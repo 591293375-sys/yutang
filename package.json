@@ -1,0 +1,71 @@
+{
+  "name": "fusheng-koi-pond",
+  "version": "1.10.0",
+  "private": true,
+  "type": "module",
+  "description": "浮生 · 四时锦鲤池",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --test tests/*.test.js",
+    "desktop": "pnpm build && pnpm build:native && electron .",
+    "package:mac": "pnpm build && pnpm build:native && electron-builder --mac dir --arm64",
+    "build:native": "node electron/build-native.cjs",
+    "test:desktop": "node --test electron/policy.test.cjs",
+    "test:performance": "node electron/performance-smoke.cjs --matrix",
+    "test:weather": "node electron/weather-smoke.cjs",
+    "test:interaction": "node electron/interaction-smoke.cjs",
+    "test:creatures": "node electron/creatures-smoke.cjs",
+    "test:water": "node electron/graphics-1.6-smoke.cjs",
+    "test:wind": "node electron/wind-playback-1.5.cjs",
+    "test:polish": "node electron/polish-1.7-smoke.cjs",
+    "test:studio": "node electron/studio-1.8-smoke.cjs",
+    "test:sound": "node electron/sound-1.9-smoke.cjs",
+    "test:windows": "node electron/window-habitat-1.10-smoke.cjs"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "lucide-react": "^0.468.0"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0",
+    "@vitejs/plugin-react": "^4.5.0",
+    "electron": "^37.0.0",
+    "electron-builder": "^26.0.12",
+    "@playwright/test": "^1.55.0"
+  },
+  "build": {
+    "appId": "studio.fusheng.koi",
+    "productName": "浮生锦鲤池",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/*.cjs",
+      "package.json"
+    ],
+    "mac": {
+      "icon": "electron/assets/app-icon.icns",
+      "minimumSystemVersion": "12.0",
+      "category": "public.app-category.entertainment",
+      "target": "dir",
+      "identity": "-",
+      "notarize": false
+    },
+    "asar": true,
+    "extraResources": [
+      {
+        "from": "electron/native/bin",
+        "to": "native",
+        "filter": [
+          "pond-window.node",
+          "pond-pointer"
+        ]
+      }
+    ]
+  }
+}
