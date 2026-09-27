@@ -1,0 +1,86 @@
+{
+  "result": "PASS",
+  "staleAssetRequests": 0,
+  "motion": {
+    "center": 6.153645833333333,
+    "leftShore": 7.46484375,
+    "rockShore": 1.2530381944444444,
+    "dryRock": 0,
+    "reducedMotion": 0
+  },
+  "performance": [
+    {
+      "name": "4k",
+      "fishCount": 36,
+      "turtleCount": 4,
+      "foodCount": 0,
+      "fps": 60,
+      "width": 3840,
+      "height": 2486,
+      "desktopMode": true,
+      "desktopSize": [
+        3840,
+        2486
+      ],
+      "scenery": {
+        "rainDrops": 85,
+        "rainHits": 648,
+        "leaves": 20,
+        "landings": 1,
+        "landscape": true
+      },
+      "rafFPS": 59.99200106652446,
+      "p95": 17.600000000000364,
+      "slow": 0
+    },
+    {
+      "name": "5k",
+      "fishCount": 36,
+      "turtleCount": 4,
+      "foodCount": 0,
+      "fps": 60,
+      "width": 5120,
+      "height": 2880,
+      "desktopMode": true,
+      "desktopSize": [
+        5120,
+        2880
+      ],
+      "scenery": {
+        "rainDrops": 85,
+        "rainHits": 1239,
+        "leaves": 21,
+        "landings": 2,
+        "landscape": true
+      },
+      "rafFPS": 60.01961860109398,
+      "p95": 18.399999999999636,
+      "slow": 0
+    },
+    {
+      "name": "6k",
+      "fishCount": 36,
+      "turtleCount": 4,
+      "foodCount": 0,
+      "fps": 60,
+      "width": 6144,
+      "height": 3456,
+      "desktopMode": true,
+      "desktopSize": [
+        6144,
+        3456
+      ],
+      "scenery": {
+        "rainDrops": 85,
+        "rainHits": 1842,
+        "leaves": 22,
+        "landings": 3,
+        "landscape": true
+      },
+      "rafFPS": 60.000664827311084,
+      "p95": 18.399999999997817,
+      "slow": 0
+    }
+  ],
+  "errors": []
+}

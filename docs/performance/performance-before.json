@@ -1,0 +1,106 @@
+{
+  "gpu": {
+    "gpu": {
+      "2d_canvas": "enabled",
+      "direct_rendering_display_compositor": "disabled_off_ok",
+      "gpu_compositing": "enabled",
+      "multiple_raster_threads": "enabled_on",
+      "opengl": "enabled_on",
+      "rasterization": "enabled",
+      "raw_draw": "disabled_off_ok",
+      "skia_graphite": "enabled_on",
+      "trees_in_viz": "disabled_off",
+      "video_decode": "enabled",
+      "video_encode": "enabled",
+      "webgl": "enabled",
+      "webgl2": "enabled",
+      "webgpu": "enabled",
+      "webnn": "disabled_off"
+    },
+    "display": {
+      "accelerometerSupport": "unknown",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1710,
+        "height": 1107
+      },
+      "colorDepth": 30,
+      "colorSpace": "{primaries:BT709, transfer:SRGB_HDR, matrix:RGB, range:FULL}",
+      "depthPerComponent": 10,
+      "detected": true,
+      "displayFrequency": 60.00239944458008,
+      "id": 1,
+      "internal": true,
+      "label": "内建视网膜显示器",
+      "maximumCursorSize": {
+        "width": 0,
+        "height": 0
+      },
+      "monochrome": false,
+      "nativeOrigin": {
+        "x": 0,
+        "y": 0
+      },
+      "rotation": 0,
+      "scaleFactor": 2,
+      "size": {
+        "width": 1710,
+        "height": 1107
+      },
+      "workArea": {
+        "x": 0,
+        "y": 34,
+        "width": 1710,
+        "height": 998
+      },
+      "workAreaSize": {
+        "width": 1710,
+        "height": 998
+      },
+      "touchSupport": "unknown"
+    }
+  },
+  "results": [
+    {
+      "name": "baseline",
+      "frames": 24,
+      "fps": 4.690523188774015,
+      "p50": 184.09999999999945,
+      "p95": 366.6999999999998,
+      "over33ms": 24,
+      "drawP95": 0.800000011920929,
+      "pixels": [
+        3840,
+        2160
+      ]
+    },
+    {
+      "name": "without-fish-blur",
+      "frames": 259,
+      "fps": 51.63888667357844,
+      "p50": 16.69999999999891,
+      "p95": 17.600000000000364,
+      "over33ms": 4,
+      "drawP95": 1.399999976158142,
+      "pixels": [
+        3840,
+        2160
+      ]
+    },
+    {
+      "name": "without-fish-blur-and-css-filters",
+      "frames": 296,
+      "fps": 59.0029302130883,
+      "p50": 16.69999999999891,
+      "p95": 17.099999999998545,
+      "over33ms": 1,
+      "drawP95": 1.100000023841858,
+      "pixels": [
+        3840,
+        2160
+      ]
+    }
+  ],
+  "errors": []
+}

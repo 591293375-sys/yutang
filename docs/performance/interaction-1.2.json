@@ -1,0 +1,67 @@
+{
+  "result": "PASS",
+  "sound": {
+    "duration": 57,
+    "loop": true,
+    "paused": false,
+    "currentTime": 0.517063,
+    "src": "http://127.0.0.1:5188/assets/healing-stream.wav",
+    "loopBoundaryPassed": true,
+    "rapidToggleStopped": true
+  },
+  "feed": {
+    "food": 9,
+    "handLife": 0
+  },
+  "performance": [
+    {
+      "name": "native-desktop-super-sampling",
+      "fishCount": 24,
+      "foodCount": 1,
+      "fps": 60,
+      "width": 3840,
+      "height": 2486,
+      "desktopMode": true,
+      "desktopSize": [
+        3840,
+        2486
+      ],
+      "rafFPS": 59.989201943650144,
+      "p95": 17.200000000000728,
+      "slow": 0
+    },
+    {
+      "name": "5k-desktop",
+      "fishCount": 24,
+      "foodCount": 0,
+      "fps": 60,
+      "width": 5120,
+      "height": 2880,
+      "desktopMode": true,
+      "desktopSize": [
+        5120,
+        2880
+      ],
+      "rafFPS": 60.00079735278874,
+      "p95": 16.80000000000109,
+      "slow": 0
+    },
+    {
+      "name": "6k-desktop",
+      "fishCount": 24,
+      "foodCount": 0,
+      "fps": 60,
+      "width": 6144,
+      "height": 3456,
+      "desktopMode": true,
+      "desktopSize": [
+        6144,
+        3456
+      ],
+      "rafFPS": 60,
+      "p95": 16.80000000000291,
+      "slow": 0
+    }
+  ],
+  "errors": []
+}

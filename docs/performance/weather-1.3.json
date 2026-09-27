@@ -1,0 +1,118 @@
+{
+  "result": "PASS",
+  "rain": {
+    "rainDrops": 48,
+    "rainHits": 128,
+    "leaves": 20,
+    "landings": 0,
+    "landscape": true
+  },
+  "rainMix": {
+    "stream": {
+      "volume": 0.0269901778976968,
+      "time": 0.508535,
+      "paused": false,
+      "duration": 57,
+      "loop": true
+    },
+    "rain": {
+      "volume": 0.1103372052421567,
+      "time": 0.508528,
+      "paused": false,
+      "duration": 45,
+      "loop": true
+    },
+    "wind": {
+      "volume": 0.019011949210956232,
+      "time": 0.50853,
+      "paused": false,
+      "duration": 45,
+      "loop": true
+    },
+    "thunder": {
+      "volume": 0,
+      "time": 0,
+      "paused": true,
+      "duration": 18.477417,
+      "loop": false
+    }
+  },
+  "thunder": {
+    "time": 0.206479,
+    "volume": 0.11159999999999999,
+    "flash": 0
+  },
+  "moving": 12134,
+  "performance": [
+    {
+      "name": "4k-storm-24-fish",
+      "fishCount": 24,
+      "foodCount": 0,
+      "fps": 60,
+      "width": 3840,
+      "height": 2486,
+      "desktopMode": true,
+      "desktopSize": [
+        3840,
+        2486
+      ],
+      "scenery": {
+        "rainDrops": 85,
+        "rainHits": 2010,
+        "leaves": 21,
+        "landings": 4,
+        "landscape": true
+      },
+      "rafFPS": 60,
+      "p95": 17.299999999999272,
+      "slow": 0
+    },
+    {
+      "name": "5k-storm-24-fish",
+      "fishCount": 24,
+      "foodCount": 0,
+      "fps": 60,
+      "width": 5120,
+      "height": 2880,
+      "desktopMode": true,
+      "desktopSize": [
+        5120,
+        2880
+      ],
+      "scenery": {
+        "rainDrops": 85,
+        "rainHits": 2609,
+        "leaves": 20,
+        "landings": 5,
+        "landscape": true
+      },
+      "rafFPS": 60.00066482731112,
+      "p95": 17,
+      "slow": 0
+    },
+    {
+      "name": "6k-storm-24-fish",
+      "fishCount": 24,
+      "foodCount": 0,
+      "fps": 60,
+      "width": 6144,
+      "height": 3456,
+      "desktopMode": true,
+      "desktopSize": [
+        6144,
+        3456
+      ],
+      "scenery": {
+        "rainDrops": 85,
+        "rainHits": 3190,
+        "leaves": 20,
+        "landings": 6,
+        "landscape": true
+      },
+      "rafFPS": 60,
+      "p95": 16.80000000000291,
+      "slow": 0
+    }
+  ],
+  "errors": []
+}

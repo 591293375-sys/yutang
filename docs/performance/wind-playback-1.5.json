@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "staleAssetRequests": 0,
+  "motion": {},
+  "performance": [],
+  "gust": {
+    "volume": 0.020000000000000004,
+    "currentTime": 0.051354,
+    "loop": false
+  },
+  "quietWind": true,
+  "errors": []
+}

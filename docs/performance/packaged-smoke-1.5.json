@@ -1,0 +1,81 @@
+{
+  "result": "PASS",
+  "version": "1.5.0",
+  "packaged": true,
+  "anatomyPreview": true,
+  "turtles": 4,
+  "architecture": "arm64",
+  "desktopSupported": true,
+  "animationWhileOnDesktop": true,
+  "isolatedProfile": "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/packaged-smoke-profile-WphLPI",
+  "seasonalBackgrounds": [
+    {
+      "name": "pond.png",
+      "width": 3840,
+      "height": 2160
+    },
+    {
+      "name": "spring.png",
+      "width": 3840,
+      "height": 2160
+    },
+    {
+      "name": "autumn.png",
+      "width": 3840,
+      "height": 2160
+    },
+    {
+      "name": "winter.png",
+      "width": 3840,
+      "height": 2160
+    }
+  ],
+  "sounds": [
+    {
+      "id": "stream",
+      "duration": 57,
+      "loop": true,
+      "offline": true
+    },
+    {
+      "id": "rain",
+      "duration": 45,
+      "loop": true,
+      "offline": true
+    },
+    {
+      "id": "wind",
+      "duration": 45,
+      "loop": false,
+      "offline": true
+    },
+    {
+      "id": "thunder",
+      "duration": 18.477417,
+      "loop": false,
+      "offline": true
+    }
+  ],
+  "windowPerformance": {
+    "fps": 60.000998352718014,
+    "p95": 17.59999999999991,
+    "slowFrames": 0,
+    "pixels": [
+      3840,
+      2160
+    ]
+  },
+  "desktopPerformance": {
+    "fps": 60,
+    "p95": 18.299999999999272,
+    "slowFrames": 0,
+    "pixels": [
+      3840,
+      2486
+    ]
+  },
+  "screenshots": [
+    "packaged-window-preview.png",
+    "packaged-desktop-preview.png"
+  ]
+}

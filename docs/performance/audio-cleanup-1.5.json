@@ -1,0 +1,29 @@
+[
+  {
+    "track": "healing-stream",
+    "duration": 57.0,
+    "highBandReductionDb": -28.77,
+    "beforeRMS": 0.02022,
+    "afterRMS": 0.00794,
+    "peak": 0.2031,
+    "maxLoopEdge": 0.00175
+  },
+  {
+    "track": "rain",
+    "duration": 45.0,
+    "highBandReductionDb": -25.51,
+    "beforeRMS": 0.0235,
+    "afterRMS": 0.01644,
+    "peak": 0.363,
+    "maxLoopEdge": 0.00039
+  },
+  {
+    "track": "wind",
+    "duration": 45.0,
+    "highBandReductionDb": -39.63,
+    "beforeRMS": 0.10043,
+    "afterRMS": 0.0464,
+    "peak": 0.2994,
+    "maxLoopEdge": 0.00085
+  }
+]

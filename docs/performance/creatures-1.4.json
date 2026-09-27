@@ -1,0 +1,94 @@
+{
+  "result": "PASS",
+  "custom": {
+    "size": 1.8,
+    "length": 136.8,
+    "appearance": "skin-v2"
+  },
+  "saved": {
+    "size": 0.55,
+    "length": 66.88000000000001,
+    "legacyAppearance": "legacy",
+    "turtles": 4
+  },
+  "paintUndoAndTabPersistence": true,
+  "legacyUpgrade": true,
+  "turtleLimit": true,
+  "pause": true,
+  "mobile": true,
+  "performance": [
+    {
+      "name": "4k-36-koi-4-turtles-storm",
+      "fishCount": 36,
+      "turtleCount": 4,
+      "foodCount": 0,
+      "fps": 60,
+      "width": 3840,
+      "height": 2486,
+      "desktopMode": true,
+      "desktopSize": [
+        3840,
+        2486
+      ],
+      "scenery": {
+        "rainDrops": 85,
+        "rainHits": 537,
+        "leaves": 20,
+        "landings": 0,
+        "landscape": true
+      },
+      "rafFPS": 60,
+      "p95": 18.199999999999818,
+      "slow": 0
+    },
+    {
+      "name": "5k-36-koi-4-turtles-storm",
+      "fishCount": 36,
+      "turtleCount": 4,
+      "foodCount": 0,
+      "fps": 60,
+      "width": 5120,
+      "height": 2880,
+      "desktopMode": true,
+      "desktopSize": [
+        5120,
+        2880
+      ],
+      "scenery": {
+        "rainDrops": 85,
+        "rainHits": 1043,
+        "leaves": 21,
+        "landings": 2,
+        "landscape": true
+      },
+      "rafFPS": 60,
+      "p95": 18.199999999999818,
+      "slow": 0
+    },
+    {
+      "name": "6k-36-koi-4-turtles-storm",
+      "fishCount": 36,
+      "turtleCount": 4,
+      "foodCount": 0,
+      "fps": 60,
+      "width": 6144,
+      "height": 3456,
+      "desktopMode": true,
+      "desktopSize": [
+        6144,
+        3456
+      ],
+      "scenery": {
+        "rainDrops": 85,
+        "rainHits": 1556,
+        "leaves": 22,
+        "landings": 3,
+        "landscape": true
+      },
+      "rafFPS": 60.000797352788716,
+      "p95": 18,
+      "slow": 0
+    }
+  ],
+  "errors": []
+}

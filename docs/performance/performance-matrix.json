@@ -1,0 +1,179 @@
+{
+  "gpu": {
+    "gpu": {
+      "2d_canvas": "enabled",
+      "direct_rendering_display_compositor": "disabled_off_ok",
+      "gpu_compositing": "enabled",
+      "multiple_raster_threads": "enabled_on",
+      "opengl": "enabled_on",
+      "rasterization": "enabled",
+      "raw_draw": "disabled_off_ok",
+      "skia_graphite": "enabled_on",
+      "trees_in_viz": "disabled_off",
+      "video_decode": "enabled",
+      "video_encode": "enabled",
+      "webgl": "enabled",
+      "webgl2": "enabled",
+      "webgpu": "enabled",
+      "webnn": "disabled_off"
+    },
+    "display": {
+      "accelerometerSupport": "unknown",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1710,
+        "height": 1107
+      },
+      "colorDepth": 30,
+      "colorSpace": "{primaries:BT709, transfer:SRGB_HDR, matrix:RGB, range:FULL}",
+      "depthPerComponent": 10,
+      "detected": true,
+      "displayFrequency": 60.00239944458008,
+      "id": 1,
+      "internal": true,
+      "label": "内建视网膜显示器",
+      "maximumCursorSize": {
+        "width": 0,
+        "height": 0
+      },
+      "monochrome": false,
+      "nativeOrigin": {
+        "x": 0,
+        "y": 0
+      },
+      "rotation": 0,
+      "scaleFactor": 2,
+      "size": {
+        "width": 1710,
+        "height": 1107
+      },
+      "workArea": {
+        "x": 0,
+        "y": 34,
+        "width": 1710,
+        "height": 998
+      },
+      "workAreaSize": {
+        "width": 1710,
+        "height": 998
+      },
+      "touchSupport": "unknown"
+    }
+  },
+  "results": [
+    {
+      "name": "autumn-sunny-24fish",
+      "frames": 301,
+      "renderFPS": 59.60212095841805,
+      "fps": 60.00079735278874,
+      "p50": 16.699999999999818,
+      "p95": 17.100000000000364,
+      "over33ms": 0,
+      "drawP95": 1.5999999642372131,
+      "pixels": [
+        3840,
+        2160
+      ]
+    },
+    {
+      "name": "spring-rainy-day-24fish",
+      "frames": 300,
+      "renderFPS": 59.39406059394061,
+      "fps": 59.99400059994001,
+      "p50": 16.69999999999891,
+      "p95": 17.600000000000364,
+      "over33ms": 0,
+      "drawP95": 1.5999999642372131,
+      "pixels": [
+        3840,
+        2160
+      ]
+    },
+    {
+      "name": "summer-sunny-night-24fish",
+      "frames": 301,
+      "renderFPS": 60.000797352788716,
+      "fps": 60.000797352788716,
+      "p50": 16.69999999999891,
+      "p95": 16.799999999999272,
+      "over33ms": 0,
+      "drawP95": 1,
+      "pixels": [
+        3840,
+        2160
+      ]
+    },
+    {
+      "name": "winter-snowy-day-24fish",
+      "frames": 300,
+      "renderFPS": 58.99528037756978,
+      "fps": 59.99520038396926,
+      "p50": 16.700000000000728,
+      "p95": 17.599999999998545,
+      "over33ms": 0,
+      "drawP95": 1.600000023841858,
+      "pixels": [
+        3840,
+        2160
+      ]
+    },
+    {
+      "name": "autumn-foggy-day-24fish",
+      "frames": 300,
+      "renderFPS": 59.8,
+      "fps": 60,
+      "p50": 16.700000000000728,
+      "p95": 17.299999999999272,
+      "over33ms": 0,
+      "drawP95": 1.399999976158142,
+      "pixels": [
+        3840,
+        2160
+      ]
+    },
+    {
+      "name": "foggy-36fish-with-feeding",
+      "frames": 300,
+      "renderFPS": 60.2,
+      "fps": 60,
+      "p50": 16.69999999999709,
+      "p95": 16.700000000004366,
+      "over33ms": 0,
+      "drawP95": 1.100000023841858,
+      "pixels": [
+        3840,
+        2160
+      ]
+    },
+    {
+      "name": "settings-open-36fish",
+      "frames": 300,
+      "renderFPS": 60.2,
+      "fps": 60,
+      "p50": 16.69999999999709,
+      "p95": 16.799999999995634,
+      "over33ms": 0,
+      "drawP95": 1.100000023841858,
+      "pixels": [
+        3840,
+        2160
+      ]
+    },
+    {
+      "name": "energy-saving-36fish",
+      "frames": 300,
+      "renderFPS": 29.8,
+      "fps": 60,
+      "p50": 16.69999999999709,
+      "p95": 17.599999999998545,
+      "over33ms": 0,
+      "drawP95": 1.199999988079071,
+      "pixels": [
+        1920,
+        1080
+      ]
+    }
+  ],
+  "errors": []
+}

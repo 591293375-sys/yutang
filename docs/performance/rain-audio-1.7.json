@@ -1,0 +1,25 @@
+{
+  "source": "https://freesound.org/people/lukabea/sounds/707672/",
+  "license": "CC0",
+  "segment": [
+    20,
+    68
+  ],
+  "duration": 45.0,
+  "output": {
+    "rms": 0.003134935305981365,
+    "peak": 0.0233692901109144,
+    "highBandEnergy": 619.6656406329944,
+    "sampleDeltaRMS": 0.0004832841634094616,
+    "loopEdge": 0.0
+  },
+  "before": {
+    "rms": 0.016436364569936125,
+    "peak": 0.36297607421875,
+    "highBandEnergy": 28005.376659832138,
+    "sampleDeltaRMS": 0.002581573462664716,
+    "loopEdge": 0.000396728515625
+  },
+  "levelReductionDb": -14.391543653946892,
+  "highBandReductionDb": -16.550840021571037
+}

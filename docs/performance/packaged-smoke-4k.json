@@ -1,0 +1,52 @@
+{
+  "result": "PASS",
+  "packaged": true,
+  "architecture": "arm64",
+  "desktopSupported": true,
+  "animationWhileOnDesktop": true,
+  "isolatedProfile": "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/packaged-smoke-profile-zvFvmV",
+  "seasonalBackgrounds": [
+    {
+      "name": "pond.png",
+      "width": 3840,
+      "height": 2160
+    },
+    {
+      "name": "spring.png",
+      "width": 3840,
+      "height": 2160
+    },
+    {
+      "name": "autumn.png",
+      "width": 3840,
+      "height": 2160
+    },
+    {
+      "name": "winter.png",
+      "width": 3840,
+      "height": 2160
+    }
+  ],
+  "windowPerformance": {
+    "fps": 60.00039933710041,
+    "p95": 16.80000000000109,
+    "slowFrames": 0,
+    "pixels": [
+      3840,
+      2160
+    ]
+  },
+  "desktopPerformance": {
+    "fps": 60.000998352718014,
+    "p95": 17.399999999999636,
+    "slowFrames": 0,
+    "pixels": [
+      3420,
+      2214
+    ]
+  },
+  "screenshots": [
+    "packaged-window-preview.png",
+    "packaged-desktop-preview.png"
+  ]
+}

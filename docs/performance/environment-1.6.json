@@ -1,0 +1,112 @@
+{
+  "result": "PASS",
+  "staleAssetRequests": 0,
+  "motion": {
+    "center": 0,
+    "leftWater": 0,
+    "rockShore": 0,
+    "dryRock": 0,
+    "reeds": 1.2651909722222223,
+    "branches": 3.8133680555555554,
+    "reducedMotion": 0
+  },
+  "shore": {
+    "pixels": 2653,
+    "changed": 3772,
+    "left": 1122,
+    "right": 601
+  },
+  "rainCoverage": [
+    "0,1",
+    "3,3",
+    "0,0",
+    "2,2",
+    "0,2",
+    "3,2",
+    "3,1",
+    "3,0",
+    "2,0",
+    "2,1",
+    "1,0",
+    "1,3",
+    "1,1",
+    "2,3",
+    "0,3",
+    "1,2"
+  ],
+  "performance": [
+    {
+      "name": "4k",
+      "fishCount": 36,
+      "turtleCount": 4,
+      "foodCount": 0,
+      "fps": 60,
+      "width": 3840,
+      "height": 2486,
+      "desktopMode": true,
+      "desktopSize": [
+        3840,
+        2486
+      ],
+      "scenery": {
+        "rainDrops": 96,
+        "rainHits": 722,
+        "leaves": 19,
+        "landings": 1,
+        "landscape": true
+      },
+      "rafFPS": 60,
+      "p95": 17.399999999999636,
+      "slow": 0
+    },
+    {
+      "name": "5k",
+      "fishCount": 36,
+      "turtleCount": 4,
+      "foodCount": 0,
+      "fps": 60,
+      "width": 5120,
+      "height": 2880,
+      "desktopMode": true,
+      "desktopSize": [
+        5120,
+        2880
+      ],
+      "scenery": {
+        "rainDrops": 96,
+        "rainHits": 1115,
+        "leaves": 18,
+        "landings": 2,
+        "landscape": true
+      },
+      "rafFPS": 60.00066482731112,
+      "p95": 17.299999999999272,
+      "slow": 0
+    },
+    {
+      "name": "6k",
+      "fishCount": 36,
+      "turtleCount": 4,
+      "foodCount": 0,
+      "fps": 60,
+      "width": 6144,
+      "height": 3456,
+      "desktopMode": true,
+      "desktopSize": [
+        6144,
+        3456
+      ],
+      "scenery": {
+        "rainDrops": 96,
+        "rainHits": 1503,
+        "leaves": 17,
+        "landings": 4,
+        "landscape": true
+      },
+      "rafFPS": 60,
+      "p95": 17.5,
+      "slow": 0
+    }
+  ],
+  "errors": []
+}
