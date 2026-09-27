@@ -1,0 +1,297 @@
+{
+  "version": "1.10.0",
+  "unitTests": 98,
+  "browserPath": "Browser plugin not available; isolated Electron/Playwright validation, plus CUA verification of existing preview and installed app.",
+  "window": {
+    "result": "PASS",
+    "runtime": {
+      "movable": true,
+      "resizable": true,
+      "fullscreenable": true,
+      "closable": true
+    },
+    "layout": [
+      {
+        "width": 390,
+        "dock": {
+          "x": 15,
+          "y": 800,
+          "w": 360,
+          "h": 77,
+          "right": 375,
+          "bottom": 877
+        },
+        "actions": {
+          "x": 214,
+          "y": 707,
+          "w": 155,
+          "h": 44,
+          "right": 369,
+          "bottom": 751
+        },
+        "status": {
+          "x": 23,
+          "y": 649,
+          "w": 71,
+          "h": 41,
+          "right": 94,
+          "bottom": 690
+        },
+        "cursor": "default"
+      },
+      {
+        "width": 560,
+        "dock": {
+          "x": 15,
+          "y": 800,
+          "w": 530,
+          "h": 77,
+          "right": 545,
+          "bottom": 877
+        },
+        "actions": {
+          "x": 384,
+          "y": 707,
+          "w": 155,
+          "h": 44,
+          "right": 539,
+          "bottom": 751
+        },
+        "status": {
+          "x": 23,
+          "y": 649,
+          "w": 71,
+          "h": 41,
+          "right": 94,
+          "bottom": 690
+        },
+        "cursor": "default"
+      },
+      {
+        "width": 680,
+        "dock": {
+          "x": 15,
+          "y": 787,
+          "w": 650,
+          "h": 86,
+          "right": 665,
+          "bottom": 873
+        },
+        "actions": {
+          "x": 434,
+          "y": 703,
+          "w": 220,
+          "h": 50,
+          "right": 654,
+          "bottom": 753
+        },
+        "status": {
+          "x": 26,
+          "y": 705,
+          "w": 87,
+          "h": 50,
+          "right": 113,
+          "bottom": 755
+        },
+        "cursor": "default"
+      },
+      {
+        "width": 1082,
+        "dock": {
+          "x": 283,
+          "y": 787,
+          "w": 516,
+          "h": 86,
+          "right": 799,
+          "bottom": 873
+        },
+        "actions": {
+          "x": 836,
+          "y": 703,
+          "w": 220,
+          "h": 50,
+          "right": 1056,
+          "bottom": 753
+        },
+        "status": {
+          "x": 26,
+          "y": 705,
+          "w": 87,
+          "h": 50,
+          "right": 113,
+          "bottom": 755
+        },
+        "cursor": "default"
+      },
+      {
+        "width": 1357,
+        "dock": {
+          "x": 420.5,
+          "y": 785,
+          "w": 516,
+          "h": 86,
+          "right": 936.5,
+          "bottom": 871
+        },
+        "actions": {
+          "x": 1105,
+          "y": 812,
+          "w": 220,
+          "h": 50,
+          "right": 1325,
+          "bottom": 862
+        },
+        "status": {
+          "x": 34,
+          "y": 815,
+          "w": 138,
+          "h": 50,
+          "right": 172,
+          "bottom": 865
+        },
+        "cursor": "default"
+      },
+      {
+        "width": 1920,
+        "dock": {
+          "x": 654,
+          "y": 773,
+          "w": 612,
+          "h": 94,
+          "right": 1266,
+          "bottom": 867
+        },
+        "actions": {
+          "x": 1668,
+          "y": 812,
+          "w": 220,
+          "h": 50,
+          "right": 1888,
+          "bottom": 862
+        },
+        "status": {
+          "x": 34,
+          "y": 809,
+          "w": 146,
+          "h": 56,
+          "right": 180,
+          "bottom": 865
+        },
+        "cursor": "default"
+      }
+    ],
+    "simulation": {
+      "escaped": 0,
+      "fish": 24,
+      "turtles": 4
+    },
+    "fullscreen": true,
+    "fullscreenToDesktop": true,
+    "hideRestore": true,
+    "minimizeRestore": true,
+    "closeExits": true,
+    "restored": {
+      "movable": true,
+      "resizable": true,
+      "fullScreenable": true,
+      "bounds": {
+        "x": 175,
+        "y": 58,
+        "width": 1082,
+        "height": 897
+      }
+    },
+    "errors": []
+  },
+  "packaged": {
+    "result": "PASS",
+    "nativeCloseExits": true,
+    "version": "1.10.0",
+    "packaged": true,
+    "anatomyPreview": true,
+    "turtles": 4,
+    "architecture": "arm64",
+    "desktopSupported": true,
+    "animationWhileOnDesktop": true,
+    "seasonalBackgrounds": [
+      {
+        "name": "pond.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "spring.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "autumn.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "winter.png",
+        "width": 3840,
+        "height": 2160
+      }
+    ],
+    "sounds": [
+      {
+        "id": "stream",
+        "duration": 120,
+        "loop": true,
+        "offline": true
+      },
+      {
+        "id": "rain",
+        "duration": 45,
+        "loop": true,
+        "offline": true
+      },
+      {
+        "id": "wind",
+        "duration": 45,
+        "loop": false,
+        "offline": true
+      },
+      {
+        "id": "thunder",
+        "duration": 18.477417,
+        "loop": false,
+        "offline": true
+      }
+    ],
+    "windowPerformance": {
+      "fps": 59.99980033344315,
+      "p95": 16.80000000000109,
+      "slowFrames": 0,
+      "pixels": [
+        3840,
+        2160
+      ],
+      "backgroundPixels": [
+        3840,
+        2160
+      ]
+    },
+    "desktopPerformance": {
+      "fps": 59.994600485956255,
+      "p95": 16.799999999999272,
+      "slowFrames": 0,
+      "pixels": [
+        3840,
+        2486
+      ],
+      "backgroundPixels": [
+        3840,
+        2486
+      ]
+    },
+    "screenshots": [
+      "packaged-window-preview.png",
+      "packaged-desktop-preview.png"
+    ]
+  },
+  "installedAppSignature": "codesign --verify --deep --strict passed",
+  "savedUserProfile": "Original 26 koi, Kunming/rainy and existing settings preserved; version 1.10 verified in Settings."
+}

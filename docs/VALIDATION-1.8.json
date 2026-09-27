@@ -1,0 +1,152 @@
+{
+  "studio": {
+    "result": "PASS",
+    "plainWhiteSkin": {
+      "marked": 0,
+      "width": 512,
+      "height": 128,
+      "appearance": "skin-v2"
+    },
+    "undo": true,
+    "reset": true,
+    "draftPreserved": true,
+    "turtleAnimation": true,
+    "turtleLimit": 4,
+    "homeDesktopEntry": true,
+    "desktop": {
+      "width": 3840,
+      "height": 2486,
+      "background": [
+        3840,
+        2486
+      ]
+    },
+    "browserFallback": true,
+    "layout": [
+      {
+        "width": 1357,
+        "height": 897,
+        "buttons": 8
+      },
+      {
+        "width": 1101,
+        "height": 897,
+        "buttons": 8
+      },
+      {
+        "width": 1082,
+        "height": 897,
+        "buttons": 8
+      },
+      {
+        "width": 1000,
+        "height": 897,
+        "buttons": 8
+      },
+      {
+        "width": 950,
+        "height": 760,
+        "buttons": 8
+      },
+      {
+        "width": 580,
+        "height": 844,
+        "buttons": 8
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "buttons": 8
+      }
+    ],
+    "errors": []
+  },
+  "packaged": {
+    "result": "PASS",
+    "version": "1.8.0",
+    "packaged": true,
+    "anatomyPreview": true,
+    "turtles": 4,
+    "architecture": "arm64",
+    "desktopSupported": true,
+    "animationWhileOnDesktop": true,
+    "seasonalBackgrounds": [
+      {
+        "name": "pond.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "spring.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "autumn.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "winter.png",
+        "width": 3840,
+        "height": 2160
+      }
+    ],
+    "sounds": [
+      {
+        "id": "stream",
+        "duration": 57,
+        "loop": true,
+        "offline": true
+      },
+      {
+        "id": "rain",
+        "duration": 45,
+        "loop": true,
+        "offline": true
+      },
+      {
+        "id": "wind",
+        "duration": 45,
+        "loop": false,
+        "offline": true
+      },
+      {
+        "id": "thunder",
+        "duration": 18.477417,
+        "loop": false,
+        "offline": true
+      }
+    ],
+    "windowPerformance": {
+      "fps": 60.00339453479897,
+      "p95": 16.80000000000109,
+      "slowFrames": 0,
+      "pixels": [
+        3840,
+        2160
+      ],
+      "backgroundPixels": [
+        3840,
+        2160
+      ]
+    },
+    "desktopPerformance": {
+      "fps": 60.00039933710041,
+      "p95": 16.799999999999272,
+      "slowFrames": 0,
+      "pixels": [
+        3840,
+        2486
+      ],
+      "backgroundPixels": [
+        3840,
+        2486
+      ]
+    },
+    "screenshots": [
+      "packaged-window-preview.png",
+      "packaged-desktop-preview.png"
+    ]
+  }
+}
