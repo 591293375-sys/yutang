@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="water" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#579789"/><stop offset=".46" stop-color="#216d60"/><stop offset="1" stop-color="#124c43"/></linearGradient>
+    <radialGradient id="light"><stop stop-color="#bbd4ad" stop-opacity=".22"/><stop offset="1" stop-color="#bbd4ad" stop-opacity="0"/></radialGradient>
+    <linearGradient id="ivory" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff5d5"/><stop offset="1" stop-color="#decba0"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f6c978"/><stop offset="1" stop-color="#d59345"/></linearGradient>
+    <path id="body" d="M-122 5C-82-34-22-50 39-32C78-20 98-3 86 13C61 42 10 38-39 22C-79 10-95 9-122 5Z"/>
+    <clipPath id="clip"><use href="#body"/></clipPath>
+    <clipPath id="surface"><rect x="94" y="94" width="836" height="836" rx="191"/></clipPath>
+    <filter id="shadow" x="-40%" y="-50%" width="180%" height="230%"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="baseShadow" x="-10%" y="-10%" width="120%" height="125%"><feDropShadow dx="0" dy="9" stdDeviation="8" flood-color="#153e36" flood-opacity=".3"/></filter>
+  </defs>
+  <rect x="94" y="94" width="836" height="836" rx="191" fill="url(#water)" filter="url(#baseShadow)"/>
+  <rect x="99" y="99" width="826" height="826" rx="187" fill="none" stroke="#d6e8c7" stroke-opacity=".2" stroke-width="3"/>
+  <ellipse cx="380" cy="298" rx="460" ry="400" fill="url(#light)" clip-path="url(#surface)"/>
+  <g fill="none" stroke="#cbe5cc">
+    <ellipse cx="512" cy="515" rx="293" ry="276" stroke-width="3" opacity=".15" transform="rotate(-27 512 515)"/>
+    <path d="M227 610C184 457 301 257 493 228M792 411C859 583 741 773 552 807" stroke-width="5" opacity=".13" stroke-linecap="round"/>
+    <path d="M222 629C239 672 274 716 302 735M800 384C781 344 754 314 723 288" stroke-width="3" opacity=".23" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(514 361) rotate(27) scale(1.65)">
+    <g transform="translate(0 15)" opacity=".26" fill="#032e2c" filter="url(#shadow)"><use href="#body"/></g>
+    <path d="M-111 5C-149-12-155-34-183-42C-173-17-163-1-141 8C-163 20-172 40-173 56C-145 42-129 23-111 5Z" fill="#eee2ba" opacity=".87"/>
+    <path d="M-18-22C-8-47 14-60 23-61C25-42 16-29 5-18M-15 22C-13 47 6 59 22 62C21 41 11 26 2 18" fill="#f3e6c0" opacity=".75"/>
+    <use href="#body" fill="url(#ivory)"/>
+    <g clip-path="url(#clip)" fill="#c85e3d"><path d="M26-39C4-30 10-6 29-7C43-7 48 6 43 28L70 32L98 1L70-29Z"/><path d="M-40-35C-67-13-51 5-32 7C-17 9-15-4-27-13C-35-20-29-25-27-30Z"/></g>
+    <path d="M-84 7C-36 5-6 9 15 13" fill="none" stroke="#7b9d89" stroke-opacity=".2" stroke-width="2"/>
+    <ellipse cx="72" cy="-7" rx="3.1" ry="3.9" fill="#1c443a"/><path d="M84 12Q96 11 101 6" fill="none" stroke="#cdbc90" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(516 650) rotate(207) scale(1.48)">
+    <g transform="translate(0 16)" opacity=".28" fill="#032e2c" filter="url(#shadow)"><use href="#body"/></g>
+    <path d="M-111 5C-149-12-155-34-183-42C-173-17-163-1-141 8C-163 20-172 40-173 56C-145 42-129 23-111 5Z" fill="#eabf75" opacity=".9"/>
+    <path d="M-18-22C-8-47 14-60 23-61C25-42 16-29 5-18M-15 22C-13 47 6 59 22 62C21 41 11 26 2 18" fill="#f3d895" opacity=".76"/>
+    <use href="#body" fill="url(#gold)"/>
+    <g clip-path="url(#clip)" fill="#fff0c8" opacity=".92"><path d="M8-38C2-13 25-12 34-4C46 7 35 18 48 31L75 26L87 0L58-31Z"/><path d="M-68-27C-59-14-57-1-39 1C-20 5-14-15-21-27Z"/></g>
+    <path d="M-86 6C-35 6-6 9 18 13" fill="none" stroke="#895e37" stroke-opacity=".2" stroke-width="2"/>
+    <ellipse cx="72" cy="-7" rx="3.1" ry="3.9" fill="#374a32"/><path d="M84 12Q96 11 101 6" fill="none" stroke="#d3aa62" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <circle cx="692" cy="563" r="8" fill="none" stroke="#e6f1ce" stroke-opacity=".35" stroke-width="2"/>
+  <circle cx="716" cy="541" r="4" fill="#e6f1ce" opacity=".38"/>
+</svg>
