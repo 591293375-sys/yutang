@@ -34,11 +34,11 @@ export class KoiRenderer {
     const points = [];
     for (let i = 0; i <= 20; i++) {
       const p = this.bodyPoint(fish, i / 20);
-      points.push({ x: p.x, y: p.y - p.width });
+      points.push({ x: p.x - p.nx * p.width, y: p.y - p.ny * p.width });
     }
     for (let i = 20; i >= 0; i--) {
       const p = this.bodyPoint(fish, i / 20);
-      points.push({ x: p.x, y: p.y + p.width });
+      points.push({ x: p.x + p.nx * p.width, y: p.y + p.ny * p.width });
     }
     smoothPath(this.ctx, points);
   }
@@ -89,7 +89,7 @@ export class KoiRenderer {
     const tail = {x:0,y:0};
     ctx.save(); ctx.translate(root.x,root.y); ctx.rotate(koiTailAngle(fish));
     // Flexible fin tips follow the tail stalk a fraction of a stroke later.
-    const wag = Math.sin(fish.phase - 4.1) * l * (fish.swimAmplitude ?? .056) * .24;
+    const wag = Math.sin(fish.phase - 4.65) * l * (fish.swimAmplitude ?? .072) * .7;
     const finGradient = ctx.createLinearGradient(tail.x, tail.y, tail.x - l * 0.27, tail.y);
     finGradient.addColorStop(0, palette.base);
     finGradient.addColorStop(0.65, palette.fin + 'bf');
@@ -111,8 +111,9 @@ export class KoiRenderer {
     for (const side of [-1, 1]) {
       const p = this.bodyPoint(fish, 0.72);
       const fin = koiPectoralPose(fish, side);
-      const rootY = p.y + side * p.width * 0.74;
+      const rootY = side * p.width * 0.74;
       ctx.save(); ctx.globalAlpha *= 0.77;
+      ctx.translate(p.x,p.y); ctx.rotate(p.angle); p.x=0; p.y=0;
       ctx.translate(p.x,rootY); ctx.transform(1,0,fin.sweep * 3,fin.spread,0,0); ctx.translate(-p.x,-rootY);
       const g = ctx.createLinearGradient(p.x, rootY, p.x - l * 0.1, rootY + side * l * 0.17);
       g.addColorStop(0, palette.base + 'e0'); g.addColorStop(1, palette.fin + '50');
@@ -129,6 +130,8 @@ export class KoiRenderer {
       ctx.restore();
       const pelvic = this.bodyPoint(fish, 0.27);
       ctx.save(); ctx.globalAlpha *= .77;
+      ctx.translate(pelvic.x,pelvic.y);ctx.rotate(pelvic.angle+Math.sin((fish.finPhase??fish.phase)-.8)*.06);
+      pelvic.x=0;pelvic.y=0;
       ctx.fillStyle = palette.fin + '90';
       ctx.beginPath(); ctx.moveTo(pelvic.x + 5, pelvic.y + side * pelvic.width * 0.7);
       ctx.quadraticCurveTo(pelvic.x - 6, pelvic.y + side * l * 0.13, pelvic.x - 13, pelvic.y + side * l * 0.105);
@@ -138,11 +141,13 @@ export class KoiRenderer {
   }
 
   patch(fish, u, offset, rx, ry, color, seed) {
-    const ctx = this.ctx, p = this.bodyPoint(fish, u), points = [];
+    const ctx = this.ctx, points = [];
     for (let i = 0; i < 10; i++) {
       const a = i / 10 * TAU;
       const r = 0.76 + Math.sin(i * 3.7 + seed * 9.3) * 0.17;
-      points.push({ x: p.x + Math.cos(a) * fish.length * rx * r, y: p.y + offset * fish.length + Math.sin(a) * fish.length * ry * r });
+      const p = this.bodyPoint(fish, u + Math.cos(a) * rx * r / .78);
+      const across = (offset + Math.sin(a) * ry * r) * fish.length;
+      points.push({ x: p.x + p.nx * across, y: p.y + p.ny * across });
     }
     smoothPath(ctx, points); ctx.fillStyle = color; ctx.fill();
   }
@@ -174,14 +179,14 @@ export class KoiRenderer {
       for (let column = 2; column < 12; column++) {
         const u = column / 15 + (Math.abs(row) % 2) * 0.026;
         const p = this.bodyPoint(fish, u);
-        const y = p.y + row * l * 0.035;
-        ctx.beginPath(); ctx.ellipse(p.x, y, l * 0.023, l * 0.025, 0, -Math.PI * 0.5, Math.PI * 0.5); ctx.stroke();
+        const across = row * l * .035;
+        ctx.beginPath(); ctx.ellipse(p.x+p.nx*across, p.y+p.ny*across, l * 0.023, l * 0.025, p.angle, -Math.PI * 0.5, Math.PI * 0.5); ctx.stroke();
       }
     }
-    const p = this.bodyPoint(fish, 0.5);
     ctx.strokeStyle = 'rgba(255,254,216,.4)'; ctx.lineWidth = 0.6;
-    ctx.beginPath(); ctx.moveTo(-l * 0.14, p.y);
-    ctx.quadraticCurveTo(l * 0.04, p.y - 0.8, l * 0.19, 0); ctx.stroke();
+    ctx.beginPath();
+    for(let i=0;i<=12;i++){const p=this.bodyPoint(fish,.30+i*.034);if(i)ctx.lineTo(p.x,p.y);else ctx.moveTo(p.x,p.y)}
+    ctx.stroke();
   }
 
   drawHead(fish, palette) {
@@ -209,7 +214,9 @@ export class KoiRenderer {
     // Follow each cross-section of the actual fish body, preserving the painted placement.
     for(let i=0;i<strips;i++){
       const u=(i+.5)/strips,p=this.bodyPoint(fish,u),dw=fish.length*.78/strips;
-      ctx.drawImage(surface,i*surface.width/strips,0,surface.width/strips,surface.height,p.x-dw*.5,p.y-p.width,dw+.5,p.width*2);
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.angle);
+      ctx.drawImage(surface,i*surface.width/strips,0,surface.width/strips,surface.height,-dw*.5,-p.width,dw+.6,p.width*2);
+      ctx.restore();
     }
   }
 }
