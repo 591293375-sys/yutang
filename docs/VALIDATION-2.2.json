@@ -1,0 +1,624 @@
+{
+  "version": "2.2.0",
+  "validatedAt": "2026-09-29T04:41:51.842234+00:00",
+  "result": "PASS",
+  "unitTests": {
+    "passed": 179,
+    "failed": 0
+  },
+  "desktopPolicyTests": {
+    "passed": 5,
+    "failed": 0
+  },
+  "nativeBuild": {
+    "platform": "macOS",
+    "arch": "arm64",
+    "adHocSigned": true,
+    "codesignDeepStrict": "PASS"
+  },
+  "coastPackaged": {
+    "result": "PASS",
+    "packaged": true,
+    "version": "2.2.0",
+    "isolatedProfile": true,
+    "speciesAssets": 17,
+    "canvasCollect": true,
+    "canvasCapture": true,
+    "bucketAndGuide": true,
+    "reloadStable": true,
+    "koiUnchanged": true,
+    "coastToolsAndCursors": true,
+    "cursor": {
+      "value": "url(\"file://<project>/release/mac-arm64/%E6%B5%AE%E7%94%9F%E9%94%A6%E9%B2%A4%E6%B1%A0.app/Contents/Resources/app.asar/dist/assets/coast/tongs-cursor.svg\") 11 4, pointer",
+      "width": 40,
+      "height": 40
+    },
+    "tideChanges": [
+      {
+        "direction": "rising",
+        "before": 0,
+        "after": 0,
+        "epochMs": 1790656583084
+      },
+      {
+        "direction": "falling",
+        "before": 0,
+        "after": 6.168501482384237e-07,
+        "epochMs": 1790655083684
+      }
+    ],
+    "productionDebugAbsent": true,
+    "themeAudioSwitch": true,
+    "tracks": [
+      {
+        "id": "stream",
+        "error": null,
+        "paused": true,
+        "volume": 0
+      },
+      {
+        "id": "ocean",
+        "error": null,
+        "paused": false,
+        "volume": 0.096
+      },
+      {
+        "id": "rain",
+        "error": null,
+        "paused": true,
+        "volume": 0
+      },
+      {
+        "id": "wind",
+        "error": null,
+        "paused": true,
+        "volume": 0
+      },
+      {
+        "id": "thunder",
+        "error": null,
+        "paused": true,
+        "volume": 0
+      }
+    ],
+    "ocean": {
+      "duration": 90,
+      "volume": 0.0824870210821243,
+      "loop": true,
+      "source": "file://<project>/release/mac-arm64/%E6%B5%AE%E7%94%9F%E9%94%A6%E9%B2%A4%E6%B1%A0.app/Contents/Resources/app.asar/dist/assets/ocean-waves.wav?v=1.12"
+    },
+    "screenshot": "<historical-artifacts>/赶海主题-窗口预览.png",
+    "desktop": {
+      "pixels": [
+        3840,
+        2486
+      ],
+      "backgroundPixels": [
+        3840,
+        2486
+      ],
+      "visible": true,
+      "animated": true,
+      "state": {
+        "isDesktop": true,
+        "desktopMode": true,
+        "globalInteraction": false,
+        "globalInteractionStatus": "disabled",
+        "launchAtLogin": false,
+        "launchAtLoginSupported": true,
+        "platform": "darwin",
+        "desktopSupported": true,
+        "shortcut": "CommandOrControl+Shift+K",
+        "feedShortcut": "CommandOrControl+Shift+F",
+        "shortcutAvailable": true,
+        "feedShortcutAvailable": true,
+        "message": "桌面已开启鼠标穿透。开启全局点击可与当前主题互动；⌘/Ctrl+Shift+K 恢复控制。",
+        "fullScreen": false,
+        "visible": true,
+        "minimized": false,
+        "display": {
+          "id": 1,
+          "width": 1710,
+          "height": 1107,
+          "scaleFactor": 2,
+          "pixelWidth": 3420,
+          "pixelHeight": 2214
+        }
+      },
+      "screenshot": "<historical-artifacts>/赶海主题-桌面预览.png",
+      "restored": true
+    },
+    "errors": [],
+    "assetErrors": [],
+    "cancelledMediaRequests": [
+      "file://<project>/release/mac-arm64/%E6%B5%AE%E7%94%9F%E9%94%A6%E9%B2%A4%E6%B1%A0.app/Contents/Resources/app.asar/dist/assets/wind.wav?v=1.5: net::ERR_ABORTED",
+      "file://<project>/release/mac-arm64/%E6%B5%AE%E7%94%9F%E9%94%A6%E9%B2%A4%E6%B1%A0.app/Contents/Resources/app.asar/dist/assets/wind.wav?v=1.5: net::ERR_ABORTED"
+    ]
+  },
+  "bottlesPackaged": {
+    "result": "PASS",
+    "packaged": true,
+    "version": "2.2.0",
+    "isolatedProfile": true,
+    "fixtureOnlyArrivalAcceleration": true,
+    "draftSavedAcrossCloseAndReload": true,
+    "mobile600Characters": true,
+    "sendStartsBottle": true,
+    "doubleSendOnce": true,
+    "sendQuotaRollsBack": true,
+    "pickupQuotaRollsBack": true,
+    "rapidPickupOnce": true,
+    "reloadStored": true,
+    "htmlIsPlainText": true,
+    "canvasPickup": true,
+    "readOriginalLetter": true,
+    "koiUnchanged": true,
+    "screenshot": "<historical-artifacts>/漂流瓶-读一封海边来信.png",
+    "errors": []
+  },
+  "sandPackaged": {
+    "result": "PASS",
+    "packaged": true,
+    "version": "2.2.0",
+    "isolatedProfile": true,
+    "realMouseGestures": true,
+    "wallClockFixtureOnly": true,
+    "noProductionDebug": true,
+    "quickTapDoesNotDraw": true,
+    "revealOnlyTaps": [
+      1,
+      2,
+      3
+    ],
+    "catchDragDoesNotDraw": true,
+    "canvasCapture": true,
+    "heartSegments": 124,
+    "highWaterSegments": 0,
+    "lowWaterSegments": 0,
+    "naturalSurfPeriod": 8.4,
+    "swashBefore": 9,
+    "swashAfter": 0,
+    "naturalAnimationSeconds": 9.232999999999995,
+    "resizeCancelsCapture": true,
+    "worldMarksSurviveResize": true,
+    "phoneNewSegments": 8,
+    "heartScreenshot": "<historical-artifacts>/赶海主题-沙滩画心.png",
+    "errors": []
+  },
+  "koiPackaged": {
+    "result": "PASS",
+    "nativeCloseExits": true,
+    "version": "2.2.0",
+    "packaged": true,
+    "anatomyPreview": true,
+    "turtles": 4,
+    "architecture": "arm64",
+    "desktopSupported": true,
+    "animationWhileOnDesktop": true,
+    "isolatedProfile": "<historical-work>/packaged-smoke-profile-1J3PZS",
+    "seasonalBackgrounds": [
+      {
+        "name": "pond.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "spring.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "autumn.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "winter.png",
+        "width": 3840,
+        "height": 2160
+      }
+    ],
+    "sounds": [
+      {
+        "id": "stream",
+        "duration": 120,
+        "loop": true,
+        "offline": true
+      },
+      {
+        "id": "ocean",
+        "duration": 90,
+        "loop": true,
+        "offline": true
+      },
+      {
+        "id": "rain",
+        "duration": 45,
+        "loop": true,
+        "offline": true
+      },
+      {
+        "id": "wind",
+        "duration": 45,
+        "loop": false,
+        "offline": true
+      },
+      {
+        "id": "thunder",
+        "duration": 18.477417,
+        "loop": false,
+        "offline": true
+      }
+    ],
+    "windowPerformance": {
+      "fps": 60.00039933710042,
+      "p95": 17.599999999999454,
+      "slowFrames": 0,
+      "pixels": [
+        3840,
+        2160
+      ],
+      "backgroundPixels": [
+        3840,
+        2160
+      ]
+    },
+    "desktopPerformance": {
+      "fps": 60.00039933710041,
+      "p95": 17.099999999998545,
+      "slowFrames": 0,
+      "pixels": [
+        3840,
+        2486
+      ],
+      "backgroundPixels": [
+        3840,
+        2486
+      ]
+    },
+    "screenshots": [
+      "packaged-window-preview.png",
+      "packaged-desktop-preview.png"
+    ]
+  },
+  "naturalTideVisual": {
+    "createdAt": "2026-09-29T04:34:47.129Z",
+    "seed": 220229,
+    "initialFixturePath": "<historical-work>/coast-v2.2/initial-fixture.json",
+    "isolatedProfile": true,
+    "headless": true,
+    "uiStarted": true,
+    "manualJumpAfterStart": false,
+    "naturalCycle": true,
+    "phaseOrder": [
+      "rising",
+      "high",
+      "falling",
+      "low",
+      "rising"
+    ],
+    "screenshots": {
+      "high": "<historical-artifacts>/赶海主题-高潮.png",
+      "low": "<historical-artifacts>/赶海主题-低潮.png"
+    },
+    "screenshotCapture": {
+      "method": "Captured during the same unpaused natural 60x cycle after the matching visible tide badge appeared; no phase jump after start.",
+      "captures": [
+        {
+          "phase": "high",
+          "level": 1,
+          "cycle": 0,
+          "position": 664.556,
+          "speed": 60,
+          "paused": false,
+          "scene": 40,
+          "aquatic": 18,
+          "stranded": 0,
+          "inward": 0,
+          "outward": 0,
+          "pool": 2,
+          "shells": 12,
+          "dryShells": 0,
+          "bucket": 0,
+          "collected": 0,
+          "rescues": 0,
+          "badge": "高潮停留",
+          "path": "<historical-artifacts>/赶海主题-高潮.png",
+          "realSeconds": 11.048
+        },
+        {
+          "phase": "low",
+          "level": 0,
+          "cycle": 0,
+          "position": 1553.516,
+          "speed": 60,
+          "paused": false,
+          "scene": 30,
+          "aquatic": 8,
+          "stranded": 2,
+          "inward": 0,
+          "outward": 0,
+          "pool": 2,
+          "shells": 12,
+          "dryShells": 12,
+          "bucket": 0,
+          "collected": 0,
+          "rescues": 0,
+          "badge": "低潮停留",
+          "path": "<historical-artifacts>/赶海主题-低潮.png",
+          "realSeconds": 25.869
+        }
+      ]
+    },
+    "errors": [],
+    "cyclePerformance": {
+      "rising": {
+        "frames": 602,
+        "mean": 16.690697674438407,
+        "p95": 19.5,
+        "max": 37,
+        "over50ms": 0
+      },
+      "high": {
+        "frames": 211,
+        "mean": 16.66113744104078,
+        "p95": 18.19999998807907,
+        "max": 18.899999976158142,
+        "over50ms": 0
+      },
+      "falling": {
+        "frames": 599,
+        "mean": 16.655759599352123,
+        "p95": 18.19999998807907,
+        "max": 24.099999964237213,
+        "over50ms": 0
+      },
+      "low": {
+        "frames": 212,
+        "mean": 16.666981132244164,
+        "p95": 18,
+        "max": 18.599999964237213,
+        "over50ms": 0
+      }
+    },
+    "crabHabitatAudit": {
+      "frames": 1651,
+      "entityChecks": 8255,
+      "invalidFrames": 0,
+      "invalidChecks": 0,
+      "samples": []
+    },
+    "poolProbe": {
+      "point": {
+        "x": 1381.9,
+        "y": 731
+      },
+      "oceanMask": false,
+      "combinedMask": true,
+      "visiblePixels": 161
+    },
+    "performance": {
+      "stats": {
+        "theme": "coast",
+        "ready": true,
+        "source": "/assets/coast/coast-low.png",
+        "sourceSize": [
+          1672,
+          941
+        ],
+        "backgroundSize": [
+          3840,
+          2160
+        ],
+        "width": 3840,
+        "height": 2160,
+        "cssWidth": 1920,
+        "cssHeight": 1080,
+        "scale": 2,
+        "entityCount": 29,
+        "spriteCount": 17,
+        "missingAssets": [],
+        "renderMs": 1.2,
+        "desktopMode": false
+      },
+      "frameSamples": 150,
+      "meanFrameMs": 16.653333333333332,
+      "p95FrameMs": 19.600000023841858,
+      "mainThread": {
+        "wallSeconds": 2.603275000001304,
+        "taskSeconds": 0.48923,
+        "scriptSeconds": 0.400573
+      }
+    },
+    "resize": {
+      "viewport": [
+        900,
+        1200
+      ],
+      "backing": [
+        1800,
+        2400
+      ],
+      "offset": [
+        -616.6666666666665,
+        0
+      ]
+    },
+    "pick": null
+  },
+  "fixedLeftShoreRegression": {
+    "createdAt": "2026-09-29T04:31:04.051Z",
+    "seed": 2,
+    "initialFixturePath": "<historical-work>/coast-v2.2/left-regression-initial-fixture.json",
+    "isolatedProfile": true,
+    "headless": true,
+    "uiStarted": true,
+    "manualJumpAfterStart": false,
+    "naturalCycle": true,
+    "phaseOrder": [
+      "rising",
+      "high",
+      "falling",
+      "low",
+      "rising"
+    ],
+    "screenshots": {
+      "high": "<historical-work>/coast-v2.2/left-regression-high.png",
+      "low": "<historical-work>/coast-v2.2/left-regression-low.png"
+    },
+    "screenshotCapture": {
+      "method": "Captured during the same unpaused natural 60x cycle after the matching visible tide badge appeared; no phase jump after start.",
+      "captures": [
+        {
+          "phase": "high",
+          "level": 1,
+          "cycle": 0,
+          "position": 670.912,
+          "speed": 60,
+          "paused": false,
+          "scene": 12,
+          "aquatic": 10,
+          "stranded": 0,
+          "inward": 0,
+          "outward": 0,
+          "pool": 0,
+          "shells": 0,
+          "dryShells": 0,
+          "bucket": 0,
+          "collected": 0,
+          "rescues": 0,
+          "badge": "高潮停留",
+          "path": "<historical-work>/coast-v2.2/left-regression-high.png",
+          "realSeconds": 11.174
+        },
+        {
+          "phase": "low",
+          "level": 0,
+          "cycle": 0,
+          "position": 1557.892,
+          "speed": 60,
+          "paused": false,
+          "scene": 4,
+          "aquatic": 2,
+          "stranded": 2,
+          "inward": 0,
+          "outward": 0,
+          "pool": 0,
+          "shells": 0,
+          "dryShells": 0,
+          "bucket": 0,
+          "collected": 0,
+          "rescues": 0,
+          "badge": "低潮停留",
+          "path": "<historical-work>/coast-v2.2/left-regression-low.png",
+          "realSeconds": 25.958
+        }
+      ]
+    },
+    "errors": [],
+    "cyclePerformance": {
+      "rising": {
+        "frames": 608,
+        "mean": 16.656414473723423,
+        "p95": 18.299999952316284,
+        "max": 29.30000001192093,
+        "over50ms": 0
+      },
+      "high": {
+        "frames": 202,
+        "mean": 16.668316831683168,
+        "p95": 18.100000023841858,
+        "max": 20.30000001192093,
+        "over50ms": 0
+      },
+      "falling": {
+        "frames": 599,
+        "mean": 16.662270450731352,
+        "p95": 18.100000023841858,
+        "max": 18.69999998807907,
+        "over50ms": 0
+      },
+      "low": {
+        "frames": 213,
+        "mean": 16.676995305108353,
+        "p95": 18.399999976158142,
+        "max": 18.69999998807907,
+        "over50ms": 0
+      }
+    },
+    "crabHabitatAudit": {
+      "frames": 1651,
+      "entityChecks": 3312,
+      "invalidFrames": 0,
+      "invalidChecks": 0,
+      "samples": []
+    },
+    "poolProbe": {
+      "point": {
+        "x": 1381.9,
+        "y": 731
+      },
+      "oceanMask": false,
+      "combinedMask": true,
+      "visiblePixels": 161
+    },
+    "performance": {
+      "stats": {
+        "theme": "coast",
+        "ready": true,
+        "source": "/assets/coast/coast-low.png",
+        "sourceSize": [
+          1672,
+          941
+        ],
+        "backgroundSize": [
+          3840,
+          2160
+        ],
+        "width": 3840,
+        "height": 2160,
+        "cssWidth": 1920,
+        "cssHeight": 1080,
+        "scale": 2,
+        "entityCount": 9,
+        "spriteCount": 17,
+        "missingAssets": [],
+        "renderMs": 1.16,
+        "desktopMode": false
+      },
+      "frameSamples": 151,
+      "meanFrameMs": 16.68079470167097,
+      "p95FrameMs": 19.5,
+      "mainThread": {
+        "wallSeconds": 2.6015449999831617,
+        "taskSeconds": 0.413396,
+        "scriptSeconds": 0.334929
+      }
+    },
+    "resize": {
+      "viewport": [
+        900,
+        1200
+      ],
+      "backing": [
+        1800,
+        2400
+      ],
+      "offset": [
+        -616.6666666666665,
+        0
+      ]
+    },
+    "pick": null
+  },
+  "limits": {
+    "bottles": "Local offline only; bundled original shore letters. No user-to-user delivery.",
+    "baseCoastTexture": [
+      1672,
+      941
+    ],
+    "performance": "Measured on this Mac. Frame timing excludes screenshot capture windows. No claim for other hardware.",
+    "sand": "Ephemeral; not persisted after theme teardown or restart.",
+    "testIsolation": "All native QA used temporary profiles; daily user data was not overwritten."
+  }
+}

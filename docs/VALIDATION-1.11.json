@@ -1,0 +1,207 @@
+{
+  "version": "1.11.0",
+  "date": "2026-09-29",
+  "unitTests": {
+    "passed": 101,
+    "failed": 0
+  },
+  "swimming": {
+    "result": "PASS",
+    "swimming": {
+      "beforeSpeed": 18.62148193404481,
+      "feedingSpeed": 59.32649372145756,
+      "cruiseSpeed": 20.991754077254836,
+      "beforeAmplitude": 0.06564436148512277,
+      "feedingAmplitude": 0.10181094200172316,
+      "movingTails": 36,
+      "bendingBodies": 29,
+      "phasesContinuous": true,
+      "pauseStable": true
+    },
+    "performance": [
+      {
+        "name": "4k-sunny-36-fish-4-turtles",
+        "fishCount": 36,
+        "turtleCount": 4,
+        "foodCount": 0,
+        "fps": 60,
+        "width": 3840,
+        "height": 2160,
+        "backgroundSize": [
+          3840,
+          2160
+        ],
+        "sourceSize": [
+          3840,
+          2160
+        ],
+        "displayScale": 2,
+        "desktopMode": false,
+        "scenery": {
+          "rainDrops": 0,
+          "rainHits": 0,
+          "leaves": 18,
+          "landings": 1,
+          "landscape": true
+        },
+        "renderFPS": 60.166666666666664,
+        "rafFPS": 60,
+        "drawP95": 3,
+        "frameP95": 17.100000000000364,
+        "slowFrames": 0
+      },
+      {
+        "name": "4k-storm-36-fish-4-turtles",
+        "fishCount": 36,
+        "turtleCount": 4,
+        "foodCount": 0,
+        "fps": 60,
+        "width": 3840,
+        "height": 2160,
+        "backgroundSize": [
+          3840,
+          2160
+        ],
+        "sourceSize": [
+          3840,
+          2160
+        ],
+        "displayScale": 2,
+        "desktopMode": false,
+        "scenery": {
+          "rainDrops": 96,
+          "rainHits": 368,
+          "leaves": 18,
+          "landings": 2,
+          "landscape": true
+        },
+        "renderFPS": 60.166871655087604,
+        "rafFPS": 60.00066482731112,
+        "drawP95": 3.100000023841858,
+        "frameP95": 16.799999999999272,
+        "slowFrames": 0
+      },
+      {
+        "name": "energy-saving-36-fish",
+        "fishCount": 36,
+        "turtleCount": 4,
+        "foodCount": 0,
+        "fps": 30,
+        "width": 1920,
+        "height": 1080,
+        "backgroundSize": [
+          1920,
+          1080
+        ],
+        "sourceSize": [
+          3840,
+          2160
+        ],
+        "displayScale": 2,
+        "desktopMode": false,
+        "scenery": {
+          "rainDrops": 32,
+          "rainHits": 483,
+          "leaves": 18,
+          "landings": 3,
+          "landscape": true
+        },
+        "renderFPS": 30,
+        "rafFPS": 60,
+        "drawP95": 3.199999988079071,
+        "frameP95": 17,
+        "slowFrames": 0
+      }
+    ],
+    "errors": []
+  },
+  "packaged": {
+    "result": "PASS",
+    "nativeCloseExits": true,
+    "version": "1.11.0",
+    "packaged": true,
+    "anatomyPreview": true,
+    "turtles": 4,
+    "architecture": "arm64",
+    "desktopSupported": true,
+    "animationWhileOnDesktop": true,
+    "seasonalBackgrounds": [
+      {
+        "name": "pond.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "spring.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "autumn.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "winter.png",
+        "width": 3840,
+        "height": 2160
+      }
+    ],
+    "sounds": [
+      {
+        "id": "stream",
+        "duration": 120,
+        "loop": true,
+        "offline": true
+      },
+      {
+        "id": "rain",
+        "duration": 45,
+        "loop": true,
+        "offline": true
+      },
+      {
+        "id": "wind",
+        "duration": 45,
+        "loop": false,
+        "offline": true
+      },
+      {
+        "id": "thunder",
+        "duration": 18.477417,
+        "loop": false,
+        "offline": true
+      }
+    ],
+    "windowPerformance": {
+      "fps": 60.005790908274015,
+      "p95": 16.800000000000182,
+      "slowFrames": 0,
+      "pixels": [
+        3840,
+        2160
+      ],
+      "backgroundPixels": [
+        3840,
+        2160
+      ]
+    },
+    "desktopPerformance": {
+      "fps": 60.000998352718014,
+      "p95": 16.799999999999272,
+      "slowFrames": 0,
+      "pixels": [
+        3840,
+        2486
+      ],
+      "backgroundPixels": [
+        3840,
+        2486
+      ]
+    },
+    "screenshots": [
+      "packaged-window-preview.png",
+      "packaged-desktop-preview.png"
+    ]
+  }
+}

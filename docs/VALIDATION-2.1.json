@@ -1,0 +1,826 @@
+{
+  "version": "2.1.0",
+  "validatedAt": "2026-09-29T03:50:09.404758+00:00",
+  "logicTests": {
+    "passed": 155,
+    "failed": 0
+  },
+  "desktopPolicyTests": {
+    "passed": 5,
+    "failed": 0
+  },
+  "coastPackaged": {
+    "result": "PASS",
+    "packaged": true,
+    "version": "2.1.0",
+    "isolatedProfile": true,
+    "speciesAssets": 17,
+    "canvasCollect": true,
+    "canvasCapture": true,
+    "bucketAndGuide": true,
+    "reloadStable": true,
+    "koiUnchanged": true,
+    "coastToolsAndCursors": true,
+    "cursor": {
+      "value": "url(\"file://<project>/release/mac-arm64/%E6%B5%AE%E7%94%9F%E9%94%A6%E9%B2%A4%E6%B1%A0.app/Contents/Resources/app.asar/dist/assets/coast/tongs-cursor.svg\") 11 4, pointer",
+      "width": 40,
+      "height": 40
+    },
+    "tideChanges": [
+      {
+        "direction": "rising",
+        "before": 0,
+        "after": 0,
+        "epochMs": 1790653614121
+      },
+      {
+        "direction": "falling",
+        "before": 0,
+        "after": 5.606208408059921e-07,
+        "epochMs": 1790652114693
+      }
+    ],
+    "productionDebugAbsent": true,
+    "themeAudioSwitch": true,
+    "tracks": [
+      {
+        "id": "stream",
+        "error": null,
+        "paused": true,
+        "volume": 0
+      },
+      {
+        "id": "ocean",
+        "error": null,
+        "paused": false,
+        "volume": 0.096
+      },
+      {
+        "id": "rain",
+        "error": null,
+        "paused": true,
+        "volume": 0
+      },
+      {
+        "id": "wind",
+        "error": null,
+        "paused": true,
+        "volume": 0
+      },
+      {
+        "id": "thunder",
+        "error": null,
+        "paused": true,
+        "volume": 0
+      }
+    ],
+    "ocean": {
+      "duration": 90,
+      "volume": 0.0824870210821243,
+      "loop": true,
+      "source": "file://<project>/release/mac-arm64/%E6%B5%AE%E7%94%9F%E9%94%A6%E9%B2%A4%E6%B1%A0.app/Contents/Resources/app.asar/dist/assets/ocean-waves.wav?v=1.12"
+    },
+    "screenshot": "<historical-artifacts>/赶海主题-窗口预览.png",
+    "desktop": {
+      "pixels": [
+        3840,
+        2486
+      ],
+      "backgroundPixels": [
+        3840,
+        2486
+      ],
+      "visible": true,
+      "animated": true,
+      "state": {
+        "isDesktop": true,
+        "desktopMode": true,
+        "globalInteraction": false,
+        "globalInteractionStatus": "disabled",
+        "launchAtLogin": false,
+        "launchAtLoginSupported": true,
+        "platform": "darwin",
+        "desktopSupported": true,
+        "shortcut": "CommandOrControl+Shift+K",
+        "feedShortcut": "CommandOrControl+Shift+F",
+        "shortcutAvailable": true,
+        "feedShortcutAvailable": true,
+        "message": "桌面已开启鼠标穿透。开启全局点击可与当前主题互动；⌘/Ctrl+Shift+K 恢复控制。",
+        "fullScreen": false,
+        "visible": true,
+        "minimized": false,
+        "display": {
+          "id": 1,
+          "width": 1710,
+          "height": 1107,
+          "scaleFactor": 2,
+          "pixelWidth": 3420,
+          "pixelHeight": 2214
+        }
+      },
+      "screenshot": "<historical-artifacts>/赶海主题-桌面预览.png",
+      "restored": true
+    },
+    "errors": [],
+    "assetErrors": [],
+    "cancelledMediaRequests": [
+      "file://<project>/release/mac-arm64/%E6%B5%AE%E7%94%9F%E9%94%A6%E9%B2%A4%E6%B1%A0.app/Contents/Resources/app.asar/dist/assets/wind.wav?v=1.5: net::ERR_ABORTED",
+      "file://<project>/release/mac-arm64/%E6%B5%AE%E7%94%9F%E9%94%A6%E9%B2%A4%E6%B1%A0.app/Contents/Resources/app.asar/dist/assets/wind.wav?v=1.5: net::ERR_ABORTED"
+    ]
+  },
+  "koiPackaged": {
+    "result": "PASS",
+    "nativeCloseExits": true,
+    "version": "2.1.0",
+    "packaged": true,
+    "anatomyPreview": true,
+    "turtles": 4,
+    "architecture": "arm64",
+    "desktopSupported": true,
+    "animationWhileOnDesktop": true,
+    "isolatedProfile": "<historical-work>/packaged-smoke-profile-fazFCm",
+    "seasonalBackgrounds": [
+      {
+        "name": "pond.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "spring.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "autumn.png",
+        "width": 3840,
+        "height": 2160
+      },
+      {
+        "name": "winter.png",
+        "width": 3840,
+        "height": 2160
+      }
+    ],
+    "sounds": [
+      {
+        "id": "stream",
+        "duration": 120,
+        "loop": true,
+        "offline": true
+      },
+      {
+        "id": "ocean",
+        "duration": 90,
+        "loop": true,
+        "offline": true
+      },
+      {
+        "id": "rain",
+        "duration": 45,
+        "loop": true,
+        "offline": true
+      },
+      {
+        "id": "wind",
+        "duration": 45,
+        "loop": false,
+        "offline": true
+      },
+      {
+        "id": "thunder",
+        "duration": 18.477417,
+        "loop": false,
+        "offline": true
+      }
+    ],
+    "windowPerformance": {
+      "fps": 60.00039933710042,
+      "p95": 16.80000000000109,
+      "slowFrames": 0,
+      "pixels": [
+        3840,
+        2160
+      ],
+      "backgroundPixels": [
+        3840,
+        2160
+      ]
+    },
+    "desktopPerformance": {
+      "fps": 60.00039933710041,
+      "p95": 16.799999999999272,
+      "slowFrames": 0,
+      "pixels": [
+        3840,
+        2486
+      ],
+      "backgroundPixels": [
+        3840,
+        2486
+      ]
+    },
+    "screenshots": [
+      "packaged-window-preview.png",
+      "packaged-desktop-preview.png"
+    ]
+  },
+  "finalVisualCycle": {
+    "createdAt": "2026-09-29T03:46:48.964Z",
+    "isolatedProfile": true,
+    "headless": true,
+    "uiStarted": true,
+    "manualJumpAfterStart": false,
+    "naturalCycle": true,
+    "phaseOrder": [
+      "rising",
+      "high",
+      "falling",
+      "low",
+      "rising"
+    ],
+    "screenshots": {
+      "high": "<historical-artifacts>/赶海主题-高潮.png",
+      "low": "<historical-artifacts>/赶海主题-低潮.png"
+    },
+    "screenshotCapture": {
+      "method": "Captured during the same unpaused natural 60x cycle after the matching visible tide badge appeared; no phase jump after start.",
+      "captures": [
+        {
+          "phase": "high",
+          "level": 1,
+          "cycle": 0,
+          "position": 667.676,
+          "speed": 60,
+          "paused": false,
+          "scene": 40,
+          "aquatic": 18,
+          "stranded": 0,
+          "inward": 0,
+          "outward": 0,
+          "pool": 2,
+          "shells": 12,
+          "dryShells": 0,
+          "bucket": 0,
+          "collected": 0,
+          "rescues": 0,
+          "badge": "高潮停留",
+          "path": "<historical-artifacts>/赶海主题-高潮.png",
+          "realSeconds": 11.071
+        },
+        {
+          "phase": "low",
+          "level": 0,
+          "cycle": 0,
+          "position": 1555.616,
+          "speed": 60,
+          "paused": false,
+          "scene": 30,
+          "aquatic": 8,
+          "stranded": 2,
+          "inward": 0,
+          "outward": 0,
+          "pool": 2,
+          "shells": 12,
+          "dryShells": 12,
+          "bucket": 0,
+          "collected": 0,
+          "rescues": 0,
+          "badge": "低潮停留",
+          "path": "<historical-artifacts>/赶海主题-低潮.png",
+          "realSeconds": 25.871
+        }
+      ]
+    },
+    "errors": [],
+    "crabHabitatAudit": {
+      "frames": 1639,
+      "entityChecks": 8209,
+      "invalidFrames": 0,
+      "invalidChecks": 0,
+      "samples": []
+    },
+    "poolProbe": {
+      "point": {
+        "x": 1381.9,
+        "y": 731
+      },
+      "oceanMask": false,
+      "combinedMask": true,
+      "visiblePixels": 161
+    },
+    "performance": {
+      "stats": {
+        "theme": "coast",
+        "ready": true,
+        "source": "/assets/coast/coast-low.png",
+        "sourceSize": [
+          1672,
+          941
+        ],
+        "backgroundSize": [
+          3840,
+          2160
+        ],
+        "width": 3840,
+        "height": 2160,
+        "cssWidth": 1920,
+        "cssHeight": 1080,
+        "scale": 2,
+        "entityCount": 29,
+        "spriteCount": 17,
+        "missingAssets": [],
+        "renderMs": 0.38,
+        "desktopMode": false
+      },
+      "frameSamples": 150,
+      "meanFrameMs": 16.667333333094916,
+      "p95FrameMs": 17.5,
+      "mainThread": {
+        "wallSeconds": 2.60388900001999,
+        "taskSeconds": 0.474792,
+        "scriptSeconds": 0.413816
+      }
+    },
+    "resize": {
+      "viewport": [
+        900,
+        1200
+      ],
+      "backing": [
+        1800,
+        2400
+      ],
+      "offset": [
+        -616.6666666666665,
+        0
+      ]
+    },
+    "pick": {
+      "x": 654.2699781426286,
+      "y": 419.3317434609446,
+      "id": "coast-3",
+      "species": "fish_clown",
+      "before": 0,
+      "after": 1
+    },
+    "realCycleSeconds": 30.172
+  },
+  "hiddenInteraction": {
+    "createdAt": "2026-09-29T03:29:50.110Z",
+    "initial": {
+      "stats": {
+        "theme": "coast",
+        "ready": true,
+        "source": "/assets/coast/coast-low.png",
+        "sourceSize": [
+          1672,
+          941
+        ],
+        "backgroundSize": [
+          3840,
+          2160
+        ],
+        "width": 3840,
+        "height": 2160,
+        "cssWidth": 1920,
+        "cssHeight": 1080,
+        "scale": 2,
+        "entityCount": 24,
+        "spriteCount": 17,
+        "missingAssets": [],
+        "renderMs": 0.36,
+        "desktopMode": false
+      },
+      "title": "浮生 · 摸鱼桌面",
+      "url": "http://127.0.0.1:5188/",
+      "hidden": [
+        {
+          "id": "coast-5",
+          "species": "fish_yellow",
+          "kind": "crevice",
+          "anchor": {
+            "x": 914.9160591402532,
+            "y": 299.8994426429958
+          },
+          "x": 912.2605610474183,
+          "y": 330.7854966136627,
+          "needed": 1
+        },
+        {
+          "id": "coast-9",
+          "species": "crab",
+          "kind": "sand",
+          "anchor": null,
+          "x": 806.0948324850973,
+          "y": 854.5861241416968,
+          "needed": 3
+        },
+        {
+          "id": "coast-14",
+          "species": "crab_rock",
+          "kind": "sand",
+          "anchor": null,
+          "x": 1357.057583551231,
+          "y": 343.1249009429095,
+          "needed": 3
+        },
+        {
+          "id": "coast-16",
+          "species": "crab",
+          "kind": "sand",
+          "anchor": null,
+          "x": 1337.4718707407894,
+          "y": 225.7337001218854,
+          "needed": 3
+        },
+        {
+          "id": "coast-25",
+          "species": "shell",
+          "kind": "sand",
+          "anchor": null,
+          "x": 1385.20657484242,
+          "y": 537.4547016880272,
+          "needed": 3
+        },
+        {
+          "id": "coast-27",
+          "species": "shell",
+          "kind": "sand",
+          "anchor": null,
+          "x": 944.513572244044,
+          "y": 868.6742710641433,
+          "needed": 3
+        }
+      ],
+      "overlay": false
+    },
+    "clicks": [
+      {
+        "kind": "sand",
+        "before": {
+          "id": "coast-14",
+          "species": "crab_rock",
+          "x": 1357.057583551231,
+          "y": 343.1249009429095,
+          "heading": -0.14182187159630757,
+          "phase": 1.7040997376939677,
+          "state": "scene",
+          "stranded": false,
+          "submerged": false,
+          "lastStrandedCycle": -1,
+          "migrant": false,
+          "admittedCycle": -1,
+          "entry": null,
+          "forageHome": null,
+          "returnEntry": null,
+          "migration": null,
+          "moveTarget": null,
+          "entryProgress": 1,
+          "lingerCycle": -1,
+          "concealment": "sand",
+          "revealSteps": 0,
+          "revealNeeded": 3,
+          "concealmentInitialized": true,
+          "concealmentAnchor": null,
+          "creviceExit": null,
+          "emergeProgress": 0,
+          "speed": 0,
+          "motionState": "resting",
+          "bucket": 0,
+          "shells": 0,
+          "rescues": 0,
+          "observed": 0
+        },
+        "stages": [
+          {
+            "id": "coast-14",
+            "species": "crab_rock",
+            "x": 1357.057583551231,
+            "y": 343.1249009429095,
+            "heading": -0.14182187159630757,
+            "phase": 1.7040997376939677,
+            "state": "scene",
+            "stranded": false,
+            "submerged": false,
+            "lastStrandedCycle": -1,
+            "migrant": false,
+            "admittedCycle": -1,
+            "entry": null,
+            "forageHome": null,
+            "returnEntry": null,
+            "migration": null,
+            "moveTarget": null,
+            "entryProgress": 1,
+            "lingerCycle": -1,
+            "concealment": "sand",
+            "revealSteps": 1,
+            "revealNeeded": 3,
+            "concealmentInitialized": true,
+            "concealmentAnchor": null,
+            "creviceExit": null,
+            "emergeProgress": 0,
+            "speed": 0,
+            "motionState": "resting",
+            "lastRevealAt": 1790652580521,
+            "bucket": 0,
+            "shells": 0,
+            "rescues": 0,
+            "observed": 0
+          },
+          {
+            "id": "coast-14",
+            "species": "crab_rock",
+            "x": 1357.057583551231,
+            "y": 343.1249009429095,
+            "heading": -0.14182187159630757,
+            "phase": 1.7040997376939677,
+            "state": "scene",
+            "stranded": false,
+            "submerged": false,
+            "lastStrandedCycle": -1,
+            "migrant": false,
+            "admittedCycle": -1,
+            "entry": null,
+            "forageHome": null,
+            "returnEntry": null,
+            "migration": null,
+            "moveTarget": null,
+            "entryProgress": 1,
+            "lingerCycle": -1,
+            "concealment": "sand",
+            "revealSteps": 2,
+            "revealNeeded": 3,
+            "concealmentInitialized": true,
+            "concealmentAnchor": null,
+            "creviceExit": null,
+            "emergeProgress": 0,
+            "speed": 0,
+            "motionState": "resting",
+            "lastRevealAt": 1790652580785,
+            "bucket": 0,
+            "shells": 0,
+            "rescues": 0,
+            "observed": 0
+          },
+          {
+            "id": "coast-14",
+            "species": "crab_rock",
+            "x": 1357.1058512479005,
+            "y": 343.49938317735155,
+            "heading": -0.11813361414657672,
+            "phase": 1.7040997376939677,
+            "state": "scene",
+            "stranded": false,
+            "submerged": false,
+            "lastStrandedCycle": -1,
+            "migrant": false,
+            "admittedCycle": -1,
+            "entry": null,
+            "forageHome": null,
+            "returnEntry": null,
+            "migration": null,
+            "moveTarget": null,
+            "entryProgress": 1,
+            "lingerCycle": -1,
+            "concealment": null,
+            "revealSteps": 3,
+            "revealNeeded": 3,
+            "concealmentInitialized": true,
+            "concealmentAnchor": null,
+            "creviceExit": null,
+            "emergeProgress": 0.3861538461538462,
+            "speed": 2.665999999999999,
+            "motionState": "moving",
+            "lastRevealAt": 1790652581047,
+            "emergeKind": "sand",
+            "emergeStartMs": 1790652581047,
+            "motionTime": 0.26659999999999995,
+            "wanderHeading": 1.4866881860492502,
+            "crabSide": 1,
+            "turnRate": 0.14072217025343736,
+            "moveAngle": 1.4526627126483198,
+            "bucket": 0,
+            "shells": 0,
+            "rescues": 0,
+            "observed": 0
+          }
+        ],
+        "after": {
+          "id": "coast-14",
+          "species": "crab_rock",
+          "x": 1357.1022476795358,
+          "y": 349.23248490577015,
+          "heading": 0.0896990442016507,
+          "phase": 1.7040997376939677,
+          "state": "scene",
+          "stranded": false,
+          "submerged": false,
+          "lastStrandedCycle": -1,
+          "migrant": false,
+          "admittedCycle": -1,
+          "entry": null,
+          "forageHome": null,
+          "returnEntry": null,
+          "migration": null,
+          "moveTarget": null,
+          "entryProgress": 1,
+          "lingerCycle": -1,
+          "concealment": null,
+          "revealSteps": 3,
+          "revealNeeded": 3,
+          "concealmentInitialized": true,
+          "concealmentAnchor": null,
+          "creviceExit": null,
+          "emergeProgress": 1,
+          "speed": 4.457631746549923,
+          "motionState": "moving",
+          "lastRevealAt": 1790652581047,
+          "emergeKind": "sand",
+          "motionTime": 1.6666000000000012,
+          "wanderHeading": 1.6837020393717241,
+          "crabSide": 1,
+          "turnRate": 0.09599728868559755,
+          "moveAngle": 1.6604953709965473,
+          "bucket": 0,
+          "shells": 0,
+          "rescues": 0,
+          "observed": 0
+        }
+      },
+      {
+        "kind": "crevice",
+        "before": {
+          "id": "coast-5",
+          "species": "fish_yellow",
+          "x": 912.2605610474183,
+          "y": 330.7854966136627,
+          "heading": 2.5257069684104763,
+          "phase": 3.322959429360745,
+          "state": "scene",
+          "stranded": false,
+          "submerged": true,
+          "lastStrandedCycle": -1,
+          "migrant": false,
+          "admittedCycle": -1,
+          "entry": null,
+          "forageHome": null,
+          "returnEntry": null,
+          "migration": null,
+          "moveTarget": null,
+          "entryProgress": 1,
+          "lingerCycle": -1,
+          "concealment": "crevice",
+          "revealSteps": 0,
+          "revealNeeded": 1,
+          "concealmentInitialized": true,
+          "concealmentAnchor": {
+            "x": 914.9160591402532,
+            "y": 299.8994426429958
+          },
+          "creviceExit": {
+            "x": 906.4355974889417,
+            "y": 398.535550484803
+          },
+          "emergeProgress": 0,
+          "speed": 0,
+          "motionState": "resting",
+          "bucket": 0,
+          "shells": 0,
+          "rescues": 0,
+          "observed": 0
+        },
+        "stages": [
+          {
+            "id": "coast-5",
+            "species": "fish_yellow",
+            "x": 912.1764646847977,
+            "y": 331.7636200028835,
+            "heading": 1.9947470382218397,
+            "phase": 3.322959429360745,
+            "state": "scene",
+            "stranded": false,
+            "submerged": true,
+            "lastStrandedCycle": -1,
+            "migrant": false,
+            "admittedCycle": -1,
+            "entry": null,
+            "forageHome": null,
+            "returnEntry": null,
+            "migration": "emerging",
+            "moveTarget": {
+              "x": 906.4355974889417,
+              "y": 398.535550484803
+            },
+            "entryProgress": 1,
+            "lingerCycle": -1,
+            "concealment": null,
+            "revealSteps": 1,
+            "revealNeeded": 1,
+            "concealmentInitialized": true,
+            "concealmentAnchor": {
+              "x": 914.9160591402532,
+              "y": 299.8994426429958
+            },
+            "creviceExit": {
+              "x": 906.4355974889417,
+              "y": 398.535550484803
+            },
+            "emergeProgress": 0.22818181818181818,
+            "speed": 6.931599999999988,
+            "motionState": "moving",
+            "lastRevealAt": 1790652582715,
+            "emergeKind": "crevice",
+            "emergeStartMs": 1790652582715,
+            "turnRate": -1.3986591296315953,
+            "moveAngle": 1.6565626645260731,
+            "bucket": 0,
+            "shells": 0,
+            "rescues": 0,
+            "observed": 0
+          }
+        ],
+        "after": {
+          "id": "coast-5",
+          "species": "fish_yellow",
+          "x": 909.9015012918753,
+          "y": 358.2236812338381,
+          "heading": 1.6578132242510475,
+          "phase": 3.322959429360745,
+          "state": "scene",
+          "stranded": false,
+          "submerged": true,
+          "lastStrandedCycle": -1,
+          "migrant": false,
+          "admittedCycle": -1,
+          "entry": null,
+          "forageHome": null,
+          "returnEntry": null,
+          "migration": "emerging",
+          "moveTarget": {
+            "x": 906.4355974889417,
+            "y": 398.535550484803
+          },
+          "entryProgress": 1,
+          "lingerCycle": -1,
+          "concealment": null,
+          "revealSteps": 1,
+          "revealNeeded": 1,
+          "concealmentInitialized": true,
+          "concealmentAnchor": {
+            "x": 914.9160591402532,
+            "y": 299.8994426429958
+          },
+          "creviceExit": {
+            "x": 906.4355974889417,
+            "y": 398.535550484803
+          },
+          "emergeProgress": 1,
+          "speed": 21.999991398553178,
+          "motionState": "moving",
+          "lastRevealAt": 1790652582715,
+          "emergeKind": "crevice",
+          "turnRate": -0.005173096844197754,
+          "moveAngle": 1.6565626645260751,
+          "bucket": 0,
+          "shells": 0,
+          "rescues": 0,
+          "observed": 0
+        }
+      }
+    ],
+    "perf": {
+      "stats": {
+        "theme": "coast",
+        "ready": true,
+        "source": "/assets/coast/coast-low.png",
+        "sourceSize": [
+          1672,
+          941
+        ],
+        "backgroundSize": [
+          3840,
+          2160
+        ],
+        "width": 3840,
+        "height": 2160,
+        "cssWidth": 1920,
+        "cssHeight": 1080,
+        "scale": 2,
+        "entityCount": 26,
+        "spriteCount": 17,
+        "missingAssets": [],
+        "renderMs": 0.36,
+        "desktopMode": false
+      },
+      "frames": 174,
+      "mean": 16.668965517104358,
+      "p95": 18,
+      "mainThread": {
+        "wall": 3.003270999994129,
+        "task": 0.539282,
+        "script": 0.46189
+      }
+    },
+    "errors": []
+  }
+}
