@@ -31,3 +31,62 @@
 /* Six home tools remain reachable at intermediate window widths. */
 @media(min-width:561px) and (max-width:700px){.dock-wrap{width:calc(100% - 30px)}.dock{width:100%}.dock button{flex:1;width:auto}}
 @media(max-width:560px){.dock button{padding-inline:3px}}
+
+/* The second scene uses the same HUD, glass panels and typography. */
+.theme-trigger{display:flex;align-items:center;gap:6px;padding:2px 0;font:12px var(--serif);letter-spacing:3px;color:#e0eee0;border-radius:4px;min-height:22px}.theme-trigger:hover{color:#fff6ce}.theme-card{padding:13px;overflow:hidden}.theme-card>img{width:100%;height:90px;object-fit:cover;border-radius:10px;margin-bottom:15px}.theme-card .season-symbol{margin-bottom:8px}.theme-card small{letter-spacing:0}.theme-coast .pond-background{background-image:url('/assets/coast/coast-low.png')}.coast-background{opacity:1}.theme-coast .poem{text-shadow:0 1px 10px #163f41}.theme-coast .scene-status{text-shadow:0 1px 8px #0a3c3b;background:#15493c96;border:1px solid #e4f1d82e;border-radius:14px;padding:10px 13px;left:21px;bottom:26px;letter-spacing:1px}.theme-coast .scene-status p{margin-bottom:5px}.theme-coast .scene-status>span{font-size:12px}.tide-badge{position:absolute;right:35px;top:95px;display:flex;align-items:center;gap:11px;background:#184f46dd;border:1px solid #e4f1d85c;border-radius:20px;padding:10px 14px;box-shadow:0 4px 20px #113d3220;font-family:var(--serif)}.native-app .tide-badge{top:113px}.tide-badge>span{display:flex;flex-direction:column;gap:5px;text-align:left}.tide-badge strong{font-size:14px;font-weight:400;letter-spacing:2px}.tide-badge small{font:10px sans-serif;color:#d1e3d1;font-variant-numeric:tabular-nums}.tide-badge meter{width:48px;height:9px}.dock-count{position:absolute;top:8px;right:13px;border-radius:10px;min-width:17px;height:17px;background:#dcebc6;color:#244b3b;font:10px/17px sans-serif}.bucket-actions{display:flex;align-items:center;justify-content:space-between;gap:15px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px}.bucket-actions>span{color:var(--muted);font-size:11px}.bucket-group>header{display:flex;align-items:center;justify-content:space-between;gap:12px;font:16px var(--serif);border-bottom:1px solid var(--line);margin-top:16px;padding-bottom:5px}.bucket-row{display:flex;gap:17px;align-items:center;border-bottom:1px solid #eaf8d81c;padding:5px 0}.bucket-row>div{flex:1}.bucket-row strong{font:15px var(--serif);display:block;margin-bottom:7px}.bucket-row small{font-size:10px;color:var(--muted)}.coast-animal-image{width:105px;height:79px;object-fit:contain;flex:none}.coast-empty{text-align:center;color:var(--muted);padding:26px 0 35px}.coast-empty>svg{color:#d4e4ba}.coast-empty h3{font:22px var(--serif);color:#eef5df}.coast-empty p{font-size:12px;line-height:2}.coast-guide{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.guide-card{border:1px solid var(--line);border-radius:14px;text-align:center;padding:10px 13px 15px;min-width:0;background:#092e2221}.guide-card .coast-animal-image{width:100%;height:90px}.guide-card h3{font:17px var(--serif);margin:5px 0 10px}.guide-card p{font-size:11px;line-height:1.8;color:var(--muted);min-height:39px;margin:0 0 12px}.guide-card small{font-size:9px;color:#a4c4b8}.guide-counts{display:flex;justify-content:center;gap:12px;font-size:10px;margin-top:11px;color:#dcebc6}.undiscovered .coast-animal-image{opacity:.2;filter:grayscale(1)}.undiscovered h3{color:#b1cdbd}.tide-panel-status{display:flex;flex-direction:column;align-items:center;gap:13px;padding:10px 0 25px}.tide-panel-status strong{font:26px var(--serif);font-weight:400;letter-spacing:3px}.tide-panel-status span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}.tide-panel-status+meter{width:100%;height:13px}meter::-webkit-meter-bar{border:0;border-radius:8px;background:#e7f4df25}meter::-webkit-meter-optimum-value{border-radius:8px;background:linear-gradient(90deg,#8ec8be,#d3e7bd)}.tide-schedule{display:flex;justify-content:space-between;margin:20px 0 25px}.tide-schedule>div{display:flex;flex-direction:column;gap:8px;text-align:center}.tide-schedule strong{font:15px var(--serif)}.tide-schedule small{font-size:10px;color:var(--muted)}.tide-debug{border-top:1px solid var(--line);margin-top:24px;padding-top:17px}.tide-debug summary{font-size:11px;color:#d1ddba;cursor:pointer}.tide-jumps{grid-template-columns:repeat(4,1fr);margin:18px 0 25px}.tide-jumps button{font-size:10px;padding:12px 3px}.theme-coast .feed-hint{font-size:13px;letter-spacing:1px}
+@media(min-width:561px) and (max-width:1000px){.theme-coast .scene-status{bottom:140px}.tide-badge{right:25px}}
+@media(max-width:560px){.tide-badge{right:18px;top:92px;padding:8px 11px;gap:8px}.native-app .tide-badge{top:113px}.tide-badge meter{width:32px}.tide-badge strong{font-size:12px}.tide-badge small{font-size:9px}.theme-coast .scene-status{bottom:195px;left:18px;font-size:12px;padding:9px 11px}.theme-coast .feed-hint{font-size:10px;gap:5px;letter-spacing:0;white-space:normal;text-align:center;max-width:90vw}.theme-coast .feed-hint>span{width:12px}.coast-guide{grid-template-columns:repeat(2,1fr);gap:9px}.guide-card{padding:7px 10px 14px}.guide-card h3{font-size:15px}.guide-card p{font-size:10px}.coast-animal-image{width:75px;height:66px}.bucket-actions>span{display:none}.bucket-row{gap:9px}.bucket-row small{font-size:9px}.theme-card>img{height:74px}.dock-count{right:6px}.theme-trigger{font-size:11px}}
+
+/* Coast tools only affect the scene canvas; native desktop pointers remain untouched. */
+.theme-coast .coast-canvas[data-coast-mode="observe"]{cursor:grab}
+.theme-coast .coast-canvas[data-coast-mode="observe"]:active{cursor:grabbing}
+.theme-coast .coast-canvas[data-coast-mode="catch"]{cursor:url('/assets/coast/tongs-cursor.svg') 11 4,pointer}
+.coast-weather-badge{cursor:default;pointer-events:auto}
+.theme-coast .tide-direction-controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.theme-coast .tide-direction-controls button{display:flex;justify-content:center;align-items:center;gap:9px;min-height:48px;border:1px solid var(--line);border-radius:13px;background:#e3f4d20b;font:15px var(--serif)}
+.theme-coast .tide-direction-controls button[aria-pressed="true"]{background:#e3f4d21c;border-color:#d7eac382}
+.theme-coast .tide-direction-note{text-align:center;margin-top:12px}
+.theme-coast .coast-sound-intro{display:flex;gap:17px;align-items:center;color:#dcebc6;margin:4px 0 12px}
+.theme-coast .coast-sound-intro p{margin:0;font-size:12px;line-height:1.9;color:var(--muted)}
+.theme-coast .coast-volume{padding-top:12px}
+.theme-coast .tide-tool,.theme-coast .tide-badge,.theme-coast .tide-direction-controls button{cursor:default}
+.bottle-tabs{justify-content:flex-start;gap:26px}
+.bottle-tabs button{white-space:nowrap}
+.bottle-tabs button[aria-selected="true"]{border-bottom-color:#d7e5bd;background:none}
+.bottle-tabs small{margin-left:5px;color:var(--muted)}
+.bottle-compose{padding-top:3px}
+.bottle-compose>label{display:block;font:17px var(--serif);margin:8px 0 14px}
+.bottle-counter{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:var(--muted);margin:10px 2px 22px}
+.bottle-compose-footer{display:flex;align-items:flex-end;justify-content:space-between;gap:22px}
+.bottle-compose-footer label{font-size:12px;flex:1;max-width:290px}
+.bottle-compose-footer small{margin-left:8px;color:var(--muted)}
+.bottle-compose-footer input{display:block;width:100%;padding:13px 14px;margin-top:10px;background:#123d3326;border:1px solid var(--line);border-radius:10px}
+.bottle-compose-footer .primary-button{white-space:nowrap;flex:none}
+.bottle-letter-list{display:flex;flex-direction:column;gap:10px}
+.bottle-letter-row{display:flex;align-items:center;gap:15px;width:100%;text-align:left;padding:17px 15px;border:1px solid var(--line);border-radius:13px;background:#dcebc609}
+.bottle-letter-row>span{flex:1;min-width:0}
+.bottle-letter-row strong{display:block;font:18px var(--serif);margin-bottom:8px}
+.bottle-letter-row small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;color:var(--muted)}
+.bottle-letter-row time{font-size:10px;color:var(--muted);white-space:nowrap}
+.letter-paper{margin-top:18px;padding:29px 32px 25px;border-radius:10px;background:linear-gradient(130deg,#f6efd9,#e9e0c7);color:#3f554b;box-shadow:0 7px 24px #08261b20}
+.letter-eyebrow{color:#7b8770;font-size:11px;letter-spacing:1px}
+.letter-paper h3{font:25px/1.5 var(--serif);letter-spacing:1px;margin:20px 0}
+.letter-body{white-space:pre-wrap;overflow-wrap:anywhere;font:18px/2.05 var(--serif);letter-spacing:.4px;margin:0 0 30px}
+.letter-signature{text-align:right;font:14px/1.8 var(--serif);overflow-wrap:anywhere}
+.bottle-empty{padding:30px 30px 40px}
+.bottle-empty .text-button{margin:0 auto}
+.bottle-local-note{border-top:1px solid var(--line);padding-top:17px;margin:25px 0 0;color:#b6cdb9;font:11px/1.9 sans-serif}
+.bottle-error{color:#f0c5a1}
+@media(max-width:560px){.bottle-tabs{gap:18px}.bottle-tabs button{font-size:12px}.bottle-compose textarea{padding:17px;font-size:16px;min-height:170px}.bottle-compose-footer{align-items:stretch;flex-direction:column;gap:18px}.bottle-compose-footer label{max-width:none}.bottle-compose-footer .primary-button{justify-content:center}.letter-paper{padding:23px 21px}.letter-paper h3{font-size:21px}.letter-body{font-size:16px}.bottle-letter-row{gap:10px;padding:14px 11px}.bottle-letter-row time{display:none}.bottle-empty{padding:20px 10px}.bottle-local-note{font-size:10px}}
+@media(max-width:560px){.theme-coast .tide-direction-controls{gap:8px}.theme-coast .tide-direction-controls button{font-size:13px;gap:5px}.theme-coast .feed-hint{max-width:min(520px,90vw);line-height:1.6}}
+
+.bucket-row>.bucket-animal-details{min-width:0}.bucket-row .bucket-description{display:block;line-height:1.7;overflow-wrap:anywhere}.bucket-row>.text-button{flex-shrink:0;white-space:nowrap}
+
+/* Bottled keepsakes only display image URLs from the trusted local catalog. */
+.bottle-letter-thumbnail{width:42px;height:57px;flex:none;object-fit:cover;object-position:top;border-radius:4px;box-shadow:0 2px 6px #062c2933;background:#f7eddb}
+.bottle-curated-page{display:block;width:auto;max-width:100%;height:auto;max-height:clamp(300px,calc(100dvh - 380px),680px);object-fit:contain;margin:12px auto 20px;border-radius:4px}
+.bottle-collection-progress{margin:19px 0 0;font-size:11px;line-height:1.8;color:var(--muted)}
+.letter-paper-personal{padding:20px 0 3px;background:transparent;box-shadow:none;color:var(--muted)}
+.letter-paper-personal .letter-eyebrow{color:var(--muted)}.letter-paper-personal h3{color:#edf5da;margin:13px 0;font-size:20px}
+.letter-paper-personal .letter-signature{padding:0 9px}.letter-paper-curated{padding:14px 0 6px;background:transparent;box-shadow:none;color:var(--muted)}.letter-paper-curated .letter-eyebrow{color:var(--muted)}.letter-paper-curated h3{margin:8px 0;font-size:20px;color:#edf5da}
+@media(max-width:560px){.bottle-letter-thumbnail{width:35px;height:47px}.letter-paper-personal{padding:12px 0 3px}.letter-paper-curated{padding:12px 10px 8px}.letter-paper-curated h3{font-size:18px}.bottle-collection-progress{font-size:10px}}
