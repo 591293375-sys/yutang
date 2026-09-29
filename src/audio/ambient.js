@@ -1,5 +1,5 @@
-export const AUDIO_TRACKS=[{id:'stream',file:'healing-stream.wav?v=1.9',loop:true},{id:'rain',file:'rain.wav?v=1.7',loop:true},{id:'wind',file:'wind.wav?v=1.5',loop:false},{id:'thunder',file:'thunder.wav',loop:false}];
-export function ambientMix(weather,season,night=false){
+export const AUDIO_TRACKS=[{id:'stream',file:'healing-stream.wav?v=1.9',loop:true},{id:'ocean',file:'ocean-waves.wav?v=1.12',loop:true},{id:'rain',file:'rain.wav?v=1.7',loop:true},{id:'wind',file:'wind.wav?v=1.5',loop:false},{id:'thunder',file:'thunder.wav',loop:false}];
+export function ambientMix(weather,season,night=false,theme='koi'){
  // Wind is the peak of an occasional gust, never a continuous backing layer.
  const seasonal={spring:[.72,.07],summer:[.78,.05],autumn:[.65,.1],winter:[.3,.12]}[season]||[.7,.08];
  let [stream,wind]=seasonal,rain=0;
@@ -9,9 +9,19 @@ export function ambientMix(weather,season,night=false){
  if(weather==='snowy'){stream*=.3;wind=Math.min(wind,.09)}
  if(weather==='foggy'){stream*=.85;wind*=.4}
  if(night){wind*=.8;stream*=.9;rain*=.9}
- const total=Math.max(1,stream+wind+rain);return {stream:stream/total,rain:rain/total,wind:wind/total};
+ let ocean=0;
+ if(theme==='coast'){
+  // The coast has its own quiet field recording; inactive water always has an explicit zero target.
+  ocean=({rainy:.30,stormy:.28,snowy:.24,foggy:.32}[weather]??.4)*(night?.9:1);stream=0;wind=Math.min(wind,.07);
+ }
+ const total=Math.max(1,stream+ocean+wind+rain);return {stream:stream/total,ocean:ocean/total,rain:rain/total,wind:wind/total};
 }
-export function ambientDescription(weather,season){
+export function ambientDescription(weather,season,theme='koi'){
+ if(theme==='coast'){
+  if(weather==='stormy')return '轻缓海浪，伴着柔和雨水与偶尔远雷';
+  if(weather==='rainy')return '轻缓海浪，细雨落在海面';
+  return '轻缓海浪，偶尔一阵海风';
+ }
  if(weather==='stormy')return '柔和雨水，偶尔一阵风与远雷';
  if(weather==='rainy')return '柔和雨水，落在潺潺溪流间';
  if(weather==='snowy')return '远处细细流水，偶尔一阵轻风';
@@ -19,27 +29,41 @@ export function ambientDescription(weather,season){
 }
 // Keep ownership on the media element with a global symbol: module-local maps are replaced by HMR.
 const thunderOwner=Symbol.for('fusheng.ambient.thunderOwner');
+const mediaOwner=Symbol.for('fusheng.ambient.mediaOwner');
 /** Native audio layers, independent of render FPS; all assets are offline field recordings. */
 export class AmbientMixer{
  constructor(media,onStatus=()=>{},random=Math.random){
-  this.media=media;this.onStatus=onStatus;this.random=random;this.targets={};this.pending=new Set();this.failed=new Set();this.waiting=new Set();this.thunderTimer=0;this.timer=0;this.dead=false;this.windTimer=0;this.windEndTimer=0;this.windActive=false;
+  this.media=media;this.onStatus=onStatus;this.random=random;this.targets={};this.pending=new Map();this.failed=new Set();this.waiting=new Set();this.thunderTimer=0;this.timer=0;this.dead=false;this.windTimer=0;this.windEndTimer=0;this.windActive=false;this.generation=0;this.windRequest=null;
   this.thunderRequest=null;this.thunderAudible=false;
   const thunder=media.thunder;if(thunder){thunder[thunderOwner]=this;this.guardThunder=()=>this.enforceThunder();thunder.addEventListener('play',this.guardThunder);thunder.addEventListener('playing',this.guardThunder)}
   this.retry=()=>{if(this.enabled&&!this.dead){this.waiting.clear();this.playLayers();this.unlockThunder();this.unlockWind()}};
-  this.errors=new Map();
-  for(const [id,a] of Object.entries(media)){a.volume=0;const fail=()=>{if(this.enabled){this.failed.add(id);this.report()}};a.addEventListener('error',fail);this.errors.set(id,fail)}
+  this.errors=new Map();this.guards=new Map();
+  for(const [id,a] of Object.entries(media)){
+   a[mediaOwner]=this;a.volume=0;
+   const fail=()=>{if(this.enabled&&!this.dead&&this.owns(id)){this.failed.add(id);this.report()}};a.addEventListener('error',fail);this.errors.set(id,fail);
+   if(id!=='thunder'){const guard=()=>this.enforceLayer(id);a.addEventListener('play',guard);a.addEventListener('playing',guard);this.guards.set(id,guard)}
+  }
  }
- configure({enabled,volume,weather,season,night}){
+ configure({enabled,volume,weather,season,night,theme='koi'}){
   if(this.dead)return;
-  const oldWeather=this.weather,restartWind=this.enabled!==enabled||this.weather!==weather||this.season!==season;
-  this.enabled=enabled;this.volume=Math.max(0,Math.min(.6,volume));this.weather=weather;this.season=season;
-  const mix=ambientMix(weather,season,night);this.targets=Object.fromEntries(Object.entries(mix).map(([id,weight])=>[id,enabled?weight*this.volume:0]));
+  const oldWeather=this.weather,oldTheme=this.theme,restartWind=this.enabled!==enabled||this.weather!==weather||this.season!==season||this.theme!==theme;
+  if(restartWind)this.generation++;
+  this.enabled=enabled;this.volume=Math.max(0,Math.min(.6,volume));this.weather=weather;this.season=season;this.theme=theme;
+  const mix=ambientMix(weather,season,night,theme);this.targets=Object.fromEntries(Object.entries(mix).map(([id,weight])=>[id,enabled?weight*this.volume:0]));
   this.windLevel=this.targets.wind;this.targets.wind=this.windActive?this.windLevel:0;
   if(restartWind||!enabled||this.volume===0)this.stopWind();
-  if(!this.canThunder())this.stopThunder();else this.enforceThunder();
+  if(!this.canThunder()||oldTheme!==theme||oldWeather!==weather)this.stopThunder();else this.enforceThunder();
   if(!enabled){this.onStatus('off');this.removeRetry();this.waiting.clear();this.failed.clear()}
-  else{if(oldWeather!==weather)this.failed.clear();this.playLayers();this.unlockThunder();if(this.volume>0){this.unlockWind();this.scheduleWind(true)}}
+  else{if(oldWeather!==weather||oldTheme!==theme)this.failed.clear();this.playLayers();this.unlockThunder();if(this.volume>0){this.unlockWind();this.scheduleWind(true)}}
   this.fade();
+ }
+ owns(id){return this.media[id]?.[mediaOwner]===this}
+ silenceLayer(id){const a=this.media[id];if(!a||!this.owns(id))return;a.volume=0;a.pause()}
+ enforceLayer(id){
+  if(!this.owns(id))return;
+  const windPrime=id==='wind'&&this.windRequest?.generation===this.generation&&this.enabled&&this.volume>0&&!this.dead;
+  if(windPrime&&!this.windActive)this.media.wind.volume=0;
+  else if(this.dead||!this.enabled||!this.targets[id]||(id==='wind'&&!this.windActive))this.silenceLayer(id);
  }
  removeRetry(){window.removeEventListener('pointerdown',this.retry);window.removeEventListener('keydown',this.retry)}
  report(){
@@ -51,12 +75,12 @@ export class AmbientMixer{
  }
  playLayers(){
   for(const [id,target] of Object.entries(this.targets)){
-   const a=this.media[id];if(target<=0||!a||!a.paused||this.pending.has(id))continue;
-   this.pending.add(id);this.failed.delete(id);
-   a.play().then(()=>{if(this.dead)return;this.waiting.delete(id);if(!this.enabled||this.targets[id]<=0)a.pause();else this.fade()}).catch(error=>{
-    if(this.dead||!this.enabled)return;
+   const a=this.media[id];if(target<=0||!a||!this.owns(id)||!a.paused||this.pending.has(id))continue;
+   const request={generation:this.generation};this.pending.set(id,request);this.failed.delete(id);
+   a.play().then(()=>{if(!this.owns(id))return;this.waiting.delete(id);if(this.dead||!this.enabled||this.targets[id]<=0||request.generation!==this.generation)this.silenceLayer(id);else this.fade()}).catch(error=>{
+    if(this.dead||!this.enabled||!this.owns(id)||request.generation!==this.generation||this.targets[id]<=0)return;
     if(error.name==='NotAllowedError')this.waiting.add(id);else if(error.name!=='AbortError')this.failed.add(id);
-   }).finally(()=>{this.pending.delete(id);this.report()});
+   }).finally(()=>{if(this.pending.get(id)===request)this.pending.delete(id);if(!this.dead&&this.owns(id)&&request.generation!==this.generation)this.playLayers();this.report()});
   }
   this.report();
  }
@@ -85,12 +109,12 @@ export class AmbientMixer{
   }).catch(()=>{}).finally(()=>{if(this.thunderRequest===request)this.thunderRequest=null;this.enforceThunder()});
  }
  unlockWind(){
-  const a=this.media.wind;if(!a||this.windPrimed||this.windPriming||!a.paused||this.windActive)return;
-  this.windPriming=true;a.volume=0;
-  a.play().then(()=>{if(this.dead)return;this.windPrimed=true;if(!this.windActive){a.pause();a.currentTime=0}}).catch(()=>{}).finally(()=>{this.windPriming=false});
+  const a=this.media.wind;if(!a||!this.owns('wind')||!this.enabled||this.volume<=0||this.dead||this.windPrimed||this.windRequest||!a.paused||this.windActive)return;
+  const request={generation:this.generation};this.windRequest=request;a.volume=0;
+  a.play().then(()=>{if(!this.owns('wind'))return;if(!this.dead&&this.enabled&&request.generation===this.generation)this.windPrimed=true;if(!this.windActive){this.silenceLayer('wind');a.currentTime=0}}).catch(()=>{}).finally(()=>{if(this.windRequest===request)this.windRequest=null;this.enforceLayer('wind')});
  }
  stopWind(){
-  clearTimeout(this.windTimer);clearTimeout(this.windEndTimer);this.windTimer=this.windEndTimer=0;this.windActive=false;this.targets.wind=0;
+  clearTimeout(this.windTimer);clearTimeout(this.windEndTimer);this.windTimer=this.windEndTimer=0;this.windActive=false;this.targets.wind=0;this.windRequest=null;
   this.fade();
  }
  scheduleWind(first=false){
@@ -107,7 +131,7 @@ export class AmbientMixer{
  fade(){
   if(this.timer||this.dead)return;
   const step=()=>{let moving=false;for(const [id,target] of Object.entries(this.targets)){
-   const a=this.media[id];if(!a)continue;const diff=target-a.volume;
+   const a=this.media[id];if(!a||!this.owns(id))continue;const diff=target-a.volume;
    if(Math.abs(diff)>.0005){a.volume=Math.max(0,Math.min(.6,a.volume+diff*.14));moving=true}else{a.volume=target;if(target===0&&!a.paused)a.pause()}
   }if(!moving){clearInterval(this.timer);this.timer=0}};
   this.timer=setInterval(step,40);step();
@@ -131,6 +155,6 @@ export class AmbientMixer{
   this.dead=true;this.stopThunder();
   const thunder=this.media.thunder;if(thunder){thunder.removeEventListener('play',this.guardThunder);thunder.removeEventListener('playing',this.guardThunder)}
   clearTimeout(this.thunderTimer);clearTimeout(this.windTimer);clearTimeout(this.windEndTimer);clearInterval(this.timer);this.removeRetry();
-  for(const [id,a] of Object.entries(this.media)){a.pause();a.volume=0;a.removeEventListener('error',this.errors.get(id))}
+  for(const [id,a] of Object.entries(this.media)){this.silenceLayer(id);a.removeEventListener('error',this.errors.get(id));const guard=this.guards.get(id);if(guard){a.removeEventListener('play',guard);a.removeEventListener('playing',guard)}}
  }
 }
