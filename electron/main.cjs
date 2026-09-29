@@ -24,7 +24,7 @@ let state = {
   platform: process.platform, desktopSupported: false,
   shortcut: SHORTCUT, feedShortcut: FEED_SHORTCUT,
   shortcutAvailable: false, feedShortcutAvailable: false,
-  message: '窗口内点击即可投喂。桌面模式可从菜单栏锦鲤图标恢复。',
+  message: '窗口内点击即可与当前主题互动。桌面模式可从菜单栏锦鲤图标恢复。',
 };
 
 const nativeDir = app.isPackaged ? path.join(process.resourcesPath, 'native') : path.join(__dirname, 'native', 'bin');
@@ -49,11 +49,11 @@ function publish() {
   return currentState();
 }
 function describeInteraction() {
-  if (state.globalInteractionStatus === 'active') return '全局点击投喂已开启，仅监听鼠标左键；不读取键盘内容。';
-  if (state.globalInteractionStatus === 'awaiting-permission') return '请在系统设置 → 隐私与安全性 → 辅助功能中允许本应用，然后返回；也可继续使用托盘或快捷键投喂。';
-  if (state.globalInteractionStatus === 'error') return '系统未允许鼠标监听。可在系统设置检查辅助功能／输入监控，或使用托盘和快捷键投喂。';
-  if (state.globalInteractionStatus === 'unavailable') return '此版本无法监听全局点击。桌面中可使用托盘或投喂快捷键。';
-  return state.desktopMode ? '桌面已开启鼠标穿透。移动鼠标可与鱼互动；投喂请用托盘或 ⌘/Ctrl+Shift+F。' : '窗口内点击即可投喂。桌面模式可从菜单栏锦鲤图标恢复。';
+  if (state.globalInteractionStatus === 'active') return '全局点击互动已开启，仅监听鼠标左键；不读取键盘内容。';
+  if (state.globalInteractionStatus === 'awaiting-permission') return '请在系统设置 → 隐私与安全性 → 辅助功能中允许本应用，然后返回；也可继续使用窗口内互动。';
+  if (state.globalInteractionStatus === 'error') return '系统未允许鼠标监听。可在系统设置检查辅助功能／输入监控，或使用窗口内互动。';
+  if (state.globalInteractionStatus === 'unavailable') return '此版本无法监听全局点击。桌面中可恢复控制窗口互动。';
+  return state.desktopMode ? '桌面已开启鼠标穿透。开启全局点击可与当前主题互动；⌘/Ctrl+Shift+K 恢复控制。' : '窗口内点击即可与当前主题互动。桌面模式可从菜单栏锦鲤图标恢复。';
 }
 
 function sendPointer(type, point, source, fallbackCenter = false) {
@@ -275,15 +275,15 @@ function updateTray() {
   tray.setContextMenu(Menu.buildFromTemplate([
     { label: '浮生锦鲤池', enabled: false },
     { type: 'separator' },
-    { label: '打开池塘控制台', accelerator: SHORTCUT, click: showControls },
+    { label: '打开风景控制台', accelerator: SHORTCUT, click: showControls },
     { label: '融入桌面', type: 'checkbox', checked: state.desktopMode, enabled: state.desktopSupported, click: (item) => setDesktopMode(item.checked) },
-    { label: '隐藏池塘窗口', click: hideWindow },
-    { label: '投喂一把鱼食', accelerator: FEED_SHORTCUT, click: () => feed('tray') },
+    { label: '隐藏风景窗口', click: hideWindow },
+    { label: '主题快捷互动', accelerator: FEED_SHORTCUT, click: () => feed('tray') },
     { type: 'separator' },
-    { label: '全局点击投喂（需系统授权）', type: 'checkbox', checked: state.globalInteraction, enabled: isMac && fs.existsSync(pointerPath), click: (item) => setGlobalInteraction(item.checked) },
+    { label: '全局点击互动（需系统授权）', type: 'checkbox', checked: state.globalInteraction, enabled: isMac && fs.existsSync(pointerPath), click: (item) => setGlobalInteraction(item.checked) },
     { label: '登录时启动', type: 'checkbox', checked: state.launchAtLogin, enabled: state.launchAtLoginSupported, click: (item) => setLaunchAtLogin(item.checked) },
     { type: 'separator' },
-    { label: '退出锦鲤池', click: () => app.quit() },
+    { label: '退出摸鱼桌面', click: () => app.quit() },
   ]));
 }
 
@@ -313,7 +313,7 @@ function createWindow() {
     minWidth: WINDOW_MIN[0], minHeight: WINDOW_MIN[1], show: false, frame: true,
     resizable: true, movable: true, fullscreenable: true, minimizable: true, closable: true,
     ...(isMac ? { titleBarStyle: 'hiddenInset', trafficLightPosition: { x: 18, y: 20 } } : {}),
-    title: '浮生锦鲤池', backgroundColor: '#1d302e',
+    title: '浮生 · 摸鱼桌面', backgroundColor: '#1d302e',
     webPreferences: {
       preload: path.join(__dirname, 'preload.cjs'), sandbox: true, contextIsolation: true,
       nodeIntegration: false, webSecurity: true, allowRunningInsecureContent: false,
@@ -357,9 +357,9 @@ else {
     tray.setToolTip('浮生锦鲤池 · 慢下来，鱼会游向你');
     tray.on('double-click', showControls);
     Menu.setApplicationMenu(Menu.buildFromTemplate(isMac ? [
-      { label: '浮生锦鲤池', submenu: [{ label: '关于浮生锦鲤池', role: 'about' }, { type: 'separator' }, { label: '打开池塘控制台', click: showControls }, { type: 'separator' }, { role: 'quit', label: '退出锦鲤池' }] },
+      { label: '浮生锦鲤池', submenu: [{ label: '关于浮生锦鲤池', role: 'about' }, { type: 'separator' }, { label: '打开风景控制台', click: showControls }, { type: 'separator' }, { role: 'quit', label: '退出摸鱼桌面' }] },
       { label: '编辑', submenu: [{ role: 'undo' }, { role: 'redo' }, { type: 'separator' }, { role: 'cut' }, { role: 'copy' }, { role: 'paste' }, { role: 'selectAll' }] },
-      { label: '窗口', submenu: [{ role: 'minimize', label: '最小化窗口' }, { role: 'togglefullscreen', label: '切换全屏' }, { label: '隐藏池塘窗口', click: hideWindow }, { label: '打开池塘控制台', click: showControls }] },
+      { label: '窗口', submenu: [{ role: 'minimize', label: '最小化窗口' }, { role: 'togglefullscreen', label: '切换全屏' }, { label: '隐藏风景窗口', click: hideWindow }, { label: '打开风景控制台', click: showControls }] },
     ] : []));
     registerIPC();
     createWindow();

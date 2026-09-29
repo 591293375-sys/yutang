@@ -43,7 +43,7 @@ async function smoke() {
       preferences: BrowserWindow.getAllWindows()[0].webContents.getLastWebPreferences(),
     }));
     assert.equal(runtime.packaged, true);
-    assert.equal(runtime.version, '1.10.0');
+    assert.equal(runtime.version, require('../package.json').version);
     assert.equal(runtime.arch, 'arm64');
     assert.equal(runtime.userData, profile, 'Packaged smoke must use its own local profile.');
     assert.equal(runtime.preferences.sandbox, true);
@@ -70,7 +70,7 @@ async function smoke() {
     const labels = await page.locator('.dock button span').evaluateAll(items=>items.map(el=>({text:el.textContent,height:el.getBoundingClientRect().height,width:el.getBoundingClientRect().width,available:el.parentElement.clientWidth-6})));
     assert.equal(labels.length,6);
     assert.ok(labels.every(l=>l.height<23&&l.width<=l.available),'All six home tools have single-line mobile labels');
-    await page.screenshot({path:path.join(work,'packaged-mobile-1.10.png')});
+    await page.screenshot({path:path.join(work,'packaged-mobile-1.11.png')});
     await client.send('Emulation.setDeviceMetricsOverride', { width: 1920, height: 1080, deviceScaleFactor: 2, mobile: false });
     await page.waitForFunction(() => document.querySelector('.pond-canvas')?.width === 3840);
     const backgrounds = await page.evaluate(async () => Promise.all(['pond.png', 'spring.png', 'autumn.png', 'winter.png'].map(async (name) => {
@@ -88,8 +88,9 @@ async function smoke() {
       });
       return {id:media.dataset.ambient,duration:media.duration,loop:media.loop,offline:media.currentSrc.startsWith('file:')};
     })));
-    assert.equal(sounds.length,4);assert.ok(sounds.every(s=>s.offline&&s.duration>15));
+    assert.equal(sounds.length,5);assert.ok(sounds.every(s=>s.offline&&s.duration>15));
     assert.equal(sounds.find(s=>s.id==='stream').duration,120);
+    assert.equal(sounds.find(s=>s.id==='ocean').duration,90);
     assert.equal(sounds.find(s=>s.id==='thunder').loop,false);
     assert.equal(sounds.find(s=>s.id==='wind').loop,false);
     await page.waitForFunction(()=>document.querySelector('.living-background').style.opacity==='1');
