@@ -4,7 +4,7 @@
   "architecture": "arm64",
   "desktopSupported": true,
   "animationWhileOnDesktop": true,
-  "isolatedProfile": "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/packaged-smoke-profile-qF43FN",
+  "isolatedProfile": "<historical-work>/packaged-smoke-profile-qF43FN",
   "seasonalBackgrounds": [
     {
       "name": "pond.png",
