@@ -1,9 +1,9 @@
 {
   "name": "fusheng-koi-pond",
-  "version": "1.10.0",
+  "version": "2.4.1",
   "private": true,
   "type": "module",
-  "description": "浮生 · 四时锦鲤池",
+  "description": "浮生 · 摸鱼桌面，锦鲤与赶海",
   "main": "electron/main.cjs",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
@@ -23,7 +23,12 @@
     "test:polish": "node electron/polish-1.7-smoke.cjs",
     "test:studio": "node electron/studio-1.8-smoke.cjs",
     "test:sound": "node electron/sound-1.9-smoke.cjs",
-    "test:windows": "node electron/window-habitat-1.10-smoke.cjs"
+    "test:windows": "node electron/window-habitat-1.10-smoke.cjs",
+    "test:swim": "node electron/swim-1.11-smoke.cjs",
+    "test:coast": "node electron/coast-smoke.cjs",
+    "test:coast-scene": "node electron/coast-scene-2.3-smoke.cjs",
+    "test:bottles": "node electron/coast-bottle-smoke.cjs",
+    "test:capture": "node electron/coast-capture-smoke.cjs"
   },
   "dependencies": {
     "react": "^19.1.0",

@@ -5,6 +5,8 @@ work/
 electron/native/bin/
 .DS_Store
 *.log
+
+# Local configuration and credentials
 .env
 .env.*
 !.env.example
