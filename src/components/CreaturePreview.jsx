@@ -2,7 +2,7 @@ import {useEffect,useRef} from 'react';
 import {KoiRenderer} from '../engine/koi-renderer.js';
 import {prepareKoiSkin} from '../engine/koi-skin.js';
 import {TurtleRenderer} from '../engine/turtles.js';
-export function studioFish(size=1){const length=300*size;return{x:320+length*.115,y:160,length,width:.125,heading:0,phase:0,turn:0,depth:1,variant:0,seed:7,custom:{texture:'preview'}}}
+export function studioFish(size=1){const length=300*size;return{x:320+length*.115,y:160,length,width:.125,heading:0,phase:0,turn:0,swimAmplitude:0,bodyBend:0,depth:1,variant:0,seed:7,custom:{texture:'preview'}}}
 export function paintKoiPreview(canvas,skin,size=1,compact=false){
  const c=canvas.getContext('2d');c.setTransform(2,0,0,2,0,0);c.clearRect(0,0,640,320);
  const painter=new KoiRenderer(c);painter.options.skinStrips=512;painter.images.set('preview',{skin});

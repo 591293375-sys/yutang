@@ -1,0 +1,21 @@
+.bottle-drawing{margin:14px 0 10px;min-width:0}
+.bottle-drawing-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:11px;padding:10px 11px;background:#082e251f;border:1px solid var(--line);border-radius:11px 11px 0 0}
+.bottle-drawing-toolbar button{display:flex;align-items:center;justify-content:center;border:1px solid transparent;border-radius:7px;min-height:32px;min-width:32px;transition:background .15s}
+.bottle-drawing-toolbar button:hover:not(:disabled){background:#eaf1cf12}.bottle-drawing-toolbar button[aria-pressed=true]{background:#d9eac51b;border-color:#d4e5b774}.bottle-drawing-toolbar button:disabled{opacity:.3}
+.bottle-ink-tools,.bottle-ink-colors,.bottle-ink-widths,.bottle-ink-actions{display:flex;align-items:center;gap:3px}
+.bottle-ink-tools button{gap:6px;padding:5px 8px;font-size:11px}
+.bottle-ink-colors{gap:6px}.bottle-ink-colors button{position:relative;border-radius:50%;min-width:25px;min-height:25px;background:var(--bottle-ink);border:3px solid #e9e5cb91}
+.bottle-ink-colors button:hover:not(:disabled){background:var(--bottle-ink)}.bottle-ink-colors button[aria-pressed=true]{background:var(--bottle-ink);outline:1px solid #f8efcf;outline-offset:2px}
+.bottle-ink-widths button i{display:block;background:#e6eccf;border-radius:50%}.bottle-ink-actions{margin-left:auto}
+.bottle-drawing-paper{position:relative;overflow:hidden;aspect-ratio:3/2;width:100%;border-radius:0 0 12px 12px;background:linear-gradient(145deg,#faf4e1,#eee4c8);box-shadow:inset 0 1px 12px #ac956518;outline:1px solid #ddccaa;outline-offset:-1px}
+.bottle-paper-text-layer{position:absolute;left:0;top:0;transform-origin:top left}
+.bottle-drawing .bottle-paper-body{position:absolute;inset:0;display:block;resize:none;width:100%;height:100%;min-height:0;max-height:none;padding:28px;border:0;border-radius:0;background:transparent;color:#38514a;font:16px/1.4 var(--serif);letter-spacing:0;overflow:hidden;outline:none;box-shadow:none;white-space:pre-wrap;overflow-wrap:anywhere;scrollbar-width:none}
+.bottle-drawing .bottle-paper-body::placeholder{color:#859385;opacity:.8}.bottle-drawing .bottle-paper-body:focus-visible{outline:none}
+.bottle-drawing-paper:focus-within{box-shadow:inset 0 0 0 2px #bca77488}
+.bottle-letter-canvas{position:absolute;inset:0;display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.bottle-drawing-paper.is-text .bottle-letter-canvas{pointer-events:none;cursor:text}.bottle-drawing-paper.is-text .bottle-paper-body{cursor:text}
+.bottle-drawing-paper.is-eraser .bottle-letter-canvas{cursor:cell}.bottle-drawing:not(.bottle-drawing-readonly) .bottle-drawing-paper:not(.is-text) .bottle-paper-body{pointer-events:none}
+.bottle-drawing-caption{min-height:18px;margin:9px 2px 0;color:var(--muted);font-size:10px;line-height:1.7}
+.bottle-drawing-readonly{margin:18px 0 20px}.bottle-drawing-readonly .bottle-drawing-paper{border-radius:8px;background:linear-gradient(145deg,#faf4e1,#eee4c8)}.bottle-drawing-readonly canvas{cursor:default;touch-action:auto;pointer-events:none}.bottle-drawing-readonly .bottle-paper-body{pointer-events:auto;cursor:text}
+.bottle-draft-retry{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.bottle-draft-retry p{margin:0;flex:1;min-width:180px}.bottle-draft-retry button{white-space:nowrap}
+@media(max-width:560px){.bottle-drawing-toolbar{gap:10px 9px;padding:9px}.bottle-ink-tools button{padding:5px 6px}.bottle-ink-colors{gap:5px}.bottle-ink-colors button{min-width:24px;min-height:24px}.bottle-drawing-caption{font-size:9px}.bottle-drawing-readonly{margin:17px 0}.bottle-draft-retry{align-items:flex-start;flex-direction:column;gap:6px}}
