@@ -2,7 +2,36 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {PondSimulation} from '../src/engine/simulation.js';
 import {KoiRenderer} from '../src/engine/koi-renderer.js';
-import {koiTailAngle, koiPectoralPose} from '../src/engine/koi-motion.js';
+import {koiTailAngle, koiPectoralPose, updateSwimMotion} from '../src/engine/koi-motion.js';
+
+test('the flexible spine keeps its length through strong strokes and tight turns', () => {
+  const fish = {...create().fish[0], length:100, swimAmplitude:.105};
+  const lengths=[];
+  for (const turn of [-2,0,2]) for (const phase of [0,.8,1.6,2.4,3.2,4,4.8,5.6]) {
+    Object.assign(fish,{turn,phase,bodyBend:turn*.4});
+    let length=0, previous=painter.bodyPoint(fish,0);
+    for(let i=1;i<=200;i++) { const p=painter.bodyPoint(fish,i/200); length+=Math.hypot(p.x-previous.x,p.y-previous.y); previous=p; }
+    lengths.push(length);
+  }
+  assert.ok(Math.max(...lengths)-Math.min(...lengths)<.5,'Body must bend without stretching like a rubber strip');
+  assert.ok(lengths.every(l=>Math.abs(l-78)<.5),'The nose-to-tail stalk length remains 78% of the fish length');
+});
+
+test('a slow turn bends the rear body instead of rotating a straight fish', () => {
+  const fish={...create().fish[0],length:100,velocity:18,speed:20,turn:1,phase:0};
+  for(let i=0;i<180;i++) updateSwimMotion(fish,1/60,i/60,false);
+  let bent=0;
+  for(let i=0;i<120;i++){fish.phase=i/120*Math.PI*2;bent+=painter.bodyPoint(fish,.25).y}
+  assert.ok(bent/120>6,'The rear body must follow the curved route, visibly away from the head tangent');
+});
+
+test('each scale follows the local body tangent, including on a strong tail stroke', () => {
+  const fish={...create().fish[0],length:100,phase:2,turn:1.5,swimAmplitude:.09};
+  const arcs=[];
+  const renderer=new KoiRenderer({beginPath(){},stroke(){},moveTo(){},quadraticCurveTo(){},lineTo(){},ellipse(...args){arcs.push(args)}});
+  renderer.drawScales(fish);
+  assert.ok(arcs.some(a=>Math.abs(a[4])>.12),'Scales must rotate with the flesh, rather than remain horizontal stickers');
+});
 
 const random = () => .43;
 const painter = new KoiRenderer(null);
