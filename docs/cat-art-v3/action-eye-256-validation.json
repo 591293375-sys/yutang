@@ -1,0 +1,2652 @@
+{
+  "frames": [
+    {
+      "id": "ragdoll",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 123,
+      "outsideChanged": 0,
+      "perEye": [
+        57,
+        66
+      ]
+    },
+    {
+      "id": "ragdoll",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 115,
+      "outsideChanged": 0,
+      "perEye": [
+        55,
+        60
+      ]
+    },
+    {
+      "id": "ragdoll",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 119,
+      "outsideChanged": 0,
+      "perEye": [
+        56,
+        63
+      ]
+    },
+    {
+      "id": "ragdoll",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 116,
+      "outsideChanged": 0,
+      "perEye": [
+        63,
+        53
+      ]
+    },
+    {
+      "id": "ragdoll",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "ragdoll",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "ragdoll",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "ragdoll",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "ragdoll",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 170,
+      "outsideChanged": 0,
+      "perEye": [
+        79,
+        91
+      ]
+    },
+    {
+      "id": "ragdoll",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "ragdoll",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "ragdoll",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 214,
+      "outsideChanged": 0,
+      "perEye": [
+        103,
+        111
+      ]
+    },
+    {
+      "id": "ragdoll",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "ragdoll",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "ragdoll",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "ragdoll",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 143,
+      "outsideChanged": 0,
+      "perEye": [
+        66,
+        77
+      ]
+    },
+    {
+      "id": "british-shorthair",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 251,
+      "outsideChanged": 0,
+      "perEye": [
+        116,
+        135
+      ]
+    },
+    {
+      "id": "british-shorthair",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 251,
+      "outsideChanged": 0,
+      "perEye": [
+        115,
+        136
+      ]
+    },
+    {
+      "id": "british-shorthair",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 247,
+      "outsideChanged": 0,
+      "perEye": [
+        114,
+        133
+      ]
+    },
+    {
+      "id": "british-shorthair",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 260,
+      "outsideChanged": 0,
+      "perEye": [
+        118,
+        142
+      ]
+    },
+    {
+      "id": "british-shorthair",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "british-shorthair",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "british-shorthair",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "british-shorthair",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "british-shorthair",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 319,
+      "outsideChanged": 0,
+      "perEye": [
+        154,
+        165
+      ]
+    },
+    {
+      "id": "british-shorthair",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "british-shorthair",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "british-shorthair",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 313,
+      "outsideChanged": 0,
+      "perEye": [
+        147,
+        166
+      ]
+    },
+    {
+      "id": "british-shorthair",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "british-shorthair",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "british-shorthair",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "british-shorthair",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 254,
+      "outsideChanged": 0,
+      "perEye": [
+        118,
+        136
+      ]
+    },
+    {
+      "id": "chinchilla",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 169,
+      "outsideChanged": 0,
+      "perEye": [
+        79,
+        90
+      ]
+    },
+    {
+      "id": "chinchilla",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 173,
+      "outsideChanged": 0,
+      "perEye": [
+        84,
+        89
+      ]
+    },
+    {
+      "id": "chinchilla",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 174,
+      "outsideChanged": 0,
+      "perEye": [
+        81,
+        93
+      ]
+    },
+    {
+      "id": "chinchilla",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 175,
+      "outsideChanged": 0,
+      "perEye": [
+        85,
+        90
+      ]
+    },
+    {
+      "id": "chinchilla",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "chinchilla",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "chinchilla",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "chinchilla",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "chinchilla",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 240,
+      "outsideChanged": 0,
+      "perEye": [
+        116,
+        124
+      ]
+    },
+    {
+      "id": "chinchilla",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "chinchilla",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "chinchilla",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 255,
+      "outsideChanged": 0,
+      "perEye": [
+        119,
+        136
+      ]
+    },
+    {
+      "id": "chinchilla",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "chinchilla",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "chinchilla",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "chinchilla",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 196,
+      "outsideChanged": 0,
+      "perEye": [
+        92,
+        104
+      ]
+    },
+    {
+      "id": "american-shorthair",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 161,
+      "outsideChanged": 0,
+      "perEye": [
+        75,
+        86
+      ]
+    },
+    {
+      "id": "american-shorthair",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 165,
+      "outsideChanged": 0,
+      "perEye": [
+        77,
+        88
+      ]
+    },
+    {
+      "id": "american-shorthair",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 151,
+      "outsideChanged": 0,
+      "perEye": [
+        69,
+        82
+      ]
+    },
+    {
+      "id": "american-shorthair",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 160,
+      "outsideChanged": 0,
+      "perEye": [
+        72,
+        88
+      ]
+    },
+    {
+      "id": "american-shorthair",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "american-shorthair",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "american-shorthair",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "american-shorthair",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "american-shorthair",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 216,
+      "outsideChanged": 0,
+      "perEye": [
+        107,
+        109
+      ]
+    },
+    {
+      "id": "american-shorthair",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "american-shorthair",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "american-shorthair",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 235,
+      "outsideChanged": 0,
+      "perEye": [
+        110,
+        125
+      ]
+    },
+    {
+      "id": "american-shorthair",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "american-shorthair",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "american-shorthair",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "american-shorthair",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 165,
+      "outsideChanged": 0,
+      "perEye": [
+        85,
+        80
+      ]
+    },
+    {
+      "id": "siamese",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 170,
+      "outsideChanged": 0,
+      "perEye": [
+        81,
+        89
+      ]
+    },
+    {
+      "id": "siamese",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 167,
+      "outsideChanged": 0,
+      "perEye": [
+        85,
+        82
+      ]
+    },
+    {
+      "id": "siamese",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 148,
+      "outsideChanged": 0,
+      "perEye": [
+        69,
+        79
+      ]
+    },
+    {
+      "id": "siamese",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 152,
+      "outsideChanged": 0,
+      "perEye": [
+        73,
+        79
+      ]
+    },
+    {
+      "id": "siamese",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "siamese",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "siamese",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "siamese",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "siamese",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 223,
+      "outsideChanged": 0,
+      "perEye": [
+        107,
+        116
+      ]
+    },
+    {
+      "id": "siamese",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "siamese",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "siamese",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 236,
+      "outsideChanged": 0,
+      "perEye": [
+        111,
+        125
+      ]
+    },
+    {
+      "id": "siamese",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "siamese",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "siamese",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "siamese",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 165,
+      "outsideChanged": 0,
+      "perEye": [
+        78,
+        87
+      ]
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 211,
+      "outsideChanged": 0,
+      "perEye": [
+        108,
+        103
+      ]
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 232,
+      "outsideChanged": 0,
+      "perEye": [
+        120,
+        112
+      ]
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 222,
+      "outsideChanged": 0,
+      "perEye": [
+        122,
+        100
+      ]
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 225,
+      "outsideChanged": 0,
+      "perEye": [
+        113,
+        112
+      ]
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 384,
+      "outsideChanged": 0,
+      "perEye": [
+        198,
+        186
+      ]
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 331,
+      "outsideChanged": 0,
+      "perEye": [
+        169,
+        162
+      ]
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-orange-white",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 280,
+      "outsideChanged": 0,
+      "perEye": [
+        137,
+        143
+      ]
+    },
+    {
+      "id": "maine-coon",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 168,
+      "outsideChanged": 0,
+      "perEye": [
+        83,
+        85
+      ]
+    },
+    {
+      "id": "maine-coon",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 151,
+      "outsideChanged": 0,
+      "perEye": [
+        79,
+        72
+      ]
+    },
+    {
+      "id": "maine-coon",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 151,
+      "outsideChanged": 0,
+      "perEye": [
+        80,
+        71
+      ]
+    },
+    {
+      "id": "maine-coon",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 166,
+      "outsideChanged": 0,
+      "perEye": [
+        77,
+        89
+      ]
+    },
+    {
+      "id": "maine-coon",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "maine-coon",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "maine-coon",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "maine-coon",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "maine-coon",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 200,
+      "outsideChanged": 0,
+      "perEye": [
+        99,
+        101
+      ]
+    },
+    {
+      "id": "maine-coon",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "maine-coon",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "maine-coon",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 214,
+      "outsideChanged": 0,
+      "perEye": [
+        113,
+        101
+      ]
+    },
+    {
+      "id": "maine-coon",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "maine-coon",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "maine-coon",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "maine-coon",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 158,
+      "outsideChanged": 0,
+      "perEye": [
+        83,
+        75
+      ]
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 216,
+      "outsideChanged": 0,
+      "perEye": [
+        97,
+        119
+      ]
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 203,
+      "outsideChanged": 0,
+      "perEye": [
+        102,
+        101
+      ]
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 213,
+      "outsideChanged": 0,
+      "perEye": [
+        107,
+        106
+      ]
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 215,
+      "outsideChanged": 0,
+      "perEye": [
+        114,
+        101
+      ]
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 274,
+      "outsideChanged": 0,
+      "perEye": [
+        148,
+        126
+      ]
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 243,
+      "outsideChanged": 0,
+      "perEye": [
+        132,
+        111
+      ]
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tabby",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 201,
+      "outsideChanged": 0,
+      "perEye": [
+        122,
+        79
+      ]
+    },
+    {
+      "id": "russian-blue",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 154,
+      "outsideChanged": 0,
+      "perEye": [
+        73,
+        81
+      ]
+    },
+    {
+      "id": "russian-blue",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 136,
+      "outsideChanged": 0,
+      "perEye": [
+        68,
+        68
+      ]
+    },
+    {
+      "id": "russian-blue",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 132,
+      "outsideChanged": 0,
+      "perEye": [
+        56,
+        76
+      ]
+    },
+    {
+      "id": "russian-blue",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 130,
+      "outsideChanged": 0,
+      "perEye": [
+        65,
+        65
+      ]
+    },
+    {
+      "id": "russian-blue",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "russian-blue",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "russian-blue",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "russian-blue",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "russian-blue",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 180,
+      "outsideChanged": 0,
+      "perEye": [
+        85,
+        95
+      ]
+    },
+    {
+      "id": "russian-blue",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "russian-blue",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "russian-blue",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 217,
+      "outsideChanged": 0,
+      "perEye": [
+        106,
+        111
+      ]
+    },
+    {
+      "id": "russian-blue",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "russian-blue",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "russian-blue",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "russian-blue",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 161,
+      "outsideChanged": 0,
+      "perEye": [
+        69,
+        92
+      ]
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 82,
+      "outsideChanged": 0,
+      "perEye": [
+        42,
+        40
+      ]
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 85,
+      "outsideChanged": 0,
+      "perEye": [
+        42,
+        43
+      ]
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 82,
+      "outsideChanged": 0,
+      "perEye": [
+        43,
+        39
+      ]
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 90,
+      "outsideChanged": 0,
+      "perEye": [
+        48,
+        42
+      ]
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 134,
+      "outsideChanged": 0,
+      "perEye": [
+        69,
+        65
+      ]
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 94,
+      "outsideChanged": 0,
+      "perEye": [
+        42,
+        52
+      ]
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "norwegian-forest",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 114,
+      "outsideChanged": 0,
+      "perEye": [
+        55,
+        59
+      ]
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 146,
+      "outsideChanged": 0,
+      "perEye": [
+        80,
+        66
+      ]
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 143,
+      "outsideChanged": 0,
+      "perEye": [
+        78,
+        65
+      ]
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 119,
+      "outsideChanged": 0,
+      "perEye": [
+        53,
+        66
+      ]
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 123,
+      "outsideChanged": 0,
+      "perEye": [
+        61,
+        62
+      ]
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 190,
+      "outsideChanged": 0,
+      "perEye": [
+        99,
+        91
+      ]
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 175,
+      "outsideChanged": 0,
+      "perEye": [
+        98,
+        77
+      ]
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-tuxedo",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 127,
+      "outsideChanged": 0,
+      "perEye": [
+        57,
+        70
+      ]
+    },
+    {
+      "id": "domestic-calico",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 142,
+      "outsideChanged": 0,
+      "perEye": [
+        68,
+        74
+      ]
+    },
+    {
+      "id": "domestic-calico",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 142,
+      "outsideChanged": 0,
+      "perEye": [
+        72,
+        70
+      ]
+    },
+    {
+      "id": "domestic-calico",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 156,
+      "outsideChanged": 0,
+      "perEye": [
+        82,
+        74
+      ]
+    },
+    {
+      "id": "domestic-calico",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 142,
+      "outsideChanged": 0,
+      "perEye": [
+        83,
+        59
+      ]
+    },
+    {
+      "id": "domestic-calico",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-calico",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-calico",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-calico",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-calico",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 205,
+      "outsideChanged": 0,
+      "perEye": [
+        100,
+        105
+      ]
+    },
+    {
+      "id": "domestic-calico",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-calico",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-calico",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 198,
+      "outsideChanged": 0,
+      "perEye": [
+        93,
+        105
+      ]
+    },
+    {
+      "id": "domestic-calico",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-calico",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-calico",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "domestic-calico",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 146,
+      "outsideChanged": 0,
+      "perEye": [
+        72,
+        74
+      ]
+    },
+    {
+      "id": "persian",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 197,
+      "outsideChanged": 0,
+      "perEye": [
+        100,
+        97
+      ]
+    },
+    {
+      "id": "persian",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 178,
+      "outsideChanged": 0,
+      "perEye": [
+        91,
+        87
+      ]
+    },
+    {
+      "id": "persian",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 187,
+      "outsideChanged": 0,
+      "perEye": [
+        97,
+        90
+      ]
+    },
+    {
+      "id": "persian",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 189,
+      "outsideChanged": 0,
+      "perEye": [
+        95,
+        94
+      ]
+    },
+    {
+      "id": "persian",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "persian",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "persian",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "persian",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "persian",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 271,
+      "outsideChanged": 0,
+      "perEye": [
+        131,
+        140
+      ]
+    },
+    {
+      "id": "persian",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "persian",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "persian",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 250,
+      "outsideChanged": 0,
+      "perEye": [
+        127,
+        123
+      ]
+    },
+    {
+      "id": "persian",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "persian",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "persian",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "persian",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 206,
+      "outsideChanged": 0,
+      "perEye": [
+        96,
+        110
+      ]
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 252,
+      "outsideChanged": 0,
+      "perEye": [
+        125,
+        127
+      ]
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 258,
+      "outsideChanged": 0,
+      "perEye": [
+        131,
+        127
+      ]
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 245,
+      "outsideChanged": 0,
+      "perEye": [
+        120,
+        125
+      ]
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 255,
+      "outsideChanged": 0,
+      "perEye": [
+        127,
+        128
+      ]
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 327,
+      "outsideChanged": 0,
+      "perEye": [
+        169,
+        158
+      ]
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 331,
+      "outsideChanged": 0,
+      "perEye": [
+        170,
+        161
+      ]
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "exotic-shorthair",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 276,
+      "outsideChanged": 0,
+      "perEye": [
+        144,
+        132
+      ]
+    },
+    {
+      "id": "bengal",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 242,
+      "outsideChanged": 0,
+      "perEye": [
+        117,
+        125
+      ]
+    },
+    {
+      "id": "bengal",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 230,
+      "outsideChanged": 0,
+      "perEye": [
+        99,
+        131
+      ]
+    },
+    {
+      "id": "bengal",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 241,
+      "outsideChanged": 0,
+      "perEye": [
+        117,
+        124
+      ]
+    },
+    {
+      "id": "bengal",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 229,
+      "outsideChanged": 0,
+      "perEye": [
+        104,
+        125
+      ]
+    },
+    {
+      "id": "bengal",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "bengal",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "bengal",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "bengal",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "bengal",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 297,
+      "outsideChanged": 0,
+      "perEye": [
+        149,
+        148
+      ]
+    },
+    {
+      "id": "bengal",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "bengal",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "bengal",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 253,
+      "outsideChanged": 0,
+      "perEye": [
+        122,
+        131
+      ]
+    },
+    {
+      "id": "bengal",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "bengal",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "bengal",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "bengal",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 254,
+      "outsideChanged": 0,
+      "perEye": [
+        118,
+        136
+      ]
+    },
+    {
+      "id": "abyssinian",
+      "index": 0,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 230,
+      "outsideChanged": 0,
+      "perEye": [
+        107,
+        123
+      ]
+    },
+    {
+      "id": "abyssinian",
+      "index": 1,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 237,
+      "outsideChanged": 0,
+      "perEye": [
+        112,
+        125
+      ]
+    },
+    {
+      "id": "abyssinian",
+      "index": 2,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 234,
+      "outsideChanged": 0,
+      "perEye": [
+        106,
+        128
+      ]
+    },
+    {
+      "id": "abyssinian",
+      "index": 3,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 242,
+      "outsideChanged": 0,
+      "perEye": [
+        112,
+        130
+      ]
+    },
+    {
+      "id": "abyssinian",
+      "index": 4,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "abyssinian",
+      "index": 5,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "abyssinian",
+      "index": 6,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "abyssinian",
+      "index": 7,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "abyssinian",
+      "index": 8,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 303,
+      "outsideChanged": 0,
+      "perEye": [
+        152,
+        151
+      ]
+    },
+    {
+      "id": "abyssinian",
+      "index": 9,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "abyssinian",
+      "index": 10,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "abyssinian",
+      "index": 11,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 258,
+      "outsideChanged": 0,
+      "perEye": [
+        117,
+        141
+      ]
+    },
+    {
+      "id": "abyssinian",
+      "index": 12,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "abyssinian",
+      "index": 13,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "abyssinian",
+      "index": 14,
+      "visibleEyes": 0,
+      "alphaChanged": 0,
+      "rgbChanged": 0,
+      "outsideChanged": 0,
+      "perEye": []
+    },
+    {
+      "id": "abyssinian",
+      "index": 15,
+      "visibleEyes": 2,
+      "alphaChanged": 0,
+      "rgbChanged": 261,
+      "outsideChanged": 0,
+      "perEye": [
+        133,
+        128
+      ]
+    }
+  ],
+  "color": "#acaed0",
+  "alphaChanged": 0,
+  "outsideChanged": 0,
+  "visibleUnchanged": 0,
+  "closedChanged": 0,
+  "errors": [],
+  "result": "PASS",
+  "manualReview": "Viewed action-eye-16-before-after.png: all sixteen breed/coat identities retain pupils, catchlights, noses and face fur; only the measured iris interiors change."
+}
