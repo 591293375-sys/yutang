@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Check,Fish,Waves,Shell,ArrowUpRight,ArrowDownRight,RotateCcw} from 'lucide-react';
+import {Check,Cat,Fish,Waves,Shell,ArrowUpRight,ArrowDownRight,RotateCcw} from 'lucide-react';
 import {Panel,Toggle} from './Panel.jsx';
 import {THEMES} from '../themes/registry.js';
 import {SPECIES,SPECIES_BY_ID} from '../themes/coast/catalog.js';
@@ -14,7 +14,7 @@ export function TongsIcon(){
   return <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m10 3-4 4 2 7 8 6 6 9M22 3l4 4-2 7-8 6-6 9M6 7l5 2M26 7l-5 2"/><circle cx="16" cy="20" r="2.4"/><path d="m9 25-2 4M23 25l2 4"/></svg>;
 }
 export function ThemePanel({theme,onSelect,onClose}){
-  return <Panel title="换一处风景，慢慢摸鱼" subtitle="同一张桌面，也可以住进不同的小世界。" onClose={onClose}><div className="season-grid theme-grid">{THEMES.map(t=><button key={t.id} className={`season-card theme-card ${theme===t.id?'selected':''}`} onClick={()=>onSelect(t.id)} aria-pressed={theme===t.id}><img src={`${import.meta.env.BASE_URL}${t.image}`} alt=""/><span className="season-symbol">{t.id==='koi'?<Fish/>:<Waves/>}{theme===t.id&&<Check size={18}/>}</span><strong>{t.name}</strong><small>{t.description}</small></button>)}</div><p className="inline-note">锦鲤、赶海小桶与图鉴分别保存。切换风景，收藏也会等你回来。</p></Panel>;
+  return <Panel title="换一处风景，慢慢摸鱼" subtitle="同一张桌面，也可以住进不同的小世界。" onClose={onClose}><div className="season-grid theme-grid">{THEMES.map(t=><button key={t.id} className={`season-card theme-card ${theme===t.id?'selected':''}`} onClick={()=>onSelect(t.id)} aria-pressed={theme===t.id}><img src={`${import.meta.env.BASE_URL}${t.image}`} alt=""/><span className="season-symbol">{t.id==='cats'?<Cat/>:t.id==='koi'?<Fish/>:<Waves/>}{theme===t.id&&<Check size={18}/>}</span><strong>{t.name}</strong><small>{t.description}</small></button>)}</div><p className="inline-note">锦鲤、赶海收藏与猫咪庭院分别保存。切换风景，收藏也会等你回来。</p></Panel>;
 }
 function AnimalImage({species}){
   return <img className="coast-animal-image" src={species.asset} alt={species.name} loading="lazy"/>;
