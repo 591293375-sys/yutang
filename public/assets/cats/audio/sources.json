@@ -1,0 +1,158 @@
+{
+  "license": "CC0 1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "retrieved": "2026-09-30",
+  "sources": {
+    "meow": {
+      "title": "Cat Meowing",
+      "author": "qubodup (adapted from tuberatanka)",
+      "url": "https://freesound.org/people/qubodup/sounds/813113/",
+      "download": "Official publicly accessible high-quality MP3 preview"
+    },
+    "purr": {
+      "title": "Cat purr.wav",
+      "author": "rareguy27",
+      "url": "https://freesound.org/people/rareguy27/sounds/690620/",
+      "download": "Official publicly accessible high-quality MP3 preview"
+    },
+    "food": {
+      "title": "Cat eating dry-food (croquettes)",
+      "author": "Sadiquecat",
+      "url": "https://freesound.org/people/Sadiquecat/sounds/801808/",
+      "download": "Official publicly accessible high-quality MP3 preview"
+    },
+    "scratch": {
+      "title": "Cat Scratching A Post",
+      "author": "Samantha_Dolman",
+      "url": "https://freesound.org/people/Samantha_Dolman/sounds/490730/",
+      "download": "Official publicly accessible high-quality MP3 preview"
+    },
+    "cloth": {
+      "title": "Blanket Movement 6",
+      "author": "OwlStorm / Ashe Kirk",
+      "url": "https://freesound.org/people/OwlStorm/sounds/320144/",
+      "download": "Official publicly accessible high-quality MP3 preview"
+    },
+    "tap": {
+      "title": "SOFT TAPPING",
+      "author": "stevielematt",
+      "url": "https://freesound.org/people/stevielematt/sounds/707827/",
+      "download": "Official publicly accessible high-quality MP3 preview"
+    },
+    "wind": {
+      "title": "Wind(leaves).WAV",
+      "author": "o_ciz",
+      "url": "https://freesound.org/people/o_ciz/sounds/475448/",
+      "download": "Previously bundled CC0 field recording, reused locally"
+    },
+    "bird": {
+      "title": "White-crowned Sparrow Chirp",
+      "author": "Zott820",
+      "url": "https://freesound.org/people/Zott820/sounds/695297/",
+      "download": "Official publicly accessible high-quality MP3 preview",
+      "retrieved": "2026-10-01"
+    }
+  },
+  "clips": [
+    {
+      "file": "meow.wav",
+      "source": "meow",
+      "sourceIntervalSeconds": [
+        0,
+        0.6
+      ],
+      "processing": "Mono 24kHz 16-bit PCM; 120–3300 Hz gentle band shaping; soft transient knee; 0.022s / 0.072s fades; peak 0.28; no pitch change"
+    },
+    {
+      "file": "purr.wav",
+      "source": "purr",
+      "sourceIntervalSeconds": [
+        36,
+        37.65
+      ],
+      "processing": "Mono 24kHz 16-bit PCM; 78–1150 Hz gentle band shaping; soft transient knee; 0.18s / 0.26s fades; peak 0.24; no pitch change"
+    },
+    {
+      "file": "food.wav",
+      "source": "food",
+      "sourceIntervalSeconds": [
+        4.5,
+        5.16
+      ],
+      "processing": "Mono 24kHz 16-bit PCM; 170–2550 Hz gentle band shaping; soft transient knee; 0.035s / 0.075s fades; peak 0.11; no pitch change"
+    },
+    {
+      "file": "scratch.wav",
+      "source": "scratch",
+      "sourceIntervalSeconds": [
+        13.6,
+        14.42
+      ],
+      "processing": "Mono 24kHz 16-bit PCM; 140–2100 Hz gentle band shaping; soft transient knee; 0.055s / 0.11s fades; peak 0.11; no pitch change"
+    },
+    {
+      "file": "tap.wav",
+      "source": "tap",
+      "sourceIntervalSeconds": [
+        0.08,
+        0.24
+      ],
+      "processing": "Mono 24kHz 16-bit PCM; 95–1800 Hz gentle band shaping; soft transient knee; 0.009s / 0.04s fades; peak 0.085; no pitch change"
+    },
+    {
+      "file": "step.wav",
+      "source": "tap",
+      "sourceIntervalSeconds": [
+        0.5,
+        0.62
+      ],
+      "processing": "Mono 24kHz 16-bit PCM; 90–850 Hz gentle band shaping; soft transient knee; 0.012s / 0.04s fades; peak 0.048; no pitch change"
+    },
+    {
+      "file": "feather.wav",
+      "source": "cloth",
+      "sourceIntervalSeconds": [
+        0.1,
+        0.74
+      ],
+      "processing": "Mono 24kHz 16-bit PCM; 280–2200 Hz gentle band shaping; soft transient knee; 0.075s / 0.14s fades; peak 0.075; no pitch change"
+    },
+    {
+      "file": "yarn.wav",
+      "source": "cloth",
+      "sourceIntervalSeconds": [
+        0.2,
+        0.72
+      ],
+      "processing": "Mono 24kHz 16-bit PCM; 150–1050 Hz gentle band shaping; soft transient knee; 0.035s / 0.1s fades; peak 0.085; no pitch change; recorded padded-tap accents at 0.02s / 0.25s"
+    },
+    {
+      "file": "mouse.wav",
+      "source": "cloth",
+      "sourceIntervalSeconds": [
+        0.15,
+        0.63
+      ],
+      "processing": "Mono 24kHz 16-bit PCM; 210–1600 Hz gentle band shaping; soft transient knee; 0.035s / 0.09s fades; peak 0.08; no pitch change; recorded padded-tap accents at 0.02s / 0.25s"
+    },
+    {
+      "file": "wind-bed.wav",
+      "source": "wind",
+      "processedSource": "public/assets/wind.wav",
+      "processedSourceIntervalSeconds": [
+        9,
+        21
+      ],
+      "processing": "Mono 24kHz 16-bit PCM; 2s equal-power overlap into a seamless 10s loop; periodic 110–950Hz shaping; soft transient knee; RMS .060; runtime bed gain is much lower than interaction cues"
+    },
+    {
+      "file": "bird.wav",
+      "source": "bird",
+      "sourceIntervalSeconds": [
+        0,
+        2.245375
+      ],
+      "processing": "Mono 24kHz 16-bit PCM; 900–5300Hz gentle band shaping; soft transient knee; 65ms/120ms fades; peak .14; original pitch"
+    }
+  ]
+}
