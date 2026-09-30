@@ -1,0 +1,9 @@
+{
+  "version": "2.7.4",
+  "asarSha256": "a8c47985896ffa36be334834887a0f05ed4569bf0efd94a1d3e9bb10b7f03034",
+  "signature": "codesign --verify --deep --strict passed",
+  "files": 3737,
+  "errors": [],
+  "packageMetadata": true,
+  "result": "PASS"
+}

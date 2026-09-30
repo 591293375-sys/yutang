@@ -1,0 +1,356 @@
+{
+  "result": "PASS",
+  "mode": "packaged",
+  "isolatedProfile": true,
+  "checks": [
+    "season-comparison-uses-disabled-particles-and-fireflies",
+    "all-six-season-pairs-change-central-paving-even-with-particles-off",
+    "bed-water-step-climbing-and-rock-remain-registered-in-all-four-seasons",
+    "rapid-cold-season-switching-finishes-on-the-last-selection",
+    "season-particle-preference-and-cat-save-survive-reload",
+    "particle-toggle-does-not-remove-the-seasonal-ground-art",
+    "portrait-like-and-wide-windows-remain-covered-with-registered-scenes",
+    "seasonal-ground-also-renders-after-switching-to-night"
+  ],
+  "screenshots": [
+    "packaged-summer-day-particles-off.png",
+    "packaged-spring-day-particles-off.png",
+    "packaged-autumn-day-particles-off.png",
+    "packaged-winter-day-particles-off.png",
+    "packaged-autumn-night.png"
+  ],
+  "seasons": {
+    "summer": {
+      "canvas": [
+        3200,
+        1800
+      ],
+      "environment": {
+        "season": "summer",
+        "time": "day",
+        "fireflies": false,
+        "particles": false
+      }
+    },
+    "spring": {
+      "canvas": [
+        3200,
+        1800
+      ],
+      "environment": {
+        "season": "spring",
+        "time": "day",
+        "fireflies": false,
+        "particles": false
+      }
+    },
+    "autumn": {
+      "canvas": [
+        3200,
+        1800
+      ],
+      "environment": {
+        "season": "autumn",
+        "time": "day",
+        "fireflies": false,
+        "particles": false
+      }
+    },
+    "winter": {
+      "canvas": [
+        3200,
+        1800
+      ],
+      "environment": {
+        "season": "winter",
+        "time": "day",
+        "fireflies": false,
+        "particles": false
+      }
+    }
+  },
+  "errors": [],
+  "assetErrors": [],
+  "runtime": {
+    "version": "2.7.4",
+    "packaged": true
+  },
+  "stderr": "[10354:0930/234714.925369:ERROR:gpu/command_buffer/service/shared_image/shared_image_manager.cc:472] SharedImageManager::ProduceOverlay: Trying to Produce a Overlay representation from a non-existent mailbox.\n[10354:0930/234714.926478:ERROR:components/viz/service/display_embedder/skia_output_device_buffer_queue.cc:263] Invalid mailbox.\n",
+  "pairwise": [
+    {
+      "first": "summer",
+      "second": "spring",
+      "regions": {
+        "center": {
+          "mae": 4.655924479166667,
+          "changedFraction": 0.265625
+        },
+        "upperPaving": {
+          "mae": 4.865152994791667,
+          "changedFraction": 0.3037109375
+        },
+        "lowerPaving": {
+          "mae": 5.198160807291667,
+          "changedFraction": 0.287109375
+        },
+        "canopy": {
+          "mae": 72.794189453125,
+          "changedFraction": 0.99658203125
+        }
+      }
+    },
+    {
+      "first": "summer",
+      "second": "autumn",
+      "regions": {
+        "center": {
+          "mae": 10.661458333333334,
+          "changedFraction": 0.996826171875
+        },
+        "upperPaving": {
+          "mae": 10.628824869791666,
+          "changedFraction": 0.998779296875
+        },
+        "lowerPaving": {
+          "mae": 11.545084635416666,
+          "changedFraction": 0.998046875
+        },
+        "canopy": {
+          "mae": 37.692464192708336,
+          "changedFraction": 0.99609375
+        }
+      }
+    },
+    {
+      "first": "summer",
+      "second": "winter",
+      "regions": {
+        "center": {
+          "mae": 21.338704427083332,
+          "changedFraction": 1
+        },
+        "upperPaving": {
+          "mae": 22.696695963541668,
+          "changedFraction": 1
+        },
+        "lowerPaving": {
+          "mae": 23.614420572916668,
+          "changedFraction": 1
+        },
+        "canopy": {
+          "mae": 65.022705078125,
+          "changedFraction": 0.996337890625
+        }
+      }
+    },
+    {
+      "first": "spring",
+      "second": "autumn",
+      "regions": {
+        "center": {
+          "mae": 10.278971354166666,
+          "changedFraction": 0.9990234375
+        },
+        "upperPaving": {
+          "mae": 10.29052734375,
+          "changedFraction": 0.998291015625
+        },
+        "lowerPaving": {
+          "mae": 11.093180338541666,
+          "changedFraction": 0.9990234375
+        },
+        "canopy": {
+          "mae": 71.42708333333333,
+          "changedFraction": 0.991455078125
+        }
+      }
+    },
+    {
+      "first": "spring",
+      "second": "winter",
+      "regions": {
+        "center": {
+          "mae": 22.84130859375,
+          "changedFraction": 1
+        },
+        "upperPaving": {
+          "mae": 24.19482421875,
+          "changedFraction": 1
+        },
+        "lowerPaving": {
+          "mae": 25.682373046875,
+          "changedFraction": 1
+        },
+        "canopy": {
+          "mae": 72.19645182291667,
+          "changedFraction": 0.99169921875
+        }
+      }
+    },
+    {
+      "first": "autumn",
+      "second": "winter",
+      "regions": {
+        "center": {
+          "mae": 30.334798177083332,
+          "changedFraction": 1
+        },
+        "upperPaving": {
+          "mae": 31.673990885416668,
+          "changedFraction": 1
+        },
+        "lowerPaving": {
+          "mae": 33.557779947916664,
+          "changedFraction": 1
+        },
+        "canopy": {
+          "mae": 73.54768880208333,
+          "changedFraction": 0.998046875
+        }
+      }
+    }
+  ],
+  "facilityRegistration": {
+    "spring": {
+      "bed": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "water": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "step": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "climbing": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "rock": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      }
+    },
+    "autumn": {
+      "bed": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "water": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "step": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "climbing": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "rock": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      }
+    },
+    "winter": {
+      "bed": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "water": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "step": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "climbing": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      "rock": {
+        "correlation": 1,
+        "dx": 0,
+        "dy": 0
+      }
+    }
+  },
+  "rapidLastWins": {
+    "mae": 0,
+    "changedFraction": 0
+  },
+  "reloadDifference": {
+    "mae": 0,
+    "changedFraction": 0
+  },
+  "staticArtWithParticles": {
+    "mae": 0,
+    "changedFraction": 0
+  },
+  "viewports": [
+    {
+      "viewport": [
+        1045,
+        899
+      ],
+      "css": [
+        0,
+        0,
+        1045,
+        899
+      ],
+      "canvas": [
+        2090,
+        1798
+      ],
+      "mattePixels": 0,
+      "total": 3456,
+      "opacity": "1"
+    },
+    {
+      "viewport": [
+        1600,
+        900
+      ],
+      "css": [
+        0,
+        0,
+        1600,
+        900
+      ],
+      "canvas": [
+        3200,
+        1800
+      ],
+      "mattePixels": 0,
+      "total": 3456,
+      "opacity": "1"
+    }
+  ],
+  "night": {
+    "center": {
+      "mae": 87.093017578125,
+      "changedFraction": 1
+    }
+  },
+  "asarSha256": "a8c47985896ffa36be334834887a0f05ed4569bf0efd94a1d3e9bb10b7f03034",
+  "checkedAt": "2026-09-30T15:48:00.680Z"
+}
