@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-30",
+  "type": "local deterministic PCM synthesis, not recordings",
+  "volume": 0.4,
+  "sourcePngInDist": 0,
+  "cues": {
+    "purr": {
+      "duration": 1.65,
+      "peak": 0.0949999988079071,
+      "rms": 0.028850704780149387,
+      "maximumDelta": 0.0018823182908818126,
+      "cooldownMs": 9000
+    },
+    "meow": {
+      "duration": 0.72,
+      "peak": 0.08500000089406967,
+      "rms": 0.036434503963461415,
+      "maximumDelta": 0.01788558717817068,
+      "cooldownMs": 14000
+    },
+    "food": {
+      "duration": 0.26,
+      "peak": 0.054999999701976776,
+      "rms": 0.010579533995510117,
+      "maximumDelta": 0.0022480273619294167,
+      "cooldownMs": 2600
+    },
+    "tap": {
+      "duration": 0.16,
+      "peak": 0.03999999910593033,
+      "rms": 0.008581538024161903,
+      "maximumDelta": 0.0013857986486982554,
+      "cooldownMs": 1100
+    },
+    "step": {
+      "duration": 0.1,
+      "peak": 0.023000000044703484,
+      "rms": 0.006117550708042053,
+      "maximumDelta": 0.00046415289398282766,
+      "cooldownMs": 1400
+    }
+  }
+}

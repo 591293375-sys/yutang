@@ -1,0 +1,63 @@
+{
+  "date": "2026-09-30",
+  "presetCount": 16,
+  "domestic": 4,
+  "checks": [
+    {
+      "id": "persian",
+      "texture": [
+        768,
+        768
+      ],
+      "alpha": true,
+      "thumbnail": [
+        256,
+        256
+      ],
+      "protectedCenters": "within alpha",
+      "regions": "normalized"
+    },
+    {
+      "id": "exotic-shorthair",
+      "texture": [
+        768,
+        768
+      ],
+      "alpha": true,
+      "thumbnail": [
+        256,
+        256
+      ],
+      "protectedCenters": "within alpha",
+      "regions": "normalized"
+    },
+    {
+      "id": "bengal",
+      "texture": [
+        768,
+        768
+      ],
+      "alpha": true,
+      "thumbnail": [
+        256,
+        256
+      ],
+      "protectedCenters": "within alpha",
+      "regions": "normalized"
+    },
+    {
+      "id": "abyssinian",
+      "texture": [
+        768,
+        768
+      ],
+      "alpha": true,
+      "thumbnail": [
+        256,
+        256
+      ],
+      "protectedCenters": "within alpha",
+      "regions": "normalized"
+    }
+  ]
+}

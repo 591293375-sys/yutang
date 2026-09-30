@@ -1,0 +1,62 @@
+{
+  "date": "2026-09-30",
+  "generator": "built-in image_gen; exact model not exposed",
+  "atlases": [
+    {
+      "id": "persian",
+      "source": "/Users/leo/.codex/generated_images/01a0f040-1602-7063-9fb6-c100949e24de/exec-22cae52d-e7ea-472a-81bf-e8351951df99.png",
+      "archived": "docs/cat-art-v2/sources/atlas-persian-source.png",
+      "image": "public/assets/cats/actions-v2/persian.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "bytes": 361480,
+      "cleanedAlphaPixels": 251569,
+      "poses": 16,
+      "rows": 4,
+      "columns": 4
+    },
+    {
+      "id": "exotic-shorthair",
+      "source": "/Users/leo/.codex/generated_images/01a0f040-1602-7063-9fb6-c100949e24de/exec-9a892625-71a7-4173-8053-00247b880cba.png",
+      "archived": "docs/cat-art-v2/sources/atlas-exotic-shorthair-source.png",
+      "image": "public/assets/cats/actions-v2/exotic-shorthair.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "bytes": 358702,
+      "cleanedAlphaPixels": 185194,
+      "poses": 16,
+      "rows": 4,
+      "columns": 4
+    },
+    {
+      "id": "bengal",
+      "source": "/Users/leo/.codex/generated_images/01a0f040-1602-7063-9fb6-c100949e24de/exec-54979803-39cb-4e1a-920c-2018129c2db6.png",
+      "archived": "docs/cat-art-v2/sources/atlas-bengal-source.png",
+      "image": "public/assets/cats/actions-v2/bengal.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "bytes": 463772,
+      "cleanedAlphaPixels": 119503,
+      "poses": 16,
+      "rows": 4,
+      "columns": 4
+    },
+    {
+      "id": "abyssinian",
+      "source": "/Users/leo/.codex/generated_images/01a0f040-1602-7063-9fb6-c100949e24de/exec-39f6c996-019a-497f-99d9-7239e5b4d5dc.png",
+      "archived": "docs/cat-art-v2/sources/atlas-abyssinian-source.png",
+      "image": "public/assets/cats/actions-v2/abyssinian.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "bytes": 409840,
+      "cleanedAlphaPixels": 107443,
+      "poses": 16,
+      "rows": 4,
+      "columns": 4
+    }
+  ]
+}

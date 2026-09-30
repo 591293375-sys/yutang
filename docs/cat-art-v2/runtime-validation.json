@@ -1,0 +1,160 @@
+{
+  "result": "PASS",
+  "isolatedProfile": true,
+  "instrumentation": "browser RAF/canvas/audio, no game access",
+  "limitations": [],
+  "fourK": {
+    "cssSize": [
+      1920,
+      1080
+    ],
+    "canvas": [
+      3840,
+      2160
+    ],
+    "background": [
+      3840,
+      2160
+    ],
+    "backgroundOpacity": "1",
+    "activeCats": 12,
+    "sampleMs": 10005.300000011921,
+    "renderedFrames": 600,
+    "meanFps": 59.96821684500066,
+    "medianFrameMs": 16.69999998807907,
+    "p95FrameMs": 17.69999998807907,
+    "maxFrameMs": 20.19999998807907,
+    "gapsOver34ms": 0,
+    "pendingCatRAF": 1
+  },
+  "mute": {
+    "immediate": true,
+    "contexts": [
+      {
+        "state": "running",
+        "closed": 0,
+        "nodes": [
+          {
+            "type": "buffer",
+            "started": true,
+            "ended": false,
+            "disconnected": true,
+            "stops": [
+              {
+                "at": 13689.900000035763,
+                "when": null
+              }
+            ],
+            "startAt": 13570.300000011921,
+            "duration": 0.72,
+            "loop": false
+          }
+        ],
+        "active": 0
+      }
+    ]
+  },
+  "themeCleanup": {
+    "catContexts": [
+      {
+        "state": "closed",
+        "closed": 1,
+        "active": 0
+      }
+    ],
+    "pendingCatRAF": 0,
+    "frames": 1518
+  },
+  "pauseResume": true,
+  "hidden": {
+    "start": {
+      "hidden": false,
+      "frames": 1592
+    },
+    "end": {
+      "hidden": false,
+      "frames": 1592,
+      "pending": 0
+    },
+    "paused": true,
+    "audioActive": 0,
+    "restored": {
+      "frames": 1594,
+      "documentHidden": false,
+      "state": {
+        "isDesktop": true,
+        "desktopMode": false,
+        "globalInteraction": false,
+        "globalInteractionStatus": "disabled",
+        "launchAtLogin": false,
+        "launchAtLoginSupported": false,
+        "platform": "darwin",
+        "desktopSupported": true,
+        "shortcut": "CommandOrControl+Shift+K",
+        "feedShortcut": "CommandOrControl+Shift+F",
+        "shortcutAvailable": true,
+        "feedShortcutAvailable": true,
+        "message": "窗口内点击即可与当前主题互动。桌面模式可从菜单栏锦鲤图标恢复。",
+        "fullScreen": false,
+        "visible": true,
+        "minimized": false,
+        "display": {
+          "id": 1,
+          "width": 1710,
+          "height": 1107,
+          "scaleFactor": 2,
+          "pixelWidth": 3420,
+          "pixelHeight": 2214
+        }
+      }
+    }
+  },
+  "desktop": {
+    "state": {
+      "isDesktop": true,
+      "desktopMode": true,
+      "globalInteraction": false,
+      "globalInteractionStatus": "disabled",
+      "launchAtLogin": false,
+      "launchAtLoginSupported": false,
+      "platform": "darwin",
+      "desktopSupported": true,
+      "shortcut": "CommandOrControl+Shift+K",
+      "feedShortcut": "CommandOrControl+Shift+F",
+      "shortcutAvailable": true,
+      "feedShortcutAvailable": true,
+      "message": "桌面已开启鼠标穿透。开启全局点击可与当前主题互动；⌘/Ctrl+Shift+K 恢复控制。",
+      "fullScreen": false,
+      "visible": true,
+      "minimized": false,
+      "display": {
+        "id": 1,
+        "width": 1710,
+        "height": 1107,
+        "scaleFactor": 2,
+        "pixelWidth": 3420,
+        "pixelHeight": 2214
+      }
+    },
+    "canvas": [
+      3840,
+      2486
+    ],
+    "background": [
+      3840,
+      2486
+    ],
+    "restoredBounds": {
+      "x": 165,
+      "y": 48,
+      "width": 1380,
+      "height": 900
+    }
+  },
+  "afterRestart": {
+    "cats": 12,
+    "active": 12,
+    "props": 0
+  },
+  "errors": []
+}
