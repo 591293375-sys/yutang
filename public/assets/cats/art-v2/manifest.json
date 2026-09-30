@@ -1,0 +1,109 @@
+{
+  "version": 2,
+  "generator": "built-in image_gen; model ID not exposed",
+  "portraits": [
+    {
+      "id": "persian",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "padding": 16,
+      "runtime": [
+        768,
+        768
+      ],
+      "thumbnail": [
+        256,
+        256
+      ],
+      "imperceptibleAlphaPixelsRemoved": 40471
+    },
+    {
+      "id": "exotic-shorthair",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "padding": 16,
+      "runtime": [
+        768,
+        768
+      ],
+      "thumbnail": [
+        256,
+        256
+      ],
+      "imperceptibleAlphaPixelsRemoved": 37601
+    },
+    {
+      "id": "bengal",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "padding": 16,
+      "runtime": [
+        768,
+        768
+      ],
+      "thumbnail": [
+        256,
+        256
+      ],
+      "imperceptibleAlphaPixelsRemoved": 30011
+    },
+    {
+      "id": "abyssinian",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "padding": 16,
+      "runtime": [
+        768,
+        768
+      ],
+      "thumbnail": [
+        256,
+        256
+      ],
+      "imperceptibleAlphaPixelsRemoved": 35895
+    }
+  ],
+  "backgrounds": [
+    {
+      "id": "spring",
+      "image": "assets/cats/art-v2/courtyard-spring.webp",
+      "width": 1672,
+      "height": 941,
+      "nativeResolution": true,
+      "upscaled": false
+    },
+    {
+      "id": "autumn",
+      "image": "assets/cats/art-v2/courtyard-autumn.webp",
+      "width": 1672,
+      "height": 941,
+      "nativeResolution": true,
+      "upscaled": false
+    },
+    {
+      "id": "winter",
+      "image": "assets/cats/art-v2/courtyard-winter.webp",
+      "width": 1672,
+      "height": 941,
+      "nativeResolution": true,
+      "upscaled": false
+    },
+    {
+      "id": "night",
+      "image": "assets/cats/art-v2/courtyard-night.webp",
+      "width": 1672,
+      "height": 941,
+      "nativeResolution": true,
+      "upscaled": false
+    }
+  ],
+  "totalRuntimeBytes": 3197712
+}
