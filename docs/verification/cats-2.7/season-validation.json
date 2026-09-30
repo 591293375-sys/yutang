@@ -1,0 +1,170 @@
+{
+  "isolatedProfile": true,
+  "result": "PASS",
+  "screenshots": [
+    "summer-day.png",
+    "spring-day.png",
+    "autumn-day.png",
+    "winter-day.png",
+    "spring-night.png"
+  ],
+  "seasons": {
+    "summer": {
+      "canopy": [
+        112.58,
+        137.32,
+        74.23
+      ],
+      "paving": [
+        225.4,
+        219.45,
+        179.44
+      ],
+      "leftBorder": [
+        123.87,
+        143.16,
+        108.85
+      ],
+      "environment": {
+        "season": "summer",
+        "time": "day",
+        "fireflies": true,
+        "particles": true
+      },
+      "canvas": [
+        3200,
+        1800
+      ]
+    },
+    "spring": {
+      "canopy": [
+        189.94,
+        164.54,
+        147.76
+      ],
+      "paving": [
+        225.26,
+        219.2,
+        179.27
+      ],
+      "leftBorder": [
+        140.21,
+        148.38,
+        91.87
+      ],
+      "environment": {
+        "season": "spring",
+        "time": "day",
+        "fireflies": true,
+        "particles": true
+      },
+      "canvas": [
+        3200,
+        1800
+      ]
+    },
+    "autumn": {
+      "canopy": [
+        171.71,
+        115.73,
+        49.66
+      ],
+      "paving": [
+        225.26,
+        219.2,
+        179.27
+      ],
+      "leftBorder": [
+        165.35,
+        124.13,
+        71.4
+      ],
+      "environment": {
+        "season": "autumn",
+        "time": "day",
+        "fireflies": true,
+        "particles": true
+      },
+      "canvas": [
+        3200,
+        1800
+      ]
+    },
+    "winter": {
+      "canopy": [
+        142.43,
+        147.3,
+        157.16
+      ],
+      "paving": [
+        225.26,
+        219.2,
+        179.27
+      ],
+      "leftBorder": [
+        141.5,
+        150.5,
+        153.4
+      ],
+      "environment": {
+        "season": "winter",
+        "time": "day",
+        "fireflies": true,
+        "particles": true
+      },
+      "canvas": [
+        3200,
+        1800
+      ]
+    }
+  },
+  "errors": [],
+  "legacyDawnMigration": true,
+  "visibleSeasonDifferences": true,
+  "night": {
+    "canopy": [
+      87.08,
+      80.13,
+      75.56
+    ],
+    "paving": [
+      91.95,
+      116.14,
+      142.81
+    ],
+    "leftBorder": [
+      67.7,
+      70.16,
+      54.09
+    ],
+    "environment": {
+      "season": "spring",
+      "time": "night",
+      "fireflies": true,
+      "particles": true
+    },
+    "canvas": [
+      3200,
+      1800
+    ]
+  },
+  "fireflyToggle": true,
+  "persisted": true,
+  "dayNightOnly": true,
+  "visualReview": {
+    "reviewedScreenshots": [
+      "summer-day.png",
+      "spring-day.png",
+      "autumn-day.png",
+      "winter-day.png",
+      "spring-night.png"
+    ],
+    "notes": [
+      "Spring has a clearly pink and white cherry canopy and scattered petals.",
+      "Autumn has gold and rust foliage, winter has visible snow-covered branches and garden edges.",
+      "Paving and fixed furnishings stay registered while seasonal edge art changes.",
+      "Spring night has readable blue-gray ground and dimmed cats; fireflies remain small edge lights, without large bright halos."
+    ],
+    "resolutionLimit": "Seasonal and night source paintings are native 1672×941. Runtime keeps the supplied 3840/6144 high-resolution original paving and facilities for day composition; no generated plate is described as native 4K."
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "mode": "packaged",
+  "version": "2.7.0",
+  "isolatedProfile": true,
+  "checkedAt": "2026-09-30T11:20:23.778Z",
+  "checks": [
+    "import-entry-and-file-input-removed",
+    "parameter-editor-replaces-paint-and-ignores-old-paint-draft",
+    "live-build-size-ears-eyes-and-eight-personalities",
+    "actual-yard-size-preview-and-persisted-parameters-preserve-legacy-paint",
+    "reload-recovers-identical-customized-appearance",
+    "cancel-draft-and-default-reset-never-overwrite-confirmed-design",
+    "all-sixteen-presets-and-new-parameter-cat-creation",
+    "mobile-parameter-controls-fit-and-remain-accessible"
+  ],
+  "pixelChecks": {
+    "earSize": {
+      "count": 11707,
+      "alpha": 3234
+    },
+    "earShape": {
+      "count": 10686,
+      "alpha": 2823
+    },
+    "eyes": {
+      "count": 414,
+      "alpha": 0
+    }
+  },
+  "errors": []
+}

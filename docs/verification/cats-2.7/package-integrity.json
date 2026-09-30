@@ -1,0 +1,13 @@
+{
+  "version": "2.7.0",
+  "checked": 3726,
+  "errors": [],
+  "actionAtlases": 16,
+  "sourcePNGs": 0,
+  "electronFiles": [
+    "/electron/main.cjs",
+    "/electron/policy.cjs",
+    "/electron/preload.cjs"
+  ],
+  "spring": true
+}

@@ -1,0 +1,28 @@
+{
+  "race": {
+    "cachedA_vs_expectedA": 0,
+    "cachedA_vs_currentB": 151571
+  },
+  "size": {
+    "small": {
+      "x": 809.3837846098994,
+      "y": 363.98660618764075,
+      "w": 141.2608,
+      "h": 146.9568
+    },
+    "large": {
+      "x": 784.6681092233642,
+      "y": 318.13191835331503,
+      "w": 190.70208,
+      "h": 198.39167999999998
+    },
+    "ratio": 1.35,
+    "hitCenter": "review-race"
+  },
+  "destroy": {
+    "dead": true,
+    "skins": 0,
+    "bounds": 0
+  },
+  "result": "PASS"
+}

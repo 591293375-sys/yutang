@@ -1,0 +1,11 @@
+{
+  "color": "#acaed0",
+  "alphaChanged": 0,
+  "outsideChanged": 0,
+  "visibleUnchanged": 0,
+  "closedChanged": 0,
+  "errors": [],
+  "result": "PASS",
+  "manualReview": "Viewed action-eye-16-before-after.png: all sixteen breed/coat identities retain pupils, catchlights, noses and face fur; only the measured iris interiors change.",
+  "framesChecked": 256
+}

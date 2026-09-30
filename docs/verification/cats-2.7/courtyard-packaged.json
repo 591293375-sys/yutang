@@ -1,0 +1,140 @@
+{
+  "mode": "packaged",
+  "result": "PASS",
+  "isolatedProfile": true,
+  "checks": [
+    {
+      "name": "first-visit-three-default-cats-and-shared-dock"
+    },
+    {
+      "name": "courtyard-background-visible-and-textured"
+    },
+    {
+      "name": "canvas-pet-specified-cat-completes",
+      "interactions": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "canvas-food-specified-cat-completes",
+      "interactions": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "canvas-yarn-specified-cat-completes",
+      "interactions": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "canvas-scratch-specified-cat-completes",
+      "interactions": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "canvas-mouse-specified-cat-completes",
+      "interactions": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "wand-pointer-feedback-and-escape-cancel"
+    },
+    {
+      "name": "ground-food-nearest-two-cats"
+    },
+    {
+      "name": "scratch-board-persist-move-remove"
+    },
+    {
+      "name": "new-command-replaces-pending-pet"
+    },
+    {
+      "name": "obstacle-click-rejected"
+    },
+    {
+      "name": "environment-panels-season-time-fireflies-and-reload",
+      "environment": {
+        "season": "winter",
+        "time": "day",
+        "fireflies": true,
+        "particles": false
+      }
+    },
+    {
+      "name": "three-theme-switch-cleanup-and-old-collections-intact"
+    },
+    {
+      "name": "native-hide-stops-render-and-show-resumes",
+      "hiddenDraws": 3,
+      "resumeDraws": 21,
+      "afterDraws": 81,
+      "states": [
+        {
+          "visible": false,
+          "minimized": false
+        },
+        {
+          "visible": false,
+          "minimized": false
+        },
+        {
+          "visible": true,
+          "minimized": false
+        },
+        {
+          "visible": true,
+          "minimized": false
+        }
+      ]
+    },
+    {
+      "name": "tall-1000-visible-platform-direct-hit-climb-and-reload",
+      "id": "cat-first-orange"
+    },
+    {
+      "name": "narrow-390-ui-and-canvas-hit-aligned"
+    },
+    {
+      "name": "4k-render-pixels",
+      "pixels": [
+        3840,
+        2160
+      ]
+    }
+  ],
+  "screenshots": [
+    "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/cat-courtyard/cat-packaged-default-courtyard.png",
+    "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/cat-courtyard/cat-packaged-tool-pet.png",
+    "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/cat-courtyard/cat-packaged-tool-food.png",
+    "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/cat-courtyard/cat-packaged-tool-yarn.png",
+    "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/cat-courtyard/cat-packaged-tool-scratch.png",
+    "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/cat-courtyard/cat-packaged-tool-mouse.png",
+    "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/cat-courtyard/cat-packaged-tool-wand.png",
+    "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/cat-courtyard/cat-packaged-summer-night-fireflies.png",
+    "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/cat-courtyard/cat-packaged-winter-night-no-fireflies.png",
+    "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/cat-courtyard/cat-packaged-tall-1000-platform-visible.png",
+    "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/cat-courtyard/cat-packaged-narrow-390.png",
+    "/Users/leo/Documents/Codex/2026-09-27/1-2-3-1-2-1/work/cat-courtyard/cat-packaged-4k.png"
+  ],
+  "limitations": [
+    "本脚本验证真实 UI 操作、存档与画布结果，动作逐帧质量另有专项检查",
+    "萤火虫通过夜/季/开关状态和截图验证，未逐像素分类每一只光点"
+  ],
+  "version": "2.7.0",
+  "errors": [],
+  "assetErrors": [],
+  "checkedAt": "2026-09-30T11:24:28.893Z"
+}
