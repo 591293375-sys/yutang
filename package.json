@@ -1,9 +1,9 @@
 {
   "name": "fusheng-koi-pond",
-  "version": "2.4.1",
+  "version": "3.0.0",
   "private": true,
   "type": "module",
-  "description": "浮生 · 摸鱼桌面，锦鲤与赶海",
+  "description": "浮生 · 摸鱼桌面，锦鲤、赶海与猫咪庭院",
   "main": "electron/main.cjs",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
@@ -28,7 +28,10 @@
     "test:coast": "node electron/coast-smoke.cjs",
     "test:coast-scene": "node electron/coast-scene-2.3-smoke.cjs",
     "test:bottles": "node electron/coast-bottle-smoke.cjs",
-    "test:capture": "node electron/coast-capture-smoke.cjs"
+    "test:capture": "node electron/coast-capture-smoke.cjs",
+    "test:cats": "node electron/cat-courtyard-smoke.cjs",
+    "test:cat-studio": "node electron/cat-customization-smoke.cjs",
+    "test:cat-seasons": "node electron/cat-seasons-smoke.cjs"
   },
   "dependencies": {
     "react": "^19.1.0",
@@ -50,7 +53,9 @@
     },
     "files": [
       "dist/**/*",
-      "electron/*.cjs",
+      "electron/main.cjs",
+      "electron/preload.cjs",
+      "electron/policy.cjs",
       "package.json"
     ],
     "mac": {
@@ -72,5 +77,9 @@
         ]
       }
     ]
+  },
+  "author": {
+    "name": "赛博老爸",
+    "email": "cyberdaddy@163.com"
   }
 }
