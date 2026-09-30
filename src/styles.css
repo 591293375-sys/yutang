@@ -90,3 +90,10 @@
 .letter-paper-personal .letter-eyebrow{color:var(--muted)}.letter-paper-personal h3{color:#edf5da;margin:13px 0;font-size:20px}
 .letter-paper-personal .letter-signature{padding:0 9px}.letter-paper-curated{padding:14px 0 6px;background:transparent;box-shadow:none;color:var(--muted)}.letter-paper-curated .letter-eyebrow{color:var(--muted)}.letter-paper-curated h3{margin:8px 0;font-size:20px;color:#edf5da}
 @media(max-width:560px){.bottle-letter-thumbnail{width:35px;height:47px}.letter-paper-personal{padding:12px 0 3px}.letter-paper-curated{padding:12px 10px 8px}.letter-paper-curated h3{font-size:18px}.bottle-collection-progress{font-size:10px}}
+
+.developer-credit{display:flex;flex-wrap:wrap;justify-content:center;gap:3px 10px;margin:9px 0 0;color:var(--muted);font-size:11px;line-height:1.8;text-align:center;user-select:text}
+
+/* Cat audio stays beside the desktop controls, leaving the six-tool dock intact. */
+.cat-audio-status{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted);margin:0 0 9px}.sound-volume-control input{max-width:none}.sound-volume-control output{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;color:#e9f5db}.cat-sound-preview{padding:14px;border:1px solid var(--line);border-radius:12px;margin:17px 0}.cat-sound-preview>span{font-size:12px;color:#e2edd2}.cat-sound-preview>div{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.cat-sound-preview button{display:inline-flex;align-items:center;gap:6px;border:1px solid #d7ebcf38;border-radius:18px;padding:8px 10px;font-size:11px;min-height:34px}.cat-sound-preview small{display:block;font-size:11px;line-height:1.7;color:var(--muted);margin-top:10px}
+
+@media(max-width:560px){.theme-cats .scene-actions{gap:6px}.theme-cats .scene-actions>button{padding:9px 10px;gap:6px;letter-spacing:1px}.cat-sound-preview{padding:12px}}
