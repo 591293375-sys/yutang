@@ -180,7 +180,9 @@ function showControls() {
   if (pondWindow.isMinimized()) pondWindow.restore();
   pondWindow.show();
   pondWindow.focus();
-  return currentState();
+  // Restoring an already-windowed app must also broadcast visibility; the
+  // native show event is not guaranteed on every macOS restoration path.
+  return publish();
 }
 
 function stopPointerHelper() {
