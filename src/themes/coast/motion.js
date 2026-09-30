@@ -66,13 +66,17 @@ export function warmShoreNavigation(level,ahead,count=16){
  for(;cursor<end;cursor++){const node=shoreNodeList[cursor];if(graph.valid(node)){graph.heuristic(node);graph.neighbors(node);}}
  graph.warmCursor=cursor;return cursor===shoreNodeList.length;
 }
-export function shoreEscapeRoute(entity,level,ahead,canReach){
+export function shoreEscapeRoute(entity,level,ahead,canReach,crowding=()=>0){
  const graph=shoreGraph(level,ahead),starts=[...shoreNodes.values()].filter(p=>Math.hypot(p.x-entity.x,p.y-entity.y)<=60&&graph.valid(p)&&canReach(p.x,p.y));
  if(!starts.length)return null;
  const queue=[...starts],cost=new Map(starts.map(p=>[p.key,Math.hypot(p.x-entity.x,p.y-entity.y)])),previous=new Map(starts.map(p=>[p.key,null])),closed=new Set();let best=null,bestScore=Infinity;
  while(queue.length&&closed.size<700){
   queue.sort((a,b)=>cost.get(a.key)+graph.heuristic(a)-cost.get(b.key)-graph.heuristic(b));const node=queue.shift();if(closed.has(node.key))continue;closed.add(node.key);
-  const score=graph.heuristic(node)+cost.get(node.key)*.025;if(score<bestScore){best=node;bestScore=score}if(graph.heuristic(node)<1)break;
+  // Animals reserve different safe ends of the same route network. Previously
+  // the first nearest refuge won for every crab, collapsing a whole shore
+  // population into a single corner as the water advanced.
+  const density=crowding(node),score=graph.heuristic(node)+cost.get(node.key)*.025+density*85;
+  if(score<bestScore){best=node;bestScore=score}if(graph.heuristic(node)<1&&density<.02)break;
   for(const next of graph.neighbors(node)){const nextCost=cost.get(node.key)+shoreStep;if(nextCost<(cost.get(next.key)??Infinity)){cost.set(next.key,nextCost);previous.set(next.key,node);queue.push(next)}}
  }
  if(!best||Math.hypot(best.x-entity.x,best.y-entity.y)<10)return null;

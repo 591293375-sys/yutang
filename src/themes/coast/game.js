@@ -3,6 +3,7 @@ import { habitatAt, findHabitat, isHabitatValid, pathIsHabitatValid, shoreLine, 
 import { TideClock } from './tide.js';
 import { normalizeCoast, COAST_LIMITS } from './storage.js';
 import { steerMotion, crabCruiseSpeed, shoreEscapeRoute, warmShoreNavigation } from './motion.js';
+import { beachResident, occupiedShore, findSpacedHabitat, shoreCrowding } from './spacing.js';
 const TAU = Math.PI * 2;
 export const FISH_CATCH_RULES = Object.freeze({ attempts: 3, intervalMs: 500, resetMs: 15000, escapeMs: 1200, speed: 112, acceleration: 520, braking: 185, turnRate: 6.8 });
 const speciesFor = id => Object.hasOwn(SPECIES_BY_ID, id) ? SPECIES_BY_ID[id] : null;
@@ -36,7 +37,7 @@ export class CoastGame {
     if (!state) this.seed();
     else this.removeOfflineVisitors();
     // Offline return resolves against the current tide once, without replay or awards.
-    this.reconcile(true); this.initializeConcealments(); this.concealmentReady = true;
+    this.reconcile(true); this.disperseCrowdedShore(); this.initializeConcealments(); this.concealmentReady = true;
     this.realLifecycle = this.lifecycle(); this.wasDebug = false; this.hasUpdated = false;
     this.populationVisits = new Set(['real:' + this.tide.cycle]);
   }
@@ -64,7 +65,7 @@ export class CoastGame {
     const stable = normalizeCoast({ version: 1, epochMs: this.clock.epochMs, nextId: this.nextId, entities: this.entities });
     this.entities = stable.entities; this.transitions = []; this.pointerState = null;
     Object.assign(this, this.calibrateLifecycle(source)); this.lastCycle = this.tide.cycle;
-    this.removeOfflineVisitors(); this.reconcile(true);
+    this.removeOfflineVisitors(); this.reconcile(true); this.disperseCrowdedShore();
   }
   /** Refresh before a UI hit-test or transaction; long sleeps never replay populations. */
   refresh(nowMs = Date.now()) { return this.update(0, nowMs, true); }
@@ -109,7 +110,10 @@ export class CoastGame {
   }
   spawn(species, { point, permanent = false, migrant = false, entry = null } = {}) {
     if (!species || (species.bucketable ? this.liveCount() >= COAST_LIMITS.alive : this.shellCount() >= COAST_LIMITS.shells)) return null;
-    point ??= findHabitat(species, permanent ? 0 : this.tide.level, this.random);
+    if (!point) {
+      const sample = findHabitat(species, permanent ? 0 : this.tide.level, this.random);
+      point = species.aquatic ? sample : sample && findSpacedHabitat(species, this.tide.level, this.entities, () => sample.x / 1600);
+    }
     if (!point) return null;
     const entity = { id: 'coast-' + this.nextId++, species: species.id, ...point, heading: this.random() * TAU,
       phase: this.random() * TAU, state: 'scene', stranded: false, migrant, entry, admittedCycle: migrant ? this.tide.cycle : -1,
@@ -117,6 +121,23 @@ export class CoastGame {
     this.entities.push(entity);
     if (this.concealmentReady) this.initializeOneConcealment(entity);
     return entity;
+  }
+  disperseCrowdedShore() {
+    // Repair only overlap in loaded saves. An established, well-spaced animal
+    // keeps its exact position, ID and discovery state on every reopen.
+    const settled = [];
+    for (const entity of this.entities) {
+      if (entity.state !== 'scene' || !beachResident(entity)) continue;
+      if (settled.some(other => distance(entity, other) < 64)) {
+        const level = !speciesFor(entity.species).bucketable && entity.submerged ? 0 : this.tide.level;
+        const point = findSpacedHabitat(entity.species, level, this.entities, this.random, entity);
+        if (point) {
+          entity.x = point.x; entity.y = point.y; entity.submerged = !!habitatAt(point.x, point.y, this.tide.level).water;
+          entity.moveTarget = null; entity.migration = null; delete entity.shoreWaypoints; delete entity.shoreEscaping; delete entity.shorePlanAt;
+        }
+      }
+      settled.push(entity);
+    }
   }
   initializeOneConcealment(entity, kind = undefined) {
     if (entity.concealmentInitialized) return;
@@ -422,7 +443,8 @@ export class CoastGame {
           // within two seconds of a manual surge. Replan sooner while its
           // water is advancing quickly; natural tides keep the calmer cadence.
           entity.shorePlanAt = virtualNow + (this.tide.manual ? 1000 : 2000);
-          const route = seekingRefuge ? shoreEscapeRoute(entity, this.tide.level, futureLevel, (x,y)=>this.shoreRecoveryPath(entity,x,y)) : null;
+          const occupied = occupiedShore(this.entities, entity);
+          const route = seekingRefuge ? shoreEscapeRoute(entity, this.tide.level, futureLevel, (x,y)=>this.shoreRecoveryPath(entity,x,y), point=>shoreCrowding(point, occupied)) : null;
           const point = route?.[0] ?? this.shoreTarget(entity, futureLevel);
           if (point) { entity.migration = 'recover'; entity.moveTarget = point; entity.shoreWaypoints = route?.slice(1) ?? []; entity.shoreEscaping = !!route; }
         }
@@ -480,13 +502,16 @@ export class CoastGame {
     return true;
   }
   shoreTarget(entity, level = this.tide.level) {
+    const occupied = occupiedShore(this.entities, entity); let best = null, score = Infinity;
     for (const radius of [16, 32, 56, 88, 128, 192, 288, 432, 640, 960]) {
       for (let i = 0; i < 24; i++) {
         const angle = i * TAU / 24, point = { x: entity.x + Math.cos(angle) * radius, y: entity.y + Math.sin(angle) * radius };
-        if (isHabitatValid(entity.species, point.x, point.y, level) && this.shoreRecoveryPath(entity, point.x, point.y)) return point;
+        const candidateScore = radius * .18 + shoreCrowding(point, occupied) * 110;
+        if (candidateScore < score && isHabitatValid(entity.species, point.x, point.y, level) && this.shoreRecoveryPath(entity, point.x, point.y)) { best = point; score = candidateScore; }
       }
+      if (best && radius * .18 > score) break;
     }
-    return null;
+    return best;
   }
   centerPath(entity, x, y, allowWet = false) {
     const steps = Math.max(1, Math.ceil(Math.hypot(x - entity.x, y - entity.y) / 6));
@@ -550,6 +575,18 @@ export class CoastGame {
         : crab ? crabCruiseSpeed(entity, virtualDt, responding) : 1.8;
       entity.wanderHeading ??= entity.moveAngle ?? entity.heading + (crab ? (entity.phase > Math.PI ? -1 : 1) * Math.PI / 2 : 0);
       entity.wanderHeading += Math.sin(this.elapsed * .34 + entity.phase) * .32 * virtualDt;
+      if (crab) {
+        let awayX = 0, awayY = 0;
+        for (const other of this.entities) {
+          if (other === entity || other.state !== 'scene' || !beachResident(other)) continue;
+          const separation = distance(entity, other);
+          if (separation > 0 && separation < 85) {
+            const weight = (1 - separation / 85) * 3;
+            awayX += (entity.x - other.x) / separation * weight; awayY += (entity.y - other.y) / separation * weight;
+          }
+        }
+        if (awayX || awayY) entity.wanderHeading = Math.atan2(Math.sin(entity.wanderHeading) + awayY, Math.cos(entity.wanderHeading) + awayX);
+      }
       const pointer = this.pointerState;
       if (aquatic && pointer && pointer.until >= this.nowMs && distance(entity, pointer) < 130) {
         entity.wanderHeading = Math.atan2(entity.y - pointer.y, entity.x - pointer.x); desiredSpeed += 5;
@@ -673,7 +710,8 @@ export class CoastGame {
     if (!selected.length) return failure('小桶里没有需要放生的这一位。');
     let released = 0;
     for (const entity of selected) {
-      const species = speciesFor(entity.species), point = findHabitat(species, this.tide.level, this.random, entity);
+      const species = speciesFor(entity.species), point = species.aquatic ? findHabitat(species, this.tide.level, this.random, entity)
+        : findSpacedHabitat(species, this.tide.level, this.entities, this.random, entity);
       if (!point || !isHabitatValid(species, point.x, point.y, this.tide.level)) continue;
       this.clearCatch(entity); entity.state = 'releasing'; entity.stranded = false; entity.migration = null; delete entity.moveTarget; delete entity.lingerCycle; delete entity.shoreWaypoints; delete entity.shoreEscaping; delete entity.shorePlanAt; this.transition(entity, 'release', point, 850); released++;
     }

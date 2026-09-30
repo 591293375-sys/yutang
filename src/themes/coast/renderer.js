@@ -1,4 +1,5 @@
 import {CoastWater} from './water.js';
+import {RockContact} from './rock-contact.js';
 import {drawBottles} from './bottle-renderer.js';
 import {drawSurf} from './surf.js';
 import {SPECIES,SPECIES_BY_ID,COAST_ASSETS,COAST_BACKGROUND} from './catalog.js';
@@ -21,6 +22,7 @@ export class CoastRenderer {
     this.backgroundCtx=backgroundCanvas?.getContext('2d',{alpha:false});
     this.images=new Set();this.sprites=new Map();this.errors=[];this.disposed=false;
     this.water=new CoastWater();
+    this.rockContact=new RockContact();
     this.animalAnimations=new Map();this.animalWaterPath=null;this.animalWaterKey=-1;
     this.width=1;this.height=1;this.scale=1;this.cover=1;this.offsetX=0;this.offsetY=0;
     this.baseImage=null;this.baseCache=null;this.sandCache=null;this.ready=false;this.sourceSize=null;this.sandSourceSize=null;
@@ -49,6 +51,7 @@ export class CoastRenderer {
     const width=Math.min(3200,image.naturalWidth),height=Math.round(width*H/W);
     this.baseCache=makeCanvas(width,height);this.baseCache.getContext('2d').drawImage(image,0,0,width,height);
     this.water.setSea(this.baseCache);
+    this.rockContact.setSource(this.baseCache);
     this.ready=true;this.floodKey=-1;this.drawBackground();
   }
   setSand(image){
@@ -323,6 +326,7 @@ export class CoastRenderer {
     // Copy only emergent foreground from the identical terrain layer. This masks
     // water, foam and animals with the very same rock polygons used by collision.
     this.drawRockForeground(ctx);
+    this.rockContact.draw(ctx,this.water,this.currentPath,time,!!options.reducedMotion);
     this.drawConcealment(ctx,game,time);
     if(options.debugHabitat){
       ctx.save();ctx.strokeStyle='rgba(241,98,80,.75)';ctx.lineWidth=1;ctx.stroke(this.rocksPath);
@@ -373,6 +377,7 @@ export class CoastRenderer {
     if(this.disposed)return;this.disposed=true;
     for(const image of this.images){image.onload=null;image.onerror=null;}
     this.water.destroy();
+    this.rockContact.destroy();
     this.images.clear();this.sprites.clear();this.animalAnimations.clear();this.game=null;this.baseImage=null;this.baseCache=null;this.sandCache=null;
     this.ctx.setTransform(1,0,0,1,0,0);this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
   }
