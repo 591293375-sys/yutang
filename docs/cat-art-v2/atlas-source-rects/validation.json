@@ -1,0 +1,4274 @@
+[
+  {
+    "id": "abyssinian",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          31,
+          8,
+          285,
+          336
+        ],
+        "centroid": [
+          178.03,
+          177.86
+        ],
+        "bodyArea": 33413,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          339,
+          9,
+          281,
+          330
+        ],
+        "centroid": [
+          487.2,
+          178.3
+        ],
+        "bodyArea": 33118,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          659,
+          8,
+          283,
+          333
+        ],
+        "centroid": [
+          801.7,
+          177.53
+        ],
+        "bodyArea": 32563,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          965,
+          8,
+          278,
+          336
+        ],
+        "centroid": [
+          1110.28,
+          179.83
+        ],
+        "bodyArea": 33121,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          22,
+          346,
+          291,
+          304
+        ],
+        "centroid": [
+          166.13,
+          475.88
+        ],
+        "bodyArea": 33036,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          340,
+          346,
+          282,
+          300
+        ],
+        "centroid": [
+          479.11,
+          479.96
+        ],
+        "bodyArea": 32359,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          643,
+          348,
+          299,
+          298
+        ],
+        "centroid": [
+          790.76,
+          479.23
+        ],
+        "bodyArea": 32745,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          966,
+          346,
+          278,
+          301
+        ],
+        "centroid": [
+          1105.12,
+          481.68
+        ],
+        "bodyArea": 32419,
+        "neighborAlpha": 426
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          0,
+          661,
+          305,
+          230
+        ],
+        "centroid": [
+          159.91,
+          789.24
+        ],
+        "bodyArea": 42448,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          342,
+          703,
+          278,
+          191
+        ],
+        "centroid": [
+          481.84,
+          802.63
+        ],
+        "bodyArea": 40624,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          659,
+          663,
+          265,
+          240
+        ],
+        "centroid": [
+          799.52,
+          785.99
+        ],
+        "bodyArea": 39132,
+        "neighborAlpha": 846
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          979,
+          624,
+          263,
+          288
+        ],
+        "centroid": [
+          1107.02,
+          782.97
+        ],
+        "bodyArea": 36250,
+        "neighborAlpha": 732
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          48,
+          916,
+          251,
+          304
+        ],
+        "centroid": [
+          156.1,
+          1081.53
+        ],
+        "bodyArea": 43658,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          385,
+          923,
+          233,
+          294
+        ],
+        "centroid": [
+          487.23,
+          1084.56
+        ],
+        "bodyArea": 40934,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          644,
+          884,
+          291,
+          349
+        ],
+        "centroid": [
+          806.14,
+          1078.18
+        ],
+        "bodyArea": 40200,
+        "neighborAlpha": 1204
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          954,
+          906,
+          274,
+          319
+        ],
+        "centroid": [
+          1118.89,
+          1094.53
+        ],
+        "bodyArea": 38519,
+        "neighborAlpha": 82
+      }
+    ]
+  },
+  {
+    "id": "american-shorthair",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          12,
+          2,
+          304,
+          324
+        ],
+        "centroid": [
+          177.96,
+          171.47
+        ],
+        "bodyArea": 41167,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          324,
+          3,
+          295,
+          316
+        ],
+        "centroid": [
+          486.64,
+          171.04
+        ],
+        "bodyArea": 38499,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          641,
+          5,
+          297,
+          321
+        ],
+        "centroid": [
+          801.84,
+          170.36
+        ],
+        "bodyArea": 39961,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          954,
+          5,
+          296,
+          323
+        ],
+        "centroid": [
+          1116.33,
+          175.34
+        ],
+        "bodyArea": 39768,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          15,
+          329,
+          291,
+          298
+        ],
+        "centroid": [
+          160.91,
+          455.8
+        ],
+        "bodyArea": 40112,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          335,
+          329,
+          290,
+          302
+        ],
+        "centroid": [
+          481.27,
+          457.69
+        ],
+        "bodyArea": 40959,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          647,
+          330,
+          292,
+          302
+        ],
+        "centroid": [
+          792.92,
+          458.62
+        ],
+        "bodyArea": 41112,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          963,
+          327,
+          281,
+          307
+        ],
+        "centroid": [
+          1104.64,
+          457.36
+        ],
+        "bodyArea": 40622,
+        "neighborAlpha": 482
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          8,
+          665,
+          328,
+          212
+        ],
+        "centroid": [
+          176.31,
+          775.98
+        ],
+        "bodyArea": 52643,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          343,
+          660,
+          294,
+          226
+        ],
+        "centroid": [
+          489.21,
+          776.04
+        ],
+        "bodyArea": 50484,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          659,
+          644,
+          293,
+          242
+        ],
+        "centroid": [
+          808.93,
+          769.63
+        ],
+        "bodyArea": 50133,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          973,
+          608,
+          280,
+          296
+        ],
+        "centroid": [
+          1103.3,
+          773.71
+        ],
+        "bodyArea": 45561,
+        "neighborAlpha": 770
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          42,
+          902,
+          285,
+          325
+        ],
+        "centroid": [
+          165.26,
+          1081.42
+        ],
+        "bodyArea": 56978,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          339,
+          909,
+          273,
+          318
+        ],
+        "centroid": [
+          478.99,
+          1081.61
+        ],
+        "bodyArea": 55185,
+        "neighborAlpha": 337
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          594,
+          900,
+          342,
+          344
+        ],
+        "centroid": [
+          793.16,
+          1086.58
+        ],
+        "bodyArea": 53545,
+        "neighborAlpha": 1131
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          951,
+          909,
+          295,
+          321
+        ],
+        "centroid": [
+          1123.84,
+          1091.74
+        ],
+        "bodyArea": 50545,
+        "neighborAlpha": 0
+      }
+    ]
+  },
+  {
+    "id": "bengal",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          20,
+          9,
+          293,
+          335
+        ],
+        "centroid": [
+          174.33,
+          180.93
+        ],
+        "bodyArea": 35863,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          323,
+          9,
+          285,
+          330
+        ],
+        "centroid": [
+          475.24,
+          180.34
+        ],
+        "bodyArea": 35419,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          626,
+          5,
+          288,
+          341
+        ],
+        "centroid": [
+          778.62,
+          182.66
+        ],
+        "bodyArea": 35612,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          931,
+          8,
+          310,
+          337
+        ],
+        "centroid": [
+          1096.46,
+          184.75
+        ],
+        "bodyArea": 38909,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          21,
+          352,
+          276,
+          285
+        ],
+        "centroid": [
+          157.89,
+          471.92
+        ],
+        "bodyArea": 33987,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          325,
+          349,
+          277,
+          283
+        ],
+        "centroid": [
+          465.36,
+          466.71
+        ],
+        "bodyArea": 35103,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          640,
+          355,
+          271,
+          283
+        ],
+        "centroid": [
+          776.56,
+          473.74
+        ],
+        "bodyArea": 34044,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          953,
+          356,
+          274,
+          272
+        ],
+        "centroid": [
+          1093.88,
+          469.48
+        ],
+        "bodyArea": 33411,
+        "neighborAlpha": 81
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          10,
+          673,
+          305,
+          217
+        ],
+        "centroid": [
+          171.45,
+          787.7
+        ],
+        "bodyArea": 45713,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          342,
+          690,
+          276,
+          206
+        ],
+        "centroid": [
+          481.28,
+          797.02
+        ],
+        "bodyArea": 43335,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          643,
+          653,
+          304,
+          254
+        ],
+        "centroid": [
+          794.83,
+          785.58
+        ],
+        "bodyArea": 41975,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          975,
+          619,
+          266,
+          289
+        ],
+        "centroid": [
+          1112.51,
+          772.86
+        ],
+        "bodyArea": 40897,
+        "neighborAlpha": 134
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          49,
+          914,
+          266,
+          320
+        ],
+        "centroid": [
+          162.93,
+          1090.41
+        ],
+        "bodyArea": 50643,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          338,
+          910,
+          280,
+          320
+        ],
+        "centroid": [
+          472.18,
+          1088.75
+        ],
+        "bodyArea": 46933,
+        "neighborAlpha": 10
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          615,
+          907,
+          330,
+          334
+        ],
+        "centroid": [
+          792.13,
+          1086.98
+        ],
+        "bodyArea": 50310,
+        "neighborAlpha": 749
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          917,
+          931,
+          323,
+          308
+        ],
+        "centroid": [
+          1106.63,
+          1116.14
+        ],
+        "bodyArea": 41223,
+        "neighborAlpha": 1567
+      }
+    ]
+  },
+  {
+    "id": "british-shorthair",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          4,
+          16,
+          327,
+          341
+        ],
+        "centroid": [
+          177.23,
+          183.54
+        ],
+        "bodyArea": 48825,
+        "neighborAlpha": 58
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          319,
+          15,
+          315,
+          343
+        ],
+        "centroid": [
+          486.73,
+          185.58
+        ],
+        "bodyArea": 48823,
+        "neighborAlpha": 361
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          632,
+          20,
+          310,
+          337
+        ],
+        "centroid": [
+          794.95,
+          184.21
+        ],
+        "bodyArea": 46617,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          941,
+          22,
+          310,
+          332
+        ],
+        "centroid": [
+          1107.65,
+          187.34
+        ],
+        "bodyArea": 47804,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          13,
+          360,
+          307,
+          305
+        ],
+        "centroid": [
+          167.58,
+          490.42
+        ],
+        "bodyArea": 45618,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          330,
+          360,
+          300,
+          305
+        ],
+        "centroid": [
+          477.85,
+          489.24
+        ],
+        "bodyArea": 45503,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          634,
+          361,
+          292,
+          304
+        ],
+        "centroid": [
+          781.66,
+          486.91
+        ],
+        "bodyArea": 46060,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          950,
+          360,
+          299,
+          304
+        ],
+        "centroid": [
+          1102.59,
+          485.66
+        ],
+        "bodyArea": 46121,
+        "neighborAlpha": 410
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          6,
+          696,
+          327,
+          219
+        ],
+        "centroid": [
+          169.73,
+          814.72
+        ],
+        "bodyArea": 52263,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          335,
+          704,
+          314,
+          215
+        ],
+        "centroid": [
+          493.61,
+          817.58
+        ],
+        "bodyArea": 52152,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          658,
+          690,
+          302,
+          239
+        ],
+        "centroid": [
+          814.87,
+          816.34
+        ],
+        "bodyArea": 47661,
+        "neighborAlpha": 512
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          969,
+          643,
+          283,
+          297
+        ],
+        "centroid": [
+          1099.08,
+          812.27
+        ],
+        "bodyArea": 51804,
+        "neighborAlpha": 675
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          32,
+          924,
+          298,
+          306
+        ],
+        "centroid": [
+          163.36,
+          1094.5
+        ],
+        "bodyArea": 57679,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          357,
+          929,
+          256,
+          299
+        ],
+        "centroid": [
+          482.64,
+          1092.59
+        ],
+        "bodyArea": 51801,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          617,
+          916,
+          332,
+          322
+        ],
+        "centroid": [
+          800.88,
+          1090.15
+        ],
+        "bodyArea": 53258,
+        "neighborAlpha": 734
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          939,
+          941,
+          307,
+          286
+        ],
+        "centroid": [
+          1120.25,
+          1100.27
+        ],
+        "bodyArea": 49941,
+        "neighborAlpha": 289
+      }
+    ]
+  },
+  {
+    "id": "chinchilla",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          12,
+          8,
+          317,
+          345
+        ],
+        "centroid": [
+          175.37,
+          177.5
+        ],
+        "bodyArea": 53582,
+        "neighborAlpha": 14
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          324,
+          6,
+          310,
+          332
+        ],
+        "centroid": [
+          488.1,
+          172.76
+        ],
+        "bodyArea": 51099,
+        "neighborAlpha": 302
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          622,
+          15,
+          316,
+          322
+        ],
+        "centroid": [
+          785.33,
+          179.65
+        ],
+        "bodyArea": 52950,
+        "neighborAlpha": 406
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          932,
+          9,
+          321,
+          345
+        ],
+        "centroid": [
+          1100.52,
+          180.17
+        ],
+        "bodyArea": 54909,
+        "neighborAlpha": 101
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          11,
+          352,
+          312,
+          323
+        ],
+        "centroid": [
+          164.52,
+          487.8
+        ],
+        "bodyArea": 51691,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          329,
+          351,
+          308,
+          324
+        ],
+        "centroid": [
+          482.71,
+          484.82
+        ],
+        "bodyArea": 52267,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          638,
+          350,
+          305,
+          309
+        ],
+        "centroid": [
+          792.68,
+          479.87
+        ],
+        "bodyArea": 50134,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          951,
+          356,
+          297,
+          315
+        ],
+        "centroid": [
+          1097.67,
+          484.47
+        ],
+        "bodyArea": 50112,
+        "neighborAlpha": 746
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          0,
+          691,
+          331,
+          233
+        ],
+        "centroid": [
+          163.06,
+          814.51
+        ],
+        "bodyArea": 58940,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          334,
+          692,
+          307,
+          235
+        ],
+        "centroid": [
+          487.94,
+          814.43
+        ],
+        "bodyArea": 55751,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          642,
+          674,
+          302,
+          244
+        ],
+        "centroid": [
+          797.13,
+          802.27
+        ],
+        "bodyArea": 52512,
+        "neighborAlpha": 906
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          957,
+          649,
+          295,
+          287
+        ],
+        "centroid": [
+          1089.54,
+          803.4
+        ],
+        "bodyArea": 55032,
+        "neighborAlpha": 1537
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          29,
+          939,
+          304,
+          305
+        ],
+        "centroid": [
+          160.16,
+          1103.3
+        ],
+        "bodyArea": 62229,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          338,
+          929,
+          285,
+          315
+        ],
+        "centroid": [
+          478.91,
+          1098.59
+        ],
+        "bodyArea": 59202,
+        "neighborAlpha": 263
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          608,
+          901,
+          337,
+          342
+        ],
+        "centroid": [
+          801.57,
+          1088.08
+        ],
+        "bodyArea": 58043,
+        "neighborAlpha": 2166
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          954,
+          920,
+          296,
+          315
+        ],
+        "centroid": [
+          1121.64,
+          1090.3
+        ],
+        "bodyArea": 56656,
+        "neighborAlpha": 641
+      }
+    ]
+  },
+  {
+    "id": "domestic-calico",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          29,
+          9,
+          271,
+          326
+        ],
+        "centroid": [
+          170.71,
+          185.8
+        ],
+        "bodyArea": 33215,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          352,
+          6,
+          272,
+          326
+        ],
+        "centroid": [
+          493.96,
+          180.48
+        ],
+        "bodyArea": 35103,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          652,
+          5,
+          279,
+          326
+        ],
+        "centroid": [
+          795.66,
+          181.2
+        ],
+        "bodyArea": 33754,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          946,
+          11,
+          274,
+          329
+        ],
+        "centroid": [
+          1093.73,
+          189.89
+        ],
+        "bodyArea": 35225,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          50,
+          350,
+          247,
+          282
+        ],
+        "centroid": [
+          178.75,
+          471.39
+        ],
+        "bodyArea": 31572,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          367,
+          354,
+          235,
+          276
+        ],
+        "centroid": [
+          486.21,
+          477.4
+        ],
+        "bodyArea": 30977,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          671,
+          352,
+          234,
+          279
+        ],
+        "centroid": [
+          792.32,
+          469.01
+        ],
+        "bodyArea": 30207,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          972,
+          351,
+          250,
+          276
+        ],
+        "centroid": [
+          1105.37,
+          477.99
+        ],
+        "bodyArea": 32848,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          26,
+          692,
+          283,
+          202
+        ],
+        "centroid": [
+          173.09,
+          796.63
+        ],
+        "bodyArea": 39647,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          349,
+          694,
+          275,
+          187
+        ],
+        "centroid": [
+          489.02,
+          794.04
+        ],
+        "bodyArea": 38367,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          666,
+          634,
+          263,
+          266
+        ],
+        "centroid": [
+          809.37,
+          791.25
+        ],
+        "bodyArea": 35757,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          975,
+          633,
+          245,
+          276
+        ],
+        "centroid": [
+          1095.32,
+          787.46
+        ],
+        "bodyArea": 36043,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          55,
+          954,
+          254,
+          248
+        ],
+        "centroid": [
+          184.15,
+          1082.9
+        ],
+        "bodyArea": 41432,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          343,
+          925,
+          266,
+          277
+        ],
+        "centroid": [
+          474.99,
+          1076.48
+        ],
+        "bodyArea": 41538,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          646,
+          911,
+          275,
+          301
+        ],
+        "centroid": [
+          814.64,
+          1087.37
+        ],
+        "bodyArea": 36790,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          960,
+          918,
+          276,
+          282
+        ],
+        "centroid": [
+          1116.18,
+          1087.41
+        ],
+        "bodyArea": 34478,
+        "neighborAlpha": 0
+      }
+    ]
+  },
+  {
+    "id": "domestic-orange-white",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          11,
+          2,
+          293,
+          319
+        ],
+        "centroid": [
+          165.05,
+          168.88
+        ],
+        "bodyArea": 38572,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          319,
+          0,
+          298,
+          321
+        ],
+        "centroid": [
+          477.72,
+          168.61
+        ],
+        "bodyArea": 39095,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          636,
+          1,
+          298,
+          319
+        ],
+        "centroid": [
+          792.25,
+          170.54
+        ],
+        "bodyArea": 39852,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          949,
+          4,
+          299,
+          317
+        ],
+        "centroid": [
+          1108.28,
+          170.1
+        ],
+        "bodyArea": 38497,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          13,
+          328,
+          282,
+          307
+        ],
+        "centroid": [
+          157.55,
+          459.26
+        ],
+        "bodyArea": 38474,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          324,
+          328,
+          287,
+          306
+        ],
+        "centroid": [
+          469.65,
+          461.79
+        ],
+        "bodyArea": 37900,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          637,
+          328,
+          292,
+          307
+        ],
+        "centroid": [
+          783.83,
+          461.74
+        ],
+        "bodyArea": 38602,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          951,
+          327,
+          302,
+          316
+        ],
+        "centroid": [
+          1104.49,
+          464.4
+        ],
+        "bodyArea": 40760,
+        "neighborAlpha": 817
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          0,
+          667,
+          321,
+          210
+        ],
+        "centroid": [
+          161.52,
+          771.57
+        ],
+        "bodyArea": 48488,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          336,
+          674,
+          291,
+          199
+        ],
+        "centroid": [
+          481.34,
+          777.85
+        ],
+        "bodyArea": 45410,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          646,
+          648,
+          297,
+          240
+        ],
+        "centroid": [
+          796.33,
+          771.49
+        ],
+        "bodyArea": 48822,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          954,
+          613,
+          297,
+          291
+        ],
+        "centroid": [
+          1093.43,
+          774.56
+        ],
+        "bodyArea": 49605,
+        "neighborAlpha": 937
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          36,
+          913,
+          288,
+          311
+        ],
+        "centroid": [
+          161.03,
+          1080.62
+        ],
+        "bodyArea": 56931,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          341,
+          910,
+          258,
+          316
+        ],
+        "centroid": [
+          472.06,
+          1082.22
+        ],
+        "bodyArea": 51223,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          604,
+          902,
+          327,
+          339
+        ],
+        "centroid": [
+          792.66,
+          1097.03
+        ],
+        "bodyArea": 48007,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          960,
+          906,
+          278,
+          327
+        ],
+        "centroid": [
+          1124.34,
+          1092.43
+        ],
+        "bodyArea": 47704,
+        "neighborAlpha": 0
+      }
+    ]
+  },
+  {
+    "id": "domestic-tabby",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          33,
+          29,
+          271,
+          333
+        ],
+        "centroid": [
+          175.31,
+          192.23
+        ],
+        "bodyArea": 37539,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          343,
+          24,
+          270,
+          332
+        ],
+        "centroid": [
+          489.84,
+          189.33
+        ],
+        "bodyArea": 36291,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          657,
+          32,
+          276,
+          332
+        ],
+        "centroid": [
+          801.17,
+          195.84
+        ],
+        "bodyArea": 37325,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          972,
+          24,
+          258,
+          330
+        ],
+        "centroid": [
+          1115.18,
+          193.26
+        ],
+        "bodyArea": 36633,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          19,
+          371,
+          290,
+          305
+        ],
+        "centroid": [
+          165.2,
+          502.69
+        ],
+        "bodyArea": 37286,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          348,
+          371,
+          275,
+          298
+        ],
+        "centroid": [
+          486.05,
+          500.91
+        ],
+        "bodyArea": 35353,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          645,
+          373,
+          296,
+          292
+        ],
+        "centroid": [
+          791.71,
+          502.56
+        ],
+        "bodyArea": 36583,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          971,
+          378,
+          267,
+          298
+        ],
+        "centroid": [
+          1105.92,
+          510.24
+        ],
+        "bodyArea": 34992,
+        "neighborAlpha": 448
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          25,
+          719,
+          283,
+          195
+        ],
+        "centroid": [
+          173.82,
+          818.36
+        ],
+        "bodyArea": 39263,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          352,
+          720,
+          272,
+          193
+        ],
+        "centroid": [
+          487.52,
+          820.66
+        ],
+        "bodyArea": 40368,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          667,
+          681,
+          266,
+          242
+        ],
+        "centroid": [
+          802.73,
+          809.26
+        ],
+        "bodyArea": 36786,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          981,
+          653,
+          253,
+          277
+        ],
+        "centroid": [
+          1097.3,
+          804.99
+        ],
+        "bodyArea": 40805,
+        "neighborAlpha": 598
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          54,
+          951,
+          254,
+          276
+        ],
+        "centroid": [
+          162.47,
+          1102.66
+        ],
+        "bodyArea": 45062,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          354,
+          946,
+          246,
+          281
+        ],
+        "centroid": [
+          485.79,
+          1099.87
+        ],
+        "bodyArea": 42785,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          640,
+          926,
+          289,
+          310
+        ],
+        "centroid": [
+          812.48,
+          1096.94
+        ],
+        "bodyArea": 40118,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          972,
+          946,
+          250,
+          284
+        ],
+        "centroid": [
+          1118.12,
+          1107.07
+        ],
+        "bodyArea": 37131,
+        "neighborAlpha": 0
+      }
+    ]
+  },
+  {
+    "id": "domestic-tuxedo",
+    "sourceSize": [
+      1263,
+      1245
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          37,
+          8,
+          273,
+          355
+        ],
+        "centroid": [
+          180.85,
+          195
+        ],
+        "bodyArea": 34942,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          339,
+          26,
+          262,
+          336
+        ],
+        "centroid": [
+          479.47,
+          199.91
+        ],
+        "bodyArea": 35321,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          652,
+          24,
+          253,
+          333
+        ],
+        "centroid": [
+          786.36,
+          197.56
+        ],
+        "bodyArea": 35670,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          971,
+          17,
+          258,
+          345
+        ],
+        "centroid": [
+          1104.48,
+          197.18
+        ],
+        "bodyArea": 33842,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          48,
+          370,
+          244,
+          281
+        ],
+        "centroid": [
+          180.66,
+          494.06
+        ],
+        "bodyArea": 31308,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          367,
+          379,
+          239,
+          275
+        ],
+        "centroid": [
+          494.31,
+          497.6
+        ],
+        "bodyArea": 31498,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          676,
+          372,
+          233,
+          271
+        ],
+        "centroid": [
+          793.63,
+          490.29
+        ],
+        "bodyArea": 28709,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          979,
+          371,
+          239,
+          276
+        ],
+        "centroid": [
+          1103.29,
+          486.49
+        ],
+        "bodyArea": 29447,
+        "neighborAlpha": 32
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          33,
+          692,
+          287,
+          189
+        ],
+        "centroid": [
+          180.18,
+          793.04
+        ],
+        "bodyArea": 37984,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          354,
+          721,
+          279,
+          170
+        ],
+        "centroid": [
+          496.42,
+          809.4
+        ],
+        "bodyArea": 36338,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          660,
+          657,
+          275,
+          254
+        ],
+        "centroid": [
+          804.14,
+          800.62
+        ],
+        "bodyArea": 37596,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          988,
+          641,
+          236,
+          273
+        ],
+        "centroid": [
+          1106.95,
+          790.93
+        ],
+        "bodyArea": 33577,
+        "neighborAlpha": 72
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          49,
+          957,
+          278,
+          224
+        ],
+        "centroid": [
+          193.03,
+          1062.46
+        ],
+        "bodyArea": 36772,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          367,
+          951,
+          242,
+          226
+        ],
+        "centroid": [
+          486.24,
+          1067.05
+        ],
+        "bodyArea": 34170,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          648,
+          912,
+          283,
+          310
+        ],
+        "centroid": [
+          810.05,
+          1087.01
+        ],
+        "bodyArea": 38212,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          972,
+          927,
+          261,
+          276
+        ],
+        "centroid": [
+          1123.28,
+          1089.17
+        ],
+        "bodyArea": 32614,
+        "neighborAlpha": 0
+      }
+    ]
+  },
+  {
+    "id": "exotic-shorthair",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          29,
+          13,
+          284,
+          324
+        ],
+        "centroid": [
+          175.41,
+          174.44
+        ],
+        "bodyArea": 41453,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          342,
+          15,
+          284,
+          322
+        ],
+        "centroid": [
+          489.24,
+          172.95
+        ],
+        "bodyArea": 40516,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          656,
+          13,
+          284,
+          324
+        ],
+        "centroid": [
+          804.49,
+          174.48
+        ],
+        "bodyArea": 41783,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          964,
+          12,
+          275,
+          321
+        ],
+        "centroid": [
+          1109.16,
+          174.65
+        ],
+        "bodyArea": 40942,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          23,
+          353,
+          285,
+          293
+        ],
+        "centroid": [
+          161.86,
+          479.06
+        ],
+        "bodyArea": 40079,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          345,
+          352,
+          277,
+          297
+        ],
+        "centroid": [
+          477.39,
+          481.82
+        ],
+        "bodyArea": 39922,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          651,
+          349,
+          289,
+          296
+        ],
+        "centroid": [
+          791.01,
+          477.42
+        ],
+        "bodyArea": 40972,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          966,
+          348,
+          273,
+          293
+        ],
+        "centroid": [
+          1099.41,
+          477.97
+        ],
+        "bodyArea": 39340,
+        "neighborAlpha": 59
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          34,
+          692,
+          270,
+          218
+        ],
+        "centroid": [
+          168.03,
+          803.56
+        ],
+        "bodyArea": 43905,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          342,
+          691,
+          285,
+          224
+        ],
+        "centroid": [
+          487.5,
+          807.95
+        ],
+        "bodyArea": 48693,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          665,
+          669,
+          281,
+          250
+        ],
+        "centroid": [
+          812.91,
+          796.51
+        ],
+        "bodyArea": 46369,
+        "neighborAlpha": 1
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          980,
+          633,
+          264,
+          295
+        ],
+        "centroid": [
+          1101.4,
+          794.79
+        ],
+        "bodyArea": 49289,
+        "neighborAlpha": 142
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          54,
+          934,
+          269,
+          297
+        ],
+        "centroid": [
+          170.25,
+          1095.86
+        ],
+        "bodyArea": 51043,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          347,
+          933,
+          254,
+          301
+        ],
+        "centroid": [
+          480.74,
+          1096.42
+        ],
+        "bodyArea": 50146,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          637,
+          916,
+          298,
+          321
+        ],
+        "centroid": [
+          804.54,
+          1093.18
+        ],
+        "bodyArea": 46703,
+        "neighborAlpha": 1
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          957,
+          924,
+          281,
+          307
+        ],
+        "centroid": [
+          1126.64,
+          1094.18
+        ],
+        "bodyArea": 45799,
+        "neighborAlpha": 21
+      }
+    ]
+  },
+  {
+    "id": "maine-coon",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          21,
+          13,
+          300,
+          341
+        ],
+        "centroid": [
+          173.84,
+          176.73
+        ],
+        "bodyArea": 44046,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          335,
+          14,
+          305,
+          326
+        ],
+        "centroid": [
+          492.92,
+          171.48
+        ],
+        "bodyArea": 44056,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          649,
+          26,
+          289,
+          320
+        ],
+        "centroid": [
+          799.74,
+          181.65
+        ],
+        "bodyArea": 42947,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          948,
+          16,
+          298,
+          330
+        ],
+        "centroid": [
+          1104.79,
+          176.94
+        ],
+        "bodyArea": 44846,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          37,
+          363,
+          270,
+          283
+        ],
+        "centroid": [
+          172.9,
+          485.26
+        ],
+        "bodyArea": 38076,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          352,
+          359,
+          273,
+          294
+        ],
+        "centroid": [
+          491.46,
+          482.87
+        ],
+        "bodyArea": 38474,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          650,
+          360,
+          268,
+          277
+        ],
+        "centroid": [
+          787.31,
+          481.05
+        ],
+        "bodyArea": 38479,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          953,
+          360,
+          275,
+          286
+        ],
+        "centroid": [
+          1095.81,
+          481.19
+        ],
+        "bodyArea": 40699,
+        "neighborAlpha": 196
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          8,
+          695,
+          313,
+          204
+        ],
+        "centroid": [
+          172.49,
+          802.84
+        ],
+        "bodyArea": 46293,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          351,
+          700,
+          271,
+          194
+        ],
+        "centroid": [
+          487.23,
+          802.79
+        ],
+        "bodyArea": 39958,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          650,
+          660,
+          294,
+          234
+        ],
+        "centroid": [
+          808.4,
+          784.46
+        ],
+        "bodyArea": 45548,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          975,
+          626,
+          270,
+          281
+        ],
+        "centroid": [
+          1097.59,
+          789.07
+        ],
+        "bodyArea": 44337,
+        "neighborAlpha": 546
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          46,
+          935,
+          270,
+          281
+        ],
+        "centroid": [
+          165.95,
+          1095.32
+        ],
+        "bodyArea": 47212,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          342,
+          926,
+          253,
+          289
+        ],
+        "centroid": [
+          469.69,
+          1086.73
+        ],
+        "bodyArea": 46811,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          614,
+          901,
+          312,
+          327
+        ],
+        "centroid": [
+          792.62,
+          1077.52
+        ],
+        "bodyArea": 46916,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          956,
+          920,
+          283,
+          290
+        ],
+        "centroid": [
+          1118.44,
+          1080.25
+        ],
+        "bodyArea": 44741,
+        "neighborAlpha": 0
+      }
+    ]
+  },
+  {
+    "id": "norwegian-forest",
+    "sourceSize": [
+      1447,
+      1087
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          58,
+          7,
+          292,
+          297
+        ],
+        "centroid": [
+          208.65,
+          155.04
+        ],
+        "bodyArea": 39184,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          425,
+          3,
+          248,
+          296
+        ],
+        "centroid": [
+          556.69,
+          152.7
+        ],
+        "bodyArea": 34535,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          772,
+          3,
+          259,
+          301
+        ],
+        "centroid": [
+          908.4,
+          155.53
+        ],
+        "bodyArea": 35387,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          1135,
+          1,
+          273,
+          298
+        ],
+        "centroid": [
+          1277.26,
+          153.27
+        ],
+        "bodyArea": 37840,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          53,
+          308,
+          296,
+          252
+        ],
+        "centroid": [
+          204.06,
+          418.05
+        ],
+        "bodyArea": 40886,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          414,
+          308,
+          278,
+          252
+        ],
+        "centroid": [
+          557.36,
+          418
+        ],
+        "bodyArea": 38612,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          770,
+          308,
+          281,
+          252
+        ],
+        "centroid": [
+          914.33,
+          416.82
+        ],
+        "bodyArea": 39649,
+        "neighborAlpha": 442
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          1130,
+          308,
+          284,
+          253
+        ],
+        "centroid": [
+          1277.73,
+          416.96
+        ],
+        "bodyArea": 38138,
+        "neighborAlpha": 111
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          64,
+          585,
+          269,
+          207
+        ],
+        "centroid": [
+          198.94,
+          696.05
+        ],
+        "bodyArea": 38107,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          410,
+          595,
+          288,
+          201
+        ],
+        "centroid": [
+          556.77,
+          700.15
+        ],
+        "bodyArea": 42268,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          772,
+          546,
+          311,
+          256
+        ],
+        "centroid": [
+          931.18,
+          686.33
+        ],
+        "bodyArea": 44844,
+        "neighborAlpha": 504
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          1152,
+          545,
+          263,
+          262
+        ],
+        "centroid": [
+          1267.71,
+          698.27
+        ],
+        "bodyArea": 39603,
+        "neighborAlpha": 378
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          79,
+          824,
+          277,
+          245
+        ],
+        "centroid": [
+          206.3,
+          952.32
+        ],
+        "bodyArea": 43149,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          416,
+          816,
+          283,
+          246
+        ],
+        "centroid": [
+          546.26,
+          947.86
+        ],
+        "bodyArea": 42721,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          737,
+          793,
+          328,
+          268
+        ],
+        "centroid": [
+          932.44,
+          949.19
+        ],
+        "bodyArea": 40767,
+        "neighborAlpha": 418
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          1127,
+          810,
+          282,
+          247
+        ],
+        "centroid": [
+          1288.75,
+          950.64
+        ],
+        "bodyArea": 36741,
+        "neighborAlpha": 0
+      }
+    ]
+  },
+  {
+    "id": "persian",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          13,
+          11,
+          307,
+          319
+        ],
+        "centroid": [
+          173.54,
+          172.26
+        ],
+        "bodyArea": 49392,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          324,
+          14,
+          301,
+          314
+        ],
+        "centroid": [
+          484.77,
+          172.62
+        ],
+        "bodyArea": 48371,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          640,
+          13,
+          293,
+          316
+        ],
+        "centroid": [
+          794.78,
+          172.52
+        ],
+        "bodyArea": 47694,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          946,
+          14,
+          300,
+          315
+        ],
+        "centroid": [
+          1106.64,
+          170.94
+        ],
+        "bodyArea": 47324,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          18,
+          336,
+          300,
+          291
+        ],
+        "centroid": [
+          169.19,
+          455.73
+        ],
+        "bodyArea": 46623,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          334,
+          336,
+          294,
+          297
+        ],
+        "centroid": [
+          484.87,
+          458.86
+        ],
+        "bodyArea": 48193,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          642,
+          337,
+          293,
+          289
+        ],
+        "centroid": [
+          794.56,
+          456.2
+        ],
+        "bodyArea": 45988,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          952,
+          338,
+          293,
+          287
+        ],
+        "centroid": [
+          1103.96,
+          456.31
+        ],
+        "bodyArea": 46273,
+        "neighborAlpha": 41
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          9,
+          667,
+          304,
+          230
+        ],
+        "centroid": [
+          163.85,
+          781.19
+        ],
+        "bodyArea": 49995,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          331,
+          672,
+          295,
+          228
+        ],
+        "centroid": [
+          483.57,
+          791.62
+        ],
+        "bodyArea": 52358,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          646,
+          643,
+          287,
+          265
+        ],
+        "centroid": [
+          798.76,
+          784.85
+        ],
+        "bodyArea": 53221,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          955,
+          619,
+          290,
+          298
+        ],
+        "centroid": [
+          1092.99,
+          774.87
+        ],
+        "bodyArea": 57672,
+        "neighborAlpha": 71
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          33,
+          941,
+          283,
+          292
+        ],
+        "centroid": [
+          164,
+          1098.28
+        ],
+        "bodyArea": 56653,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          332,
+          928,
+          266,
+          305
+        ],
+        "centroid": [
+          468.24,
+          1092.8
+        ],
+        "bodyArea": 54996,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          619,
+          909,
+          327,
+          329
+        ],
+        "centroid": [
+          802.39,
+          1087.35
+        ],
+        "bodyArea": 55068,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          952,
+          918,
+          284,
+          319
+        ],
+        "centroid": [
+          1112.81,
+          1092.35
+        ],
+        "bodyArea": 54601,
+        "neighborAlpha": 0
+      }
+    ]
+  },
+  {
+    "id": "ragdoll",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          11,
+          6,
+          301,
+          313
+        ],
+        "centroid": [
+          169.2,
+          162.47
+        ],
+        "bodyArea": 39703,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          323,
+          4,
+          301,
+          315
+        ],
+        "centroid": [
+          482.02,
+          162.98
+        ],
+        "bodyArea": 40182,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          635,
+          3,
+          302,
+          317
+        ],
+        "centroid": [
+          792.79,
+          163.95
+        ],
+        "bodyArea": 40526,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          950,
+          4,
+          300,
+          312
+        ],
+        "centroid": [
+          1109.36,
+          162.21
+        ],
+        "bodyArea": 39808,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          10,
+          328,
+          301,
+          296
+        ],
+        "centroid": [
+          158.71,
+          456.12
+        ],
+        "bodyArea": 40576,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          323,
+          328,
+          305,
+          293
+        ],
+        "centroid": [
+          473.56,
+          454.2
+        ],
+        "bodyArea": 39656,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          637,
+          327,
+          297,
+          298
+        ],
+        "centroid": [
+          787.61,
+          455.32
+        ],
+        "bodyArea": 40748,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          951,
+          327,
+          292,
+          297
+        ],
+        "centroid": [
+          1098.77,
+          456.46
+        ],
+        "bodyArea": 40738,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          4,
+          676,
+          312,
+          202
+        ],
+        "centroid": [
+          160.09,
+          781.27
+        ],
+        "bodyArea": 48334,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          335,
+          673,
+          282,
+          213
+        ],
+        "centroid": [
+          476.9,
+          782.59
+        ],
+        "bodyArea": 46077,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          641,
+          644,
+          301,
+          247
+        ],
+        "centroid": [
+          792.64,
+          773.05
+        ],
+        "bodyArea": 51219,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          961,
+          625,
+          289,
+          281
+        ],
+        "centroid": [
+          1093.38,
+          780.8
+        ],
+        "bodyArea": 48625,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          38,
+          931,
+          274,
+          289
+        ],
+        "centroid": [
+          157.49,
+          1080.9
+        ],
+        "bodyArea": 51482,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          329,
+          921,
+          264,
+          298
+        ],
+        "centroid": [
+          467.15,
+          1081.37
+        ],
+        "bodyArea": 48835,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          623,
+          908,
+          315,
+          321
+        ],
+        "centroid": [
+          800.38,
+          1079.02
+        ],
+        "bodyArea": 46732,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          961,
+          906,
+          284,
+          321
+        ],
+        "centroid": [
+          1126.26,
+          1077.98
+        ],
+        "bodyArea": 50500,
+        "neighborAlpha": 0
+      }
+    ]
+  },
+  {
+    "id": "russian-blue",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          38,
+          20,
+          269,
+          329
+        ],
+        "centroid": [
+          181.03,
+          184.23
+        ],
+        "bodyArea": 32643,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          344,
+          16,
+          270,
+          331
+        ],
+        "centroid": [
+          490.64,
+          186.92
+        ],
+        "bodyArea": 33251,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          656,
+          15,
+          261,
+          332
+        ],
+        "centroid": [
+          796.66,
+          183.89
+        ],
+        "bodyArea": 31278,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          969,
+          22,
+          252,
+          325
+        ],
+        "centroid": [
+          1109.37,
+          185.16
+        ],
+        "bodyArea": 32004,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          36,
+          366,
+          266,
+          295
+        ],
+        "centroid": [
+          168.98,
+          498.12
+        ],
+        "bodyArea": 31966,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          354,
+          367,
+          259,
+          288
+        ],
+        "centroid": [
+          483.15,
+          496.62
+        ],
+        "bodyArea": 31364,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          658,
+          367,
+          258,
+          291
+        ],
+        "centroid": [
+          787.94,
+          497.59
+        ],
+        "bodyArea": 31753,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          963,
+          366,
+          261,
+          291
+        ],
+        "centroid": [
+          1096.81,
+          495.02
+        ],
+        "bodyArea": 31817,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          45,
+          727,
+          271,
+          181
+        ],
+        "centroid": [
+          186.7,
+          821.76
+        ],
+        "bodyArea": 35756,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          366,
+          722,
+          255,
+          189
+        ],
+        "centroid": [
+          494.31,
+          820.22
+        ],
+        "bodyArea": 37040,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          676,
+          695,
+          240,
+          223
+        ],
+        "centroid": [
+          802.2,
+          810.71
+        ],
+        "bodyArea": 35504,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          995,
+          656,
+          233,
+          268
+        ],
+        "centroid": [
+          1101.71,
+          805.08
+        ],
+        "bodyArea": 33796,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          71,
+          949,
+          239,
+          270
+        ],
+        "centroid": [
+          176.13,
+          1089.45
+        ],
+        "bodyArea": 42283,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          357,
+          936,
+          231,
+          281
+        ],
+        "centroid": [
+          483.2,
+          1093.36
+        ],
+        "bodyArea": 38418,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          632,
+          933,
+          276,
+          299
+        ],
+        "centroid": [
+          792.91,
+          1100.52
+        ],
+        "bodyArea": 35381,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          950,
+          932,
+          269,
+          284
+        ],
+        "centroid": [
+          1106.25,
+          1094.35
+        ],
+        "bodyArea": 36174,
+        "neighborAlpha": 0
+      }
+    ]
+  },
+  {
+    "id": "siamese",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "alphaThreshold": 12,
+    "padding": 2,
+    "frames": [
+      {
+        "index": 0,
+        "pose": "walk toward 1",
+        "sourceRect": [
+          18,
+          3,
+          293,
+          355
+        ],
+        "centroid": [
+          170.77,
+          187.3
+        ],
+        "bodyArea": 39296,
+        "neighborAlpha": 371
+      },
+      {
+        "index": 1,
+        "pose": "walk toward 2",
+        "sourceRect": [
+          324,
+          2,
+          292,
+          356
+        ],
+        "centroid": [
+          477.49,
+          186.93
+        ],
+        "bodyArea": 38732,
+        "neighborAlpha": 284
+      },
+      {
+        "index": 2,
+        "pose": "walk toward 3",
+        "sourceRect": [
+          635,
+          3,
+          297,
+          352
+        ],
+        "centroid": [
+          793.88,
+          183.47
+        ],
+        "bodyArea": 40334,
+        "neighborAlpha": 174
+      },
+      {
+        "index": 3,
+        "pose": "walk toward 4",
+        "sourceRect": [
+          950,
+          3,
+          296,
+          355
+        ],
+        "centroid": [
+          1107.14,
+          187.65
+        ],
+        "bodyArea": 39784,
+        "neighborAlpha": 241
+      },
+      {
+        "index": 4,
+        "pose": "walk away 1",
+        "sourceRect": [
+          19,
+          347,
+          287,
+          307
+        ],
+        "centroid": [
+          158.92,
+          472.02
+        ],
+        "bodyArea": 37921,
+        "neighborAlpha": 244
+      },
+      {
+        "index": 5,
+        "pose": "walk away 2",
+        "sourceRect": [
+          335,
+          349,
+          288,
+          296
+        ],
+        "centroid": [
+          474.05,
+          470.77
+        ],
+        "bodyArea": 36942,
+        "neighborAlpha": 173
+      },
+      {
+        "index": 6,
+        "pose": "walk away 3",
+        "sourceRect": [
+          643,
+          347,
+          289,
+          288
+        ],
+        "centroid": [
+          783.97,
+          470.32
+        ],
+        "bodyArea": 37039,
+        "neighborAlpha": 163
+      },
+      {
+        "index": 7,
+        "pose": "walk away 4",
+        "sourceRect": [
+          959,
+          349,
+          289,
+          296
+        ],
+        "centroid": [
+          1100.98,
+          470.72
+        ],
+        "bodyArea": 36210,
+        "neighborAlpha": 504
+      },
+      {
+        "index": 8,
+        "pose": "rest",
+        "sourceRect": [
+          6,
+          678,
+          320,
+          208
+        ],
+        "centroid": [
+          170.16,
+          785.31
+        ],
+        "bodyArea": 47514,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 9,
+        "pose": "sleep",
+        "sourceRect": [
+          345,
+          670,
+          278,
+          217
+        ],
+        "centroid": [
+          486.02,
+          783.73
+        ],
+        "bodyArea": 46035,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 10,
+        "pose": "eat",
+        "sourceRect": [
+          646,
+          637,
+          274,
+          262
+        ],
+        "centroid": [
+          789.96,
+          770.2
+        ],
+        "bodyArea": 46820,
+        "neighborAlpha": 248
+      },
+      {
+        "index": 11,
+        "pose": "lick",
+        "sourceRect": [
+          977,
+          624,
+          269,
+          292
+        ],
+        "centroid": [
+          1105.47,
+          786.51
+        ],
+        "bodyArea": 42718,
+        "neighborAlpha": 530
+      },
+      {
+        "index": 12,
+        "pose": "groom face",
+        "sourceRect": [
+          51,
+          919,
+          261,
+          307
+        ],
+        "centroid": [
+          163.09,
+          1087.77
+        ],
+        "bodyArea": 50462,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 13,
+        "pose": "groom paw",
+        "sourceRect": [
+          364,
+          917,
+          225,
+          311
+        ],
+        "centroid": [
+          474.09,
+          1090.32
+        ],
+        "bodyArea": 47632,
+        "neighborAlpha": 0
+      },
+      {
+        "index": 14,
+        "pose": "scratch",
+        "sourceRect": [
+          601,
+          890,
+          328,
+          352
+        ],
+        "centroid": [
+          791.11,
+          1082.93
+        ],
+        "bodyArea": 51540,
+        "neighborAlpha": 76
+      },
+      {
+        "index": 15,
+        "pose": "pounce",
+        "sourceRect": [
+          950,
+          917,
+          293,
+          319
+        ],
+        "centroid": [
+          1116.4,
+          1100.47
+        ],
+        "bodyArea": 44082,
+        "neighborAlpha": 0
+      }
+    ]
+  }
+]
