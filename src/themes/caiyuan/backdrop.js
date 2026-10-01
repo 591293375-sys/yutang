@@ -1,27 +1,19 @@
-// Keep the complete painted scene and its interaction projection intact. Only
-// architecture/cloth at the outer edge supplies the extra viewport coverage;
-// these narrow samples cannot contain a face or the plaque's lettering.
-export function drawTempleBackdrop(ctx,image,t,width,height){
+// The new artwork fills only space outside the original 16:9 scene. Both layers
+// share one uniform scale, with no reflected strips or independent axis scaling.
+export const BACKDROP_FILES={tall:'temple-outpaint-tall.webp',wide:'temple-outpaint-wide.webp'};
+export function backdropPlacement(image,t,orientation){
  const iw=image.naturalWidth||image.width,ih=image.naturalHeight||image.height;
- const top=Math.max(0,t.y),bottom=Math.max(0,height-t.y-t.height);
- const left=Math.max(0,t.x),right=Math.max(0,width-t.x-t.width);
- if(top>0){
-  ctx.save();ctx.translate(t.x,t.y);ctx.scale(1,-1);
-  ctx.drawImage(image,0,0,iw,ih*.024,0,-.5,t.width,top+.5);ctx.restore();
+ const scale=orientation==='tall'?t.width/iw:t.height/ih;
+ const width=iw*scale,height=ih*scale;
+ return{x:t.x+(t.width-width)/2,y:t.y+(t.height-height)/2,width,height,scale};
+}
+export function drawTempleBackdrop(ctx,image,t,width,height,extension){
+ if(extension){
+  const orientation=height>t.height+.5?'tall':'wide';
+  const p=backdropPlacement(extension,t,orientation);
+  ctx.drawImage(extension,p.x,p.y,p.width,p.height);
  }
- if(bottom>0){
-  ctx.save();ctx.translate(t.x,t.y+t.height);ctx.scale(1,-1);
-  ctx.drawImage(image,0,ih*.91,iw,ih*.09,0,-bottom,t.width,bottom+.5);ctx.restore();
- }
- if(left>0){
-  const crop=iw*Math.min(.05,left/t.width);
-  ctx.save();ctx.translate(t.x,t.y);ctx.scale(-1,1);
-  ctx.drawImage(image,0,0,crop,ih,0,0,left+.5,t.height);ctx.restore();
- }
- if(right>0){
-  const crop=iw*Math.min(.05,right/t.width);
-  ctx.save();ctx.translate(t.x+t.width,t.y);ctx.scale(-1,1);
-  ctx.drawImage(image,iw-crop,0,crop,ih,-right,0,right+.5,t.height);ctx.restore();
- }
+ // Retain the original pixels, perspective, curtain anchors and all saved item
+ // coordinates. Generated faces/lettering are never displayed in the scene.
  ctx.drawImage(image,t.x,t.y,t.width,t.height);
 }

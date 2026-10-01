@@ -1,0 +1,18 @@
+{
+  "created": "2026-10-01",
+  "method": "Built-in image_gen image editing/outpainting. Tool does not expose a selectable model version.",
+  "original": "final-background-7680.png",
+  "masters": {
+    "tall": "outpaint-tall.png",
+    "wide": "outpaint-wide.png"
+  },
+  "runtime": {
+    "tall": "../../public/assets/caiyuan/temple-outpaint-tall.webp",
+    "wide": "../../public/assets/caiyuan/temple-outpaint-wide.webp"
+  },
+  "prompts": {
+    "tall": "只填上下灰色的扩图。输入1920×2160，原图位于y=540至1620之间（25%～75%的高度），占全部宽度。维持这个精确矩形、尺寸和位置，输出同样8:9竖画布；严禁重新取景或缩小中间画面。上灰区补木构屋顶横梁、沿原轴线延续笔直的红柱与布幔；下灰区自然延续红色祥云桌布到下摆，木桌脚和少量地板。必须和原图边缘无缝衔接，颜色光线手绘质感一致。中间原画的五位财神、完整“财源广进”匾额、空供桌一笔不动，桌布只一层，不加供品、灯、人物或文字。不要扭曲、镜像、重复贴图或拉伸，只画原图之外上下灰色。",
+    "wide": "Only outpaint the two flat gray side strips of this supplied 2880x1080 (8:3) canvas. Keep the entire middle painting pixel-aligned, unchanged: it occupies x480..2399, y0..1079, exactly the central two thirds of the width and full height. Match this very wide canvas aspect ratio exactly. Do not zoom or move the original, do not change its perspective. Extend existing temple room to each side: straight red columns continued along their existing straight axes, traditional wooden lattice windows and subdued timber panels, continue the horizontal wooden table at the bottom with coherent perspective. Match the original warm finely painted watercolor texture. Keep all five seated gods, the whole original plaque 财源广进, the empty red cloth covered table unchanged. No new characters, statues, objects, lanterns, text, mist, or UI. No stretching, mirroring, or repeated strips. Fill the gray side regions with natural hand-painted architecture seamlessly joined to the original edge."
+  },
+  "integration": "Only generated extensions outside the original 16:9 scene are visible. The original image is rendered over the center unchanged. Each extension uses a uniform scale; no reflected strips, crop enlargement or image-axis deformation. Canvas background is cached. No layout or storage coordinates change."
+}
