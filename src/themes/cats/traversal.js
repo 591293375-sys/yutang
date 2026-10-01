@@ -26,6 +26,29 @@ function surfaceSpans(a,b){
  return spans;
 }
 
+// The painted height between two surfaces chooses the gait over their edge:
+// a low lip is simply stepped over, a small rise is a light hop, and only a
+// real step (or the cat tree) gets a gathered, airborne jump.
+export const TRAVERSAL_TIMING=Object.freeze({
+ stride:Object.freeze({crouch:0,jump:.3,land:0}),
+ hop:Object.freeze({crouch:.13,jump:.3,land:.16}),
+ jump:Object.freeze({crouch:.22,jump:.42,land:.22}),
+ climb:Object.freeze({crouch:.34,jump:.66,land:.3}),
+});
+export function traversalStyle(rise){const r=Math.abs(Number(rise)||0);return r<.005?'stride':r<.011?'hop':'jump';}
+export function traversalArc(rise,style=traversalStyle(rise)){
+ const r=Math.abs(Number(rise)||0);if(style==='stride')return .0015;
+ const arc=style==='hop'?.006+r*.45:.011+r*.45;return Math.min(.022,rise<0?arc*.75:arc);
+}
+// Ballistic height above the straight takeoff→landing line. Upward leaps peak
+// late (they must clear the higher lip); downward drops peak soon after takeoff.
+export function flightHeight(progress,arc,direction='up',style='jump'){
+ const p=Math.max(0,Math.min(1,Number(progress)||0));if(style==='stride')return Math.sin(p*Math.PI)*arc;
+ return Math.sin(Math.PI*p**(direction==='down'?.65:1.25))*arc;
+}
+// Mostly constant horizontal speed with a little ease: no hovering at either end.
+export function flightTravel(progress,style='jump'){const p=Math.max(0,Math.min(1,Number(progress)||0));return style==='stride'?p:p*.82+p*p*(3-2*p)*.18;}
+
 export function prepareSurfacePath(from,path){
  if(prepared.has(path))return path;
  const result=[];let a=from;
@@ -37,8 +60,8 @@ export function prepareSurfacePath(from,path){
    const edge=before.end,lead=Math.min(.011/length,(edge-before.start)*.42),trail=Math.min(.014/length,(after.end-edge)*.42);
    const takeoff=pointAt(a,b,edge-lead),landing=pointAt(a,b,edge+trail);
    if(!segmentWalkable(takeoff,landing))continue;
-   const rise=(heights.get(after.id)||0)-(heights.get(before.id)||0);
-   result.push({...takeoff,jump:{to:landing,fromSurface:before.id,toSurface:after.id,direction:rise>=0?'up':'down',arc:Math.min(.035,.019+Math.abs(rise)*.6)}});
+   const rise=(heights.get(after.id)||0)-(heights.get(before.id)||0),style=traversalStyle(rise);
+   result.push({...takeoff,jump:{to:landing,fromSurface:before.id,toSurface:after.id,direction:rise>=0?'up':'down',style,arc:traversalArc(rise,style)}});
   }
   result.push({x:b.x,y:b.y});a=b;
  }

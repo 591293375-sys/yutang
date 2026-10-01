@@ -1,0 +1,10 @@
+// Mechanical trimming / compression only; the supplied final artwork is not redrawn.
+const fs=require('node:fs/promises'),path=require('node:path');
+const sharp=require(process.env.SHARP_MODULE||'sharp');
+const root=path.resolve(__dirname,'..');
+const source=process.argv[2];if(!source)throw Error('Pass the supplied 财神桌面 folder');
+(async()=>{const out=path.join(root,'public/assets/caiyuan'),original=path.join(root,'source-art/caiyuan');await fs.mkdir(out,{recursive:true});await fs.mkdir(original,{recursive:true});await fs.copyFile(path.join(source,'空背景.png'),path.join(original,'final-background-7680.png'));
+for(const width of [1920,3840])await sharp(path.join(source,'空背景.png')).resize({width}).webp({quality:91,effort:6}).toFile(path.join(out,`temple-${width}.webp`));
+const files=['03_incense_burner','04_incense_stick','05_incense_smoke','06_lotus_lamp','07_lamp_flame','08_fruit_offering','09_pastry_offering','10_teapot','11_teacup','12_wish_plaque'];const manifest={};
+for(const file of files){const input=path.join(source,'元素',file+'.png');await fs.copyFile(input,path.join(original,file+'.png'));const{data,info}=await sharp(input).ensureAlpha().raw().toBuffer({resolveWithObject:true});let l=info.width,t=info.height,r=0,b=0;const threshold=/smoke|flame/.test(file)?3:16;for(let y=0;y<info.height;y++)for(let x=0;x<info.width;x++)if(data[(y*info.width+x)*4+3]>=threshold){l=Math.min(l,x);r=Math.max(r,x);t=Math.min(t,y);b=Math.max(b,y)}l=Math.max(0,l-4);t=Math.max(0,t-4);r=Math.min(info.width-1,r+4);b=Math.min(info.height-1,b+4);const crop={left:l,top:t,width:r-l+1,height:b-t+1};const output=file.slice(3)+'.webp';const meta=await sharp(input).extract(crop).resize({width:900,height:1100,fit:'inside',withoutEnlargement:true}).webp({quality:95,alphaQuality:100,effort:6}).toFile(path.join(out,output));manifest[file]={file:output,original:[info.width,info.height],crop,width:meta.width,height:meta.height,threshold};}
+await fs.writeFile(path.join(out,'manifest.json'),JSON.stringify(manifest,null,2));console.log(manifest);})()

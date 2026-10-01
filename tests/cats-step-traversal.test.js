@@ -10,15 +10,15 @@ function boardOnPorch(game,cat){
  const result=game.command('scratch',cat,cat.id);assert.ok(result.ok);assert.ok(game.moveProp(result.propId,FACILITIES.water.approach).ok);assert.ok(game.useProp(result.propId,cat.id).ok);return game.props.find(p=>p.id===result.propId);
 }
 function travel(game,cat,target){
- const jumps=[],phases=new Set();let maxArc=0,lastMove=null;
+ const jumps=[],phases=new Set(),styles={};let maxArc=0,lastMove=null;
  for(let i=0;i<90*30;i++){
   const before={x:cat.x,y:cat.y},wasJump=!!cat.traverse;
   game.update(1/30,{});
   if(cat.traverse){const move=cat.traverse;phases.add(move.phase);maxArc=Math.max(maxArc,move.jumpHeight);
-   if(move!==lastMove){jumps.push([move.fromSurface,move.toSurface]);lastMove=move;assert.ok(isWalkable(move.from));assert.ok(isWalkable(move.to));assert.ok(segmentWalkable(move.from,move.to));}
+   if(move!==lastMove){jumps.push([move.fromSurface,move.toSurface]);styles[move.fromSurface+'>'+move.toSurface]=move.style;lastMove=move;assert.ok(isWalkable(move.from));assert.ok(isWalkable(move.to));assert.ok(segmentWalkable(move.from,move.to));}
   }
   if(!wasJump&&!cat.traverse)assert.ok(segmentWalkable(before,cat),'walking portions stay on the original legal route');
-  if(!cat.path.length&&!cat.traverse&&distance(cat,target)<.004)return {jumps,phases,maxArc};
+  if(!cat.path.length&&!cat.traverse&&distance(cat,target)<.004)return {jumps,phases,maxArc,styles};
  }
  assert.fail('cat did not reach the requested facility within 90 seconds');
 }
@@ -27,8 +27,9 @@ test('going up the stone step and wooden porch uses crouch, airborne arc and lan
  const game=make(),cat=game.cats[0];assert.ok(game.visitFacility('water',cat.id).ok);
  const result=travel(game,cat,FACILITIES.water.approach);
  assert.ok(result.jumps.some(([a,b])=>a==='ground'&&b==='step'),'ground to stone step must be a jump');
- assert.ok(result.jumps.some(([a,b])=>a==='step'&&b==='porch'),'stone step to porch must be a jump');
- assert.deepEqual([...result.phases].sort(),['crouch','jump','land']);assert.ok(result.maxArc>.018);
+ assert.ok(result.jumps.some(([a,b])=>a==='step'&&b==='porch'),'stone step to porch must leave the floor');
+ assert.equal(result.styles['ground>step'],'jump');assert.equal(result.styles['step>porch'],'hop','a 6 cm lip is a light hop, not a full leap');
+ assert.deepEqual([...result.phases].sort(),['crouch','jump','land']);assert.ok(result.maxArc>.014&&result.maxArc<=.022,'a step leap clears the lip without floating');
  assert.equal(surfaceAt(cat).id,'porch');
 });
 
@@ -37,7 +38,8 @@ test('coming down from the porch jumps each physical edge and returns to ground'
  const result=travel(game,cat,{...cat.target});
  assert.ok(result.jumps.some(([a,b])=>a==='porch'&&b==='step'),'porch descent must leave the floor');
  assert.ok(result.jumps.some(([a,b])=>a==='step'&&b==='ground'),'stone step descent must leave the floor');
- assert.deepEqual([...result.phases].sort(),['crouch','jump','land']);assert.ok(result.maxArc>.018);assert.equal(cat.state,'rest');
+ assert.equal(result.styles['step>ground'],'jump');
+ assert.deepEqual([...result.phases].sort(),['crouch','jump','land']);assert.ok(result.maxArc>.01&&result.maxArc<.017,'a drop is lower than the matching climb');assert.equal(cat.state,'rest');
 });
 
 test('a crossing keeps the assigned prop and resumes its original interaction after landing',()=>{
@@ -68,7 +70,7 @@ test('saving or switching themes in a step hop preserves the bed intent without 
 
 test('warm stone entry and exit are short jumps on a legal route rather than movement through its vertical face',()=>{
  const game=make(),cat=game.cats[0];assert.ok(game.visitFacility('rock',cat.id).ok);
- const up=travel(game,cat,{...cat.target});assert.ok(up.jumps.some(([a,b])=>b==='safe-rock'));assert.ok(up.maxArc>.018);
+ const up=travel(game,cat,{...cat.target});assert.ok(up.jumps.some(([a,b])=>b==='safe-rock'));assert.ok(up.maxArc>.008&&up.maxArc<.014);assert.equal(up.styles['rock-step>safe-rock'],'hop');
  game.visitFacility('sun',cat.id);const down=travel(game,cat,{...cat.target});assert.ok(down.jumps.some(([a])=>a==='safe-rock'));assert.equal(surfaceAt(cat).id,'ground');
 });
 
@@ -100,4 +102,20 @@ test('a target exactly on a stone or porch polygon edge still includes the physi
   for(const node of route){assert.equal(surfaceAt(previous).id,surfaceAt(node).id,'no unmarked walking edge');previous=node.jump?node.jump.to:node;if(node.jump)jumps++;}
   assert.ok(jumps>0);assert.ok(distance(previous,target)<1e-9);
  }
+});
+
+test('edge gait follows the painted height: low lips are walked, small rises hopped, real steps leapt',async()=>{
+ const {traversalStyle,traversalArc,flightHeight,flightTravel,TRAVERSAL_TIMING}=await import('../src/themes/cats/traversal.js');
+ assert.equal(traversalStyle(.002),'stride');assert.equal(traversalStyle(-.004),'stride');assert.equal(traversalStyle(.006),'hop');assert.equal(traversalStyle(.015),'jump');assert.equal(traversalStyle(-.015),'jump');
+ assert.ok(traversalArc(.015)>traversalArc(-.015),'dropping down needs less lift than climbing up');assert.ok(traversalArc(.006)<traversalArc(.015));assert.ok(traversalArc(.002)<.002);
+ let upPeak=0,downPeak=0,u=0,d=0;for(let i=0;i<=100;i++){const p=i/100,a=flightHeight(p,1,'up'),b=flightHeight(p,1,'down');if(a>u){u=a;upPeak=p}if(b>d){d=b;downPeak=p}assert.ok(a>=0&&b>=0)}
+ assert.ok(upPeak>.5&&downPeak<.4,'upward leaps peak late, drops peak early');assert.equal(flightHeight(0,1),0);assert.ok(flightHeight(1,1)<1e-9);
+ for(let i=1;i<=100;i++)assert.ok(flightTravel(i/100)>flightTravel((i-1)/100),'horizontal travel never pauses mid-air');assert.ok(flightTravel(.05)>.04,'no hovering at take-off');
+ assert.equal(TRAVERSAL_TIMING.stride.crouch,0);assert.ok(TRAVERSAL_TIMING.hop.jump<TRAVERSAL_TIMING.jump.jump);
+});
+
+test('walking onto the low bed edge keeps the ordinary gait instead of a crouch',()=>{
+ const game=make(),cat=game.cats[0];Object.assign(cat,FACILITIES.water.approach);assert.ok(game.setActive(cat.id,false).ok);
+ const seen=new Set();for(let i=0;i<60*30&&cat.state!=='sleep';i++){game.update(1/30,{});const m=cat.traverse;if(m){seen.add(m.style);if(m.style==='stride'){assert.equal(m.phase,'jump');assert.equal(cat.state,'walk');assert.ok(cat.speed>0,'the cat keeps walking over a low lip');assert.ok(m.jumpHeight<.002)}}}
+ assert.equal(cat.state,'sleep');assert.equal(surfaceAt(cat).id,'bed');assert.ok(seen.has('stride')||seen.has('hop'));
 });

@@ -1,0 +1,38 @@
+{
+  "created": "2026-10-01",
+  "project": "财源广进 · 阁内清音",
+  "projectUrl": "https://app.chatcut.io/editor/ead3ea69-7a7d-453f-a60d-91f3742cc63d",
+  "files": {
+    "temple-music.m4a": {
+      "source": "Original instrumental generated for this project with ChatCut Music",
+      "assetId": "fc4354a9-012a-4fea-aa85-5dffa88679ab",
+      "generationJob": "4056c68a6d",
+      "exportId": "89e565a3-5c25-4df7-973a-c9524927582f",
+      "direction": "Sparse guqin/guzheng and gentle bamboo flute; calm, warm, no vocals, no percussion, low energy",
+      "durationSeconds": 194.199667,
+      "processing": "ChatCut native 2s opening / 4s ending fades; local AAC 96kbps stereo encode with macOS afconvert; runtime volume envelope and loop boundary fades",
+      "rights": "New generated project asset; governed by the generating account's ChatCut terms. Not represented as CC0 or as a recording by a human performer."
+    },
+    "tea.mp3": {
+      "source": "Custom quiet teapot-to-porcelain-cup pouring Foley generated with ChatCut Sound Effects; no matching tea-pour library entry",
+      "assetId": "6aa15db1-87e5-415e-9f11-c2fe83db676e",
+      "generationJob": "2e1d529792",
+      "exportId": "785e0d14-4a0c-4c06-901e-3fe420315a31",
+      "durationSeconds": 3,
+      "processing": "ChatCut native 50ms opening / 120ms ending fades; original export retained; runtime quiet gain",
+      "rights": "New generated project asset; governed by the generating account's ChatCut terms. Not represented as CC0."
+    },
+    "temple-breeze.wav": {
+      "source": "Wind(leaves).WAV — o_ciz, via existing cats/audio/wind-bed.wav",
+      "sourceUrl": "https://freesound.org/people/o_ciz/sounds/475448/",
+      "rights": "CC0 1.0, attribution in cats/audio/LICENSE.md",
+      "durationSeconds": 32,
+      "processing": "STFT stationary-noise reduction, smooth 150–650 Hz shaping, 3 gentle gusts with quiet intervals, no synthesized noise; zero loop seam; runtime gain capped at theme volume × 0.055"
+    }
+  },
+  "reused": {
+    "softTap": "../../cats/audio/tap.wav",
+    "cloth": "../../cats/audio/feather.wav",
+    "license": "CC0 1.0; full original recording attributions and processing in ../../cats/audio/sources.json"
+  }
+}

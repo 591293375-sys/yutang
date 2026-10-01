@@ -1,6 +1,6 @@
 import {feedingDock,foodBowlLayout} from './feeding.js';
 import {normalizeCustomization} from './customization.js';
-import {prepareSurfacePath,sameSurface,supportedTraversalPoint} from './traversal.js';
+import {prepareSurfacePath,sameSurface,supportedTraversalPoint,TRAVERSAL_TIMING,flightHeight,flightTravel} from './traversal.js';
 import { getPreset, MAX_ACTIVE_CATS } from './catalog.js';
 import { DEFAULT_CAT_ENVIRONMENT, normalizeEnvironment } from './environment.js';
 import { validateDesign, normalizeCats, MAX_CAT_COLLECTION } from './storage.js';
@@ -12,6 +12,7 @@ export const CAT_PERSONAL_SPACE=.054;
 const COLLISION_SPACE=.045;
 const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
 const angleDelta=(from,to)=>Math.atan2(Math.sin(to-from),Math.cos(to-from));
+function segmentDistance(p,a,b){const dx=b.x-a.x,dy=(b.y-a.y)*ASPECT,l=dx*dx+dy*dy,t=l?clamp(((p.x-a.x)*dx+(p.y-a.y)*ASPECT*dy)/l,0,1):0;return Math.hypot(p.x-(a.x+t*dx),(p.y-a.y)*ASPECT-t*dy);}
 const sizeCache=new WeakMap();
 const catSize=cat=>{
  if(!cat||typeof cat!=='object')return 1;const source=cat.customization,cached=sizeCache.get(cat);
@@ -53,12 +54,12 @@ export class CatGame{
   drainEvents(){return this.events.splice(0);}
   _release(cat,keepProp=false){
     if(cat.task){const p=this.props.find(p=>p.id===cat.task.propId);if(p){p.catIds=p.catIds.filter(id=>id!==cat.id);if(!keepProp&&!p.persistent&&!p.catIds.length)p.ttl=Math.min(p.ttl,p.age+.8);}}
-    cat.task=null;cat.target=null;cat.path=[];cat.traverse=null;cat.climbAction=null;cat.pendingCommand=null;cat.manualRoute=false;cat.afterWalk=null;cat.restZone=null;cat.restIntent=null;cat.sleepSlotId=null;cat.speed=0;cat.state='idle';cat.stateTime=0;cat.expression=null;cat.wait=1.8+this.random()*3;
+    cat.task=null;cat.target=null;cat.path=[];cat.traverse=null;cat.climbAction=null;cat.pendingCommand=null;cat.manualRoute=false;cat.afterWalk=null;cat.restZone=null;cat.restIntent=null;cat.sleepSlotId=null;cat.detouring=false;cat.resumeAt=null;cat.detourGoal=null;cat.speed=0;cat.state='idle';cat.stateTime=0;cat.expression=null;cat.wait=1.8+this.random()*3;
   }
   _cancelInteraction(cat,keepProp=false){if(cat.traverse?.kind==='surface')this._queueGroundAction(cat,{type:'wake'});else this._release(cat,keepProp);}
   _removeProp(prop){for(const c of this.cats)if(c.task?.propId===prop.id)this._cancelInteraction(c,true);this.props=this.props.filter(p=>p!==prop);}
   _avoidCats(cat){return this.cats.filter(c=>c!==cat&&c.active).flatMap(c=>[{x:c.x,y:c.y,radius:spacing(cat,c,.046)},...(c.traverse?[{...c.traverse.to,radius:spacing(cat,c,.046)}]:[])]);}
-  _route(cat,point){const path=findPath(cat,point);if(!path)return false;cat.target=copyPoint(point);cat.path=path;cat.state=cat.task?'approach':'walk';cat.stateTime=0;cat.progressAt=this.time;cat.bestDistance=Infinity;return true;}
+  _route(cat,point){const path=findPath(cat,point);if(!path)return false;cat.advanceAnchor=null;cat.target=copyPoint(point);cat.path=path;cat.state=cat.task?'approach':'walk';cat.stateTime=0;cat.progressAt=this.time;cat.bestDistance=Infinity;return true;}
   _near(point,index=0,size=1){
     if(index===0&&isWalkable(point))return copyPoint(point);
     for(let i=0;i<20;i++){const a=(i*.618+index*.5)*Math.PI*2,r=(.029+Math.floor(i/6)*.008)*Math.max(1,size);const p={x:point.x+Math.cos(a)*r,y:point.y+Math.sin(a)*r/ASPECT};if(isWalkable(p))return p;}return null;
@@ -83,6 +84,36 @@ export class CatGame{
     const target=this._freePoint(anchor,cat,nearby>=3?{avoidZone:anchor}:{});
     return target?{target,zone:distance(target,anchor)<.145?zone:'garden'}:null;
   }
+  // A landing only needs room from bodies actually there (or landing there),
+  // not from where another waiting cat merely plans to stand later.
+  _landingClear(point,cat){return this.cats.every(other=>other===cat||!other.active||(distance(point,other)>=spacing(cat,other,COLLISION_SPACE)&&(!other.traverse||distance(point,other.traverse.to)>=spacing(cat,other,COLLISION_SPACE))));}
+  _sideSpot(cat,route,other){
+    // Make way on the same surface first; on the narrow porch accept a closer
+    // spot, and only as a last resort hop down to somewhere roomier.
+    const phase=(cat.id.length%5)*.7,attempts=[[spacing(cat,other)+.016,true],[spacing(cat,other,COLLISION_SPACE)+.006,true],[spacing(cat,other)+.016,false]];
+    for(const [gap,flat] of attempts){
+      const clear=p=>route.every((a,i)=>i===0||segmentDistance(p,route[i-1],a)>gap);
+      for(let ring=0;ring<7;ring++)for(let k=0;k<12;k++){
+        const r=.045+ring*.022,a=phase+k*Math.PI/6,p={x:cat.x+Math.cos(a)*r,y:cat.y+Math.sin(a)*r/ASPECT};
+        if(!isWalkable(p)||(flat&&!sameSurface(p,cat))||surfaceAt(p)?.id==='lower-platform'||!clear(p)||!this._clearSpot(p,cat))continue;
+        const path=findPath(cat,p,{avoid:this._avoidCats(cat)});if(path&&(!flat||path.every(node=>sameSurface(node,cat))))return {p,path};
+      }
+    }
+    return null;
+  }
+  // Pressed against a step corner, the remaining leg may clip a raised face
+  // that cannot be walked or jumped from here. Back off onto open paving of
+  // the same surface, then re-plan from there (jumps are re-derived).
+  _unstick(cat){
+    const surface=surfaceAt(cat)?.id,phase=(cat.id.length%7)*.5;
+    for(let ring=0;ring<4;ring++)for(let k=0;k<10;k++){
+      const r=.012+ring*.01,a=phase+k*Math.PI/5,p={x:cat.x+Math.cos(a)*r,y:cat.y+Math.sin(a)*r/ASPECT};
+      if(!isWalkable(p)||surfaceAt(p)?.id!==surface||!this._clearSpot(p,cat,COLLISION_SPACE)||prepareSurfacePath(cat,[p]).some(n=>n.jump))continue;
+      const rest=findPath(p,cat.target,{avoid:this._avoidCats(cat)})||findPath(p,cat.target);if(!rest)continue;
+      cat.path=prepareSurfacePath(cat,[copyPoint(p),...rest]);cat.bestDistance=Infinity;cat.progressAt=this.time;cat.advanceAnchor=null;cat.speed=0;return true;
+    }
+    return false;
+  }
   _slotAvailable(slot,cat){return this.cats.every(c=>c===cat||!c.active||(c.restIntent?.slotId!==slot.id&&c.sleepSlotId!==slot.id&&distance(c.target||c,slot)>=spacing(cat,c,COLLISION_SPACE)));}
   _chooseSleepSlot(cat,preferred='bed'){
     const preference=slot=>slot.surfaceId===preferred?0:slot.surfaceId==='bed'?1:slot.surfaceId==='safe-rock'?2:3;
@@ -103,6 +134,7 @@ export class CatGame{
     else{cat.state=intent.kind;cat.wait=Infinity;cat.target=null;cat.path=[];}
   }
   _arrive(cat){
+    if(cat.detouring){cat.detouring=false;cat.target=null;cat.path=[];cat.speed=0;cat.state='observe';cat.stateTime=0;cat.resumeAt=this.time+1.4;return;}
     cat.target=null;cat.path=[];cat.speed=0;cat.manualRoute=false;
     if(cat.climbAction==='up'){cat.climbAction=null;this._startTraverse(cat,'up');return;}
     if(cat.task){this._begin(cat);return;}
@@ -123,16 +155,19 @@ export class CatGame{
     const to=direction==='up'?FACILITIES.climbing.landing:this._freePoint(ground,cat,{nearOnly:true,maxRadius:.065})||ground;
     const from=copyPoint(cat),fromElevation=surfaceAt(from)?.elevation||0,toElevation=surfaceAt(to)?.elevation||0;
     cat.path=[];cat.target=null;cat.task=null;cat.climbAction=null;cat.speed=0;cat.state='crouch';cat.stateTime=0;
-    cat.traverse={kind:'climb',direction,from,to:copyPoint(to),phase:'crouch',elapsed:0,progress:0,jumpProgress:0,jumpHeight:0,fromElevation,toElevation};
+    cat.traverse={kind:'climb',style:'climb',direction,from,to:copyPoint(to),arc:direction==='up'?.045:.032,phase:'crouch',elapsed:0,progress:0,jumpProgress:0,jumpHeight:0,fromElevation,toElevation};
     cat.facing=to.x>=from.x?1:-1;cat.heading=Math.atan2((to.y-from.y)*ASPECT,to.x-from.x);
   }
   _startSurfaceTraverse(cat,jump){
     // Retain the route, destination, interaction reservation and sleep intent.
     // Only locomotion pauses while the paws leave one physical surface.
-    const from=copyPoint(cat),to=copyPoint(jump.to);
-    cat.speed=0;cat.state='crouch';cat.stateTime=0;
-    cat.traverse={kind:'surface',direction:jump.direction,from,to,fromSurface:jump.fromSurface,toSurface:jump.toSurface,arc:jump.arc,phase:'crouch',elapsed:0,progress:0,jumpProgress:0,jumpHeight:0,fromElevation:surfaceAt(from)?.elevation||0,toElevation:surfaceAt(to)?.elevation||0};
-    cat.motionHeading=cat.heading=Math.atan2((to.y-from.y)*ASPECT,to.x-from.x);cat.facing=to.x>=from.x?1:-1;
+    // A low lip is walked over without stopping; hops and jumps gather first.
+    const from=copyPoint(cat),to=copyPoint(jump.to),style=TRAVERSAL_TIMING[jump.style]?jump.style:'jump',stride=style==='stride';
+    const duration=stride?clamp(distance(from,to)/Math.max(.014,cat.speed||.02),.16,.5):TRAVERSAL_TIMING[style].jump;
+    if(!stride)cat.speed=0;cat.state=stride?'walk':'crouch';cat.stateTime=0;
+    cat.traverse={kind:'surface',style,direction:jump.direction,from,to,fromSurface:jump.fromSurface,toSurface:jump.toSurface,arc:jump.arc??.012,duration,phase:stride?'jump':'crouch',elapsed:0,progress:0,jumpProgress:0,jumpHeight:0,fromElevation:surfaceAt(from)?.elevation||0,toElevation:surfaceAt(to)?.elevation||0};
+    const heading=Math.atan2((to.y-from.y)*ASPECT,to.x-from.x);cat.motionHeading=heading;
+    if(!stride){cat.heading=heading;cat.facing=to.x>=from.x?1:-1;}
   }
   _queueGroundAction(cat,action){
     // A new command replaces the one pending action, never interrupts a cat
@@ -140,7 +175,7 @@ export class CatGame{
     if(cat.traverse){
       if(cat.traverse.kind==='surface'){
         // Release the old target immediately, but finish the current safe hop.
-        const move=cat.traverse;this._release(cat);cat.traverse=move;cat.state=move.phase==='jump'?'jump':'crouch';
+        const move=cat.traverse;this._release(cat);cat.traverse=move;cat.state=move.style==='stride'?'walk':move.phase==='jump'?'jump':'crouch';
       }
       cat.pendingCommand=action;cat.restIntent=null;cat.sleepSlotId=null;return {ok:true,catIds:[cat.id],pending:true,message:`${cat.name}落稳后就过来。`};}
     this._release(cat);cat.pendingCommand=action;this._startTraverse(cat,'down');return {ok:true,catIds:[cat.id],pending:true,message:`${cat.name}正轻轻跳回庭院。`};
@@ -154,22 +189,27 @@ export class CatGame{
     else{cat.state='observe';cat.wait=2;}
   }
   _updateTraverse(cat,dt){
-    const move=cat.traverse;if(!move)return;move.elapsed+=dt;const shortHop=move.kind==='surface',crouchDuration=shortHop?.24:.32,jumpDuration=shortHop?.54:.82,landDuration=shortHop?.22:.28;
+    const move=cat.traverse;if(!move)return;move.elapsed+=dt;
+    const shortHop=move.kind==='surface',style=move.style||(shortHop?'jump':'climb'),timing=TRAVERSAL_TIMING[style]||TRAVERSAL_TIMING.jump,stride=style==='stride';
     if(move.phase==='crouch'){
-      cat.state='crouch';move.progress=Math.min(1,move.elapsed/crouchDuration);
-      if(move.elapsed>=crouchDuration){move.phase='jump';move.elapsed=0;move.progress=0;cat.state='jump';cat.stateTime=0;}
+      cat.state='crouch';move.progress=timing.crouch?Math.min(1,move.elapsed/timing.crouch):1;
+      if(move.elapsed>=timing.crouch){move.phase='jump';move.elapsed=0;move.progress=0;cat.state='jump';cat.stateTime=0;}
       return;
     }
     if(move.phase==='jump'){
-      const progress=Math.min(1,move.elapsed/jumpDuration);move.progress=progress;move.jumpProgress=progress;move.jumpHeight=Math.sin(progress*Math.PI)*(move.arc||.045);
-      const t=progress*progress*(3-2*progress);cat.x=move.from.x+(move.to.x-move.from.x)*t;cat.y=move.from.y+(move.to.y-move.from.y)*t;cat.state='jump';
-      if(progress>=1){Object.assign(cat,move.to);move.phase='land';move.elapsed=0;move.progress=0;move.jumpHeight=0;cat.state='crouch';cat.stateTime=0;this._event('land',cat,shortHop?'step':'climbing');}
-      return;
+      const duration=stride?move.duration||timing.jump:timing.jump,progress=Math.min(1,move.elapsed/duration);move.progress=progress;move.jumpProgress=progress;
+      move.jumpHeight=flightHeight(progress,move.arc??.045,move.direction,style);
+      const t=flightTravel(progress,style);cat.x=move.from.x+(move.to.x-move.from.x)*t;cat.y=move.from.y+(move.to.y-move.from.y)*t;cat.state=stride?'walk':'jump';
+      if(progress>=1){
+        Object.assign(cat,move.to);move.jumpHeight=0;
+        if(stride){move.phase='land';move.elapsed=timing.land;move.progress=1;}
+        else{move.phase='land';move.elapsed=0;move.progress=0;cat.state='crouch';cat.stateTime=0;this._event('land',cat,shortHop?'step':'climbing');return;}
+      }else return;
     }
-    cat.state='crouch';move.progress=Math.min(1,move.elapsed/landDuration);if(move.elapsed<landDuration)return;
+    if(!stride)cat.state='crouch';move.progress=timing.land?Math.min(1,move.elapsed/timing.land):1;if(move.elapsed<timing.land)return;
     const pending=cat.pendingCommand;cat.traverse=null;cat.pendingCommand=null;
     if(shortHop){
-      cat.motionHeading=cat.heading;cat.bestDistance=Infinity;cat.progressAt=this.time;cat.stateTime=0;
+      cat.motionHeading=cat.heading;cat.bestDistance=Infinity;cat.progressAt=this.time;if(!stride)cat.stateTime=0;
       if(pending){this._release(cat);this._runPending(cat,pending);}
       else if(cat.path.length)cat.state=cat.task||cat.restIntent?'approach':'walk';
       else this._arrive(cat);
@@ -217,7 +257,7 @@ export class CatGame{
     const foodPlan=tool==='food'?this._planFood(anchor,candidates,selected?1:2):null;
     const assignments=foodPlan?.assignments||[];
     for(const cat of tool==='food'?[]:candidates){
-      const target=selected&&tool==='pet'?copyPoint(cat):this._near(anchor,assignments.length+1,catSize(cat));
+      const target=tool==='pet'?(selected?copyPoint(cat):this._near(anchor,assignments.length+1,catSize(cat))):this._toyDock(cat,anchor,tool);
       if(!target)continue;const path=findPath(cat,target);if(!path)continue;
       assignments.push({cat,target,path});if(assignments.length>=(tool==='food'&&!selected?2:1))break;
     }
@@ -243,7 +283,18 @@ export class CatGame{
     const target={x:prop.origin.x+(point.x-prop.origin.x)*t,y:prop.origin.y+(point.y-prop.origin.y)*t};
     if(isWalkable(target)&&segmentWalkable(prop,target)){prop.x=target.x;prop.y=target.y;prop.lastPointerAt=this.time;}
   }
-  _begin(cat){const firstArrival=cat.task?.phase==='approach';if(firstArrival&&cat.task?.tool==='wand'){const prop=this.props.find(p=>p.id===cat.task.propId);if(prop)prop.lastPointerAt=this.time;}cat.state=cat.task?.tool==='food'?'observe':'interact';cat.stateTime=0;if(cat.task){cat.task.phase=cat.task.tool==='food'?'orient':'interact';cat.task.orientElapsed=0;}cat.speed=0;cat.target=null;cat.path=[];this._event('interaction',cat,cat.task?.tool);}
+  // Stand beside a toy, facing it, so the outstretched forepaws of the pounce
+  // and stretch poses land on the toy rather than the cat playing with its back to it.
+  _toyDock(cat,point,tool){
+    const preset=getPreset(cat.presetId),body=(preset?.scale||.068)*(.88+point.y*.18)*catSize(cat),scratch=tool==='scratch',reach=body*(scratch?.5:.44)+(scratch?.009:0);
+    for(const side of cat.x<=point.x?[-1,1]:[1,-1])for(const dy of [0,.014,-.014,.028]){
+      const p={x:point.x+side*reach,y:point.y+dy};
+      if(isWalkable(p)&&sameSurface(p,point)&&segmentWalkable(p,point,0)&&this._clearSpot(p,cat,COLLISION_SPACE)&&findPath(cat,p))return p;
+    }
+    return this._near(point,1,catSize(cat));
+  }
+  _faceToward(cat,point){const dx=point.x-cat.x;if(Math.abs(dx)<.002)return;const facing=dx>0?1:-1;if(cat.facing!==facing||Math.abs(angleDelta(cat.heading,facing===1?0:Math.PI))>.6){cat.facing=facing;cat.heading=cat.motionHeading=facing===1?0:Math.PI;}}
+  _begin(cat){const firstArrival=cat.task?.phase==='approach';if(firstArrival&&cat.task?.tool==='wand'){const prop=this.props.find(p=>p.id===cat.task.propId);if(prop)prop.lastPointerAt=this.time;}cat.state=cat.task?.tool==='food'?'observe':'interact';cat.stateTime=0;if(cat.task){cat.task.phase=cat.task.tool==='food'?'orient':'interact';cat.task.orientElapsed=0;const prop=['scratch','yarn','mouse','wand'].includes(cat.task.tool)&&this.props.find(p=>p.id===cat.task.propId);if(prop)this._faceToward(cat,prop);}cat.speed=0;cat.target=null;cat.path=[];this._event('interaction',cat,cat.task?.tool);}
   _interact(cat,dt){
     const task=cat.task,prop=this.props.find(p=>p.id===task.propId);if(!prop){this._release(cat);return;}
     if(task.tool==='food'&&task.phase==='orient'){
@@ -252,19 +303,19 @@ export class CatGame{
       if(Math.abs(angleDelta(cat.heading,heading))<.35)cat.facing=facing;
       if(task.orientElapsed>=.45&&Math.abs(angleDelta(cat.heading,heading))<.04){cat.facing=facing;task.phase='interact';task.elapsed=0;cat.stateTime=0;}return;
     }
-    task.elapsed+=dt;
+    task.elapsed+=dt;if(['scratch','yarn','mouse','wand'].includes(task.tool))this._faceToward(cat,prop);
     if(task.tool==='food'){cat.state=task.elapsed<1?'observe':task.elapsed<5.5?'eat':'groom';cat.expression=task.elapsed>5.8?'heart':null;}
     else if(task.tool==='pet'){cat.state='interact';cat.expression='heart';}
     else if(task.tool==='scratch'){cat.state='interact';cat.expression=task.elapsed>3.5?'relaxed':null;}
     else if(task.tool==='wand'){
       cat.state='observe';cat.expression=Math.sin(task.elapsed*2)>0?'curious':null;
-      if(task.elapsed>task.round*.9+.9&&distance(cat,prop)>.014){task.round++;const target=this._near(prop,1,catSize(cat));if(target&&distance(target,prop.origin)<.09)this._route(cat,target);}
+      if(task.elapsed>task.round*.9+.9&&distance(cat,prop)>.014){task.round++;const target=this._toyDock(cat,prop,'wand');if(target&&distance(target,cat)>.006&&distance(target,prop.origin)<.09)this._route(cat,target);}
       if(this.time-prop.lastPointerAt>12){this._release(cat);return;}
     }else{
       cat.state='interact';cat.expression=task.elapsed<.6?'curious':null;
       if(task.round<2&&task.elapsed>1+task.round*2){
         task.round++;const a=this.random()*Math.PI*2,point={x:prop.x+Math.cos(a)*.028,y:prop.y+Math.sin(a)*.028/ASPECT};
-        if(isWalkable(point)&&segmentWalkable(prop,point)){prop.moveTarget=point;const target=this._near(point,1,catSize(cat));if(target)this._route(cat,target);}
+        if(isWalkable(point)&&segmentWalkable(prop,point)){prop.moveTarget=point;const target=this._toyDock(cat,point,task.tool);if(target)this._route(cat,target);}
       }
     }
     if(task.elapsed>=durations[task.tool]){cat.interactions++;this._event('finished',cat,task.tool);this._release(cat);cat.state=task.tool==='food'?'groom':'rest';cat.expression='heart';cat.wait=2+this.random()*2;}
@@ -277,17 +328,35 @@ export class CatGame{
     }
     cat.path=prepareSurfacePath(cat,cat.path);
     let next=cat.path[0];if(!next){this._arrive(cat);return;}
-    const distanceToNext=distance(cat,next);
-    if(distanceToNext<(cat.bestDistance??Infinity)-.002){cat.bestDistance=distanceToNext;cat.progressAt=this.time;}
-    if(cat.target&&this.time-(cat.progressAt??0)>2.2&&this.time>(cat.nextDynamicRoute||0)){
-      cat.nextDynamicRoute=this.time+2;const path=findPath(cat,cat.target,{avoid:this._avoidCats(cat)});
+    // A neighbour's nudge can leave the body where its old leg would cut a
+    // step face; plan again from where the paws actually are.
+    if(cat.target&&distance(cat,next)>.003&&!segmentWalkable(cat,next)&&this.time>(cat.nextLegCheck||0)){
+      cat.nextLegCheck=this.time+.5;const path=findPath(cat,cat.target,{avoid:this._avoidCats(cat)})||findPath(cat,cat.target);
       if(path){cat.path=prepareSurfacePath(cat,path);cat.bestDistance=Infinity;cat.progressAt=this.time;next=cat.path[0];}
-      else if(!cat.task&&!cat.restIntent&&!cat.manualRoute&&!next.jump){this._release(cat);cat.wait=1;return;}
+    }
+    const distanceToNext=distance(cat,next);
+    // Re-routing resets the per-node progress clock; this one only advances
+    // when the cat has physically moved, so a wanderer cannot wait forever.
+    if(!cat.advanceAnchor||distance(cat,cat.advanceAnchor)>.004){cat.advanceAnchor=copyPoint(cat);cat.lastAdvanceAt=this.time;}
+    if(distanceToNext<(cat.bestDistance??Infinity)-.002){cat.bestDistance=distanceToNext;cat.progressAt=this.time;}
+    // Personal-space pushes from a waiting neighbour can balance the last few
+    // millimetres of approach forever. Settled that close, the cat has arrived.
+    if(cat.path.length===1&&!next.jump&&distanceToNext<.012&&this.time-(cat.progressAt??0)>.8&&this._settleHere(cat)){cat.path=[];this._arrive(cat);return;}
+    if(cat.target&&this.time-(cat.progressAt??0)>2.2&&this.time>(cat.nextDynamicRoute||0)){
+      // An idle cat sitting in a narrow passage (the stone step is the only
+      // way up to the porch) politely moves aside instead of trapping a queue.
+      cat.nextDynamicRoute=this.time+2;this._clearWay(cat,next);
+      if(!cat.task&&!cat.restIntent&&!cat.manualRoute&&this.time-(cat.lastAdvanceAt??this.time)>6){this._release(cat);cat.wait=1;return;}
+      if(this.time-(cat.lastAdvanceAt??this.time)>4&&this._unstick(cat))return;
+      const path=findPath(cat,cat.target,{avoid:this._avoidCats(cat)})||(!segmentWalkable(cat,next)&&findPath(cat,cat.target));
+      if(path){cat.path=prepareSurfacePath(cat,path);cat.bestDistance=Infinity;cat.progressAt=this.time;next=cat.path[0];}
+      // A cat that was only wandering gives up, even while waiting at a step edge.
+      else if(!cat.task&&!cat.restIntent&&!cat.manualRoute){this._release(cat);cat.wait=1;return;}
     }
     // Round a navigation corner only when the shortcut stays on a legal
     // surface. The body follows a curve; it never teleports to a path node.
     if(cat.path.length>1&&!next.jump&&sameSurface(cat,cat.path[1])&&distance(cat,next)<Math.max(.006,cat.speed*.30)&&segmentWalkable(cat,cat.path[1])){cat.path.shift();next=cat.path[0];cat.bestDistance=Infinity;cat.progressAt=this.time;}
-    const d=distance(cat,next),remaining=distance(cat,next.jump?next:cat.target||next),preset=getPreset(cat.presetId);
+    const d=distance(cat,next),remaining=distance(cat,next.jump&&next.jump.style!=='stride'?next:cat.target||next),preset=getPreset(cat.presetId);
     const base=typeof preset?.speed==='number'?clamp(preset.speed,.012,.045):.024,personality=personalityOf(cat);
     const direction=Math.atan2((next.y-cat.y)*ASPECT,next.x-cat.x),oldHeading=Number.isFinite(cat.motionHeading)?cat.motionHeading:cat.heading;
     const turn=angleDelta(oldHeading,direction),turnRate=4.8;
@@ -302,7 +371,9 @@ export class CatGame{
       // Tight steps and narrow porch entries may not have room for an arc.
       // Continue the legal segment as the facing catches up; never cut flowers.
       if((!sameSurface(cat,proposed)||!isWalkable(proposed)||!segmentWalkable(cat,proposed))&&Math.abs(turn)<.65)proposed={x:cat.x+(next.x-cat.x)*step/d,y:cat.y+(next.y-cat.y)*step/d};
-      for(const other of this.cats)if(other!==cat&&other.active){const near=distance(proposed,other),personal=spacing(cat,other);if(near>.0001&&near<personal+.005){
+      // Steering around neighbours is for open walking. In the last few
+      // millimetres to a waypoint it only balances against the approach.
+      if(d>.006)for(const other of this.cats)if(other!==cat&&other.active){const near=distance(proposed,other),personal=spacing(cat,other);if(near>.0001&&near<personal+.005){
         const push=Math.max(0,personal-near)*Math.min(.16,dt*3),vx=(next.x-cat.x)/d,vy=(next.y-cat.y)*ASPECT/d;
         const toward=vx*(other.x-cat.x)+vy*(other.y-cat.y)*ASPECT;
         const cross=vx*(other.y-cat.y)*ASPECT-vy*(other.x-cat.x),side=cross>=0?-1:1,lateral=toward>0?step*.65:0;
@@ -311,17 +382,67 @@ export class CatGame{
       }}
       const overlaps=this.cats.some(other=>other!==cat&&other.active&&[other,...(other.traverse?[other.traverse.to]:[])].some(occupied=>distance(proposed,occupied)<spacing(cat,other,COLLISION_SPACE)&&distance(proposed,occupied)<distance(cat,occupied)));
       if(!overlaps&&sameSurface(cat,proposed)&&isWalkable(proposed)&&segmentWalkable(cat,proposed)){cat.x=proposed.x;cat.y=proposed.y;}
-      else cat.speed=Math.max(0,cat.speed-braking*dt);
+      else{
+        cat.speed=Math.max(0,cat.speed-braking*dt);
+        // A neighbour waiting just beyond the last few millimetres must not
+        // leave both cats frozen: close enough is arrived (food docks excepted).
+        if(overlaps&&cat.path.length===1&&!next.jump&&distance(cat,next)<.012&&this._settleHere(cat)){cat.path=[];this._arrive(cat);return;}
+      }
     }
     // Settle the final paw placement within a subpixel tolerance instead of
     // stopping five screen pixels early at every waypoint.
-    if(distance(cat,next)<.00012){
+    if(distance(cat,next)<(next.jump?.0015:.00012)){
       if(segmentWalkable(cat,next)&&!this.cats.some(other=>other!==cat&&other.active&&distance(next,other)<spacing(cat,other,COLLISION_SPACE)))Object.assign(cat,copyPoint(next));
-      if(next.jump&&!this._clearSpot(next.jump.to,cat,COLLISION_SPACE)){cat.speed=0;return;}
+      if(next.jump&&!this._landingClear(next.jump.to,cat)){cat.speed=0;return;}
       cat.path.shift();cat.bestDistance=Infinity;cat.progressAt=this.time;if(next.jump){this._startSurfaceTraverse(cat,next.jump);return;}if(!cat.path.length)this._arrive(cat);
     }
   }
 
+  // Settling a few millimetres short is fine for an open spot; exact bed slots
+  // and food docks keep their precise placement, and nobody settles squeezed.
+  _settleHere(cat){return cat.task?.tool!=='food'&&!cat.restIntent&&!cat.sleepSlotId&&this.cats.every(o=>o===cat||!o.active||distance(o,cat)>=.05);}
+  _idleBlocker(other){
+    if(!other.active||other.task||other.traverse||other.restIntent||other.climbAction||this._onPlatform(other)||this.time<=(other.yieldUntil||0))return false;
+    // Idle cats, or wanderers that are themselves stuck, can make way.
+    if(!other.path.length)return ['idle','observe','groom','rest','walk'].includes(other.state);
+    return !other.manualRoute&&this.time-(other.progressAt??this.time)>1.5;
+  }
+  _clearWay(cat,next){
+    const ahead=[copyPoint(cat),copyPoint(next),...(next.jump?[copyPoint(next.jump.to)]:[]),...cat.path.slice(1,3).map(copyPoint)];
+    const near=(p,o)=>ahead.some((a,i)=>i>0&&segmentDistance(p,ahead[i-1],a)<spacing(cat,o)+.012);
+    for(const other of this.cats){if(other===cat||!this._idleBlocker(other)||!near(other,other))continue;if(this._stepAside(other,ahead,cat))return true;}
+    // Two cats with somewhere to be, nose to nose in a narrow passage: the
+    // lower-priority one detours aside, keeps its plan, and resumes after.
+    if(this.time-(cat.lastAdvanceAt??this.time)<3||cat.detouring)return false;
+    for(const other of this.cats){
+      if(other===cat||!other.active||other.traverse||other.detouring||!other.path.length||!(other.task||other.restIntent||other.manualRoute||other.afterWalk)||!near(other,other))continue;
+      if(this.time-(other.lastAdvanceAt??this.time)<2)continue;
+      const theirs=[copyPoint(other),...other.path.slice(0,3).flatMap(p=>p.jump?[copyPoint(p),copyPoint(p.jump.to)]:[copyPoint(p)])];
+      if(other.id>cat.id){if(this._detour(other,ahead,cat)||this._detour(cat,theirs,other))return true;}
+      else if(this._detour(cat,theirs,other)||this._detour(other,ahead,cat))return true;
+    }
+    return false;
+  }
+  _detour(cat,route,other){
+    const spot=this._sideSpot(cat,route,other);if(!spot)return false;
+    if(!cat.detourGoal&&cat.target)cat.detourGoal={target:copyPoint(cat.target),afterWalk:cat.afterWalk,manualRoute:cat.manualRoute};
+    cat.path=spot.path;cat.target=copyPoint(spot.p);cat.detouring=true;cat.advanceAnchor=null;cat.progressAt=this.time;cat.bestDistance=Infinity;cat.speed=Math.min(cat.speed,.01);return true;
+  }
+  _resumeIntent(cat){
+    const goal=cat.detourGoal;cat.resumeAt=null;cat.detourGoal=null;
+    if(cat.task){const path=findPath(cat,cat.task.target);if(path){cat.target=copyPoint(cat.task.target);cat.path=path;cat.task.phase='approach';cat.state='approach';cat.stateTime=0;cat.progressAt=this.time;cat.bestDistance=Infinity;cat.advanceAnchor=null;}else this._release(cat);return;}
+    if(cat.restIntent){this._resumeRest(cat);return;}
+    if(cat.sleepSlotId&&cat.afterWalk){const slot=SLEEP_SLOT_MAP[cat.sleepSlotId];if(slot&&this._slotAvailable(slot,cat)&&this._assignRest(cat,slot,{persistent:false,kind:cat.afterWalk}))return;}
+    // A walk to a facility (or the cat-tree run-up) carries on where it left off.
+    const path=goal&&findPath(cat,goal.target);
+    if(path){cat.target=copyPoint(goal.target);cat.path=path;cat.afterWalk=goal.afterWalk;cat.manualRoute=goal.manualRoute;cat.state=goal.manualRoute||cat.climbAction?'approach':'walk';cat.stateTime=0;cat.progressAt=this.time;cat.bestDistance=Infinity;cat.advanceAnchor=null;return;}
+    this._release(cat);cat.state='observe';cat.wait=1;
+  }
+  _stepAside(blocker,route,mover){
+    const spot=this._sideSpot(blocker,route,mover);if(!spot)return false;
+    const resume=['rest','groom','observe'].includes(blocker.state)?blocker.state:'observe';
+    this._release(blocker);blocker.path=spot.path;blocker.target=copyPoint(spot.p);blocker.state='walk';blocker.afterWalk=resume;blocker.wait=0;blocker.yieldUntil=this.time+8;return true;
+  }
   _decide(cat,env){
     if(cat.task||cat.traverse||cat.path.length||cat.wait>0)return;
     if(cat.restIntent){this._resumeRest(cat);return;}
@@ -340,8 +461,8 @@ export class CatGame{
     dt=Math.max(0,Math.min(.12,Number(dt)||0));this.time+=dt;this.decisionClock+=dt;const decide=this.decisionClock>=.5;if(decide)this.decisionClock=0;
     for(const prop of [...this.props]){prop.age+=dt;prop.phase+=dt;if(prop.moveTarget){const d=distance(prop,prop.moveTarget),step=Math.min(d,dt*(prop.tool==='mouse'?.034:.023));if(d>.00001){const point={x:prop.x+(prop.moveTarget.x-prop.x)*step/d,y:prop.y+(prop.moveTarget.y-prop.y)*step/d};if(segmentWalkable(prop,point))Object.assign(prop,point);else prop.moveTarget=null;}if(d<=step+.0001)prop.moveTarget=null;}if(prop.age>=prop.ttl)this._removeProp(prop);}
     for(const cat of this.cats){if(!cat.active)continue;const before=copyPoint(cat);cat.animTime+=dt;cat.phase+=dt*(cat.path.length?5:1.2);cat.stateTime+=dt;cat.wait=Math.max(0,cat.wait-dt);
-      if(cat.traverse)this._updateTraverse(cat,dt);else if(cat.path.length)this._move(cat,dt);else if(cat.task){if(cat.task.phase==='approach')this._begin(cat);this._interact(cat,dt);}else if(decide)this._decide(cat,env);
-      cat.motionDx=cat.x-before.x;cat.motionDy=cat.y-before.y;const travel=distance(cat,before);if(!cat.traverse){
+      if(cat.traverse)this._updateTraverse(cat,dt);else if(cat.path.length)this._move(cat,dt);else if(cat.resumeAt){if(this.time>=cat.resumeAt)this._resumeIntent(cat);}else if(cat.task){if(cat.task.phase==='approach')this._begin(cat);this._interact(cat,dt);}else if(decide)this._decide(cat,env);
+      cat.motionDx=cat.x-before.x;cat.motionDy=cat.y-before.y;const travel=distance(cat,before);if(!cat.traverse||cat.traverse.style==='stride'){
         cat.strideDistance+=travel;
         if(travel>.000001&&cat.strideDistance>=(cat.nextFootstepDistance??.014*catSize(cat))){
           cat.nextFootstepDistance=cat.strideDistance+.022*catSize(cat);this._event('step',cat);
@@ -353,7 +474,7 @@ export class CatGame{
         // direction on tiny sideways avoidance movements.
         const horizontal=Math.cos(cat.heading);if(horizontal>.24)cat.facing=1;else if(horizontal<-.24)cat.facing=-1;
       }
-      const surface=surfaceAt(cat);const airborne=cat.traverse?.phase==='jump';cat.surfaceId=airborne?'air':surface?.id||'ground';cat.elevation=airborne?cat.traverse.fromElevation+(cat.traverse.toElevation-cat.traverse.fromElevation)*cat.traverse.jumpProgress:surface?.elevation||0;cat.surfaceLayer=airborne?4:surface?.layer||0;cat.worldFoot=copyPoint(cat);
+      const surface=surfaceAt(cat);const airborne=cat.traverse?.phase==='jump'&&cat.traverse.style!=='stride';cat.surfaceId=airborne?'air':surface?.id||'ground';cat.elevation=airborne?cat.traverse.fromElevation+(cat.traverse.toElevation-cat.traverse.fromElevation)*cat.traverse.jumpProgress:surface?.elevation||0;cat.surfaceLayer=airborne?4:surface?.layer||0;cat.worldFoot=copyPoint(cat);
     }
   }
   clearTransient(){for(const c of this.cats){const rest=c.restIntent&&clone(c.restIntent);if(c.traverse)Object.assign(c,supportedTraversalPoint(c));this._release(c);if(rest){c.restIntent=rest;this._resumeRest(c);}}this.props=this.props.filter(p=>p.persistent).map(p=>({...p,catIds:[],age:0,ttl:Infinity}));this.pointerPoint=null;this.events=[];}
@@ -450,7 +571,7 @@ export class CatGame{
     const prop=this.props.find(p=>p.id===id&&p.persistent);if(!prop)return {ok:false,message:'这个道具已经收起。'};
     const selected=catId&&this.cats.find(c=>c.id===catId&&c.active);if(selected&&(selected.traverse||this._onPlatform(selected)))return this._queueGroundAction(selected,{type:'prop',id});
     const candidates=catId?this.cats.filter(c=>c.id===catId&&c.active):this.cats.filter(c=>c.active&&!c.task&&!c.traverse&&!this._onPlatform(c)).sort((a,b)=>(!!a.restIntent-!!b.restIntent)||distance(a,prop)-distance(b,prop));
-    for(const cat of candidates){const target=this._near(prop,1,catSize(cat)),path=target&&findPath(cat,target);if(!path)continue;
+    for(const cat of candidates){const target=this._toyDock(cat,prop,prop.tool),path=target&&findPath(cat,target);if(!path)continue;
       for(const occupying of this.cats)if(occupying.task?.propId===prop.id)this._cancelInteraction(occupying,true);
       this._release(cat);cat.task={tool:prop.tool,propId:id,target,elapsed:0,phase:'approach',round:0,manual:true};cat.path=path;cat.target=target;cat.state='approach';cat.wait=0;prop.catIds=[cat.id];return {ok:true,catIds:[cat.id],propId:id};
     }return {ok:false,message:'暂时没有能过来玩的猫，点一只猫再试试。'};

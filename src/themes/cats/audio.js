@@ -1,4 +1,5 @@
-import {CAT_WIND_FILE,catWindGain,prepareCatWindSample,synthesizeCatWind} from './wind-audio.js';
+import {CatMusic} from './music.js';
+import {CAT_WIND_FILE,catWindGain,prepareCatWindSample} from './wind-audio.js';
 // Short locally bundled CC0 recordings; quiet procedural fallback if a file is unavailable.
 // One quiet breeze bed, plus one voice and one replaceable interaction request; no per-cat timers.
 export const CAT_CUES=Object.freeze({
@@ -107,16 +108,17 @@ export function synthesizeCatCue(kind='tap',sampleRate=48000){
 export class CatAudio {
  constructor(onStatus=()=>{},random=Math.random,loadSample=loadCatSample){
   this.onStatus=onStatus;this.random=random;this.loadSample=loadSample;this.sampleAbort=null;this.status='off';this.context=null;this.nodes=new Set();this.buffers=new Map();this.last={};this.lastAny=-Infinity;
-  this.enabled=false;this.volume=0;this.dead=false;this.pending=0;this.starting=false;this.unlocking=null;this.queued=null;this.queueTimer=0;
+  this.music=new CatMusic();this.enabled=false;this.volume=0;this.dead=false;this.pending=0;this.starting=false;this.unlocking=null;this.queued=null;this.queueTimer=0;
   this.ambientClock=0;this.ambientKey=null;this.nextAmbient=Infinity;this.nextMeow=Infinity;this.lastAccentAt=-Infinity;this.lastInteractionAt=-Infinity;
-  this.wind=null;this.windStarting=false;this.windAbort=null;this.windBuffer=null;this.windClock=0;this.windModulationClock=0;this.windTails=new Set();this.environment={};this.cueSerial=0;this.startingAmbient=false;this.startingKind=null;
+  this.windUnavailable=false;this.wind=null;this.windStarting=false;this.windAbort=null;this.windBuffer=null;this.windClock=0;this.windModulationClock=0;this.windTails=new Set();this.environment={};this.cueSerial=0;this.startingAmbient=false;this.startingKind=null;
  }
  report(status){if(this.status!==status){this.status=status;this.onStatus(status)}}
  restingStatus(){return !this.enabled||!this.volume||this.dead?'off':!this.context||this.context.state==='suspended'?'waiting':this.wind?'playing':'ready'}
- configure(enabled,volume){
+ configure(enabled,volume,settings={}){
   if(this.dead)return;
   const wasAudible=this.enabled&&this.volume>0,previousVolume=this.volume;
   this.enabled=!!enabled;this.volume=Number.isFinite(volume)?Math.min(.6,Math.max(0,volume)):0;
+  this.music.configure(this.enabled,this.volume,settings);
   if(!this.enabled||!this.volume){if(wasAudible||this.nodes.size||this.starting||this.queued)this.stop();this.report('off');return}
   if(!wasAudible){this.ambientKey=null;this.ambientClock=0;this.nextAmbient=Infinity;this.report(this.restingStatus())}
   if(this.volume!==previousVolume){
@@ -130,6 +132,7 @@ export class CatAudio {
   if(!Audio){this.report('error');return false}
   try{
    const c=this.context??=new Audio();
+   this.music.unlock();
    if(c.state!=='running'){
     this.report('waiting');
     if(!this.unlocking){const job=Promise.resolve(c.resume());this.unlocking=job;job.then(()=>{if(this.unlocking===job)this.unlocking=null},()=>{if(this.unlocking===job)this.unlocking=null})}
@@ -183,7 +186,7 @@ export class CatAudio {
   },Math.max(0,205-(performance.now()-this.lastAny)));
  }
  async ensureWind(){
-  if(this.wind||this.windStarting||this.dead||!this.enabled||!this.volume||!this.context||this.context.state==='suspended')return;
+  if(this.windUnavailable||this.wind||this.windStarting||this.dead||!this.enabled||!this.volume||!this.context||this.context.state==='suspended')return;
   const generation=this.pending,c=this.context;this.windStarting=true;
   try{
    let buffer=this.windBuffer;
@@ -191,7 +194,8 @@ export class CatAudio {
     const abort=new AbortController();this.windAbort=abort;const timeout=setTimeout(()=>abort.abort(),2200);let sample;
     try{sample=await this.loadSample('wind',{signal:abort.signal})}catch{}finally{clearTimeout(timeout);if(this.windAbort===abort)this.windAbort=null}
     if(this.dead||!this.enabled||!this.volume||generation!==this.pending||this.context!==c)return;
-    try{sample=sample?prepareCatWindSample(sample):synthesizeCatWind()}catch{sample=synthesizeCatWind()}
+    try{sample=sample?prepareCatWindSample(sample):null}catch{sample=null}
+    if(!sample){this.windUnavailable=true;return}
     buffer=c.createBuffer(1,sample.data.length,sample.sampleRate);buffer.copyToChannel(sample.data,0);this.windBuffer=buffer;
    }
    if(this.dead||!this.enabled||!this.volume||generation!==this.pending||this.context!==c||this.wind)return;
@@ -221,6 +225,7 @@ export class CatAudio {
  update(dt,environment){
   if(this.dead||!this.enabled||!this.volume||!this.context||this.context.state==='suspended')return;
   const env=environment||{},key=env.season+':'+(env.night||env.time==='night'),elapsed=Math.max(0,Math.min(.1,Number.isFinite(dt)?dt:0));
+  this.music.update(elapsed,this.nodes.size>0);
   this.environment=env;void this.ensureWind();this.windClock+=elapsed;this.windModulationClock+=elapsed;
   if(this.windModulationClock>=.25){this.windModulationClock=0;this.updateWindGain()}
   if(key!==this.ambientKey){
@@ -251,12 +256,12 @@ export class CatAudio {
   if(!this.nodes.size){this.updateWindGain();this.report(this.restingStatus())}
  }
  stop(){
-  this.pending++;this.cueSerial++;this.startingAmbient=false;this.startingKind=null;this.stopWind();this.sampleAbort?.abort();this.sampleAbort=null;this.starting=false;this.queued=null;clearTimeout(this.queueTimer);this.queueTimer=0;this.ambientKey=null;this.nextAmbient=Infinity;this.nextMeow=Infinity;this.lastAccentAt=-Infinity;
+  this.music.stop();this.pending++;this.cueSerial++;this.startingAmbient=false;this.startingKind=null;this.stopWind();this.sampleAbort?.abort();this.sampleAbort=null;this.starting=false;this.queued=null;clearTimeout(this.queueTimer);this.queueTimer=0;this.ambientKey=null;this.nextAmbient=Infinity;this.nextMeow=Infinity;this.lastAccentAt=-Infinity;
   for(const group of [...this.nodes]){this.release(group);try{group.voice.stop()}catch{}}
   this.report(this.restingStatus());
  }
  destroy(){
-  if(this.dead)return;this.dead=true;this.stop();this.buffers.clear();this.unlocking=null;
+  if(this.dead)return;this.dead=true;this.stop();this.music.destroy();this.buffers.clear();this.unlocking=null;
   for(const group of this.windTails){group.voice.onended=null;try{group.voice.stop();group.voice.disconnect();group.gain.disconnect()}catch{}}
   this.windTails.clear();this.windBuffer=null;this.context?.close().catch(()=>{});this.context=null;
  }

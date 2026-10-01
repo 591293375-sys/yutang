@@ -1,10 +1,11 @@
-export const DEFAULT_CAT_ENVIRONMENT = Object.freeze({season:'auto',time:'auto',fireflies:true,particles:true});
+export const DEFAULT_CAT_ENVIRONMENT = Object.freeze({season:'auto',time:'auto',fireflies:true,particles:true,music:true,musicVolume:.35});
 export const CAT_SEASONS = ['spring','summer','autumn','winter'];
 export const CAT_TIMES = ['day','night'];
 export function normalizeEnvironment(value={}){
   const time=['dawn','dusk'].includes(value?.time)?'day':value?.time;
   return {season:['auto',...CAT_SEASONS].includes(value?.season)?value.season:'auto',time:['auto',...CAT_TIMES].includes(time)?time:'auto',
-    fireflies:typeof value?.fireflies==='boolean'?value.fireflies:true,particles:typeof value?.particles==='boolean'?value.particles:true};
+    fireflies:typeof value?.fireflies==='boolean'?value.fireflies:true,particles:typeof value?.particles==='boolean'?value.particles:true,
+    music:typeof value?.music==='boolean'?value.music:true,musicVolume:Number.isFinite(value?.musicVolume)?Math.max(0,Math.min(1,value.musicVolume)):.35};
 }
 export function resolveEnvironment(config={},date=new Date()){
   const settings=normalizeEnvironment(config),month=date.getMonth()+1,hour=date.getHours()+date.getMinutes()/60;

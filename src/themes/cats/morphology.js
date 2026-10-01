@@ -9,6 +9,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const ellipse=(p,c,rx,ry)=>Math.exp(-2*((p.x-c.x)**2/(rx*rx)+(p.y-c.y)**2/(ry*ry)));
 function remap(p,from,to){return {x:to[0]+(p.x-from[0])/from[2]*to[2],y:to[1]+(p.y-from[1])/from[3]*to[3]}}
 export function catLandmarks(preset,frame=null){
+ if(frame?.portrait)frame=null;
  const head=frame?.parts?.head||preset.regions.head,body=frame?.parts?.body||preset.regions.body;
  const originalHead=preset.regions.head;
  const map=frame?.sourceMapping;

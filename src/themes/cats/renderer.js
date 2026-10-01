@@ -8,6 +8,7 @@ import {courtyardBackground} from './background.js';
 import {CatAnimationState,loadActionAtlas,getActionSpec,drawActionFrame,poseLayers,drawBlendedPoses} from './animation.js';
 import {courtyardLight,contactShadow,groundedBodyShadow} from './lighting.js';
 import {buildCanopyOcclusion} from './canopy.js';
+import {mergeWindowRects} from './canopy-windows.js';
 
 const TAU=Math.PI*2;
 const base=import.meta.env.BASE_URL;
@@ -69,7 +70,7 @@ export class CatRenderer {
   if(!cached){const image=document.createElement('canvas');image.width=source.naturalWidth||source.width;image.height=source.naturalHeight||source.height;cached={image,level:-1};this.litSprites.set(source,cached)}
   const c=cached.image.getContext('2d');c.clearRect(0,0,cached.image.width,cached.image.height);c.filter=`brightness(${1-level*.042}) saturate(${1-level*.028})`;c.drawImage(source,0,0);c.filter='none';cached.level=level;return cached.image;
  }
- hitTest(x,y,cats){const r=this.canvas.getBoundingClientRect(),sx=x-r.left,sy=y-r.top,world=screenToWorld({x:sx,y:sy},this.cover);if(this.canopy?.alphaAt(world.x,world.y)>.8)return null;for(const cat of cats.filter(c=>c.active).sort((a,b)=>b.y-a.y)){const b=this.bounds.get(cat.id);if(b&&sx>=b.x&&sx<=b.x+b.w&&sy>=b.y&&sy<=b.y+b.h)return cat}return null}
+ hitTest(x,y,cats){const r=this.canvas.getBoundingClientRect(),sx=x-r.left,sy=y-r.top;for(const cat of cats.filter(c=>c.active).sort((a,b)=>b.y-a.y)){const b=this.bounds.get(cat.id);if(b&&sx>=b.x&&sx<=b.x+b.w&&sy>=b.y&&sy<=b.y+b.h)return cat}return null}
  render(game,environment,options,time,selected,moveProp,debug=false){
   const c=this.ctx,t=this.cover;c.setTransform(this.scale,0,0,this.scale,0,0);c.clearRect(0,0,t.width,t.height);this.bounds.clear();
   const now=performance.now()/1000,lightDt=this.lightingAt?Math.min(.06,now-this.lightingAt):1;this.lightingAt=now;this.nightMix+=((environment.time==='night'?1:0)-this.nightMix)*Math.min(1,lightDt*3);
@@ -79,15 +80,40 @@ export class CatRenderer {
   drawSeasonEffects(c,t,environment,options,time,'ground');
   const sorted=[...game.props.map(p=>({kind:'prop',y:p.y,item:p})),...active.map(cat=>({kind:'cat',y:cat.y,item:cat}))].sort((a,b)=>a.y-b.y||(a.kind==='prop'?-1:1));
   for(const entry of sorted)if(entry.kind==='prop')this.drawProp(entry.item,time,options);else this.drawCat(entry.item,time,options,entry.item.task?.tool==='food'?game.props.find(p=>p.id===entry.item.task.propId):null);
-  this.drawCanopy();
+  this.drawCanopy(this.canopyWindows(active));
   drawSeasonEffects(c,t,environment,options,time,'air');
   this.drawFireflies(environment,options,time);
   if((selected||moveProp)&&this.pointer){const p=this.point(this.pointer),valid=isWalkable(this.pointer)||!!this.hoverId;c.save();c.strokeStyle=valid?'#fff7cfcc':'#ba675bcb';c.lineWidth=1.5;c.setLineDash([4,4]);c.beginPath();c.ellipse(p.x,p.y,13,7,0,0,TAU);c.stroke();c.setLineDash([]);if(selected==='wand'){c.strokeStyle='#dedabacc';c.beginPath();c.moveTo(p.x+9,p.y-25);c.quadraticCurveTo(p.x+22,p.y-12,p.x,p.y);c.stroke();c.fillStyle='#d2abb2';c.beginPath();c.ellipse(p.x,p.y-1,3,9,.6,0,TAU);c.fill()}c.restore()}
   if(debug)this.drawDebug();
  }
- drawCanopy(){
+ canopyWindows(cats){
+  // The crown hangs well above the paving. A cat walking beneath it stays
+  // readable: leaves over its body thin to a soft see-through window (the
+  // dappled shade on its fur is kept), instead of swallowing the whole cat.
+  const layer=this.canopy;if(!layer)return [];const windows=[];
+  for(const cat of cats){const b=this.bounds.get(cat.id);if(!b)continue;let cover=0;
+   for(let iy=0;iy<3;iy++)for(let ix=0;ix<3;ix++){const w=screenToWorld({x:b.x+b.w*(.2+ix*.3),y:b.y+b.h*(.2+iy*.3)},this.cover);cover=Math.max(cover,layer.alphaAt(w.x,w.y))}
+   if(cover>.08)windows.push({cx:b.x+b.w*.5,cy:b.y+b.h*.56,rx:b.w*.66,ry:b.h*.7,strength:Math.min(1,cover*1.6)});
+  }
+  return windows;
+ }
+ drawCanopy(windows=[]){
   const c=this.ctx,t=this.cover,fade=this.previousCanopy?Math.min(1,(performance.now()-this.backgroundTransition)/1400):1;
-  const draw=(layer,opacity)=>{if(!layer||!opacity)return;const b=layer.bounds;c.save();c.globalAlpha=opacity;c.drawImage(layer.image,t.offsetX+b.x*t.drawWidth,t.offsetY+b.y*t.drawHeight,b.width*t.drawWidth,b.height*t.drawHeight);c.restore()};
+  const rects=mergeWindowRects(windows);
+  const draw=(layer,opacity)=>{if(!layer||!opacity)return;const b=layer.bounds,dx=t.offsetX+b.x*t.drawWidth,dy=t.offsetY+b.y*t.drawHeight,dw=b.width*t.drawWidth,dh=b.height*t.drawHeight;
+   c.save();c.globalAlpha=opacity;if(rects.length){c.beginPath();c.rect(dx,dy,dw,dh);for(const r of rects)c.rect(r.x,r.y,r.w,r.h);c.clip('evenodd')}c.drawImage(layer.image,dx,dy,dw,dh);c.restore();
+   for(const r of rects){
+    // Only the small patch over a cat is recomposited; the rest of the crown is a single draw.
+    const ratio=this.scale,pw=Math.max(1,Math.ceil(r.w*ratio)),ph=Math.max(1,Math.ceil(r.h*ratio)),scratch=this.canopyScratch||(this.canopyScratch=document.createElement('canvas'));
+    if(scratch.width<pw)scratch.width=pw;if(scratch.height<ph)scratch.height=ph;
+    const g=scratch.getContext('2d');g.setTransform(1,0,0,1,0,0);g.globalCompositeOperation='source-over';g.clearRect(0,0,pw,ph);
+    const iw=layer.image.width/dw,ih=layer.image.height/dh;g.drawImage(layer.image,(r.x-dx)*iw,(r.y-dy)*ih,r.w*iw,r.h*ih,0,0,pw,ph);
+    g.globalCompositeOperation='destination-out';
+    for(const hole of r.windows){g.save();g.translate((hole.cx-r.x)*ratio,(hole.cy-r.y)*ratio);g.scale(hole.rx*ratio,hole.ry*ratio);const grad=g.createRadialGradient(0,0,0,0,0,1),a=.8*hole.strength;grad.addColorStop(0,`rgba(0,0,0,${a})`);grad.addColorStop(.58,`rgba(0,0,0,${a*.9})`);grad.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=grad;g.beginPath();g.arc(0,0,1,0,TAU);g.fill();g.restore()}
+    g.globalCompositeOperation='source-over';
+    c.save();c.globalAlpha=opacity;c.drawImage(scratch,0,0,pw,ph,r.x,r.y,r.w,r.h);c.restore();
+   }
+  };
   if(fade<1)draw(this.previousCanopy,1-fade);draw(this.canopy,fade);
  }
  drawCat(cat,time,options,foodBowl=null){
@@ -114,7 +140,7 @@ export class CatRenderer {
     const frame=atlas.frames[pose.index];target.translate((pose.lean||0)*w,-(pose.bob||0)*w);
     const hindSourceFrame=pose.index===4?atlas.frames[5]:null;
     if(foodBowl&&pose.action==='eat'){const mouth=feedingMouthWorld(cat,{frame,atlas,flip:pose.flip??sample.flip,time:time+(cat.phase||0),reducedMotion:quiet,settle:pose.settle});feeding={mouth,foodPoint:foodContact(foodBowl,cat.task.feeding?.seat||0),bowl:{x:foodBowl.x,y:foodBowl.y,foodScale:foodBowl.foodScale||1,capacity:foodBowl.capacity},inside:mouthInsideFood(mouth,foodBowl),edibleRx:FOOD_GEOMETRY.edibleRx*(foodBowl.foodScale||1)/1600,edibleRy:FOOD_GEOMETRY.edibleRy*(foodBowl.foodScale||1)/1600/(9/16)};}
-    measured=drawActionFrame(target,frame,atlas,w,pose.action,time+(cat.phase||0),{reducedMotion:quiet,mesh:true,gaitPhase:pose.gaitPhase,strideStrength:pose.strideStrength,motionStage:pose.motionStage,stageProgress:pose.stageProgress,settle:pose.settle,hindSourceFrame,locomotion:sample.locomotion,worldScale:this.cover.drawWidth,flip:pose.flip??sample.flip,drawContactShadows:drawContacts});
+    measured=drawActionFrame(target,frame,atlas,w,pose.action,time+(cat.phase||0),{reducedMotion:quiet,mesh:true,gaitPhase:pose.gaitPhase,strideStrength:pose.strideStrength,motionStage:pose.motionStage,stageProgress:pose.stageProgress,traverse:pose.traverse??sample.traverse,settle:pose.settle,hindSourceFrame,locomotion:sample.locomotion,worldScale:this.cover.drawWidth,flip:pose.flip??sample.flip,drawContactShadows:drawContacts});
    }else target.drawImage(skin,-w*anchor.x,-h*(1+breath)*anchor.y,w,h*(1+breath));
    target.restore();return measured;
   };

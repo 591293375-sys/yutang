@@ -1,0 +1,162 @@
+{
+  "03_incense_burner": {
+    "file": "incense_burner.webp",
+    "original": [
+      1671,
+      941
+    ],
+    "crop": {
+      "left": 59,
+      "top": 102,
+      "width": 1553,
+      "height": 788
+    },
+    "width": 900,
+    "height": 457,
+    "threshold": 16
+  },
+  "04_incense_stick": {
+    "file": "incense_stick.webp",
+    "original": [
+      1024,
+      1536
+    ],
+    "crop": {
+      "left": 496,
+      "top": 57,
+      "width": 33,
+      "height": 1422
+    },
+    "width": 26,
+    "height": 1100,
+    "threshold": 16
+  },
+  "05_incense_smoke": {
+    "file": "incense_smoke.webp",
+    "original": [
+      1024,
+      1536
+    ],
+    "crop": {
+      "left": 426,
+      "top": 151,
+      "width": 234,
+      "height": 1262
+    },
+    "width": 204,
+    "height": 1100,
+    "threshold": 3
+  },
+  "06_lotus_lamp": {
+    "file": "lotus_lamp.webp",
+    "original": [
+      1295,
+      1215
+    ],
+    "crop": {
+      "left": 15,
+      "top": 27,
+      "width": 1265,
+      "height": 1166
+    },
+    "width": 900,
+    "height": 830,
+    "threshold": 16
+  },
+  "07_lamp_flame": {
+    "file": "lamp_flame.webp",
+    "original": [
+      1254,
+      1254
+    ],
+    "crop": {
+      "left": 389,
+      "top": 238,
+      "width": 481,
+      "height": 877
+    },
+    "width": 481,
+    "height": 877,
+    "threshold": 3
+  },
+  "08_fruit_offering": {
+    "file": "fruit_offering.webp",
+    "original": [
+      1536,
+      1024
+    ],
+    "crop": {
+      "left": 35,
+      "top": 34,
+      "width": 1462,
+      "height": 940
+    },
+    "width": 900,
+    "height": 579,
+    "threshold": 16
+  },
+  "09_pastry_offering": {
+    "file": "pastry_offering.webp",
+    "original": [
+      1536,
+      1024
+    ],
+    "crop": {
+      "left": 16,
+      "top": 128,
+      "width": 1504,
+      "height": 785
+    },
+    "width": 900,
+    "height": 470,
+    "threshold": 16
+  },
+  "10_teapot": {
+    "file": "teapot.webp",
+    "original": [
+      1374,
+      1145
+    ],
+    "crop": {
+      "left": 57,
+      "top": 59,
+      "width": 1291,
+      "height": 1040
+    },
+    "width": 900,
+    "height": 725,
+    "threshold": 16
+  },
+  "11_teacup": {
+    "file": "teacup.webp",
+    "original": [
+      1307,
+      1203
+    ],
+    "crop": {
+      "left": 136,
+      "top": 219,
+      "width": 1033,
+      "height": 864
+    },
+    "width": 900,
+    "height": 753,
+    "threshold": 16
+  },
+  "12_wish_plaque": {
+    "file": "wish_plaque.webp",
+    "original": [
+      1024,
+      1536
+    ],
+    "crop": {
+      "left": 172,
+      "top": 40,
+      "width": 722,
+      "height": 1438
+    },
+    "width": 552,
+    "height": 1100,
+    "threshold": 16
+  }
+}

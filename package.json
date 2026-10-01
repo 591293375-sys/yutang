@@ -1,9 +1,9 @@
 {
   "name": "fusheng-koi-pond",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "private": true,
   "type": "module",
-  "description": "浮生 · 摸鱼桌面，锦鲤、赶海与猫咪庭院",
+  "description": "浮生 · 摸鱼桌面，锦鲤、赶海、猫咪庭院与财源广进",
   "main": "electron/main.cjs",
   "scripts": {
     "dev": "vite --host 127.0.0.1",

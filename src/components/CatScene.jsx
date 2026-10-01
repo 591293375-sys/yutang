@@ -22,10 +22,10 @@ const CatScene=forwardRef(function CatScene({options,desktop,tool,moveProp,editi
   const render=()=>{if(!dead&&!hidden())renderer.render(game,environment(),latest.current.options,time,latest.current.tool,latest.current.moveProp)};
   const resize=()=>{if(dead)return;const b=canvas.current.getBoundingClientRect(),o=latest.current.options;renderer.resize({width:b.width,height:b.height,scale:renderScale(b.width,b.height,window.devicePixelRatio||1,o.quality,o.desktopMode,latest.current.desktop?.display?.scaleFactor)});render()};
   const soundAllowed=()=>!dead&&!latest.current.options.paused&&!hidden()&&!latest.current.editing;
-  const updateSound=()=>{const o=latest.current.options;audio.configure(o.sound&&soundAllowed(),o.volume)};
+  const updateSound=()=>{const o=latest.current.options;audio.configure(o.sound&&soundAllowed(),o.volume,game.environment)};
   const unlockSound=()=>{updateSound();if(soundAllowed()&&latest.current.options.sound)void audio.unlock()};
   const previewSound=async(kind='meow')=>{updateSound();if(!soundAllowed()||!latest.current.options.sound)return false;if(!await audio.unlock())return false;return audio.cue(kind,{priority:true,preview:true})};
-  const setSound=async(enabled,volume)=>{audio.configure(enabled&&soundAllowed(),volume);if(!enabled)return true;if(!soundAllowed())return false;if(!await audio.unlock())return false;return audio.cue('meow',{priority:true,preview:true})};
+  const setSound=async(enabled,volume)=>{audio.configure(enabled&&soundAllowed(),volume,game.environment);if(!enabled)return true;if(!soundAllowed())return false;if(!await audio.unlock())return false;return audio.cue('meow',{priority:true,preview:true})};
   const respond=result=>{if(result?.message)latest.current.notify(result.message);persist();publish();render();return result};
   const inside=(x,y)=>{const b=canvas.current.getBoundingClientRect();return x>=b.left&&x<b.right&&y>=b.top&&y<b.bottom&&document.elementFromPoint(x,y)===canvas.current};
   const interact=(x,y)=>{
@@ -62,10 +62,13 @@ const CatScene=forwardRef(function CatScene({options,desktop,tool,moveProp,editi
   window.addEventListener('resize',resize);document.addEventListener('visibilitychange',visibility);window.addEventListener('pagehide',hide);
   window.addEventListener('pointerdown',unlockSound,true);window.addEventListener('keydown',unlockSound,true);
   const off=window.pondDesktop?.onPointer(event=>event.type==='feed'?interact(event.x,event.y):pointer(event.x,event.y));
-  runtime.current={game,renderer,interact,pointer,resize,schedule,clear,respond,updateSound,visibility,setSound,previewSound,
+  runtime.current={game,renderer,audio,interact,pointer,resize,schedule,clear,respond,updateSound,visibility,setSound,previewSound,
    saveDesign:(id,design)=>{const old=game.snapshot();const result=id?game.editCat(id,design):game.addCat(design);if(!result?.ok)return respond(result);if(!persist()){game.clearTransient();const restored=new CatGame(old);game.cats=restored.cats;game.props=restored.props;game.serial=restored.serial;publish();return {ok:false,message:'保存失败，编辑内容仍在，请先导出设计。'}}publish();render();return result},
    stats:()=>({...renderer.stats(),fps:latest.current.options.paused?0:fps,desktopMode:!!latest.current.options.desktopMode,activeCats:game.view().activeCount,props:game.props.length,fireflies:environment().fireflyCount}),
   };resize();publish();persist();schedule();
+  // The theme picker gesture happened before this scene mounted. Reuse that
+  // browser activation so returning to the courtyard can resume its soundtrack.
+  if(navigator.userActivation?.hasBeenActive)unlockSound();
   return()=>{dead=true;game.clearTransient();persist();cancelAnimationFrame(frame);audio.destroy();renderer.destroy();observer.disconnect();stopScale?.();off?.();window.removeEventListener('resize',resize);document.removeEventListener('visibilitychange',visibility);window.removeEventListener('pagehide',hide);window.removeEventListener('pointerdown',unlockSound,true);window.removeEventListener('keydown',unlockSound,true);runtime.current=null};
  },[]);
  useEffect(()=>{runtime.current?.resize();runtime.current?.updateSound();runtime.current?.schedule()},[options,desktop?.display?.scaleFactor]);

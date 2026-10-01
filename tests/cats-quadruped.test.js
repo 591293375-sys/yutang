@@ -18,7 +18,7 @@ test('front/back bank swaps release old foot contacts and replant inside the new
 });
 test('four-limb materials and dispatch do not depend on the old single-hind-leg patch',async()=>{
  const fs=await import('node:fs/promises'),code=await fs.readFile(new URL('../src/themes/cats/animation.js',import.meta.url),'utf8');
- assert.ok(code.includes('drawQuadruped'));assert.ok(!code.includes("from './hind-leg.js'"));
+ assert.ok(code.includes('drawPaintedGait'));assert.ok(!code.includes("from './hind-leg.js'"));
  const {limbKnee}=await import('../src/themes/cats/quadruped.js');for(const x of [-30,-10,0,10,30]){const knee=limbKnee({x:0,y:0},{x,y:35},38,1);assert.ok(Number.isFinite(knee.x)&&Number.isFinite(knee.y));assert.ok(Math.hypot(knee.x,knee.y)<60)}
 });
 test('paused clocks never invent strides and resetting a safe restored position never stretches legs across the garden',()=>{
@@ -36,7 +36,13 @@ test('short steps keep knee bends restrained instead of right-angle zigzags',asy
 });
 
 test('only real step takeoff/landing compress the body; every flat-ground action keeps zero body bob',async()=>{
- const {quadrupedBodyDrop}=await import('../src/themes/cats/quadruped.js');for(let i=0;i<=100;i++){const p=i/100;for(const stage of [null,undefined,'walk','idle','jump'])assert.equal(quadrupedBodyDrop(100,stage,p),0);assert.ok(quadrupedBodyDrop(100,'crouch',p)>=0&&quadrupedBodyDrop(100,'crouch',p)<=2.4);assert.ok(quadrupedBodyDrop(100,'land',p)<=1.4+1e-10)}assert.equal(quadrupedBodyDrop(100,'crouch',0),0);assert.equal(quadrupedBodyDrop(100,'land',0),0);assert.ok(quadrupedBodyDrop(100,'land',1)<1e-12);
+ const {quadrupedBodyDrop}=await import('../src/themes/cats/quadruped.js');
+ for(let i=0;i<=100;i++){const p=i/100;for(const stage of [null,undefined,'walk','idle'])assert.equal(quadrupedBodyDrop(100,stage,p),0);
+  assert.ok(quadrupedBodyDrop(100,'crouch',p)>=0&&quadrupedBodyDrop(100,'crouch',p)<=5+1e-9);assert.ok(quadrupedBodyDrop(100,'land',p)<=4.2+1e-9);
+  // The loaded body unfolds during the push-off only, then flies at full height.
+  if(p>=.16)assert.equal(quadrupedBodyDrop(100,'jump',p),0);else assert.ok(quadrupedBodyDrop(100,'jump',p)<=quadrupedBodyDrop(100,'crouch',1)+1e-9);}
+ assert.equal(quadrupedBodyDrop(100,'crouch',0),0);assert.equal(quadrupedBodyDrop(100,'land',0),0);assert.ok(quadrupedBodyDrop(100,'land',1)<1e-12);
+ assert.ok(Math.abs(quadrupedBodyDrop(100,'crouch',1)-quadrupedBodyDrop(100,'jump',0))<1e-9,'no pop between crouch and take-off');
 });
 
 test('all sixteen coats use smooth individually authored body undersides, with no rectangular cut masks',async()=>{

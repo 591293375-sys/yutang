@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {catWindGain,prepareCatWindSample,synthesizeCatWind} from '../src/themes/cats/wind-audio.js';
+import {catWindGain,prepareCatWindSample} from '../src/themes/cats/wind-audio.js';
 import {CatAudio,CAT_CUES,synthesizeCatCue,catOutputGain,catAmbientDelay,CAT_SAMPLE_FILES,decodeCatSample} from '../src/themes/cats/audio.js';
 
 function fixture(t,loader=async()=>null){
@@ -194,12 +194,13 @@ test('spontaneous meows are sparse and yield immediately to an explicit interact
 });
 
 
-test('fallback breeze is band softened, cached and seamless without endpoint fades to silence',()=>{
- const sample=synthesizeCatWind();assert.equal(sample,synthesizeCatWind());assert.equal(sample.sampleRate,24000);assert.equal(sample.data.length,230400);
- let peak=0,power=0,delta=0,mean=0;for(let i=0;i<sample.data.length;i++){const v=sample.data[i];assert.ok(Number.isFinite(v));peak=Math.max(peak,Math.abs(v));power+=v*v;mean+=v;if(i)delta=Math.max(delta,Math.abs(v-sample.data[i-1]))}
- assert.ok(peak<=.161);assert.ok(Math.sqrt(power/sample.data.length)>.01&&Math.sqrt(power/sample.data.length)<.06);
- assert.ok(Math.abs(mean/sample.data.length)<.001);assert.ok(delta<.045,'no broadband sharp sample jumps');assert.ok(Math.abs(sample.data[0]-sample.data.at(-1))<=delta,'loop boundary is no sharper than normal waveform motion');
- assert.ok(catWindGain(catOutputGain(.18),5)<.04);assert.ok(catWindGain(.7,5,{duck:true})<catWindGain(.7,5));assert.ok(catWindGain(.7,5,{night:true})<catWindGain(.7,5));
+test('missing or invalid breeze recordings stay silent and do not retry every frame',async t=>{
+ let reads=0;const {audio,contexts}=fixture(t,async id=>{if(id==='wind')reads++;return null});
+ await audio.unlock();audio.update(.1,{season:'spring',time:'day'});await new Promise(r=>setTimeout(r,0));
+ for(let i=0;i<100;i++)audio.update(.1,{season:'spring',time:'day'});
+ assert.equal(reads,1);assert.equal(audio.wind,null);assert.equal(contexts[0].voices.length,0);
+ assert.equal(await audio.cue('purr',{priority:true}),true,'missing wind never disables cat sounds');
+ assert.ok(catWindGain(catOutputGain(.18),5)<.025);assert.ok(catWindGain(.7,5,{duck:true})<catWindGain(.7,5));assert.ok(catWindGain(.7,5,{night:true})<catWindGain(.7,5));
  const peakBound=prepareCatWindSample({sampleRate:24000,data:new Float32Array(24000).fill(.9)});assert.ok(Math.max(...peakBound.data)<=.231);
  assert.throws(()=>prepareCatWindSample({sampleRate:24000,data:new Float32Array(10)}),/Invalid/);
 });
@@ -215,11 +216,11 @@ test('an interaction preempts an optional ambient file read without late playbac
 test('bundled breeze decodes, stays quiet and remains seamless after loop preparation',()=>{
  const raw=readFileSync(new URL('../public/assets/cats/audio/wind-bed.wav',import.meta.url));
  const decoded=decodeCatSample(raw.buffer.slice(raw.byteOffset,raw.byteOffset+raw.byteLength),30);
- assert.equal(decoded.sampleRate,24000);assert.equal(decoded.data.length,240000);
- const loop=prepareCatWindSample(decoded);assert.equal(loop.data.length,230400);
+ assert.equal(decoded.sampleRate,24000);assert.equal(decoded.data.length,672000);
+ const loop=prepareCatWindSample(decoded);assert.equal(loop.data.length,662400);
  let power=0,peak=0,delta=0;for(let i=0;i<loop.data.length;i++){const v=loop.data[i];power+=v*v;peak=Math.max(peak,Math.abs(v));if(i)delta=Math.max(delta,Math.abs(v-loop.data[i-1]))}
- assert.ok(peak<.23);assert.ok(Math.sqrt(power/loop.data.length)>.04&&Math.sqrt(power/loop.data.length)<.07);assert.ok(Math.abs(loop.data[0]-loop.data.at(-1))<=delta);
- assert.ok(peak*catWindGain(catOutputGain(.6),5)<.022,'maximum breeze level stays behind the foreground voices');
+ assert.ok(loop.data.filter(v=>Math.abs(v)<.0001).length/loop.data.length>.3,'natural gusts leave quiet intervals');assert.ok(peak<.12);assert.ok(Math.sqrt(power/loop.data.length)>.001&&Math.sqrt(power/loop.data.length)<.013);assert.ok(Math.abs(loop.data[0]-loop.data.at(-1))<=delta);
+ assert.ok(peak*catWindGain(catOutputGain(.6),5)<.005,'maximum breeze level stays behind the foreground voices');
 });
 
 test('switching day/night cancels an in-flight bird but preserves meows and explicit interactions',async t=>{

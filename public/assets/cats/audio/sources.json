@@ -143,7 +143,8 @@
         9,
         21
       ],
-      "processing": "Mono 24kHz 16-bit PCM; 2s equal-power overlap into a seamless 10s loop; periodic 110–950Hz shaping; soft transient knee; RMS .060; runtime bed gain is much lower than interaction cues"
+      "processing": "Original leaf-wind field recording, stationary-noise reduction, gentle 190–1550 Hz shaping, three softly faded gusts separated by quiet intervals; no synthesized noise or loudness normalization",
+      "durationSeconds": 28
     },
     {
       "file": "bird.wav",

@@ -1,0 +1,261 @@
+{
+  "version": 1,
+  "theme": "caiyuan",
+  "asset_count": 10,
+  "asset_type": "independent static hand-painted transparent PNGs; not animation sequences",
+  "notes": [
+    "Preserve original PNG alpha. Color in zero-alpha pixels is invisible and must not create a halo.",
+    "Visual bounding boxes are metadata, not instructions to crop semitransparent mist.",
+    "Toad variants require per-pose registration and uniform character scale before switching.",
+    "Lantern tassel is a separate child layer.",
+    "Runtime animation, collision, lighting and particles must be implemented by the receiving project."
+  ],
+  "assets": [
+    {
+      "file": "01_toad_idle.png",
+      "label": "金蟾待机",
+      "role": "toad",
+      "facing": "right",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1390446,
+      "sha256": "dc63c26c2cdfeadd310b10c86811173d9e84ffd0609125f730f336c640e5b964",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.5752,
+      "semi_transparent_fraction": 0.4245,
+      "visual_bbox_alpha16": [
+        100,
+        209,
+        1177,
+        1105
+      ]
+    },
+    {
+      "file": "02_toad_blink.png",
+      "label": "金蟾眨眼",
+      "role": "toad",
+      "facing": "right",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1271923,
+      "sha256": "60b1bcf6081083c8ebf9033fff5f009ffc533b641a0a71de6e965dd9337291aa",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.5738,
+      "semi_transparent_fraction": 0.4255,
+      "visual_bbox_alpha16": [
+        99,
+        209,
+        1178,
+        1106
+      ]
+    },
+    {
+      "file": "03_toad_hop.png",
+      "label": "金蟾跳跃姿态",
+      "role": "toad",
+      "facing": "right",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1306561,
+      "sha256": "1cc084ab61470aac8a408d32a138f25436a18bbfa66e3509f765213def70d681",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.5809,
+      "semi_transparent_fraction": 0.4187,
+      "visual_bbox_alpha16": [
+        123,
+        155,
+        1200,
+        1157
+      ]
+    },
+    {
+      "file": "04_toad_carry.png",
+      "label": "金蟾抱钱",
+      "role": "toad",
+      "facing": "right",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1389631,
+      "sha256": "73dd81635f4dbc177630dbe7a79198e9ad6f7d942aec4a0c8bbcc6e510deee8a",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.5749,
+      "semi_transparent_fraction": 0.4249,
+      "visual_bbox_alpha16": [
+        99,
+        208,
+        1184,
+        1106
+      ]
+    },
+    {
+      "file": "05_toad_sleep.png",
+      "label": "金蟾打盹",
+      "role": "toad",
+      "facing": "right",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "bytes": 1347750,
+      "sha256": "885f87dc8324802317b88138eada3fedd887afc9ec3002eb5308bbac0cdbbf24",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.5921,
+      "semi_transparent_fraction": 0.4075,
+      "visual_bbox_alpha16": [
+        33,
+        306,
+        1230,
+        1003
+      ]
+    },
+    {
+      "file": "06_lantern_body.png",
+      "label": "灯笼灯体",
+      "role": "hanging_prop",
+      "facing": null,
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "bytes": 2124239,
+      "sha256": "57afc6a0782373dceef4cd92337d2cfe1bb426782c7ac11c635bc06da5b0086f",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.5378,
+      "semi_transparent_fraction": 0.4622,
+      "visual_bbox_alpha16": [
+        56,
+        70,
+        969,
+        1435
+      ]
+    },
+    {
+      "file": "07_lantern_tassel.png",
+      "label": "独立流苏",
+      "role": "hanging_prop",
+      "facing": null,
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "bytes": 1376454,
+      "sha256": "f96b1b9bb3fb081211b14155078bd79619b0d9e1959ed57272148d2c389d9c59",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.849,
+      "semi_transparent_fraction": 0.151,
+      "visual_bbox_alpha16": [
+        354,
+        71,
+        676,
+        1465
+      ]
+    },
+    {
+      "file": "08_treasure_bowl.png",
+      "label": "聚宝盆",
+      "role": "table_prop",
+      "facing": null,
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "bytes": 1776072,
+      "sha256": "5ca40643f82d53a86f022c71de01700dad9c3c10a89c7748465db74bc6a1f105",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "fully_transparent_fraction": 0.662,
+      "semi_transparent_fraction": 0.338,
+      "visual_bbox_alpha16": [
+        290,
+        231,
+        1247,
+        911
+      ]
+    },
+    {
+      "file": "09_gold_coin.png",
+      "label": "铜钱",
+      "role": "interaction_prop",
+      "facing": null,
+      "width": 1310,
+      "height": 1201,
+      "mode": "RGBA",
+      "bytes": 1612510,
+      "sha256": "5abf7cbcbbd7255c7a603d3babddc9a2655a272e10e862088979f2891257473e",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_fraction": 0.5343,
+      "semi_transparent_fraction": 0.4654,
+      "visual_bbox_alpha16": [
+        163,
+        106,
+        1148,
+        1101
+      ]
+    },
+    {
+      "file": "10_auspicious_mist.png",
+      "label": "薄祥云",
+      "role": "ambient_overlay",
+      "facing": null,
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "bytes": 583618,
+      "sha256": "5b6ef993d42bd7f4796a8b54b1e70c28934a90d286532e3d65accf9a4f837f1d",
+      "alpha_extrema": [
+        0,
+        253
+      ],
+      "fully_transparent_fraction": 0.8016,
+      "semi_transparent_fraction": 0.1984,
+      "visual_bbox_alpha16": [
+        16,
+        234,
+        2127,
+        532
+      ]
+    }
+  ],
+  "suggested_lantern_attachment": {
+    "units": "original image pixels; calibrate visually",
+    "body_pivot": [
+      512,
+      80
+    ],
+    "body_bottom_eye": [
+      513,
+      1405
+    ],
+    "tassel_top": [
+      509,
+      88
+    ],
+    "tassel_scale_relative_to_body": 0.43
+  }
+}

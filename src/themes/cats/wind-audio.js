@@ -3,7 +3,7 @@ export const CAT_WIND_FILE='assets/cats/audio/wind-bed.wav';
 
 export function catWindGain(outputGain,clock=0,{night=false,duck=false}={}){
  const breath=.78+.14*Math.sin(clock*.17)+.08*Math.sin(clock*.051+1.2);
- return outputGain*.12*breath*(night?.85:1)*(duck?.58:1);
+ return outputGain*.07*breath*(night?.85:1)*(duck?.58:1);
 }
 
 /** Overlap the end into the beginning, then start beyond that overlap. */
@@ -21,19 +21,4 @@ export function prepareCatWindSample(sample){
  return {data,sampleRate:rate};
 }
 
-let fallback;
-export function synthesizeCatWind(){
- if(fallback)return fallback;
- const sampleRate=24000,data=new Float32Array(sampleRate*10);
- let seed=0x7d98ab2d,low=0,soft=0,rumble=0,peak=0;
- // Deterministic two-pole low-pass texture with sub-bass removed. No bright
- // broadband hiss, pitched oscillator, per-frame synthesis or running timer.
- for(let i=-sampleRate;i<data.length;i++){
-  seed=(Math.imul(seed,1664525)+1013904223)>>>0;
-  const white=seed/2147483648-1;
-  low+=.082*(white-low);soft+=.082*(low-soft);rumble+=.008*(soft-rumble);
-  if(i>=0){const v=soft-rumble;data[i]=v;peak=Math.max(peak,Math.abs(v))}
- }
- for(let i=0;i<data.length;i++)data[i]*=.16/peak;
- fallback=prepareCatWindSample({data,sampleRate});return fallback;
-}
+// Missing field recordings remain silent; never substitute a noise generator.

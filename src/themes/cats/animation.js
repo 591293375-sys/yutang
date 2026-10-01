@@ -2,17 +2,20 @@ import {renderCatAppearance,drawStroke,validateAppearance} from './appearance.js
 import {normalizeCustomization} from './customization.js';
 import {CAT_ACTION_ATLASES} from './actions-manifest.js';
 import {rigVertexWeights,rigControls,applyRigWeights} from './continuous-rig.js';
-import {drawQuadruped} from './quadruped.js';
+import {drawPaintedGait} from './painted-gait.js';
 
 export const CAT_ACTION_CLIPS=Object.freeze({walkToward:[0,1,2,3],walkAway:[4,5,6,7],rest:[8],sleep:[9],eat:[10,11],groom:[12,13],scratch:[14],pounce:[15]});
 const TAU=Math.PI*2,clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
 const smooth=v=>{const t=clamp(v,0,1);return t*t*(3-2*t)};
-export const GAIT_STRIDE_RATIO=.24;
+export const GAIT_STRIDE_RATIO=.22;
 const baseAtlases=new Map(),paintedAtlases=new Map();
 const PART_ORDER=['head','tail','frontLeft','frontRight','backLeft','backRight','legs','body'];
 
+// A low surface lip is crossed with the ordinary gait; only hops and jumps
+// switch to the gathered leap.
+const leaping=cat=>!!cat.traverse&&cat.traverse.style!=='stride';
 export function selectCatAction(cat){
-  if(['crouch','jump'].includes(cat.state)||['crouch','jump','land'].includes(cat.traverse?.phase))return 'pounce';
+  if(['crouch','jump'].includes(cat.state)||leaping(cat)&&['crouch','jump','land'].includes(cat.traverse?.phase))return 'pounce';
   const moving=['walk','approach'].includes(cat.state)&&(cat.speed>.0003||Math.hypot(cat.motionDx||0,cat.motionDy||0)>.000001);
   if(moving)return Math.sin(cat.heading??Math.atan2(cat.motionDy||0,cat.motionDx||1))<-.2?'walkAway':'walkToward';
   if(cat.state==='sleep')return 'sleep';
@@ -35,12 +38,12 @@ export function animationSample(cat,preset,time,lowMotion=false){
   // Independent painted cells are not in-between drawings. Keep a stable coat
   // and use articulated geometry, including for idle, instead of dissolving
   // four whole cats (or alternating the high/low feeding silhouettes).
-  const index=action==='pounce'&&cat.traverse?(Math.sin(cat.heading||0)<-.2?4:0):({idle:0,walkToward:0,walkAway:4,rest:8,sleep:9,eat:10,groom:12,scratch:14,pounce:15})[action]??0;
+  const index=action==='pounce'&&leaping(cat)?(Math.sin(cat.heading||0)<-.2?4:0):({idle:0,walkToward:0,walkAway:4,rest:8,sleep:9,eat:10,groom:12,scratch:14,pounce:15})[action]??0;
   const strideStrength=walking?clamp((cat.speed||0)/Math.max(.014,preset.speed||.03),0,1):0;
   const jump=0; // Whole-body lift belongs exclusively to a real surface traversal.
   const length=Math.hypot(cat.motionDx||0,(cat.motionDy||0)*9/16),heading=cat.heading||0;
   const locomotion={origin:{x:cat.x||0,y:(cat.y||0)*9/16},direction:length>1e-9?{x:cat.motionDx/length,y:cat.motionDy*9/16/length}:{x:Math.cos(heading),y:Math.sin(heading)},distance:cat.strideDistance||0,stride:Math.max(.015,(preset.scale||.068)*normalizeCustomization(cat.customization).size*GAIT_STRIDE_RATIO),moving:walking};
-  return {action,index,next:index,mix:0,bob:0,lean:0,jump,locomotion,gaitPhase:phase,strideStrength,singlePose:true,motionStage:cat.traverse?.phase||null,stageProgress:cat.traverse?.progress||0,actionTime:cat.stateTime??time};
+  return {action,index,next:index,mix:0,bob:0,lean:0,jump,locomotion,gaitPhase:phase,strideStrength,singlePose:true,motionStage:leaping(cat)?cat.traverse.phase:null,stageProgress:leaping(cat)?cat.traverse.progress||0:0,traverse:leaping(cat)?{kind:cat.traverse.kind,style:cat.traverse.style||(cat.traverse.kind==='climb'?'climb':'jump'),direction:cat.traverse.direction||'up'}:null,actionTime:cat.stateTime??time};
 }
 
 export function partUV(point,sourceRect,targetRect){
@@ -188,11 +191,21 @@ export function shadeCatPaint(original,pigment,alpha){
   const lum=(.2126*original[0]+.7152*original[1]+.0722*original[2])/255,coverage=clamp(alpha,0,1)*.88*(lum<.13?.45:1),shade=.32+.78*lum;
   return original.map((value,channel)=>Math.round(value*(1-coverage)+Math.min(255,pigment[channel]*shade)*coverage));
 }
+// Locomotion faces the viewer using the supplied portrait, including its original
+// uncut paws. The authored planted rear pose replaces the raised-sole pose.
+async function withPortraitGait(preset,appearance,atlas){
+ const portrait=await renderCatAppearance(preset,appearance,{size:512});
+ const g=portrait.getContext('2d',{willReadFrequently:true}),box=alphaBounds(g.getImageData(0,0,portrait.width,portrait.height).data,portrait.width,portrait.height);
+ const cropped=canvas(box.width,box.height);cropped.getContext('2d').drawImage(portrait,box.x,box.y,box.width,box.height,0,0,box.width,box.height);
+ const bounds=normalizedBounds(box,portrait.width,portrait.height),standing={...atlas.frames[0],portrait:true,image:cropped,bounds,anchor:{x:.5,y:.98},parts:preset.regions,sourceMapping:{x:0,y:0,width:1,height:1},scale:atlas.referenceWidth/bounds[2],cellWidth:portrait.width,cellHeight:portrait.height,rigKey:{}};
+ const frames=[...atlas.frames];frames[0]=standing;frames[4]={...frames[7],index:4};
+ return {...atlas,frames};
+}
 export async function loadActionAtlas(preset,appearance,configuration={}){
   const spec=getActionSpec(preset.id);if(!spec)return null;
   const key=`${preset.id}:${spec.version||1}:${JSON.stringify(spec.sourceRects||[])}:${JSON.stringify(appearance||{})}:${configuration.key||''}`;
   if(paintedAtlases.has(key)){const value=paintedAtlases.get(key);paintedAtlases.delete(key);paintedAtlases.set(key,value);return value}
-  const job=baseAtlas(preset,spec).then(atlas=>paintAtlas(preset,appearance,atlas)).then(async atlas=>typeof configuration.transformFrame==='function'?{...atlas,frames:await Promise.all(atlas.frames.map(frame=>configuration.transformFrame(frame,preset)))}:atlas);paintedAtlases.set(key,job);while(paintedAtlases.size>12)paintedAtlases.delete(paintedAtlases.keys().next().value);job.catch(()=>paintedAtlases.delete(key));return job;
+  const job=baseAtlas(preset,spec).then(atlas=>paintAtlas(preset,appearance,atlas)).then(atlas=>withPortraitGait(preset,appearance,atlas)).then(async atlas=>typeof configuration.transformFrame==='function'?{...atlas,frames:await Promise.all(atlas.frames.map(frame=>configuration.transformFrame(frame,preset)))}:atlas);paintedAtlases.set(key,job);while(paintedAtlases.size>12)paintedAtlases.delete(paintedAtlases.keys().next().value);job.catch(()=>paintedAtlases.delete(key));return job;
 }
 
 // Crossfades are a normalized sum of complete poses. Drawing translucent
@@ -299,7 +312,7 @@ export function drawActionFrame(ctx,frame,atlas,width,action,time,options={}){
   const cellWidth=width/atlas.referenceWidth*(frame.scale||1),cellHeight=cellWidth*frame.cellHeight/frame.cellWidth,b=frame.bounds;
   const left=(b[0]-frame.anchor.x)*cellWidth,top=(b[1]-frame.anchor.y)*cellHeight,w=b[2]*cellWidth,h=b[3]*cellHeight;
   if(!mesh){ctx.drawImage(frame.image,left,top,w,h);return {left,top,width:w,height:h}}
-  if([0,4].includes(frame.index)&&(['idle','pounce'].includes(action)||action.startsWith('walk'))){const result=drawQuadruped(ctx,frame,atlas,width,action,time,options);if(result)return result}
+  if([0,4].includes(frame.index)&&(['idle','pounce'].includes(action)||action.startsWith('walk'))){const result=drawPaintedGait(ctx,frame,atlas,width,action,time,options,triangle);if(result)return result}
   const {columns,rows,vertices,cells}=actionMesh(frame,action),controls=rigControls(action,time,{gaitPhase,strideStrength,motionStage,stageProgress,reducedMotion}),points=[];
   for(const vertex of vertices){
     const offset=applyRigWeights(vertex.weights,controls),y=top+vertex.v*h;

@@ -90,7 +90,7 @@ test('feeding and grooming articulate their own joints without alternating incom
 });
 
 test('mesh occupancy belongs to each customized image, not the shared original pose key',()=>{
- const bitmap=(left,right)=>{const data=new Uint8ClampedArray(100*100*4);for(let y=20;y<98;y++)for(let x=left;x<right;x++)data[(y*100+x)*4+3]=255;return {width:100,height:100,getContext:()=>({getImageData:()=>({data})})}};
+ const bitmap=(left,right)=>{const data=new Uint8ClampedArray(100*100*4);for(let y=20;y<98;y++)for(let x=left;x<right;x++)data[(y*100+x)*4+3]=255;return {width:100,height:100,getContext:()=>({getImageData:()=>({data,width:100,height:100})})}};
  const rigKey={},template={rigKey,index:0,bounds:[0,0,1,1],anchor:{x:.5,y:.98},cellWidth:100,cellHeight:100,sourceMapping:{x:0,y:0,width:1,height:1},parts:{head:[.1,.4,.4,.4],body:[.35,.26,.48,.48],legs:[.2,.65,.6,.32],tail:[.68,.03,.28,.4]}};
  const count=frame=>{let n=0;const noop=()=>{},ctx={save:noop,restore:noop,beginPath:noop,moveTo:noop,lineTo:noop,closePath:noop,clip:noop,transform:noop,drawImage:()=>n++};drawActionFrame(ctx,frame,{referenceWidth:1},100,'walkToward',0,{gaitPhase:.3,strideStrength:1});return n};
  const thin=count({...template,image:bitmap(44,56)}),wide=count({...template,image:bitmap(20,80)}),fresh=count({...template,rigKey:{},image:bitmap(20,80)});assert.ok(wide>thin,'larger body has additional visible mesh cells');assert.equal(wide,fresh,'loading a thin cat first must not clip a later wide cat');

@@ -1,0 +1,162 @@
+{
+  "toad_idle": {
+    "source": [
+      1254,
+      1254
+    ],
+    "crop": {
+      "left": 96,
+      "top": 205,
+      "width": 1086,
+      "height": 904
+    },
+    "runtime": [
+      512,
+      426
+    ]
+  },
+  "toad_blink": {
+    "source": [
+      1254,
+      1254
+    ],
+    "crop": {
+      "left": 95,
+      "top": 205,
+      "width": 1087,
+      "height": 905
+    },
+    "runtime": [
+      512,
+      426
+    ]
+  },
+  "toad_hop": {
+    "source": [
+      1254,
+      1254
+    ],
+    "crop": {
+      "left": 119,
+      "top": 151,
+      "width": 1085,
+      "height": 1010
+    },
+    "runtime": [
+      512,
+      477
+    ]
+  },
+  "toad_carry": {
+    "source": [
+      1254,
+      1254
+    ],
+    "crop": {
+      "left": 94,
+      "top": 204,
+      "width": 1096,
+      "height": 906
+    },
+    "runtime": [
+      512,
+      423
+    ]
+  },
+  "toad_sleep": {
+    "source": [
+      1254,
+      1254
+    ],
+    "crop": {
+      "left": 29,
+      "top": 302,
+      "width": 1207,
+      "height": 705
+    },
+    "runtime": [
+      512,
+      299
+    ]
+  },
+  "lantern_body": {
+    "source": [
+      1024,
+      1536
+    ],
+    "crop": {
+      "left": 52,
+      "top": 66,
+      "width": 921,
+      "height": 1373
+    },
+    "runtime": [
+      470,
+      700
+    ]
+  },
+  "lantern_tassel": {
+    "source": [
+      1024,
+      1536
+    ],
+    "crop": {
+      "left": 350,
+      "top": 67,
+      "width": 330,
+      "height": 1402
+    },
+    "runtime": [
+      165,
+      700
+    ]
+  },
+  "treasure_bowl": {
+    "source": [
+      1536,
+      1024
+    ],
+    "crop": {
+      "left": 286,
+      "top": 227,
+      "width": 965,
+      "height": 688
+    },
+    "runtime": [
+      512,
+      365
+    ]
+  },
+  "gold_coin": {
+    "source": [
+      1310,
+      1201
+    ],
+    "crop": {
+      "left": 158,
+      "top": 102,
+      "width": 994,
+      "height": 1004
+    },
+    "runtime": [
+      507,
+      512
+    ]
+  },
+  "auspicious_mist": {
+    "source": [
+      2172,
+      724
+    ],
+    "crop": {
+      "left": 0,
+      "top": 220,
+      "width": 2145,
+      "height": 320
+    },
+    "runtime": [
+      1200,
+      179
+    ]
+  }
+}

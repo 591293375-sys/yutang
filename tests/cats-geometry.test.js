@@ -35,7 +35,7 @@ test('season and local clock phase boundaries follow the courtyard specification
  assert.equal(resolveEnvironment({season:'summer',time:'night',fireflies:false}).fireflyCount,0);
  assert.equal(resolveEnvironment({season:'spring',time:'day'}).fireflyCount,0);
  assert.ok(resolveEnvironment({season:'summer',time:'night'}).fireflyCount>0);
- assert.deepEqual(normalizeEnvironment({time:'bad',season:'bad'}),{season:'auto',time:'auto',fireflies:true,particles:true});
+ assert.deepEqual(normalizeEnvironment({time:'bad',season:'bad'}),{season:'auto',time:'auto',fireflies:true,particles:true,music:true,musicVolume:.35});
 });
 test('a blocked straight line is replaced with a valid multi-segment route',()=>{
  let fixture=null;
@@ -71,4 +71,14 @@ test('facility hit areas follow actual surfaces and cannot steal nearby paving c
  assert.equal(hitFacility({x:.52,y:.58}),null);assert.equal(hitFacility({x:.857,y:.574}),null,'climbing takeoff paving is not itself the raised platform');
  assert.equal(hitFacility({x:.832,y:.177}),null,'outside the bowl outline stays unselected');
  assert.equal(hitFacility({x:NaN,y:0}),null);assert.equal(hitFacility({x:Infinity,y:0}),null);
+});
+
+
+test('cat tree platform stays fully visible in common and narrow desktop windows',()=>{
+ const platform=SURFACES.find(s=>s.id==='lower-platform');
+ for(const [width,height] of [[1357,911],[1045,899],[1280,800],[1920,1080],[2560,1080]]){
+  const transform=coverTransform(width,height);
+  for(const p of platform.polygon){const screen=worldToScreen(p,transform);assert.ok(screen.x>=0&&screen.x<=width);assert.ok(screen.y>=0&&screen.y<=height)}
+  const click=worldToScreen(FACILITIES.climbing,transform);assert.equal(hitFacility(screenToWorld(click,transform))?.id,'climbing');
+ }
 });

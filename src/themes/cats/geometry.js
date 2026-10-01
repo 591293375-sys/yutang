@@ -51,10 +51,12 @@ export const SLEEP_SLOT_MAP=Object.freeze(Object.fromEntries(SLEEP_SLOTS.map(s=>
 export function coverTransform(width,height){
   const w=Math.max(1,Number(width)||1),h=Math.max(1,Number(height)||1);
   // Fill the viewport with the actual painting at its original aspect ratio.
-  // Unusual windows crop the edges instead of adding blurred letterboxes.
+  // Anchor the crop to the furnished right edge so the entire cat-tree platform
+  // remains visible in ordinary/tall windows. The tree is part of the painting;
+  // reframe its navigation, canopy, shadows and hit areas with the same matrix.
   // Foreground, feet, shadows and input must keep this exact same transform.
   const scale=Math.max(w/WORLD_WIDTH,h/WORLD_HEIGHT);
-  return {width:w,height:h,scale,fit:'cover',offsetX:(w-WORLD_WIDTH*scale)/2,offsetY:(h-WORLD_HEIGHT*scale)/2,drawWidth:WORLD_WIDTH*scale,drawHeight:WORLD_HEIGHT*scale};
+  return {width:w,height:h,scale,fit:'cover',offsetX:w-WORLD_WIDTH*scale,offsetY:(h-WORLD_HEIGHT*scale)/2,drawWidth:WORLD_WIDTH*scale,drawHeight:WORLD_HEIGHT*scale};
 }
 export function worldToScreen(point,t){return {x:t.offsetX+point.x*t.drawWidth,y:t.offsetY+point.y*t.drawHeight};}
 export function screenToWorld(point,t){return {x:(point.x-t.offsetX)/t.drawWidth,y:(point.y-t.offsetY)/t.drawHeight};}

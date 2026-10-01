@@ -1,0 +1,15 @@
+{
+  "title": "晴窗小憩",
+  "type": "generated instrumental",
+  "generator": "ChatCut / Mureka 9",
+  "projectId": "ed590bd8-4697-4dcc-bf2c-7f784e4f47e0",
+  "assetId": "19d98eb450",
+  "jobId": "ad744c3592",
+  "exportId": "c46fbf8e04",
+  "generatedOn": "2026-10-01",
+  "durationSeconds": 182.26,
+  "source": "source-art/cats/audio/courtyard-music.mp3",
+  "runtime": "assets/cats/audio/courtyard-music.m4a",
+  "treatment": "2 second opening fade, 4 second ending fade in native ChatCut audio timeline; AAC 128 kbps. Runtime soft volume, fade on resume and ducking under cat responses.",
+  "rights": "Generated for this project through the user-authorized ChatCut music workflow. This track is not part of the CC0 sound-effects bank."
+}

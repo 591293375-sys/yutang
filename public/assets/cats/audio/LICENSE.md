@@ -1,5 +1,7 @@
 # Courtyard audio credits
 
+`courtyard-music.m4a` (晴窗小憩) is a new instrumental generated for this project with ChatCut / Mureka 9 on 2026-10-01. Its generation/export provenance is recorded in `music-source.json`. It is separate from the CC0 field-recording bank below; no CC0 license claim is made for the generated music.
+
 These short edited recordings are released under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) by the original contributors. Local copies ship with the app; no runtime network service is used.
 
 - **Cat Meowing** — qubodup (adapted from tuberatanka) · [source and CC0 declaration](https://freesound.org/people/qubodup/sounds/813113/)
@@ -9,7 +11,7 @@ These short edited recordings are released under [CC0 1.0](https://creativecommo
 - **Blanket Movement 6** — OwlStorm / Ashe Kirk · [source and CC0 declaration](https://freesound.org/people/OwlStorm/sounds/320144/)
 - **SOFT TAPPING** — stevielematt · [source and CC0 declaration](https://freesound.org/people/stevielematt/sounds/707827/)
 
-`sources.json` records excerpt times and processing. Felt toy cues combine the textile and padded-tap sources. Nighttime cricket and missing-file fallbacks are original procedural sounds; the wind bed and daytime bird calls use edited field recordings. Full originals and unused audition candidates are not shipped.
+`sources.json` records excerpt times and processing. Felt toy cues combine the textile and padded-tap sources. Nighttime cricket and missing-file fallbacks are original procedural sounds; the wind bed and daytime bird calls use edited field recordings. Missing wind recordings remain silent; no synthesized wind fallback is used. Full originals and unused audition candidates are not shipped.
 
 - **Wind(leaves).WAV** — o_ciz · [source and CC0 declaration](https://freesound.org/people/o_ciz/sounds/475448/)
 

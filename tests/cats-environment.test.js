@@ -15,9 +15,9 @@ test('the only manual times are day and night, with precise local automatic boun
 test('legacy dawn and dusk saves migrate to daylight without losing season and effect preferences',()=>{
  for(const time of ['dawn','dusk']){
   const env={season:'winter',time,particles:false,fireflies:false};
-  assert.deepEqual(normalizeEnvironment(env),{...env,time:'day'});
+  assert.deepEqual(normalizeEnvironment(env),{...env,time:'day',music:true,musicVolume:.35});
   const saved=normalizeCats({version:1,cats:[],props:[],nextId:1,environment:env});
-  assert.deepEqual(saved.environment,{...env,time:'day'});
+  assert.deepEqual(saved.environment,{...env,time:'day',music:true,musicVolume:.35});
  }
  assert.equal(normalizeEnvironment({time:'unknown'}).time,'auto');
 });

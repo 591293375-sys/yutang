@@ -10,3 +10,9 @@ electron/native/bin/
 .env
 .env.*
 !.env.example
+
+# Local verification output
+test-results/
+playwright-report/
+__pycache__/
+*.pyc

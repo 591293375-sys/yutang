@@ -1,0 +1,23 @@
+import {ITEMS,MAX_ITEMS} from './catalog.js';
+import {bounds,inPolygon,validPlacement} from './geometry.js';
+export const TOAD_RADIUS={x:19,y:7};
+export const distance=(a,b)=>Math.hypot((a.x-b.x)*1600,(a.y-b.y)*900);
+const point=(x,y)=>({x:x/1600,y:y/900});
+export function footprint(item){const b=bounds(item);return{x:item.x*1600,y:item.y*900-3,rx:b.w*1600*ITEMS[item.kind].base*.5,ry:Math.max(5,b.w*1600*.069)}}
+export function freePoint(p,items,radius=TOAD_RADIUS){if(!p||![p.x,p.y].every(Number.isFinite))return false;for(const dx of [-radius.x,radius.x])for(const dy of [-radius.y,radius.y])if(!inPolygon(point(p.x*1600+dx,p.y*900+dy)))return false;return items.filter(i=>!i.stored).every(i=>{const b=footprint(i);return ((p.x*1600-b.x)/(b.rx+radius.x))**2+((p.y*900-b.y)/(b.ry+radius.y))**2>1})}
+export function clearSegment(a,b,items,radius=TOAD_RADIUS){const n=Math.ceil(distance(a,b)/4);for(let i=0;i<=n;i++){const u=n?i/n:0;if(!freePoint({x:a.x+(b.x-a.x)*u,y:a.y+(b.y-a.y)*u},items,radius))return false}return true}
+export function safePoints(items){const points=[];for(let y=722;y<=798;y+=8)for(let x=44;x<=1556;x+=16){const p=point(x,y);if(freePoint(p,items))points.push(p)}return points}
+export function nearestFree(p,items){if(freePoint(p,items))return {...p};return safePoints(items).sort((a,b)=>distance(a,p)-distance(b,p))[0]||null}
+// Bounded A* on a small table grid. Only planned on a decision / layout change.
+export function pathTo(start,end,items){if(!freePoint(start,items)||!freePoint(end,items))return null;if(clearSegment(start,end,items))return[{...end}];const nodes=safePoints(items),key=p=>`${Math.round(p.x*1600)},${Math.round(p.y*900)}`,map=new Map(nodes.map((p,i)=>[key(p),i]));
+ const closest=p=>nodes.map((q,i)=>({i,d:distance(p,q)})).sort((a,b)=>a.d-b.d).slice(0,12).find(n=>clearSegment(p,nodes[n.i],items))?.i;
+ const first=closest(start),last=closest(end);if(first===undefined||last===undefined)return null;const open=[first],cost=new Map([[first,0]]),from=new Map(),closed=new Set();let found=false;
+ for(let limit=0;open.length&&limit<nodes.length;limit++){open.sort((a,b)=>(cost.get(a)+distance(nodes[a],end))-(cost.get(b)+distance(nodes[b],end)));const id=open.shift();if(id===last){found=true;break}closed.add(id);const p=nodes[id];for(const dx of [-16,0,16])for(const dy of [-8,0,8]){if(!dx&&!dy)continue;const q=point(Math.round(p.x*1600)+dx,Math.round(p.y*900)+dy),j=map.get(key(q));if(j===undefined||closed.has(j)||!clearSegment(p,q,items))continue;const c=cost.get(id)+distance(p,q);if(c<(cost.get(j)??Infinity)){cost.set(j,c);from.set(j,id);if(!open.includes(j))open.push(j)}}}
+ if(!found)return null;const route=[end];for(let i=last;i!==undefined;i=from.get(i))route.unshift(nodes[i]);route.unshift(start);const reduced=[];let i=0;while(i<route.length-1){let j=route.length-1;while(j>i+1&&!clearSegment(route[i],route[j],items))j--;reduced.push(route[j]);i=j}return reduced;
+}
+// Prefer a visible arrival point: a physically free foot can still be hidden
+// by a tall foreground burner. Score torso samples in the same depth order.
+export function occlusion(p,items){let hidden=0;for(const [dx,dy] of [[0,-34],[-18,-22],[18,-22],[0,-14]]){const q={x:p.x+dx/1600,y:p.y+dy/900};if(items.some(i=>{if(i.stored||i.y<=p.y)return false;const b=bounds(i);return q.x>b.x&&q.x<b.x+b.w&&q.y>b.y&&q.y<b.y+b.h}))hidden++}return hidden}
+export function approach(item,from,items){if(!item||item.stored)return null;const b=footprint(item),candidates=[];for(let i=0;i<16;i++){const a=i*Math.PI/8,p=point(b.x+Math.cos(a)*(b.rx+TOAD_RADIUS.x+8),b.y+Math.sin(a)*(b.ry+TOAD_RADIUS.y+8));if(freePoint(p,items))candidates.push(p)}for(const p of candidates.sort((a,b)=>(occlusion(a,items)*200+distance(a,from))-(occlusion(b,items)*200+distance(b,from)))){const path=pathTo(from,p,items);if(path)return{p,path}}return null}
+export function bowlPlacement(items){if(items.length>=MAX_ITEMS)return null;const candidate={id:'cy-motion-bowl',kind:'bowl',x:.598,y:.882,scale:1,stored:false,lit:false,tea:0};const points=[candidate,...safePoints([]).sort((a,b)=>distance(a,candidate)-distance(b,candidate))];for(const p of points){const item={...candidate,x:p.x,y:p.y},b=footprint(item);if(validPlacement(item)&&freePoint({x:item.x,y:(b.y)/900},items,{x:b.rx+9,y:b.ry+5}))return item}return null}
+export function upgradeMotion(state){if(state.motion.version>=1)return;state.motion.version=1;if(state.items.some(i=>!i.stored)&&!state.items.some(i=>i.kind==='bowl')){const bowl=bowlPlacement(state.items);if(bowl){while(state.items.some(i=>i.id===bowl.id))bowl.id+='-1';state.items.push(bowl)}}}
