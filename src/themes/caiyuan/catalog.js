@@ -13,4 +13,4 @@ export const ITEMS=Object.freeze({
 });
 export function defaultItems(){return [
  ['burner',.5,.868],['lamp',.335,.843],['lamp',.665,.843],['fruit',.177,.864],['pastry',.79,.866],['teapot',.909,.829],['cup',.891,.875],['cup',.941,.869],['plaque',.082,.833]
-].map(([kind,x,y],i)=>({id:'cy-'+(i+1),kind,x,y,scale:1,stored:false,lit:kind==='lamp',incense:kind==='burner'?{status:'unlit',startedAt:0,duration:600000}:undefined,tea:0}));}
+].map(([kind,x,y],i)=>({id:'cy-'+(i+1),kind,x,y,scale:1,stored:false,lit:kind==='lamp',incense:kind==='burner'?{status:'unlit',startedAt:0,duration:600000}:undefined,tea:0,...(kind==='plaque'?{wishId:null}:{})}));}

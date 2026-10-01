@@ -39,6 +39,7 @@ const Scene=forwardRef(function CaiyuanScene({options,desktop,immersive,editing=
    if(tool==='incense'){if(item?.kind==='burner'){command('select',item.id);if(model.incense().status==='burning')open('incense');else command('ignite',{id:item.id})}else latest.current.notify('轻点供桌中央的香炉。');return}
    if(tool==='lamp'){if(item?.kind==='lamp')command('lamp',item.id);else latest.current.notify('轻点一盏莲灯。');return}
    if(tool==='tea')return command('tea',item?.id);
+   if(tool==='wish'){if(item?.kind==='plaque'){command('cancel');command('select',item.id);open('wishes')}else latest.current.notify('轻点要写心愿的祈愿牌。');return}
    if(tool==='arrange'){if(item){command('select',item.id)}return}
    if(!item)return;command('select',item.id);
    if(item.kind==='burner')open('incense');else if(item.kind==='lamp')command('lamp',item.id);else if(item.kind==='plaque')open('wishes');else if(item.kind==='teapot'){command('tool','tea');latest.current.notify('已拿起茶壶，轻点一只茶杯添茶。')}else open('object');
