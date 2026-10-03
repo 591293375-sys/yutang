@@ -29,7 +29,7 @@ test('random selection does not impose file order and a missed bottle remains el
  const a=create(memory(),start,()=>0),b=create(memory(),start,()=>.95);
  arrive(a);arrive(b);
  assert.notEqual(a.bottles[0].letter.contentId,b.bottles[0].letter.contentId);
- const first=a.bottles[0];advance(a,first.expiresAt+1000);arrive(a);
+ const first=a.bottles[0];advance(a,first.expiresAt+1000);for(let i=0;i<185&&!a.bottles.length;i++)a.update(2,a.snapshot().lastSeenAt+2000,0);
  assert.equal(a.view().collectedContentIds.length,0);assert.ok(a.bottles.length>0);
  assert.equal(a.bottles[0].letter.contentId,first.letter.contentId,'uncollected content was not consumed');assert.notEqual(a.bottles[0].id,first.id);
 });

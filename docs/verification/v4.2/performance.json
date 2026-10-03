@@ -1,0 +1,109 @@
+{
+  "nativeRAF": true,
+  "pixelReadback": false,
+  "extraUpdates": false,
+  "screenshots": false,
+  "viewport": {
+    "width": 1600,
+    "height": 900,
+    "requestedDpr": 2
+  },
+  "quality": "high",
+  "cases": [
+    {
+      "theme": "coast",
+      "nativeRAF": true,
+      "css": {
+        "width": 1600,
+        "height": 900
+      },
+      "dpr": 2,
+      "canvas": {
+        "width": 3200,
+        "height": 1800
+      },
+      "entities": 30,
+      "tide": {
+        "phase": "high",
+        "level": 1,
+        "remainingSeconds": 243,
+        "cycle": 0,
+        "progress": 0.1924000000000001,
+        "position": 657.72,
+        "nextPhase": "falling",
+        "manual": false,
+        "paused": false,
+        "speed": 1
+      },
+      "measures": {
+        "renderer.drawWater": {
+          "ms": 128.7000013589859,
+          "n": 595
+        },
+        "renderer.drawSprite": {
+          "ms": 423.7999986410141,
+          "n": 17850
+        },
+        "renderer.drawAnimalWaterVeil": {
+          "ms": 60.30000162124634,
+          "n": 595
+        },
+        "renderer.drawFoam": {
+          "ms": 1520.299998641014,
+          "n": 595
+        },
+        "renderer.drawRockForeground": {
+          "ms": 5.799999475479126,
+          "n": 595
+        },
+        "renderer.drawWeather": {
+          "ms": 1,
+          "n": 595
+        },
+        "contact.draw": {
+          "ms": 1646.1999999284744,
+          "n": 595
+        },
+        "water.drawSea": {
+          "ms": 119.2000024318695,
+          "n": 1190
+        },
+        "water.update": {
+          "ms": 2.3000000715255737,
+          "n": 595
+        },
+        "water.draw": {
+          "ms": 19.5,
+          "n": 595
+        }
+      },
+      "elapsedMs": 10022.700000047684,
+      "renderedFrames": 595,
+      "renderFPS": 59.36524090286741,
+      "renderCpuMs": {
+        "p50": 6.5,
+        "p95": 8.899999976158142,
+        "p99": 10.900000095367432,
+        "max": 12.100000023841858,
+        "over33": 0
+      },
+      "renderFrameMs": {
+        "p50": 16.600000023841858,
+        "p95": 19.5,
+        "p99": 37.200000047683716,
+        "max": 38.5,
+        "over33": 13
+      },
+      "rafFPS": 59.36524090286741,
+      "rafMs": {
+        "p50": 16.69999999999891,
+        "p95": 18.399999999999636,
+        "p99": 31.399999999999636,
+        "max": 35.100000000000364,
+        "over33": 2
+      }
+    }
+  ],
+  "errors": [],
+  "result": "PASS"
+}

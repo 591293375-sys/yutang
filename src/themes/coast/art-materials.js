@@ -39,11 +39,20 @@ export function shadeAnimalPixels(source,width,height,artWidth,artHeight,pad,spe
 /** Blue-water transmission, cached per animation frame. Channel attenuation
  * preserves the source's local markings and highlights instead of a flat green
  * source-atop paint layer. Depth/opacity and all hit masks remain renderer-owned. */
-export function submergeAnimalPixels(source){
+export function submergeAnimalPixels(source,species){
  const output=new Uint8ClampedArray(source);
  for(let i=0;i<source.length;i+=4){
   if(!source[i+3])continue;
   const luma=source[i]*.2126+source[i+1]*.7152+source[i+2]*.0722;
+  if(species?.kind==='fish'){
+   // Wavelength absorption and a little blue-green in-scattering soften the
+   // bright paper-like scales. Markings stay distinct and alpha is untouched.
+   const scatter=.23+(1-luma/255)*.07,transmission=1-scatter;
+   output[i]=source[i]*.46*transmission+24*scatter;
+   output[i+1]=source[i+1]*.74*transmission+107*scatter;
+   output[i+2]=source[i+2]*.81*transmission+139*scatter;
+   continue;
+  }
   const scatter=.28+(1-luma/255)*.06,transmission=1-scatter;
   output[i]=source[i]*.79*transmission+48*scatter;
   output[i+1]=source[i+1]*.96*transmission+125*scatter;

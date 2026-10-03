@@ -1,4 +1,4 @@
-import {blockedAt,pointInPolygon,waterBoundary,shoreDistance,POOL} from './geometry.js';
+import {blockedAt,pointInPolygon,waterBoundary,shoreDistance,POOL,getRockRevision} from './geometry.js';
 import {emptyDrawing,normalizeDrawing,hasDrawing,jsonBytes} from './letter-drawing.js';
 import {CURATED_LETTERS,CURATED_LETTERS_BY_ID} from './letter-catalog.js';
 import {validTideArrivalKey} from './tide.js';
@@ -6,6 +6,7 @@ import {validTideArrivalKey} from './tide.js';
 export const BOTTLE_STORAGE_KEY='mofish-bottles-v1';
 export const BOTTLE_LIMITS=Object.freeze({incoming:1,outgoing:2,collection:100,sent:100,body:600,signature:24,storageBytes:1500000});
 const MINUTE=60000;
+export const BOTTLE_ARRIVAL_INTERVAL=Object.freeze({minMs:4*MINUTE,maxMs:6*MINUTE});
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
 const record=v=>v&&typeof v==='object'&&!Array.isArray(v);
 const finite=(v,fallback=0)=>Number.isFinite(v)?v:fallback;
@@ -41,9 +42,10 @@ export function bottleWaterPath(a,b){
  for(let i=0;i<=steps;i++)if(!bottleWaterPoint(a.x+(b.x-a.x)*i/steps,a.y+(b.y-a.y)*i/steps))return false;
  return true;
 }
-let waterGrid=null;
+let waterGrid=null,waterGridRevision=-1;
 function grid(){
- if(waterGrid)return waterGrid;
+ const revision=getRockRevision();
+ if(waterGrid&&waterGridRevision===revision)return waterGrid;
  const nodes=new Map(),step=28;
  // Cover cropping on a 390×844 viewport exposes world x≈592..1008.
  // Keep the whole 23px bottle footprint in a central connected sea corridor,
@@ -54,11 +56,20 @@ function grid(){
  // These shore-side cells stay above the mobile bottom controls. Outgoing
  // bottles use the reversed route, so their launch point is visible too.
  const shores=[...nodes.values()].filter(n=>n.y>280&&n.y<680&&n.x>840&&shoreDistance(n.x,n.y,0)<60&&shoreDistance(n.x,n.y,0)>18);
- waterGrid={nodes,edges,entries,shores};return waterGrid;
+ waterGridRevision=revision;waterGrid={nodes,edges,entries,shores};return waterGrid;
 }
 function makeRoute(random){
- const g=grid(),start=g.entries[Math.floor(random()*g.entries.length)];if(!start)return null;
- const target=g.shores[Math.floor(random()*g.shores.length)],queue=[start],previous=new Map([[start.key,null]]),cost=new Map([[start.key,0]]),closed=new Set();let found=null;
+ const g=grid();if(!g.shores.length)return null;
+ const target=g.shores[Math.floor(random()*g.shores.length)];
+ // The visible reef can split the narrow viewport corridor in two. Keep the
+ // original top entry when connected; otherwise drift from open sea in the
+ // shore's own component. Never tunnel through the reef or leave the viewport.
+ const connected=new Set([target]),pending=[target];
+ for(let index=0;index<pending.length;index++)for(const next of g.edges(pending[index]))if(!connected.has(next)){connected.add(next);pending.push(next)}
+ let entries=g.entries.filter(node=>connected.has(node));
+ if(!entries.length){const open=[...connected].filter(node=>node.y<target.y-80&&shoreDistance(node.x,node.y,0)>100),top=Math.min(...open.map(node=>node.y));entries=open.filter(node=>node.y<=top+28)}
+ const start=entries[Math.floor(random()*entries.length)];if(!start)return null;
+ const queue=[start],previous=new Map([[start.key,null]]),cost=new Map([[start.key,0]]),closed=new Set();let found=null;
  const score=node=>cost.get(node.key)+Math.hypot(node.x-target.x,node.y-target.y);
  while(queue.length){
   queue.sort((a,b)=>score(a)-score(b));const node=queue.shift();if(closed.has(node.key))continue;closed.add(node.key);if(node===target){found=node;break}
@@ -102,7 +113,7 @@ export function normalizeBottles(value){
  }
  const draft={id:idValid(value.draft?.id)?value.draft.id:'draft-1',body:text(value.draft?.body,600),signature:text(value.draft?.signature,24),drawing:normalizeDrawing(value.draft?.drawing)??emptyDrawing()};
  const ids=[draft.id,...collection.map(l=>l.id),...sent.map(l=>l.id),...bottles.map(b=>b.id)],maxId=Math.max(0,...ids.map(id=>{const n=Number(id.match(/-(\d+)$/)?.[1]);return Number.isSafeInteger(n)&&n<=1e12?n:0}));
- return{version:1,nextId:Math.max(maxId+1,Math.floor(clamp(finite(value.nextId,1),1,1e12))),nextArrivalAt:value.nextArrivalAt,lastArrivalTideKey:validTideArrivalKey(value.lastArrivalTideKey)?value.lastArrivalTideKey:null,lastSeenAt:finite(value.lastSeenAt),letterIndex:Math.floor(clamp(finite(value.letterIndex),0,1e9)),draft,collection,collectedContentIds,sent,bottles};
+ return{version:1,nextId:Math.max(maxId+1,Math.floor(clamp(finite(value.nextId,1),1,1e12))),nextArrivalAt:value.nextArrivalAt,arrivalScheduleVersion:value.arrivalScheduleVersion===1?1:0,lastArrivalTideKey:validTideArrivalKey(value.lastArrivalTideKey)?value.lastArrivalTideKey:null,lastSeenAt:finite(value.lastSeenAt),letterIndex:Math.floor(clamp(finite(value.letterIndex),0,1e9)),draft,collection,collectedContentIds,sent,bottles};
 }
 export function loadBottles(storage=storageDefault()){
  try{const raw=storage?.getItem(BOTTLE_STORAGE_KEY);return raw&&raw.length<=BOTTLE_LIMITS.storageBytes&&jsonBytes(raw)<=BOTTLE_LIMITS.storageBytes?normalizeBottles(JSON.parse(raw)):null}catch{return null}
@@ -114,12 +125,16 @@ export function saveBottles(state,storage=storageDefault()){
 export class BottleDrift{
  constructor({storage=storageDefault(),nowMs=Date.now(),random=Math.random,getTide=()=>null,persistTide=()=>true}={}){
   this.storage=storage;this.getTide=getTide;this.persistTide=persistTide;this.random=()=>clamp(finite(random(),.5),0,.999999);this.storageError=false;this.lastPersist=nowMs;this.lastAttempt=-Infinity;this.lastArrivalAttemptKey=null;
+  this.rockRevision=getRockRevision();
   const stored=loadBottles(storage);
-  // Retain the old deadline field for save compatibility; only tide keys now
-  // schedule arrivals, so no old random timer can create an extra bottle.
+  // Reuse the legacy deadline as an active-time budget relative to lastSeenAt.
+  // Re-anchor it on entry: time spent paused, in another theme or offline never
+  // accumulates a queue of bottles. The marker distinguishes v4.1's unused timer.
   this.state=stored??{version:1,nextId:2,nextArrivalAt:0,lastArrivalTideKey:null,lastSeenAt:nowMs,letterIndex:0,draft:{id:'draft-1',body:'',signature:'',drawing:emptyDrawing()},collection:[],collectedContentIds:[],sent:[],bottles:[]};
-  const next=stored?this.reconcileOffline(this.state,nowMs,true):this.state;if(!stored||next!==this.state)this.commit(next);this.state.lastSeenAt=Math.max(this.state.lastSeenAt,nowMs);
+  const remaining=stored?.arrivalScheduleVersion===1?clamp(stored.nextArrivalAt-stored.lastSeenAt,0,BOTTLE_ARRIVAL_INTERVAL.maxMs):this.arrivalDelay();
+  this.state={...this.reconcileOffline(this.state,nowMs,true),arrivalScheduleVersion:1,nextArrivalAt:nowMs+remaining,lastSeenAt:nowMs};this.commit(this.state);
  }
+ arrivalDelay(){return BOTTLE_ARRIVAL_INTERVAL.minMs+this.random()*(BOTTLE_ARRIVAL_INTERVAL.maxMs-BOTTLE_ARRIVAL_INTERVAL.minMs)}
  reconcileOffline(state,now,returning=false){
   if(!returning&&now-state.lastSeenAt<MINUTE)return state;
   return{...state,lastSeenAt:now,bottles:state.bottles.filter(b=>b.expiresAt>now)};
@@ -132,10 +147,31 @@ export class BottleDrift{
   this.state=next;this.storageError=false;this.lastPersist=next.lastSeenAt;return true;
  }
  persist(){return this.commit(this.state)}
+ reconcileRoutes(now){
+  const revision=getRockRevision();if(revision===this.rockRevision)return;this.rockRevision=revision;
+  let changed=false;const bottles=this.state.bottles.flatMap(b=>{
+   if(bottleWaterPoint(b.x,b.y)&&b.route.every((p,i)=>bottleWaterPoint(p.x,p.y)&&(!i||bottleWaterPath(b.route[i-1],p))))return[b];
+   changed=true;let route=makeRoute(this.random);if(!route)return[];
+   if(b.kind==='outgoing')route.reverse();
+   // A newly decoded rock mask may invalidate a route made before asset load.
+   // Continue from the current position where connected. Otherwise settle the
+   // same unread letter onto its safe entry and use the existing soft fade-in.
+   let joined=false;
+   for(let i=route.length-1;i>=0;i--)if(bottleWaterPath(b,route[i])){route=[{x:b.x,y:b.y},...route.slice(i)];joined=true;break}
+   return[{...b,...route[0],route,routeIndex:1,heading:Math.atan2(route[1].y-route[0].y,route[1].x-route[0].x),arrivedAt:null,...(!joined&&b.kind==='incoming'?{opacity:0,createdAt:now}:{})}];
+  });
+  if(changed){this.state={...this.state,bottles};this.persist()}
+ }
  update(dt,nowMs=Date.now(),level=0){
   const now=Math.max(this.state.lastSeenAt,finite(nowMs,Date.now()));
+  this.reconcileRoutes(now);
+  const tide=this.getTide(now),elapsed=now-this.state.lastSeenAt,remaining=Math.max(0,this.state.nextArrivalAt-this.state.lastSeenAt);
+  const wasOccupied=this.state.bottles.some(b=>b.kind==='incoming');
+  // Only time simulated by the active coast counts. A resumed window contributes
+  // one bounded frame, not the hours that passed while it was hidden.
+  const activeMs=tide&&!tide.debug&&!wasOccupied?Math.min(elapsed,clamp(finite(dt),0,2)*1000):0;
   const offline=this.reconcileOffline(this.state,now);
-  if(offline!==this.state){if(!this.commit(offline))return this.bottles;dt=0}
+  if(offline!==this.state){if(!this.commit({...offline,nextArrivalAt:now+remaining}))return this.bottles;dt=0}
   const bottles=[];
   for(const original of this.state.bottles){
    if(original.expiresAt<=now)continue;
@@ -146,17 +182,20 @@ export class BottleDrift{
    const end=b.route.at(-1),fade=b.kind==='outgoing'?Math.min(1,Math.hypot(b.x-end.x,b.y-end.y)/45):1;
    b.opacity=(b.kind==='outgoing'?1:clamp((now-b.createdAt)/6000,0,1))*fade;bottles.push(b);
   }
-  this.state={...this.state,lastSeenAt:now,bottles};
-  const tide=this.getTide(now),arrivalKey=tide?.phase==='rising'&&!tide.debug&&validTideArrivalKey(tide.key)?tide.key:null;
-  if(arrivalKey&&arrivalKey!==this.state.lastArrivalTideKey&&(arrivalKey!==this.lastArrivalAttemptKey||now-this.lastAttempt>=5000)){
+  this.state={...this.state,lastSeenAt:now,nextArrivalAt:now+Math.max(0,remaining-activeMs),bottles};
+  const arrivalKey=tide?.phase==='rising'&&!tide.debug&&validTideArrivalKey(tide.key)?tide.key:null;
+  const newTide=arrivalKey&&arrivalKey!==this.state.lastArrivalTideKey;
+  const firstArrival=newTide&&!this.state.lastArrivalTideKey&&this.state.letterIndex===0&&this.state.collection.length===0;
+  const ready=tide&&!tide.debug&&this.state.nextArrivalAt<=now&&!bottles.some(b=>b.kind==='incoming')&&this.state.collection.length<100&&this.state.collectedContentIds.length<CURATED_LETTERS.length;
+  if((newTide||ready)&&((newTide&&arrivalKey!==this.lastArrivalAttemptKey)||now-this.lastAttempt>=5000)){
    this.lastAttempt=now;this.lastArrivalAttemptKey=arrivalKey;
    // The coast clock and bottle collection live in different stores. Make the
    // clock durable first: a failed tide save must not let a collectible bottle
    // replace the old tide receipt, then replay that old tide after a restart.
-   let tideSaved=false;try{tideSaved=this.persistTide()===true}catch{}
+   let tideSaved=!newTide;try{if(newTide)tideSaved=this.persistTide()===true}catch{}
    if(!tideSaved){this.storageError=true;return this.bottles}
-   const next={...this.state,lastArrivalTideKey:arrivalKey};
-   if(!bottles.some(b=>b.kind==='incoming')&&next.collection.length<100){const bottle=this.createBottle(next,'incoming',now);if(bottle)next.bottles=[...bottles,bottle]}
+   const next={...this.state,...(newTide?{lastArrivalTideKey:arrivalKey}:{})};
+   if((firstArrival||ready)&&!bottles.some(b=>b.kind==='incoming')&&next.collection.length<100){const bottle=this.createBottle(next,'incoming',now);if(bottle){next.bottles=[...bottles,bottle];next.nextArrivalAt=now+this.arrivalDelay()}}
    this.commit(next);
   }else if(now-this.lastPersist>=5000&&now-this.lastAttempt>=5000){this.lastAttempt=now;this.persist()}
   return this.bottles;
@@ -173,7 +212,8 @@ export class BottleDrift{
   const bottle=this.state.bottles.find(b=>b.id===id);if(!bottle||bottle.expiresAt<=nowMs)return fail('这只漂流瓶已经随海水离开了。');
   if(bottle.kind==='outgoing')return ok('这是你写给海的一封信，正随海浪远行。',{action:'read-sent',letter:copy(bottle.letter)});
   if(this.state.collection.length>=100)return fail('收藏已满 100 封，这封信先留在海里。');
-  const l={...bottle.letter,receivedAt:nowMs},collectedContentIds=[...new Set([...this.state.collectedContentIds,...(l.contentId?[l.contentId]:[])])],next={...this.state,collection:[l,...this.state.collection],collectedContentIds,bottles:this.state.bottles.filter(b=>b.id!==id)};
+  const now=Math.max(this.state.lastSeenAt,finite(nowMs,this.state.lastSeenAt));
+  const l={...bottle.letter,receivedAt:nowMs},collectedContentIds=[...new Set([...this.state.collectedContentIds,...(l.contentId?[l.contentId]:[])])],next={...this.state,lastSeenAt:now,nextArrivalAt:now+this.arrivalDelay(),collection:[l,...this.state.collection],collectedContentIds,bottles:this.state.bottles.filter(b=>b.id!==id)};
   if(!this.commit(next))return fail('没能保存到本机，漂流瓶还留在原处，请稍后再试。');
   return ok('拾到一封海边手记。',{letter:copy(l)});
  }

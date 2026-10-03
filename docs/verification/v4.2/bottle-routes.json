@@ -1,0 +1,1278 @@
+{
+  "width": 1672,
+  "height": 941,
+  "results": [
+    {
+      "seed": 0,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 258,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 1,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 360,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 2,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 342,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 3,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 324,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 924,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 4,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 312,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 5,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 294,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 6,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 276,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 7,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 264,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 8,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 246,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 9,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 348,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 10,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 336,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 924,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 11,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 318,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 12,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 300,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 13,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 282,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 14,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 270,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 15,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 252,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 924,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 16,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 354,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 17,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 342,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 18,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 324,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 19,
+      "level": 0,
+      "arrived": true,
+      "arrivalSeconds": 306,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 0,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 258,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 1,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 360,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 2,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 342,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 3,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 324,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 924,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 4,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 312,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 5,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 294,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 6,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 276,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 7,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 264,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 8,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 246,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 9,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 348,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 10,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 336,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 924,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 11,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 318,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 12,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 300,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 13,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 282,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 14,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 270,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 15,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 252,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 924,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 16,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 354,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 17,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 342,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 18,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 324,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 19,
+      "level": 0.5,
+      "arrived": true,
+      "arrivalSeconds": 306,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 0,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 258,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 1,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 360,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 2,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 342,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 3,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 324,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 924,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 4,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 312,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 5,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 294,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 6,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 276,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 7,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 264,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 8,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 246,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 9,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 348,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 10,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 336,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 924,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 11,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 318,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 12,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 300,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 13,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 282,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 14,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 270,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 15,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 252,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 924,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 16,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 354,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 17,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 342,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 18,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 324,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    },
+    {
+      "seed": 19,
+      "level": 1,
+      "arrived": true,
+      "arrivalSeconds": 306,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ],
+      "resting": true,
+      "pickup": true,
+      "outgoing": true
+    }
+  ]
+}

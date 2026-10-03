@@ -8,6 +8,7 @@ const start=1700000000000,cycleMs=TIDE_CYCLE_SECONDS*1000;
 const memory=()=>({value:null,fail:false,getItem(){return this.value},setItem(key,value){if(this.fail)throw Error('quota');this.value=value}});
 const make=(storage,clock,now=start)=>new BottleDrift({storage,nowMs:now,random:()=>.3,getTide:time=>clock.bottleArrival(time)});
 const tick=(drift,now)=>drift.update(0,now,0);
+const waitActive=drift=>{const until=drift.snapshot().lastSeenAt+370000;while(drift.snapshot().lastSeenAt<until&&!incoming(drift).length)drift.update(2,drift.snapshot().lastSeenAt+2000,0);return drift.snapshot().lastSeenAt};
 const incoming=drift=>drift.bottles.filter(b=>b.kind==='incoming');
 const pick=(drift,now)=>{assert.equal(incoming(drift).length,1);assert.equal(drift.pickup(incoming(drift)[0].id,now).ok,true)};
 
@@ -16,7 +17,7 @@ test('the first active rising tide delivers immediately, once across pickup, the
  tick(drift,now);assert.equal(incoming(drift).length,1);const key=drift.snapshot().lastArrivalTideKey;assert.ok(key);pick(drift,now+1);
  tick(drift,now+100);assert.equal(incoming(drift).length,0);
  for(let i=0;i<3;i++){drift=make(storage,new TideClock(start,now+1000+i),now+1000+i);tick(drift,now+1000+i);assert.equal(incoming(drift).length,0);assert.equal(drift.snapshot().lastArrivalTideKey,key)}
- tick(drift,start+cycleMs+100);assert.equal(incoming(drift).length,1);assert.notEqual(drift.snapshot().lastArrivalTideKey,key);assert.equal(drift.view().collection.length,1);
+ tick(drift,start+cycleMs+100);assert.equal(incoming(drift).length,0,'offline time does not consume the active wait');waitActive(drift);assert.equal(incoming(drift).length,1);assert.notEqual(drift.snapshot().lastArrivalTideKey,key);assert.equal(drift.view().collection.length,1);
 });
 
 test('manual low/falling to rising starts one arrival and its stable key survives manual save normalization',()=>{
@@ -27,7 +28,7 @@ test('manual low/falling to rising starts one arrival and its stable key survive
  const saved=normalizeCoast({version:1,epochMs:clock.epochMs,manualTide:clock.serializeManual(now+1000),entities:[]});
  clock=new TideClock(saved.epochMs,now+1001,saved.manualTide);drift=make(storage,clock,now+1001);tick(drift,now+1001);assert.equal(incoming(drift).length,0);
  clock.setDirection('falling',now+12000);tick(drift,now+12000);clock.setDirection('rising',now+13000);tick(drift,now+13000);
- assert.equal(incoming(drift).length,1);assert.notEqual(drift.snapshot().lastArrivalTideKey,firstKey);
+ assert.equal(incoming(drift).length,0,'switching tide direction cannot bypass the pickup cooldown');assert.notEqual(drift.snapshot().lastArrivalTideKey,firstKey);waitActive(drift);assert.equal(incoming(drift).length,1);
 });
 
 test('accelerating an already rising natural tide does not deliver another letter',()=>{
@@ -43,11 +44,11 @@ test('an existing incoming bottle counts for the new rising tide without being o
  pick(drift,start+202001);tick(drift,start+207000);assert.equal(incoming(drift).length,0,'there is no deferred extra bottle behind the existing one');
 });
 
-test('offline time only handles the current rise and never replays missed cycles or rewards',()=>{
+test('offline time never replays missed cycles or consumes the active arrival wait',()=>{
  const storage=memory(),clock=new TideClock(start,start),drift=make(storage,clock);tick(drift,start);pick(drift,start+1);
  const now=start+cycleMs*300+300000,returning=make(storage,new TideClock(start,now),now);tick(returning,now);
- assert.equal(incoming(returning).length,1);assert.equal(returning.view().collection.length,1);pick(returning,now+1);
- const again=make(storage,new TideClock(start,now+2),now+2);tick(again,now+2);assert.equal(incoming(again).length,0);
+ assert.equal(incoming(returning).length,0);assert.equal(returning.view().collection.length,1);const receivedAt=waitActive(returning);pick(returning,receivedAt+1);
+ const again=make(storage,new TideClock(start,receivedAt+2),receivedAt+2);tick(again,receivedAt+2);assert.equal(incoming(again).length,0);
  const fallingNow=start+cycleMs*500+1000000,falling=make(storage,new TideClock(start,fallingNow),fallingNow);tick(falling,fallingNow);assert.equal(incoming(falling).length,0);assert.equal(falling.view().collection.length,2);
 });
 
@@ -87,7 +88,7 @@ test('a new manual tide cannot issue a collectible letter before that tide is du
  assert.equal(drift.snapshot().lastArrivalTideKey,originalKey);assert.equal(drift.view().collection.length,1);assert.equal(drift.view().storageError,true);
  const restoredGame=new CoastGame(loadCoast(storage),now+2001,()=>.3),restored=new BottleDrift(options(restoredGame));tick(restored,now+2001);
  assert.equal(restoredGame.tide.phase,'rising');assert.equal(restoredGame.tide.manual,false);assert.equal(incoming(restored).length,0,'restoring the old natural tide may not issue the same tide again');
- storage.failCoast=false;game.update(0,now+7001);tick(drift,now+7001);assert.equal(incoming(drift).length,1);
+ storage.failCoast=false;game.update(0,now+7001);tick(drift,now+7001);assert.equal(incoming(drift).length,0);
  assert.equal(loadCoast(storage).manualTide.arrivalKey,drift.snapshot().lastArrivalTideKey,'the tide is saved before its incoming bottle');
- pick(drift,now+7002);const finalGame=new CoastGame(loadCoast(storage),now+7003,()=>.3),finalDrift=new BottleDrift(options(finalGame));tick(finalDrift,now+7003);assert.equal(incoming(finalDrift).length,0);assert.equal(finalDrift.view().collection.length,2);
+ const receivedAt=waitActive(drift);assert.equal(incoming(drift).length,1);pick(drift,receivedAt+1);const finalGame=new CoastGame(loadCoast(storage),receivedAt+2,()=>.3),finalDrift=new BottleDrift(options(finalGame));tick(finalDrift,receivedAt+2);assert.equal(incoming(finalDrift).length,0);assert.equal(finalDrift.view().collection.length,2);
 });

@@ -56,6 +56,18 @@ export function drawFoamMaterial(ctx,{x,y,nx,ny,length,width,opacity,seed=0,pinL
   ctx.save();ctx.globalAlpha*=opacity;ctx.transform(ny,-nx,nx,ny,x,y);
   ctx.drawImage(atlas,(Math.abs(seed)%COUNT)*TW,pinLeading?TH:0,TW,TH,-length/2,0,length,width);ctx.restore();
 }
+/** Fine contact fragments share one context state and atlas binding. */
+export function drawFoamMaterialBatch(ctx,samples){
+  loadMaterials();if(!atlas||!samples.length)return;
+  const m=ctx.getTransform(),baseAlpha=ctx.globalAlpha;ctx.save();
+  for(const s of samples){
+    if(s.opacity<=.003)continue;
+    ctx.setTransform(m.a*s.ny-m.c*s.nx,m.b*s.ny-m.d*s.nx,m.a*s.nx+m.c*s.ny,m.b*s.nx+m.d*s.ny,m.a*s.x+m.c*s.y+m.e,m.b*s.x+m.d*s.y+m.f);
+    ctx.globalAlpha=baseAlpha*s.opacity;
+    ctx.drawImage(atlas,(Math.abs(s.seed)%COUNT)*TW,0,TW,TH,-s.length/2,0,s.length,s.width);
+  }
+  ctx.restore();
+}
 /** One save/restore + base transform for the whole rock-foam pass. */
 export function drawContactFoam(ctx,samples,time,reducedMotion){
   loadMaterials();if(!atlas)return;

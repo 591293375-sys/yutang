@@ -1,0 +1,19 @@
+{
+  "checks": [
+    "cats production scene and v4.2 settings",
+    "caiyuan production scene and v4.2 settings",
+    "coast production scene and v4.2 settings",
+    "koi production scene and v4.2 settings",
+    "native desktop layer, passthrough and return to controls",
+    "theme selection persists in production build after reload"
+  ],
+  "errors": [],
+  "failed": [
+    "https://api.open-meteo.com/v1/forecast?latitude=30.5928&longitude=114.3055&current=temperature_2m%2Cweather_code%2Cis_day&temperature_unit=celsius&timeformat=unixtime&timezone=auto&forecast_days=1"
+  ],
+  "runtime": {
+    "version": "4.2.0",
+    "packaged": true,
+    "arch": "arm64"
+  }
+}

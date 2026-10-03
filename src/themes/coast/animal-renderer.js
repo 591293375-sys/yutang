@@ -14,6 +14,10 @@ export function animalDepth(entity,species,habitat){
   if(species.kind==='shell')return{depth:habitat.depth,scale:1,alpha:Math.pow(1-clamp(habitat.depth/.58),1.45),tint:clamp(habitat.depth*.85)};
   const swim=Number.isFinite(entity.swimDepth)?clamp(entity.swimDepth):.34+(Math.sin((entity.phase||0)*2.31)+1)*.22;
   const depth=clamp(habitat.depth*(species.aquatic?.38+swim*.62:.76));
+  // Fish retain their original projected size and click envelope. A stronger
+  // transmitted-water material reduces bright scales, rather than making the
+  // whole animal almost invisible. The shared surface is drawn above it.
+  if(species.kind==='fish')return{depth,scale:1-depth*.17,alpha:.91-depth*.17,tint:.68+depth*.24};
   return{depth,scale:species.aquatic?1-depth*.17:1,alpha:species.aquatic?.94-depth*.27:.97-depth*.15,tint:.11+depth*.52};
 }
 export function animationPhase(entity,species,time,reducedMotion=false){
@@ -121,7 +125,7 @@ export function prepareAnimalSprite(species,image){
   const cacheFrame=(frame,pixels)=>{
     const water=canvas(width,height),wctx=water.getContext('2d');
     const waterData=wctx.createImageData(width,height);
-    waterData.data.set(submergeAnimalPixels(pixels));wctx.putImageData(waterData,0,0);
+    waterData.data.set(submergeAnimalPixels(pixels,species));wctx.putImageData(waterData,0,0);
     const alpha=new Uint8Array(width*height);for(let i=0;i<alpha.length;i++)alpha[i]=pixels[i*4+3];
     return{canvas:frame,water,alpha,alphaStride:1};
   };
@@ -133,8 +137,33 @@ export function prepareAnimalSprite(species,image){
   }
   return{canvas:neutral,width,height,artWidth,artHeight,alpha:neutralFrame.alpha,alphaStride:1,neutralFrame,frames,sourceHeading:angle};
 }
+/** Continuous neighboring poses; retain the nearest original alpha hit mask.
+ * Sampling does not advance animation time, so hit reads cannot move a tail. */
+export function animationFrameSample(phase,count){
+  const position=(((Number.isFinite(phase)?phase:0)%1+1)%1)*count;
+  const from=Math.floor(position),mix=position-from;
+  return{from,to:(from+1)%count,mix,nearest:Math.round(position)%count};
+}
+function mixFrameCanvas(target,a,b,mix){
+  const ctx=target.getContext('2d');ctx.clearRect(0,0,target.width,target.height);
+  // Add premultiplied contributions. Source-over crossfades would thin an
+  // otherwise opaque spine halfway between poses and make it flicker.
+  ctx.globalCompositeOperation='lighter';ctx.globalAlpha=1-mix;ctx.drawImage(a,0,0);
+  ctx.globalAlpha=mix;ctx.drawImage(b,0,0);ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
+}
 export function spriteFrame(sprite,entity,species,time,reducedMotion,phase){
   if(reducedMotion===true)return sprite.neutralFrame||sprite.frames[0];
-  const index=Math.round((phase??animationPhase(entity,species,time,false))*sprite.frames.length)%sprite.frames.length;
-  return sprite.frames[index];
+  const sample=animationFrameSample(phase??animationPhase(entity,species,time,false),sprite.frames.length);
+  if(species.kind!=='fish'||sprite.frames.length<2||sample.mix<.00001||!sprite.frames[sample.from]?.canvas)return sprite.frames[sample.nearest];
+  // Two small reusable render targets per species, not new frames or timers.
+  // The caller consumes the result synchronously before another fish samples.
+  const blend=sprite.blendFrame??={canvas:canvas(sprite.width,sprite.height),water:canvas(sprite.width,sprite.height),alpha:null,alphaStride:1};
+  const first=sprite.frames[sample.from],next=sprite.frames[sample.to],nearest=sprite.frames[sample.nearest];
+  if(blend.from!==sample.from||blend.mix!==sample.mix){
+    mixFrameCanvas(blend.canvas,first.canvas,next.canvas,sample.mix);
+    mixFrameCanvas(blend.water,first.water,next.water,sample.mix);
+    blend.from=sample.from;blend.mix=sample.mix;
+  }
+  blend.alpha=nearest.alpha;blend.alphaStride=nearest.alphaStride;
+  return blend;
 }

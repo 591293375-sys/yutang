@@ -12,12 +12,13 @@ const create=(storage=memory(),nowMs=start)=>new BottleDrift({storage,nowMs,rand
 const arrive=drift=>drift.update(0,drift.snapshot().lastSeenAt+1,0);
 const advance=(drift,to)=>{let now=drift.snapshot().lastSeenAt;while(now<to){now=Math.min(to,now+10000);drift.update(2,now,0)}};
 
-test('a natural rising tide replaces the random deadline and does not accumulate offline bottles',()=>{
+test('the first rising tide arrives immediately and later arrivals do not accumulate offline',()=>{
  const storage=memory(),drift=create(storage);arrive(drift);assert.equal(drift.bottles.length,1);
  const key=drift.view().lastArrivalTideKey;assert.equal(create(storage,start+30000).view().lastArrivalTideKey,key);
  advance(drift,start+600000);assert.equal(drift.bottles.length,1);
- const now=start+5*86400000,later=create(storage,now);assert.equal(later.bottles.length,0);later.update(0,now,0);assert.equal(later.bottles.length,1);
- assert.equal(later.view().collection.length,0);assert.equal(create(storage,now+1000).bottles[0].id,later.bottles[0].id);
+ const now=start+5*86400000,later=create(storage,now);assert.equal(later.bottles.length,0);later.update(0,now,0);assert.equal(later.bottles.length,0);
+ for(let i=1;i<=185;i++)later.update(2,now+i*2000,0);assert.equal(later.bottles.length,1);
+ assert.equal(later.view().collection.length,0);assert.equal(create(storage,later.snapshot().lastSeenAt+1000).bottles[0].id,later.bottles[0].id);
 });
 
 test('pickup is atomic, idempotent, persisted, and never changes the old coast save',()=>{

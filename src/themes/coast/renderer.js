@@ -147,7 +147,7 @@ export class CoastRenderer {
     if(this.materialUpgrade){
       this.drawSubmergedGround(ctx);
       this.water.draw(ctx);
-      this.water.drawSea(ctx,this.currentPath,time,reducedMotion);
+      this.water.drawSea(ctx,this.currentPath,time,reducedMotion,.82);
     }else{
       if(this.sandCache){ctx.save();ctx.clip(this.paintedWaterPath);this.water.drawSea(ctx,this.currentPath);ctx.restore();}
       this.water.draw(ctx);
@@ -242,6 +242,13 @@ export class CoastRenderer {
     return true;
   }
   drawAnimalWaterVeil(ctx,time,options){
+    if(this.materialUpgrade){
+      // Split the same translucent surface around the swimmers. The final pass
+      // carries moving ripples across their bodies; rocks and floating bottles
+      // are restored/drawn above it. Combined opacity stays near the old .85.
+      this.water.drawSea(ctx,this.currentPath,time,!!options.reducedMotion,.17);
+      return;
+    }
     // Short moving glints cross animals and seabed together, putting the animals
     // beneath the surface without bleaching the whole painting with another tile.
     ctx.save();ctx.clip(this.animalWaterPath||this.currentPath);ctx.lineWidth=.55;

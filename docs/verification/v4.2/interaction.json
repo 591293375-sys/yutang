@@ -1,0 +1,99 @@
+{
+  "result": "PASS",
+  "errors": [],
+  "resourceFailures": [],
+  "checks": [
+    "5 tide water/shore traces exactly unchanged",
+    "observe click preserves fish and rewards",
+    "three timed mouse clicks catch fish; duplicate cooldown does not count",
+    "caught fish, catalog, rewards persist after reload",
+    "naturally generated bottle clicked at visible position; original letter collected",
+    "picked bottle collection persists after reload"
+  ],
+  "boundaries": [
+    {
+      "level": 0,
+      "water": true,
+      "shore": true
+    },
+    {
+      "level": 0.25,
+      "water": true,
+      "shore": true
+    },
+    {
+      "level": 0.5,
+      "water": true,
+      "shore": true
+    },
+    {
+      "level": 0.75,
+      "water": true,
+      "shore": true
+    },
+    {
+      "level": 1,
+      "water": true,
+      "shore": true
+    }
+  ],
+  "catches": [
+    {
+      "attempt": 1,
+      "id": "ui-fish",
+      "state": "scene",
+      "species": "fish_silver",
+      "x": 639.0468010570567,
+      "y": 339.5195256201492,
+      "attempts": 1,
+      "clear": true,
+      "bucket": 0
+    },
+    {
+      "attempt": 2,
+      "id": "ui-fish",
+      "state": "scene",
+      "species": "fish_silver",
+      "x": 634.8026488406092,
+      "y": 403.1421016265359,
+      "attempts": 2,
+      "clear": true,
+      "bucket": 0
+    },
+    {
+      "attempt": 3,
+      "id": "ui-fish",
+      "state": "bucket",
+      "species": "fish_silver",
+      "x": 586.9213344211367,
+      "y": 384.6676899842619,
+      "attempts": 0,
+      "clear": true,
+      "bucket": 1
+    }
+  ],
+  "saveFields": [
+    "admissionCycle",
+    "admissionStage",
+    "catalog",
+    "entities",
+    "epochMs",
+    "fallingCycle",
+    "hadValidState",
+    "manualTide",
+    "nextId",
+    "rescues",
+    "retreatCycle",
+    "shells",
+    "shorePreparedCycle",
+    "strandedThisCycle",
+    "tideDirection",
+    "version"
+  ],
+  "identity": {
+    "url": "http://127.0.0.1:5188/",
+    "title": "浮生 · 摸鱼桌面",
+    "main": 1,
+    "errorOverlay": 0
+  }
+}

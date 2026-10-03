@@ -116,14 +116,14 @@ export class CoastWater {
     this.ctx.putImageData(this.pixels,0,0);
     this.textureCtx.putImageData(this.texturePixels,0,0);this.rebuildSea();
   }
-  drawSea(ctx,waterPath,time=0,reducedMotion=false){
+  drawSea(ctx,waterPath,time=0,reducedMotion=false,opacity=.85){
     if(!this.seaLayer)return;
     ctx.save();ctx.clip(waterPath);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='low';
     if(this.materialUpgrade){
       // Deform only the water-normal texture. Rocks, sand and submerged
       // objects stay fixed. Shared affine strip edges avoid broken seams;
       // source pixels, depth masks and alpha remain cached outside the frame.
-      ctx.globalAlpha=.85;
+      ctx.globalAlpha*=opacity;
       if(reducedMotion)ctx.drawImage(this.seaLayer,0,0,W,H);
       else{
         const bands=36,band=H/bands,sourceY=this.seaLayer.height/H,sourceX=this.seaLayer.width/W;

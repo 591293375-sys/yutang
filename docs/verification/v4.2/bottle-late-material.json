@@ -1,0 +1,413 @@
+{
+  "cases": 20,
+  "results": [
+    {
+      "seed": 0,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ]
+    },
+    {
+      "seed": 4,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 448
+        }
+      ]
+    },
+    {
+      "seed": 5,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ]
+    },
+    {
+      "seed": 6,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 812,
+          "y": 392
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ]
+    },
+    {
+      "seed": 7,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ]
+    },
+    {
+      "seed": 8,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 924,
+          "y": 448
+        }
+      ]
+    },
+    {
+      "seed": 9,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ]
+    },
+    {
+      "seed": 10,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ]
+    },
+    {
+      "seed": 11,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ]
+    },
+    {
+      "seed": 12,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ]
+    },
+    {
+      "seed": 13,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 924,
+          "y": 448
+        }
+      ]
+    },
+    {
+      "seed": 14,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ]
+    },
+    {
+      "seed": 15,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 868,
+          "y": 448
+        }
+      ]
+    },
+    {
+      "seed": 16,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 924,
+          "y": 420
+        }
+      ]
+    },
+    {
+      "seed": 17,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 868,
+          "y": 476
+        }
+      ]
+    },
+    {
+      "seed": 18,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 308
+        },
+        {
+          "x": 924,
+          "y": 448
+        }
+      ]
+    },
+    {
+      "seed": 19,
+      "ids": [
+        "bottle-2",
+        "bottle-3"
+      ],
+      "incomingOpacity": 0,
+      "route": [
+        {
+          "x": 672,
+          "y": 280
+        },
+        {
+          "x": 700,
+          "y": 336
+        },
+        {
+          "x": 896,
+          "y": 448
+        }
+      ]
+    }
+  ]
+}
