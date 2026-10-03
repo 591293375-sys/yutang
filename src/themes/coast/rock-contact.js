@@ -1,4 +1,5 @@
 import {WORLD_WIDTH as W,WORLD_HEIGHT as H,ROCKS,DRY_ROCKS,blockedAt,habitatAt} from './geometry.js';
+import {drawContactFoam} from './foam-material.js';
 const clamp=n=>Math.max(0,Math.min(1,n));
 const smooth=n=>{const t=clamp(n);return t*t*(3-2*t)};
 const make=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c};
@@ -8,6 +9,60 @@ const trace=(ctx,polygons)=>{ctx.beginPath();for(const points of polygons){point
 // opaque; an optical transition never changes the collision silhouette.
 export function wetRockMix(distance){return .9*(1-smooth(distance/14))}
 let samples;
+let foamSamples;
+// Render-only samples of the existing rock union. The narrow patch is checked
+// in full, once, so foam cannot appear on a face or inside a touching seam.
+function rockFoamSamples(){
+  if(foamSamples)return foamSamples;
+  foamSamples=[];
+  for(const [rock,points] of ROCKS.entries()){
+    const area=points.reduce((sum,a,i)=>{const b=points[(i+1)%points.length];return sum+a.x*b.y-b.x*a.y},0),sign=area>0?1:-1;
+    for(let i=0;i<points.length;i++){
+      const a=points[i],b=points[(i+1)%points.length],dx=b.x-a.x,dy=b.y-a.y,length=Math.hypot(dx,dy),steps=Math.ceil(length/19),nx=sign*dy/length,ny=-sign*dx/length;
+      for(let j=0;j<steps;j++){
+        const t=(j+.5)/steps,x=a.x+dx*t,y=a.y+dy*t;
+        if(!blockedAt(x-nx*2,y-ny*2))continue;
+        let safe=true;
+        for(let d=1.5;d<=28.5&&safe;d+=2)for(let u=-17;u<=17;u+=2)if(blockedAt(x+nx*d+ny*u,y+ny*d-nx*u)){safe=false;break}
+        if(safe)foamSamples.push({x,y,nx,ny,rock,seed:i*11+j+rock*43});
+      }
+    }
+  }
+  return foamSamples;
+}
+function materialRockFoam(rgba){
+  const step=4,mw=W/step,mh=H/step,labels=new Int32Array(mw*mh),queue=new Int32Array(mw*mh),areas=[0];
+  const alpha=(x,y)=>rgba[(Math.max(0,Math.min(H-1,Math.round(y)))*W+Math.max(0,Math.min(W-1,Math.round(x))))*4+3]/255;
+  for(let y=0;y<mh;y++)for(let x=0;x<mw;x++)labels[y*mw+x]=alpha(x*step+2,y*step+2)>.62?-1:0;
+  let id=0;
+  for(let start=0;start<labels.length;start++)if(labels[start]===-1){
+    id++;let head=0,tail=1;queue[0]=start;labels[start]=id;
+    while(head<tail){const i=queue[head++],x=i%mw,y=Math.floor(i/mw);
+      for(const n of [x?i-1:-1,x+1<mw?i+1:-1,y?i-mw:-1,y+1<mh?i+mw:-1])if(n>=0&&labels[n]===-1){labels[n]=id;queue[tail++]=n}
+    }
+    areas[id]=tail*step*step;
+  }
+  const out=[],used=new Set();
+  for(let gy=1;gy<mh-1;gy++)for(let gx=1;gx<mw-1;gx++){
+    const i=gy*mw+gx,label=labels[i];
+    if(!label||areas[label]<1100||[i-1,i+1,i-mw,i+mw].every(j=>labels[j]>0))continue;
+    let x=gx*step+2,y=gy*step+2;
+    const dx=alpha(x+5,y)+alpha(x+5,y-3)+alpha(x+5,y+3)-alpha(x-5,y)-alpha(x-5,y-3)-alpha(x-5,y+3);
+    const dy=alpha(x,y+5)+alpha(x-3,y+5)+alpha(x+3,y+5)-alpha(x,y-5)-alpha(x-3,y-5)-alpha(x+3,y-5);
+    const length=Math.hypot(dx,dy);if(length<.1)continue;
+    const nx=-dx/length,ny=-dy/length;
+    for(let d=0;d<7&&alpha(x,y)>.4;d++){x+=nx;y+=ny}
+    if(alpha(x-nx*5,y-ny*5)<.62)continue;
+    // Check the entire maximum swept patch against the visible material, not
+    // an oversized legacy habitat hull. Only its transparent water side draws.
+    let safe=true;
+    for(let d=1.5;d<=28.5&&safe;d+=3)for(let u=-17;u<=17;u+=3)if(alpha(x+nx*d+ny*u,y+ny*d-nx*u)>.2){safe=false;break}
+    if(!safe)continue;
+    const key=Math.floor(x/15)+','+Math.floor(y/15);if(used.has(key))continue;
+    used.add(key);out.push({x,y,nx,ny,rock:label,seed:i});
+  }
+  return out;
+}
 export function rockContactSamples(){
   if(samples)return samples;
   samples=[];
@@ -34,9 +89,26 @@ export function rockContactStrength(s,level){
 
 /** Two small terrain caches, rebuilt only on loading / quantized tide changes. */
 export class RockContact {
-  constructor(){this.rim=null;this.wet=null;this.key=-1;this.visible=[]}
-  setSource(marine){
+  constructor(){this.rim=null;this.wet=null;this.key=-1;this.visible=[];this.foamVisible=[];this.contacts=rockContactSamples();this.foamContacts=rockFoamSamples()}
+  setSource(marine,{dryMaterial=false}={}){
     if(!marine)return;
+    this.contacts=rockContactSamples();this.foamContacts=rockFoamSamples();
+    if(dryMaterial){
+      // A legacy collision hull can include empty water around the painted
+      // stone. Do not reveal that invisible gameplay hull with a foam outline.
+      const material=make(W,H),m=material.getContext('2d',{willReadFrequently:true});m.drawImage(marine,0,0,W,H);
+      const rgba=m.getImageData(0,0,W,H).data;
+      const alpha=(x,y)=>rgba[(Math.max(0,Math.min(H-1,Math.round(y)))*W+Math.max(0,Math.min(W-1,Math.round(x))))*4+3]/255;
+      const visibleFace=s=>alpha(s.x-s.nx*5,s.y-s.ny*5)>.6&&alpha(s.x+s.nx*7,s.y+s.ny*7)<.5;
+      this.contacts=this.contacts.filter(visibleFace);this.foamContacts=materialRockFoam(rgba);material.width=1;
+    }
+    this.foamContacts=this.foamContacts.map(s=>{
+      const phase=s.x*.026+s.y*.019;
+      return {...s,foamSin:Math.sin(phase),foamCos:Math.cos(phase),swellSin:Math.sin(phase*1.7),swellCos:Math.cos(phase*1.7),foamCluster:.18+.82*Math.max(0,Math.sin(phase*.81+.7)),foamSourceX:(Math.abs(s.seed)%12)*160};
+    });
+    this.contacts=this.contacts.filter(s=>Math.sin((s.x*.028+s.y*.021)*2.3)>=-.3).map(s=>{
+      const phase=s.x*.028+s.y*.021;return {...s,glintSin:Math.sin(phase),glintCos:Math.cos(phase)};
+    });
     const points=DRY_ROCKS.flat(),pad=20;
     const x=Math.floor(Math.min(...points.map(p=>p.x))-pad),y=Math.floor(Math.min(...points.map(p=>p.y))-pad);
     const w=Math.ceil(Math.max(...points.map(p=>p.x))-x+pad),h=Math.ceil(Math.max(...points.map(p=>p.y))-y+pad);
@@ -54,7 +126,13 @@ export class RockContact {
     this.rim=make(w,h);const r=this.rim.getContext('2d',{willReadFrequently:true});
     r.drawImage(marine,x/W*marine.width,y/H*marine.height,w/W*marine.width,h/H*marine.height,0,0,w,h);
     const pixels=r.getImageData(0,0,w,h);
-    for(let i=0;i<d.length;i++)pixels.data[i*4+3]=Math.round(dry[i*4+3]*wetRockMix(Math.max(0,d[i]-.5)));
+    for(let i=0;i<d.length;i++){
+      // The new terrain source carries a material mask, so the wet-rock pass
+      // cannot paint dry sand pockets back over the tidal water.
+      const materialAlpha=dryMaterial?pixels.data[i*4+3]/255:1;
+      if(dryMaterial){pixels.data[i*4]*=.94;pixels.data[i*4+1]*=.97;pixels.data[i*4+2]=Math.min(255,pixels.data[i*4+2]*.99+1)}
+      pixels.data[i*4+3]=Math.round(dry[i*4+3]*wetRockMix(Math.max(0,d[i]-.5))*materialAlpha);
+    }
     r.putImageData(pixels,0,0);this.wet=make(w,h);this.key=-1;mask.width=1;
   }
   update(water){
@@ -68,25 +146,33 @@ export class RockContact {
     // Reuse the water renderer's cached distance fade instead of performing
     // hundreds of nearest-shore searches while the user scrubs the tide.
     const mw=water.textureMask.width,mh=water.textureMask.height,data=water.texturePixels.data;
-    this.visible=rockContactSamples().map(s=>{
+    this.visible=this.contacts.map(s=>{
       const px=Math.max(0,Math.min(mw-1,Math.floor((s.x+s.nx*5)/W*mw))),py=Math.max(0,Math.min(mh-1,Math.floor((s.y+s.ny*5)/H*mh)));
       return {...s,strength:data[(py*mw+px)*4+3]/255};
     }).filter(s=>s.strength>.015);
+    this.foamVisible=this.foamContacts.map(s=>{
+      const px=Math.max(0,Math.min(mw-1,Math.floor((s.x+s.nx*8)/W*mw))),py=Math.max(0,Math.min(mh-1,Math.floor((s.y+s.ny*8)/H*mh)));
+      return {...s,strength:data[(py*mw+px)*4+3]/255};
+    }).filter(s=>s.strength>.025);
   }
   draw(ctx,water,waterPath,time,reducedMotion){
     this.update(water);if(!this.wet)return;
     const {x,y,w,h}=this.bounds;ctx.save();ctx.clip(waterPath);ctx.drawImage(this.wet,x,y,w,h);
-    // Broken, quiet glints follow the outside of the union; no complete white
-    // outline and no ripples across the rock top or between touching stones.
+    // A fine, uneven necklace of aerated water clings to existing rock faces.
+    // It breathes slowly and breaks into smaller cells away from the contact.
+    drawContactFoam(ctx,this.foamVisible,time,reducedMotion);
+    // The brighter short contact crest keeps individual foam cells connected
+    // without tracing a continuous white outline over every stone.
     ctx.lineCap='round';
+    const glintTime=reducedMotion?0:time*.72,sinGlint=Math.sin(glintTime),cosGlint=Math.cos(glintTime);
+    ctx.lineWidth=.75;
     for(const s of this.visible){
-      const phase=s.x*.028+s.y*.021,pulse=.5+.5*Math.sin((reducedMotion?0:time*.72)+phase);
-      if(Math.sin(phase*2.3)<.25)continue;
+      const pulse=.5+.5*(sinGlint*s.glintCos+cosGlint*s.glintSin);
       const distance=2.8+pulse*1.3,px=s.x+s.nx*distance,py=s.y+s.ny*distance;
-      ctx.strokeStyle=`rgba(218,249,233,${s.strength*(.035+pulse*.09)})`;ctx.lineWidth=.65;
+      ctx.strokeStyle=`rgba(239,252,249,${s.strength*(.18+pulse*.22)})`;
       ctx.beginPath();ctx.moveTo(px+s.ny*2.7,py-s.nx*2.7);ctx.quadraticCurveTo(px+s.nx*.65,py+s.ny*.65,px-s.ny*2.7,py+s.nx*2.7);ctx.stroke();
     }
     ctx.restore();
   }
-  destroy(){if(this.rim)this.rim.width=1;if(this.wet)this.wet.width=1;this.rim=this.wet=null;this.visible=[]}
+  destroy(){if(this.rim)this.rim.width=1;if(this.wet)this.wet.width=1;this.rim=this.wet=null;this.visible=[];this.foamVisible=[]}
 }

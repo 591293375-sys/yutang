@@ -16,16 +16,28 @@ export function hitTestBottle(x,y,driftOrView,{cover=1,time=0,reducedMotion=fals
 function drawBottle(ctx,pose,{airborne=false}={}){
   ctx.save();ctx.translate(pose.x,pose.y);ctx.rotate(pose.angle);ctx.globalAlpha=pose.alpha;
   if(!airborne){
-  ctx.fillStyle='#154f4b25';ctx.beginPath();ctx.ellipse(1,7,18,7,.35,0,Math.PI*2);ctx.fill();
-  ctx.strokeStyle='#d5f8e761';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(0,8,21,7,0,.15,2.8);ctx.stroke();
+  ctx.fillStyle='#153e5825';ctx.beginPath();ctx.ellipse(1,7,18,7,.35,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#ddf6f761';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(0,8,21,7,0,.15,2.8);ctx.stroke();
   }
   ctx.beginPath();ctx.moveTo(-4,-19);ctx.lineTo(4,-19);ctx.lineTo(4,-11);ctx.bezierCurveTo(5,-8,10,-6,10,-1);ctx.lineTo(10,13);ctx.quadraticCurveTo(10,18,5,19);ctx.lineTo(-5,19);ctx.quadraticCurveTo(-10,18,-10,13);ctx.lineTo(-10,-1);ctx.bezierCurveTo(-10,-6,-5,-8,-4,-11);ctx.closePath();
-  const glass=ctx.createLinearGradient(-10,0,11,4);glass.addColorStop(0,'#a6deca86');glass.addColorStop(.35,'#e1f9d66b');glass.addColorStop(.72,'#65afaa50');glass.addColorStop(1,'#d5eee89c');ctx.fillStyle=glass;ctx.fill();ctx.strokeStyle='#315f54d9';ctx.lineWidth=1.3;ctx.stroke();
-  ctx.save();ctx.rotate(.13);ctx.fillStyle='#f5e7bccf';ctx.strokeStyle='#a58b57aa';ctx.lineWidth=.75;ctx.beginPath();ctx.roundRect(-5,-6,10,21,2);ctx.fill();ctx.stroke();ctx.beginPath();ctx.ellipse(0,-5,5,1.7,0,0,Math.PI*2);ctx.stroke();
-  ctx.strokeStyle='#a58b5780';ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(-2,-1);ctx.lineTo(3,-1);ctx.moveTo(-2,3);ctx.lineTo(2,3);ctx.moveTo(-2,7);ctx.lineTo(3,7);ctx.stroke();ctx.restore();
-  ctx.strokeStyle='#f0fff0bb';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(-6,-3);ctx.lineTo(-6,11);ctx.moveTo(-2,-17);ctx.lineTo(-2,-11);ctx.stroke();
-  ctx.fillStyle='#af8155';ctx.strokeStyle='#5d6647';ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(-4.5,-22,9,5,1);ctx.fill();ctx.stroke();
-  ctx.strokeStyle='#f4d4a5a6';ctx.beginPath();ctx.moveTo(-3,-20);ctx.lineTo(2,-20);ctx.stroke();
+  // The same neck/body contour and pickup pose, now with a blue glass wall,
+  // a clear centre and a rounded rim instead of a uniformly green fill.
+  const glass=ctx.createLinearGradient(-10,0,11,4);
+  glass.addColorStop(0,'#7eb5c994');glass.addColorStop(.17,'#e0f4f1a4');
+  glass.addColorStop(.34,'#c8eae957');glass.addColorStop(.61,'#89c4d33c');
+  glass.addColorStop(.84,'#3c839766');glass.addColorStop(1,'#bfdedfa8');
+  ctx.fillStyle=glass;ctx.fill();ctx.strokeStyle='#37687da8';ctx.lineWidth=1.3;ctx.stroke();
+  ctx.save();ctx.rotate(.13);
+  const paper=ctx.createLinearGradient(-5,0,5,0);paper.addColorStop(0,'#c7b88bcf');paper.addColorStop(.28,'#f0e7cadb');paper.addColorStop(.58,'#f5efd9db');paper.addColorStop(1,'#c9bd97d1');
+  ctx.fillStyle=paper;ctx.strokeStyle='#a49572a0';ctx.lineWidth=.75;ctx.beginPath();ctx.roundRect(-5,-6,10,21,2);ctx.fill();ctx.stroke();
+  ctx.fillStyle='#ded2adc9';ctx.beginPath();ctx.ellipse(0,-5,5,1.7,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+  ctx.strokeStyle='#927f6270';ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(-2,-1);ctx.lineTo(3,-1);ctx.moveTo(-2,3);ctx.lineTo(2,3);ctx.moveTo(-2,7);ctx.lineTo(3,7);ctx.stroke();ctx.restore();
+  ctx.strokeStyle='#edffffac';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(-6,-3);ctx.lineTo(-6,11);ctx.moveTo(-2,-17);ctx.lineTo(-2,-11);ctx.stroke();
+  // Rounded glass bottom stays wholly inside the original illustration bounds.
+  ctx.strokeStyle='#b3e1e595';ctx.lineWidth=.75;ctx.beginPath();ctx.ellipse(0,15.5,7.2,1.65,0,0,Math.PI);ctx.stroke();
+  const cork=ctx.createLinearGradient(-4.5,-22,4.5,-17);cork.addColorStop(0,'#dab98c');cork.addColorStop(.45,'#b99569');cork.addColorStop(1,'#806149');
+  ctx.fillStyle=cork;ctx.strokeStyle='#75694f';ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(-4.5,-22,9,5,1);ctx.fill();ctx.stroke();
+  ctx.strokeStyle='#f0d8b3a6';ctx.beginPath();ctx.moveTo(-3,-20);ctx.lineTo(2,-20);ctx.stroke();
   ctx.restore();
 }
 

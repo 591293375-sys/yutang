@@ -1,4 +1,4 @@
-import {isHabitatValid,pathIsHabitatValid} from './geometry.js';
+import {isHabitatValid,pathIsHabitatValid,getRockRevision} from './geometry.js';
 const TAU = Math.PI * 2;
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 export function angleDelta(from, to) { return ((to - from + Math.PI) % TAU + TAU) % TAU - Math.PI; }
@@ -39,6 +39,11 @@ const shoreStep=28,shoreNodes=new Map(),shoreGraphs=new Map(),shoreHeuristics=ne
 // Nodes and edge samples share a 7px lattice. Habitat calculations are
 // reused across the small overlapping tide windows without retaining paths.
 const latticeWidth=224,latticeHeight=124,shoreValidity=Array.from({length:51},()=>new Uint8Array(latticeWidth*latticeHeight));
+let navigationRockRevision=-1;
+function refreshRockNavigation(){
+ const revision=getRockRevision();if(revision===navigationRockRevision)return;
+ navigationRockRevision=revision;shoreGraphs.clear();shoreHeuristics.clear();shoreRefuges.clear();for(const validity of shoreValidity)validity.fill(0);
+}
 function validShorePoint(x,y,levelIndex){
  const index=Math.round((y-24)/7)*latticeWidth+Math.round((x-24)/7),cache=shoreValidity[levelIndex];
  if(!cache[index])cache[index]=isHabitatValid('crab',x,y,levelIndex/50,10)?2:1;
@@ -46,6 +51,7 @@ function validShorePoint(x,y,levelIndex){
 }
 for(let y=24;y<=876;y+=shoreStep)for(let x=24;x<=1576;x+=shoreStep)shoreNodes.set(x+','+y,{x,y,key:x+','+y});
 function shoreGraph(level,ahead){
+ refreshRockNavigation();
  const low=Math.floor(Math.min(level,ahead)*50),high=Math.ceil(Math.max(level,ahead)*50),refuge=ahead<level?0:50,key=low+':'+high+':'+refuge;
  if(shoreGraphs.has(key))return shoreGraphs.get(key);
  if(!shoreRefuges.has(refuge))shoreRefuges.set(refuge,[...shoreNodes.values()].filter(n=>validShorePoint(n.x,n.y,refuge)));

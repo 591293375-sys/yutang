@@ -1,4 +1,5 @@
 import {getSpecies} from './catalog.js';
+import {fishRockRadius} from './rock-habitat.js';
 
 export const WORLD_WIDTH=1600, WORLD_HEIGHT=900;
 const clamp=(n,a=0,b=1)=>Math.min(b,Math.max(a,n));
@@ -146,8 +147,18 @@ export function pointInPolygon(x,y,points){
   return inside;
 }
 const rockBounds=ROCKS.map(poly=>({poly,minX:Math.min(...poly.map(p=>p.x)),maxX:Math.max(...poly.map(p=>p.x)),minY:Math.min(...poly.map(p=>p.y)),maxY:Math.max(...poly.map(p=>p.y))}));
+let rockHabitat=null,rockRevision=0;
+export function setRockHabitat(material){if(material===rockHabitat)return;rockHabitat=material;rockRevision++;}
+export function getRockRevision(){return rockRevision;}
+export function hasRockHabitat(){return !!rockHabitat;}
+export function materialRockCrevices(){return rockHabitat?.crevices??null;}
+export function rockBodyClear(value,x,y,radius=0){
+  if(!rockHabitat)return true;
+  return rockHabitat.clearance(x,y)>Math.max(radius,fishRockRadius(getSpecies(value)));
+}
 export function blockedAt(x,y){
   if(x<8||y<8||x>WORLD_WIDTH-8||y>WORLD_HEIGHT-8)return true;
+  if(rockHabitat)return rockHabitat.blocked(x,y);
   for(const r of rockBounds)if(x>=r.minX&&x<=r.maxX&&y>=r.minY&&y<=r.maxY&&pointInPolygon(x,y,r.poly))return true;
   return false;
 }
@@ -214,6 +225,7 @@ function validPoint(species,x,y,level){
 }
 export function isHabitatValid(value,x,y,level=0,radius){
   const species=getSpecies(value);if(!species||!Number.isFinite(x)||!Number.isFinite(y))return false;
+  if(!rockBodyClear(species,x,y,radius??0))return false;
   if(!validPoint(species,x,y,level))return false;
   const r=radius??(species.kind==='fish'?13:species.kind==='shrimp'?9:species.kind==='pool'?14:8);
   for(let i=0;i<8;i++){const a=i*Math.PI/4;if(!validPoint(species,x+Math.cos(a)*r,y+Math.sin(a)*r,level))return false;}

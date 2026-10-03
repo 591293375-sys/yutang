@@ -1,0 +1,3 @@
+Generated using built-in image_gen with transparent background. Style reference: user supplied 写实3D潮汐海湾-2.png.
+Prompt: Isolated natural sea foam texture, 3:1 horizontal strip viewed from above; only organic white foamy film, varied soft rounded transparent water holes, tiny bubbles, occasional denser clusters and ragged dissipation. No sea, land, rocks, animals, text, grid or wireframe. Preserve real transparent background and soft alpha.
+Source PNG: 2172 x 724. Runtime WebP: 1536 x 512, alpha preserved; only format conversion and downsampling. Runtime Canvas creates cached local foam patches using alpha bounds, no gameplay geometry changes.

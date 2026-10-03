@@ -1,5 +1,5 @@
 import {shoreLine,waterBoundary,pointInPolygon,blockedAt} from './geometry.js';
-const TAU=Math.PI*2;
+import {drawFoamMaterial} from './foam-material.js';
 const clamp=n=>Math.max(0,Math.min(1,n));
 const hash=n=>{const v=Math.sin(n*127.13+81.7)*43758.5453;return v-Math.floor(v);};
 export const SURF_PERIOD=8.4;
@@ -67,27 +67,42 @@ export function drawSurf(ctx,{level,time,reducedMotion=false,waterPath}){
   for(let wave=0;wave<footprint.ribbons.length;wave++){
     const r=footprint.ribbons[wave],near=clamp(1-r.distance/88);
     ctx.save();if(waterPath)ctx.clip(waterPath);
-    // Intermittent watercolor tongues replace the continuous parallel rails.
-    for(let i=2;i<r.front.length-3;i+=3){
+    // The broken lace stays behind the same advancing crest that drives the
+    // wash footprint. Far offshore it dissolves into a translucent swell.
+    for(let i=1;i<r.front.length-2;i+=2){
       const strength=r.strength[i],patch=hash(Math.floor(i/3)+wave*71);
-      if(patch>.68||strength<.16)continue;
-      const end=Math.min(r.front.length,i+2+Math.floor(patch*4));
+      if(strength<.04)continue;
+      const end=Math.min(r.front.length,i+3);
       ctx.beginPath();trace(ctx,r.front,i,end);for(let j=end-1;j>=i;j--)ctx.lineTo(r.back[j].x,r.back[j].y);ctx.closePath();
-      ctx.fillStyle=`rgba(218,250,231,${strength*(.014+near*.022)})`;ctx.fill();
-      ctx.beginPath();trace(ctx,r.front,i,end);ctx.strokeStyle=`rgba(251,255,230,${strength*(.14+near*.38)})`;ctx.lineWidth=.55+near*.8+patch*.55;ctx.stroke();
-      // A few irregular bubbles cling behind each advancing crest.
-      const p=r.front[i],n=r.normals[i];ctx.fillStyle=`rgba(251,255,237,${strength*(.18+near*.34)})`;
-      for(let k=0;k<3;k++){const drift=2+hash(i*9+k)*9;ctx.beginPath();ctx.ellipse(p.x+n.x*drift+(hash(i+k)-.5)*7,p.y+n.y*drift+(hash(i+k+90)-.5)*5,.45+hash(i+k+30)*1.1,.35+hash(i+k+40)*.45,i*.8,0,TAU);ctx.fill();}
+      ctx.fillStyle=`rgba(204,238,237,${strength*(.035+near*.085)})`;ctx.fill();
+      ctx.beginPath();trace(ctx,r.front,i,end);
+      ctx.strokeStyle=`rgba(220,246,245,${strength*(.085+near*.25)})`;ctx.lineWidth=3.4+near*3.5;ctx.stroke();
+      if(patch<.87){ctx.strokeStyle=`rgba(248,253,250,${strength*(.15+near*.57)})`;ctx.lineWidth=.7+near*.8+patch*.5;ctx.stroke()}
+      const p=r.front[i],n=r.normals[i],a=r.front[Math.max(0,i-1)],b=r.front[Math.min(r.front.length-1,i+2)];
+      drawFoamMaterial(ctx,{x:p.x+n.x*1.1,y:p.y+n.y*1.1,nx:n.x,ny:n.y,
+        length:Math.min(60,Math.max(26,Math.hypot(b.x-a.x,b.y-a.y)*1.35)),
+        width:r.width*(.85+patch*.48),opacity:strength*(.30+near*.70),seed:i+wave*7});
     }
     ctx.restore();
     if(r.runup>.05){
       for(let i=1;i<r.line.length;i++){
         const a=r.line[i-1],b=r.line[i],ea=r.edge[i-1],eb=r.edge[i];
         ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.lineTo(eb.x,eb.y);ctx.lineTo(ea.x,ea.y);ctx.closePath();
-        ctx.fillStyle=`rgba(175,214,190,${r.opacity*.13})`;ctx.fill();
-        if(hash(i+wave*41)>.50){ctx.beginPath();ctx.moveTo(ea.x,ea.y);ctx.lineTo(eb.x,eb.y);ctx.strokeStyle=`rgba(250,249,220,${r.strength[i]*.38})`;ctx.lineWidth=.75;ctx.stroke();}
+        ctx.fillStyle=`rgba(163,200,201,${r.opacity*.13})`;ctx.fill();
+        if(hash(i+wave*41)>.50){ctx.beginPath();ctx.moveTo(ea.x,ea.y);ctx.lineTo(eb.x,eb.y);ctx.strokeStyle=`rgba(249,251,245,${r.strength[i]*.42})`;ctx.lineWidth=.8;ctx.stroke();}
       }
     }
   }
+  // Residual bubbles left against the wet edge make a connected, varied
+  // shoreline between breakers. They are entirely inside the tidal polygon.
+  ctx.save();if(waterPath)ctx.clip(waterPath);
+  const r=footprint.ribbons[0];
+  for(let i=2;i<r.line.length-2;i+=3){
+    const p=r.line[i],n=r.normals[i],a=r.line[i-1],b=r.line[i+2],seed=hash(i*29);
+    const pulse=.5+.5*Math.sin(time*.35+i*.47),fade=.67+.22*pulse;
+    drawFoamMaterial(ctx,{x:p.x+n.x*(.4+pulse),y:p.y+n.y*(.4+pulse),nx:n.x,ny:n.y,
+      length:Math.min(75,Math.max(28,Math.hypot(b.x-a.x,b.y-a.y)*1.3)),width:26+seed*19,opacity:fade,seed:i+5});
+  }
+  ctx.restore();
   ctx.restore();
 }

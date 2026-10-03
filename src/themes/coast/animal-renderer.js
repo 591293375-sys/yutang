@@ -1,3 +1,4 @@
+import {shadeAnimalPixels,submergeAnimalPixels} from './art-materials.js';
 // Prepared once per supplied illustration. The runtime draws one smooth cached
 // silhouette, never independently displaced coarse image strips.
 const TAU=Math.PI*2;
@@ -112,10 +113,15 @@ export function prepareAnimalSprite(species,image){
   const artWidth=Math.max(1,x1-x0+1),artHeight=Math.max(1,y1-y0+1),pad=Math.ceil(Math.max(artWidth,artHeight)*.11)+3,width=artWidth+pad*2,height=artHeight+pad*2;
   const neutral=canvas(width,height),nctx=neutral.getContext('2d',{willReadFrequently:true});
   nctx.drawImage(aligned,x0,y0,artWidth,artHeight,pad,pad,artWidth,artHeight);
-  const sourcePixels=nctx.getImageData(0,0,width,height).data;
+  // Material is scene-local: don't replace the shared PNG or change its crop,
+  // silhouette, alpha hit mask, frame count, or established deformation mesh.
+  const sourceData=nctx.getImageData(0,0,width,height);
+  const sourcePixels=shadeAnimalPixels(sourceData.data,width,height,artWidth,artHeight,pad,species);
+  sourceData.data.set(sourcePixels);nctx.putImageData(sourceData,0,0);
   const cacheFrame=(frame,pixels)=>{
     const water=canvas(width,height),wctx=water.getContext('2d');
-    wctx.drawImage(frame,0,0);wctx.globalCompositeOperation='source-atop';wctx.fillStyle='rgba(42,136,145,.48)';wctx.fillRect(0,0,width,height);
+    const waterData=wctx.createImageData(width,height);
+    waterData.data.set(submergeAnimalPixels(pixels));wctx.putImageData(waterData,0,0);
     const alpha=new Uint8Array(width*height);for(let i=0;i<alpha.length;i++)alpha[i]=pixels[i*4+3];
     return{canvas:frame,water,alpha,alphaStride:1};
   };

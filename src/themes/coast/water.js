@@ -4,6 +4,41 @@ const smooth=(a,b,n)=>{const t=clamp((n-a)/(b-a));return t*t*(3-2*t);};
 const make=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
 const path=points=>{const p=new Path2D();points.forEach((q,i)=>i?p.lineTo(q.x,q.y):p.moveTo(q.x,q.y));p.closePath();return p;};
 const FIELD_W=400,FIELD_H=225,PIXEL=W/FIELD_W;
+export function surfaceDisplacement(y,time,reducedMotion=false){
+  if(reducedMotion)return 0;
+  // Two travelling swells, not a loop that translates the whole painting.
+  // Adjacent strips interpolate this continuous field at their shared edge.
+  return Math.sin(y*.017-time*.64)*5.8+Math.sin(y*.009+time*.39)*2.4;
+}
+// Optical colour depends only on distance, not on habitat or tide timing.
+// Cache its smooth curves at 1/16 world-pixel intervals. The resulting RGBA
+// differs by at most one byte from the continuous formula, while avoiding
+// several million repeated smoothstep calls during a manual tide transition.
+const OPTICAL_STEP=16,OPTICAL_MAX=480,OPTICAL_STRIDE=6;
+const opticalDepths=new Float64Array((OPTICAL_MAX*OPTICAL_STEP+1)*OPTICAL_STRIDE);
+for(let i=0;i<=OPTICAL_MAX*OPTICAL_STEP;i++){
+  const depth=i/OPTICAL_STEP,q=i*OPTICAL_STRIDE,optical=smooth(22,420,depth);
+  opticalDepths[q]=smooth(0,16,depth)*(.44+.46*smooth(30,480,depth));
+  opticalDepths[q+1]=37-optical*29;opticalDepths[q+2]=166-optical*100;opticalDepths[q+3]=179-optical*93;
+  opticalDepths[q+4]=Math.round(smooth(0,32,depth)*(.3+.7*smooth(20,340,depth))*255);
+  opticalDepths[q+5]=1-smooth(0,52,depth);
+}
+export function fillCoastOpticalPixels(data,texture,mask,inside,peak,peakDistance){
+  for(let i=0;i<mask.length;i++){
+    const offset=i*4,depth=mask[i]?Math.max(0,(inside[i]-.5)*PIXEL):0;
+    const q=Math.min(OPTICAL_MAX*OPTICAL_STEP,Math.round(depth*OPTICAL_STEP))*OPTICAL_STRIDE;
+    // Preserve the continuous zero-alpha limit at the very first shoreline
+    // pixel; quantizing it to zero would change its unpremultiplied colour.
+    const waterAlpha=mask[i]?(depth<1?smooth(0,16,depth)*.44:opticalDepths[q]):0;
+    const wetAlpha=peak?.[i] ? .12*smooth(0,34,peakDistance[i]*PIXEL)*opticalDepths[q+5] : 0;
+    const alpha=waterAlpha+wetAlpha*(1-waterAlpha),mix=alpha?waterAlpha/alpha:0;
+    data[offset]=Math.round(144*(1-mix)+opticalDepths[q+1]*mix);
+    data[offset+1]=Math.round(134*(1-mix)+opticalDepths[q+2]*mix);
+    data[offset+2]=Math.round(101*(1-mix)+opticalDepths[q+3]*mix);
+    data[offset+3]=Math.round(alpha*255);
+    texture[offset]=texture[offset+1]=texture[offset+2]=255;texture[offset+3]=mask[i]?opticalDepths[q+4]:0;
+  }
+}
 // A small cached distance field gives the shoreline a continuous optical depth.
 // It is independent of output resolution; the final exact geometry clip stays
 // at native canvas resolution. No full-screen blur/filter runs in a frame.
@@ -21,6 +56,7 @@ function distanceToMask(mask,inside){
 }
 export class CoastWater {
   constructor(){
+    this.materialUpgrade=false;
     this.mask=make(FIELD_W,FIELD_H);this.maskCtx=this.mask.getContext('2d',{willReadFrequently:true});
     this.layer=make(FIELD_W,FIELD_H);this.ctx=this.layer.getContext('2d');
     this.pixels=this.ctx.createImageData(FIELD_W,FIELD_H);this.lastKey=-1;this.lastTime=-1;this.level=0;
@@ -54,25 +90,55 @@ export class CoastWater {
     const mask=this.raster(level),inside=distanceToMask(mask,true);
     let peak=null,peakDistance=null;if(wetPeak>level+.01){peak=this.raster(wetPeak);peakDistance=distanceToMask(peak,true);}
     const data=this.pixels.data,texture=this.texturePixels.data;
+    if(this.materialUpgrade)fillCoastOpticalPixels(data,texture,mask,inside,peak,peakDistance);
+    else {
     for(let i=0;i<mask.length;i++){
       const depth=mask[i]?Math.max(0,(inside[i]-.5)*PIXEL):0;
       const land=smooth(-88,36,this.lowDistance[i]),edge=smooth(0,58,depth),deep=smooth(15,235,depth);
       // Sand grain stays visible through the shallows. The original painted
       // permanent sea keeps its own colour and detail instead of being washed flat.
-      const waterAlpha=mask[i]?edge*(.008*level+land*(.19+deep*.21)):0;
-      const wetAlpha=peak?.[i]?land*.085*smooth(0,34,peakDistance[i]*PIXEL)*(1-smooth(0,52,depth)):0;
+      const waterAlpha=mask[i]?(this.materialUpgrade?smooth(0,16,depth)*(.44+.46*smooth(30,480,depth)):edge*(.008*level+land*(.19+deep*.21))):0;
+      const wetAlpha=peak?.[i]?(this.materialUpgrade?.12:land*.085)*smooth(0,34,peakDistance[i]*PIXEL)*(1-smooth(0,52,depth)):0;
       const alpha=waterAlpha+wetAlpha*(1-waterAlpha),q=alpha?waterAlpha/alpha:0;
-      const r=75-deep*42,g=184-deep*28,b=172+deep*2;
+      // Optical absorption deepens continuously from transparent cyan to blue.
+      // It uses the existing tidal field only; no secondary/baked waterline.
+      const optical=smooth(22,420,depth);
+      const r=this.materialUpgrade?37-optical*29:75-deep*42;
+      const g=this.materialUpgrade?166-optical*100:184-deep*28;
+      const b=this.materialUpgrade?179-optical*93:172+deep*2;
       data[i*4]=Math.round(144*(1-q)+r*q);data[i*4+1]=Math.round(134*(1-q)+g*q);data[i*4+2]=Math.round(101*(1-q)+b*q);data[i*4+3]=Math.round(alpha*255);
       // The detailed marine painting stays at its native source resolution;
       // only this feather mask is coarse. A final exact water clip keeps all
       // interpolation inside the habitat boundary.
-      texture[i*4]=texture[i*4+1]=texture[i*4+2]=255;texture[i*4+3]=mask[i]?Math.round(smooth(0,26,depth)*255):0;
+      texture[i*4]=texture[i*4+1]=texture[i*4+2]=255;texture[i*4+3]=mask[i]?Math.round(smooth(0,32,depth)*(this.materialUpgrade?(.3+.7*smooth(20,340,depth)):1)*255):0;
+    }
     }
     this.ctx.putImageData(this.pixels,0,0);
     this.textureCtx.putImageData(this.texturePixels,0,0);this.rebuildSea();
   }
-  drawSea(ctx,waterPath){if(!this.seaLayer)return;ctx.save();ctx.clip(waterPath);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='low';ctx.drawImage(this.seaLayer,0,0,W,H);ctx.restore();}
+  drawSea(ctx,waterPath,time=0,reducedMotion=false){
+    if(!this.seaLayer)return;
+    ctx.save();ctx.clip(waterPath);ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='low';
+    if(this.materialUpgrade){
+      // Deform only the water-normal texture. Rocks, sand and submerged
+      // objects stay fixed. Shared affine strip edges avoid broken seams;
+      // source pixels, depth masks and alpha remain cached outside the frame.
+      ctx.globalAlpha=.85;
+      if(reducedMotion)ctx.drawImage(this.seaLayer,0,0,W,H);
+      else{
+        const bands=36,band=H/bands,sourceY=this.seaLayer.height/H,sourceX=this.seaLayer.width/W;
+        const padding=10;
+        for(let i=0;i<bands;i++){
+          const y=i*band,a=surfaceDisplacement(y,time),b=surfaceDisplacement(y+band,time),shear=(b-a)/band;
+          ctx.save();ctx.transform(1,0,shear,1,a-y*shear,0);
+          ctx.drawImage(this.seaLayer,0,y*sourceY,W*sourceX,band*sourceY,-padding,y,W+padding*2,band+.04);ctx.restore();
+        }
+      }
+    }else ctx.drawImage(this.seaLayer,0,0,W,H);
+    ctx.restore();
+  }
+  // Bilinear sampling keeps this continuous colour field smooth without a
+  // high-order full-screen resample on every high-DPI animation frame.
   draw(ctx){ctx.save();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='low';ctx.drawImage(this.layer,0,0,W,H);ctx.restore();}
   destroy(){this.layer.width=1;this.mask.width=1;this.textureMask.width=1;if(this.seaLayer)this.seaLayer.width=1;this.seaSource=null;this.seaLayer=null;this.pixels=null;this.texturePixels=null;this.lowDistance=null;}
 }

@@ -1,9 +1,12 @@
 import {CoastWater} from './water.js';
+import {COAST_ART} from './art.js';
+import {makeTerrainMaterials} from './terrain-material.js';
+import {makeRockHabitat} from './rock-habitat.js';
 import {RockContact} from './rock-contact.js';
 import {drawBottles} from './bottle-renderer.js';
 import {drawSurf} from './surf.js';
 import {SPECIES,SPECIES_BY_ID,COAST_ASSETS,COAST_BACKGROUND} from './catalog.js';
-import {WORLD_WIDTH as W,WORLD_HEIGHT as H,ROCKS,DRY_ROCKS,POOL,waterBoundary,PAINTED_WATER_BOUNDARY,habitatAt,blockedAt} from './geometry.js';
+import {WORLD_WIDTH as W,WORLD_HEIGHT as H,ROCKS,DRY_ROCKS,POOL,waterBoundary,PAINTED_WATER_BOUNDARY,habitatAt,blockedAt,setRockHabitat} from './geometry.js';
 import {prepareAnimalSprite,animalDepth,spriteFrame,advanceAnimationPhase,concealed,concealmentPoint} from './animal-renderer.js';
 
 export {COAST_BACKGROUND};
@@ -16,7 +19,7 @@ const SAND_BACKGROUND=`${import.meta.env?.BASE_URL || '/'}assets/coast/coast-san
 
 /** Canvas view only. Game rules, clocks, RAF, persistence and rewards live outside. */
 export class CoastRenderer {
-  constructor(canvas,backgroundCanvas,{background=COAST_BACKGROUND}={}){
+  constructor(canvas,backgroundCanvas,{background=COAST_ART.terrain}={}){
     this.canvas=canvas;this.backgroundCanvas=backgroundCanvas;
     this.ctx=canvas.getContext('2d',{alpha:true});
     this.backgroundCtx=backgroundCanvas?.getContext('2d',{alpha:false});
@@ -26,6 +29,8 @@ export class CoastRenderer {
     this.animalAnimations=new Map();this.animalWaterPath=null;this.animalWaterKey=-1;
     this.width=1;this.height=1;this.scale=1;this.cover=1;this.offsetX=0;this.offsetY=0;
     this.baseImage=null;this.baseCache=null;this.sandCache=null;this.ready=false;this.sourceSize=null;this.sandSourceSize=null;
+    this.materialUpgrade=false;this.surfaceImage=null;this.seabedImage=null;this.sandURL=SAND_BACKGROUND;
+    this.rockMaterial=null;
     this.lowPath=linePath(waterBoundary(0),true);this.poolPath=linePath(POOL,true);
     this.paintedWaterPath=linePath(PAINTED_WATER_BOUNDARY,true);
     this.rocksPath=new Path2D();for(const rock of ROCKS)this.rocksPath.addPath(linePath(rock,true));
@@ -35,7 +40,8 @@ export class CoastRenderer {
     this.baseURL=background;this.loadImage(background,image=>this.setBase(image,background),()=>{
       this.loadImage(COAST_ASSETS.original,image=>this.setBase(image,COAST_ASSETS.original));
     });
-    this.loadImage(SAND_BACKGROUND,image=>this.setSand(image));
+    this.loadImage(COAST_ART.surface,image=>{this.surfaceImage=image;if(this.materialUpgrade)this.water.setSea(image)});
+    this.loadImage(COAST_ART.seabed,image=>{this.seabedImage=image});
     for(const species of SPECIES)this.loadImage(species.asset,image=>this.cacheSprite(species,image));
   }
 
@@ -47,11 +53,27 @@ export class CoastRenderer {
   }
   setBase(image,url){
     this.baseImage=image;this.baseURL=url;this.sourceSize=[image.naturalWidth,image.naturalHeight];
+    this.materialUpgrade=url===COAST_ART.terrain;this.water.materialUpgrade=this.materialUpgrade;
+    // Loading can finish after the first tide field was rasterized. Rebuild
+    // its optical colours even when the tide itself has not moved.
+    this.water.lastKey=-1;this.water.lastTime=-1;
     // Keep the generated terrain's actual resolution, without claiming native 4K.
     const width=Math.min(3200,image.naturalWidth),height=Math.round(width*H/W);
     this.baseCache=makeCanvas(width,height);this.baseCache.getContext('2d').drawImage(image,0,0,width,height);
-    this.water.setSea(this.baseCache);
-    this.rockContact.setSource(this.baseCache);
+    if(this.materialUpgrade){
+      // One registered dry terrain plate supplies sand AND opaque rock faces.
+      // Water is a separate optical layer, so there is no baked second shoreline.
+      this.sandCache=this.baseCache;this.sandSourceSize=this.sourceSize;this.sandURL=url;
+      this.rockMaterial=makeTerrainMaterials(this.baseCache).rock;
+      const pixels=this.rockMaterial.getContext('2d').getImageData(0,0,width,height).data;
+      setRockHabitat(makeRockHabitat(pixels,width,height));
+      if(this.surfaceImage)this.water.setSea(this.surfaceImage);
+    }else{
+      setRockHabitat(null);
+      this.water.setSea(this.baseCache);
+      this.loadImage(SAND_BACKGROUND,sand=>this.setSand(sand));
+    }
+    this.rockContact.setSource(this.materialUpgrade?this.rockMaterial:this.baseCache,{dryMaterial:this.materialUpgrade});
     this.ready=true;this.floodKey=-1;this.drawBackground();
   }
   setSand(image){
@@ -86,7 +108,7 @@ export class CoastRenderer {
     }
   }
   drawDrySeabed(ctx){
-    if(!this.sandCache)return;
+    if(!this.sandCache||this.materialUpgrade)return;
     // Only the old painted sea needs replacement. The original dry beach,
     // tide pool, vegetation and emergent rocks keep their exact artwork.
     ctx.save();ctx.clip(this.paintedWaterPath);ctx.drawImage(this.sandCache,0,0,W,H);ctx.restore();
@@ -94,11 +116,14 @@ export class CoastRenderer {
   }
   drawRockForeground(ctx){
     if(!this.baseCache)return;
+    if(this.materialUpgrade&&this.rockMaterial){
+      // Reuse the visible material alpha instead of the former polygon hulls:
+      // fins, body and shadow all pass behind the exact same emergent rock.
+      ctx.drawImage(this.rockMaterial,0,0,W,H);return;
+    }
+    // The bundled original painting remains a complete polygon-based fallback.
     ctx.save();ctx.clip(this.rocksPath);ctx.drawImage(this.baseCache,0,0,W,H);ctx.restore();
-    // The marine painting has water colour baked into these rock faces. Their
-    // aligned dry artwork is a fixed foreground, never blended by the tide.
-    // The very same silhouettes also block animals and sand drawing.
-    if(this.sandCache){ctx.save();ctx.clip(this.dryRocksPath);ctx.drawImage(this.sandCache,0,0,W,H);ctx.restore();}
+    if(this.sandCache&&this.sandCache!==this.baseCache){ctx.save();ctx.clip(this.dryRocksPath);ctx.drawImage(this.sandCache,0,0,W,H);ctx.restore();}
   }
   screenToWorld(x,y){
     const rect=this.canvas.getBoundingClientRect();
@@ -110,13 +135,26 @@ export class CoastRenderer {
     const key=Math.round(clamp(level)*500);if(key===this.floodKey)return;
     this.floodKey=key;this.level=key/500;this.currentPath=linePath(waterBoundary(this.level),true);
   }
+  drawSubmergedGround(ctx){
+    if(!this.materialUpgrade||!this.seabedImage)return;
+    // Registered seabed detail is visible only beneath the moving water mask.
+    // Dry sand stays clean. This is a flat colour layer, never new obstacles.
+    ctx.save();ctx.clip(this.currentPath);ctx.globalAlpha=.72;
+    ctx.drawImage(this.seabedImage,0,0,W,H);ctx.restore();
+  }
   drawWater(ctx,level,time,reducedMotion){
     this.updateFlood(level);this.water.update(level,this.wetPeak,time);
-    if(this.sandCache){ctx.save();ctx.clip(this.paintedWaterPath);this.water.drawSea(ctx,this.currentPath);ctx.restore();}
-    this.water.draw(ctx);
+    if(this.materialUpgrade){
+      this.drawSubmergedGround(ctx);
+      this.water.draw(ctx);
+      this.water.drawSea(ctx,this.currentPath,time,reducedMotion);
+    }else{
+      if(this.sandCache){ctx.save();ctx.clip(this.paintedWaterPath);this.water.drawSea(ctx,this.currentPath);ctx.restore();}
+      this.water.draw(ctx);
+    }
     // Refraction reuses the actual seabed beneath this water, preserving the
     // supplied painting instead of repeating a mirrored texture over the beach.
-    if(this.baseCache&&!reducedMotion){
+    if(this.baseCache&&!reducedMotion&&!this.materialUpgrade){
       ctx.save();ctx.clip(this.currentPath);ctx.globalAlpha=.025;
       const bands=18,bh=H/bands,sourceScale=this.baseCache.height/H;
       for(let i=0;i<bands;i++){
@@ -305,6 +343,7 @@ export class CoastRenderer {
     if(!this.backgroundCtx&&this.baseCache){ctx.drawImage(this.baseCache,0,0,W,H);this.drawDrySeabed(ctx);}
     this.drawSandDrawing(ctx,game.sandDrawing);
     this.drawWater(ctx,level,time,!!options.reducedMotion);
+    if(this.rockMaterial)ctx.drawImage(this.rockMaterial,0,0,W,H);
     if(this.animalWaterKey!==this.floodKey){
       this.animalWaterPath=new Path2D(this.currentPath);this.animalWaterPath.addPath(this.poolPath);this.animalWaterKey=this.floodKey;
     }
@@ -323,8 +362,8 @@ export class CoastRenderer {
     this.drawFoam(ctx,level,time,!!options.reducedMotion);
     drawBottles(ctx,game.bottles,time,{reducedMotion:!!options.reducedMotion});
     this.drawTransitions(ctx,game,time);
-    // Copy only emergent foreground from the identical terrain layer. This masks
-    // water, foam and animals with the very same rock polygons used by collision.
+    // New art shares its actual rock alpha with collision; the original fallback
+    // painting retains its original polygons. Neither foreground covers sand.
     this.drawRockForeground(ctx);
     this.rockContact.draw(ctx,this.water,this.currentPath,time,!!options.reducedMotion);
     this.drawConcealment(ctx,game,time);
@@ -365,7 +404,7 @@ export class CoastRenderer {
     return hit;
   }
   getStats(){
-    return{theme:'coast',ready:this.ready,source:this.baseURL,sourceSize:this.sourceSize,sandSource:SAND_BACKGROUND,sandSourceSize:this.sandSourceSize,
+    return{theme:'coast',ready:this.ready,source:this.baseURL,sourceSize:this.sourceSize,sandSource:this.sandURL,sandSourceSize:this.sandSourceSize,
       backgroundSize:this.backgroundCanvas?[this.backgroundCanvas.width,this.backgroundCanvas.height]:[this.canvas.width,this.canvas.height],
       width:this.canvas.width,height:this.canvas.height,cssWidth:this.width,cssHeight:this.height,scale:this.scale,
       entityCount:this.entityCount,spriteCount:this.sprites.size,missingAssets:[...this.errors],
@@ -378,7 +417,9 @@ export class CoastRenderer {
     for(const image of this.images){image.onload=null;image.onerror=null;}
     this.water.destroy();
     this.rockContact.destroy();
-    this.images.clear();this.sprites.clear();this.animalAnimations.clear();this.game=null;this.baseImage=null;this.baseCache=null;this.sandCache=null;
+    if(this.rockMaterial)this.rockMaterial.width=1;
+    this.rockMaterial=null;
+    this.images.clear();this.sprites.clear();this.animalAnimations.clear();this.game=null;this.baseImage=null;this.baseCache=null;this.sandCache=null;this.surfaceImage=null;this.seabedImage=null;
     this.ctx.setTransform(1,0,0,1,0,0);this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
   }
 }

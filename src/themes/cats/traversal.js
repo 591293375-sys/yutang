@@ -49,6 +49,19 @@ export function flightHeight(progress,arc,direction='up',style='jump'){
 // Mostly constant horizontal speed with a little ease: no hovering at either end.
 export function flightTravel(progress,style='jump'){const p=Math.max(0,Math.min(1,Number(progress)||0));return style==='stride'?p:p*.82+p*p*(3-2*p)*.18;}
 
+// A single painted standing pose cannot convincingly articulate a vertical
+// jump. Render a brief departure/arrival dissolve at supported endpoints while
+// the existing traversal continues to own routing, reservations and persistence.
+// Flat paths and low lips never fade.
+export function traversalPresentation(cat){
+ const move=cat.traverse;
+ if(!move||move.style==='stride')return {point:cat,opacity:1,transition:false};
+ const p=Math.max(0,Math.min(1,Number(move.progress)||0)),ease=p*p*(3-2*p);
+ if(move.phase==='crouch')return {point:move.from,opacity:1-ease,transition:true};
+ if(move.phase==='land')return {point:move.to,opacity:ease,transition:true};
+ return {point:move.jumpProgress>=.5?move.to:move.from,opacity:0,transition:true};
+}
+
 export function prepareSurfacePath(from,path){
  if(prepared.has(path))return path;
  const result=[];let a=from;

@@ -9,6 +9,7 @@ import {CatAnimationState,loadActionAtlas,getActionSpec,drawActionFrame,poseLaye
 import {courtyardLight,contactShadow,groundedBodyShadow} from './lighting.js';
 import {buildCanopyOcclusion} from './canopy.js';
 import {mergeWindowRects} from './canopy-windows.js';
+import {traversalPresentation} from './traversal.js';
 
 const TAU=Math.PI*2;
 const base=import.meta.env.BASE_URL;
@@ -118,21 +119,23 @@ export class CatRenderer {
  }
  drawCat(cat,time,options,foodBowl=null){
   const skin=this.skin(cat);if(!skin)return;
-  const c=this.ctx,p=this.point(cat),preset=getPreset(cat.presetId),perspective=.88+cat.y*.18;
+  const presentation=traversalPresentation(cat),c=this.ctx,p=this.point(presentation.point),preset=getPreset(cat.presetId),perspective=.88+cat.y*.18;
   c.save();
+  c.globalAlpha*=presentation.opacity;
   const w=this.cover.drawWidth*(preset.scale||.068)*perspective*normalizeCustomization(cat.customization).size,h=w*skin.height/skin.width;
   const quiet=options.reducedMotion||options.quality==='low',sample=this.animation.sample(cat,preset,time,quiet),entry=this.skins.get(cat.id),atlas=entry?.atlas;
-  const resting=['sleep','rest'].includes(sample.action),jump=cat.traverse?.phase==='jump'?(cat.traverse.jumpHeight||0)*this.cover.drawWidth:0;
+  const resting=['sleep','rest'].includes(sample.action),jump=0;
+  if(presentation.transition){sample.motionStage=null;sample.traverse=null;sample.stageProgress=0;sample.renderAction='idle';sample.action='idle';sample.locomotion={...sample.locomotion,moving:false};}
   const light=courtyardLight(cat,this.nightMix,this.canopy?.sampleAt(cat.x,cat.y)||0);
   // The broad shadow is deliberately faint: the four small planted-paw shadows
   // below are what bind a walking cat to the paving. Height affects only real jumps.
-  if(!atlas||![0,4].includes(sample.renderIndex??sample.index)){c.save();c.globalAlpha=light.castOpacity/(1+jump/w*2);c.drawImage(this.shadow,p.x-w*.38+light.shadowX*w,p.y-w*.065+light.shadowY*w,w*(resting?.85:.72),w*.13*(1+jump/w*2));c.restore()}
+  if(!atlas||![0,4].includes(sample.renderIndex??sample.index)){c.save();c.globalAlpha=presentation.opacity*light.castOpacity/(1+jump/w*2);c.drawImage(this.shadow,p.x-w*.38+light.shadowX*w,p.y-w*.065+light.shadowY*w,w*(resting?.85:.72),w*.13*(1+jump/w*2));c.restore()}
   const anchor=preset.anchor||{x:.5,y:.98},breath=quiet?0:Math.sin(time*1.7+(cat.phase||0))*.005;
   let measured={left:-w*anchor.x,top:-h*anchor.y,width:w,height:h},contacts=[],feeding=null;
   const drawContacts=(target,feet)=>{
    contacts=feet;const flip=sample.renderFlip??sample.flip;
-   const body=groundedBodyShadow(feet,w,light,jump);c.save();c.globalAlpha=body.opacity;c.drawImage(this.shadow,p.x+flip*body.x+light.shadowX*w*.35-body.rx,p.y+body.y-body.ry,body.rx*2,body.ry*2);c.restore();
-   for(const foot of feet){const shadow=contactShadow(foot,w,light,jump);c.save();c.globalAlpha=shadow.opacity;c.drawImage(this.shadow,p.x+flip*shadow.x-shadow.rx,p.y+shadow.y-shadow.ry,shadow.rx*2,shadow.ry*2);c.restore()}
+   const body=groundedBodyShadow(feet,w,light,jump);c.save();c.globalAlpha=presentation.opacity*body.opacity;c.drawImage(this.shadow,p.x+flip*body.x+light.shadowX*w*.35-body.rx,p.y+body.y-body.ry,body.rx*2,body.ry*2);c.restore();
+   for(const foot of feet){const shadow=contactShadow(foot,w,light,jump);c.save();c.globalAlpha=presentation.opacity*shadow.opacity;c.drawImage(this.shadow,p.x+flip*shadow.x-shadow.rx,p.y+shadow.y-shadow.ry,shadow.rx*2,shadow.ry*2);c.restore()}
   };
   const drawPose=(target,pose)=>{
    target.save();target.scale(pose.flip??sample.flip,1);
@@ -158,8 +161,9 @@ export class CatRenderer {
   const lc=lit.getContext('2d');lc.clearRect(0,0,side,side);lc.filter=`brightness(${light.brightness}) saturate(${light.saturation})`;lc.drawImage(buffer,0,0);lc.filter='none';
   c.drawImage(lit,0,0,side,side,p.x-ox/ratio,p.y-jump-oy/ratio,side/ratio,side/ratio);
   const flip=sample.renderFlip??sample.flip;this.bounds.set(cat.id,{x:p.x+(flip===1?measured.left:-measured.left-measured.width),y:p.y+measured.top-jump,w:measured.width,h:measured.height});
+  if(presentation.opacity<.12)this.bounds.delete(cat.id);
   this.drawnActions.set(cat.id,{action:sample.action,frame:atlas?(sample.renderIndex??sample.index):-1,flip,jump,poseSource:atlas&&sample.index>=0?'atlas':'standing',status:entry?.actionStatus,surfaceId:cat.surfaceId||'ground',light,feeding,contacts:contacts.map(foot=>({...foot,worldX:cat.x+flip*foot.x/this.cover.drawWidth,worldY:cat.y+foot.y/this.cover.drawHeight}))});
-  this.drawForeground(cat,jump);
+  this.drawForeground({...cat,...presentation.point},jump);
   const label=({heart:'♡',relaxed:'～',curious:'· · ·'}[cat.expression]||cat.expression)||(cat.state==='sleep'?'z Z':cat.state==='rest'?'…':null);
   if(label){c.save();c.font=`${Math.max(12,Math.min(18,w*.16))}px -apple-system,sans-serif`;c.textAlign='center';c.fillStyle='#365340';c.shadowColor='#fbffe5';c.shadowBlur=5;c.fillText(label,p.x+w*.3,p.y+measured.top-8-jump);c.restore()}
   if(this.hoverId===cat.id){c.save();c.font='12px -apple-system,sans-serif';c.textAlign='center';const tw=c.measureText(cat.name).width;c.fillStyle='#234b3edc';c.beginPath();c.roundRect(p.x-tw/2-10,p.y+7,tw+20,24,12);c.fill();c.fillStyle='#f3f7dd';c.fillText(cat.name,p.x,p.y+23);c.restore()}

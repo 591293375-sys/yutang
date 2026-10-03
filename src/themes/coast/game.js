@@ -1,5 +1,5 @@
 import { SPECIES, SPECIES_BY_ID } from './catalog.js';
-import { habitatAt, findHabitat, isHabitatValid, pathIsHabitatValid, shoreLine, ROCKS } from './geometry.js';
+import { habitatAt, findHabitat, isHabitatValid, pathIsHabitatValid, shoreLine, ROCKS,rockBodyClear,getRockRevision,hasRockHabitat,materialRockCrevices } from './geometry.js';
 import { TideClock } from './tide.js';
 import { normalizeCoast, COAST_LIMITS } from './storage.js';
 import { steerMotion, crabCruiseSpeed, shoreEscapeRoute, warmShoreNavigation } from './motion.js';
@@ -36,10 +36,12 @@ export class CoastGame {
     this.hadValidState = !!state;
     if (!state) this.seed();
     else this.removeOfflineVisitors();
+    if(hasRockHabitat())this.reconcileRockMaterial();
     // Offline return resolves against the current tide once, without replay or awards.
     this.reconcile(true); this.disperseCrowdedShore(); this.initializeConcealments(); this.concealmentReady = true;
     this.realLifecycle = this.lifecycle(); this.wasDebug = false; this.hasUpdated = false;
     this.populationVisits = new Set(['real:' + this.tide.cycle]);
+    this.rockRevision=getRockRevision();
   }
   lifecycle() {
     return { admissionCycle: this.admissionCycle, admissionStage: this.admissionStage, shorePreparedCycle: this.shorePreparedCycle,
@@ -166,6 +168,14 @@ export class CoastGame {
   }
   findCrevice(entity) {
     const candidates = [];
+    const actualRims=materialRockCrevices();
+    if(actualRims){
+      for(const {anchor,nx,ny} of actualRims){
+        const point={x:anchor.x+nx*43,y:anchor.y+ny*43},exit={x:anchor.x+nx*80,y:anchor.y+ny*80};
+        if(isHabitatValid(entity.species,point.x,point.y,0)&&pathIsHabitatValid(entity.species,point.x,point.y,exit.x,exit.y,0))candidates.push({...point,anchor:{...anchor},exit});
+      }
+      candidates.sort((a,b)=>distance(a,entity)-distance(b,entity));return candidates[0]??null;
+    }
     for (const rock of ROCKS) for (let i = 0; i < rock.length; i++) {
       const a = rock[i], b = rock[(i + 1) % rock.length], dx = b.x - a.x, dy = b.y - a.y, length = Math.hypot(dx,dy) || 1;
       const anchor = { x: (a.x+b.x)/2, y: (a.y+b.y)/2 };
@@ -450,7 +460,7 @@ export class CoastGame {
         }
       }
       if (entity.concealment === 'crevice' && (offline || habitat.blocked)
-        && (!valid || !entity.creviceExit || !entity.concealmentAnchor || distance(entity,entity.concealmentAnchor)>32
+        && (!valid || !entity.creviceExit || !entity.concealmentAnchor || distance(entity,entity.concealmentAnchor)>(hasRockHabitat()?48:32)
           || !pathIsHabitatValid(species,entity.x,entity.y,entity.creviceExit.x,entity.creviceExit.y,0))) {
         const crevice = this.findCrevice(entity);
         if (crevice) {
@@ -517,6 +527,7 @@ export class CoastGame {
     const steps = Math.max(1, Math.ceil(Math.hypot(x - entity.x, y - entity.y) / 6));
     for (let i = 0; i <= steps; i++) {
       const t = i / steps, h = habitatAt(entity.x + (x - entity.x) * t, entity.y + (y - entity.y) * t, this.tide.level);
+      if(!rockBodyClear(entity.species,entity.x+(x-entity.x)*t,entity.y+(y-entity.y)*t))return false;
       if (h.blocked || !(h.water || (allowWet && h.wet))) return false;
       const radius = speciesFor(entity.species).kind === 'fish' ? 13 : 9;
       for (let j = 0; j < 8; j++) {
@@ -605,11 +616,35 @@ export class CoastGame {
     if (entity.entry) entity.entryProgress = Math.max(0, Math.min(1, distance(entity, entity.entry) / 60));
     entity.submerged = !!habitatAt(entity.x, entity.y, this.tide.level).water;
   }
+  reconcileRockMaterial(){
+    const revision=getRockRevision();if(revision===this.rockRevision)return;
+    this.rockRevision=revision;this.shallowCache.clear();
+    // The texture finishes loading asynchronously. Repair only coordinates
+    // invalidated by its newly registered rocks, retaining IDs, catches and
+    // rewards. Search outward in small deterministic rings to use the nearest
+    // safe water/sand rather than respawning a saved animal elsewhere.
+    for(const entity of this.entities){
+      if(entity.state!=='scene'||rockBodyClear(entity.species,entity.x,entity.y)&&!habitatAt(entity.x,entity.y,this.tide.level).blocked)continue;
+      let point=null;
+      for(let radius=4;radius<=320&&!point;radius+=4){
+        const count=Math.max(16,Math.ceil(TAU*radius/4));
+        for(let i=0;i<count;i++){const angle=i/count*TAU,x=entity.x+Math.cos(angle)*radius,y=entity.y+Math.sin(angle)*radius;
+          if(isHabitatValid(entity.species,x,y,this.tide.level)){point={x,y};break;}
+        }
+      }
+      point??=findHabitat(entity.species,this.tide.level,this.random,entity);
+      if(point){entity.x=point.x;entity.y=point.y;entity.moveTarget=null;entity.migration=null;entity.speed=0;
+        delete entity.escapeTarget;delete entity.escapeReturnPath;delete entity.shoreWaypoints;delete entity.forageHome;
+        if(entity.concealment==='crevice'){entity.concealment=null;entity.emergeProgress=1;delete entity.concealmentAnchor;delete entity.creviceExit;}
+      }
+    }
+  }
   update(dt = 0, nowMs = Date.now(), forceRefresh = false) {
     const nextNow = Number.isFinite(nowMs) ? nowMs : this.nowMs, gap = nextNow - this.nowMs;
     const debug = this.isDebugTime(nextNow), resumedRealTime = this.wasDebug && !debug;
     const previousLevel = this.tide.level, previousCycle = this.tide.cycle, previousManual = this.tide.manual;
     this.nowMs = nextNow; this.tide = this.clock.snapshot(this.nowMs);
+    this.reconcileRockMaterial();
     const suspended = !debug && (((this.hasUpdated || forceRefresh) && (gap > ((previousManual || this.tide.manual) ? 1000 : 30000) || gap < -1000)) || this.tide.cycle > previousCycle + 1);
     if (suspended || resumedRealTime) {
       this.reconcileAfterSuspension(resumedRealTime ? this.realLifecycle : this.lifecycle());
