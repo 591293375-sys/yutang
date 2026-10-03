@@ -1,7 +1,24 @@
 'use strict';
 const { spawnSync } = require('node:child_process');
+const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
+
+const NODE_HEADER_CHECKSUMS = {
+  'node_api.h': 'd14db85d16f182045c42745a6e44b96e932dfe6e3bfcaac7a1096fae8412c579',
+  'node_api_types.h': '8d5d854088d5725fec9775510e0aeeeb790a41ad083c49bb721d950b86e6bd61',
+  'js_native_api.h': '048b4efdcd823f30afd323d61c8aba5be285077f9d790feb52a6fa6382df2541',
+  'js_native_api_types.h': '0410c31e227f81e2981363c4d543f4832ac3df785343ec64cee621742ff8a034',
+  'LICENSE.node': 'e991d81497a85bb24fc6bffae0a3637a6accd6c6bc5ce1f2c5698bd555cf9d49',
+};
+
+function verifyChecksum(name, content) {
+  const actual = crypto.createHash('sha256').update(content).digest('hex');
+  const expected = NODE_HEADER_CHECKSUMS[name];
+  if (actual !== expected) {
+    throw new Error(`Integrity check failed for ${name}: expected ${expected}, got ${actual}`);
+  }
+}
 
 async function build() {
   if (process.platform !== 'darwin') {
@@ -19,13 +36,17 @@ async function build() {
     if (fs.existsSync(target)) return;
     const response = await fetch(`https://raw.githubusercontent.com/nodejs/node/v22.19.0/src/${name}`);
     if (!response.ok) throw new Error(`Node-API header download failed: ${response.status}`);
-    fs.writeFileSync(target, await response.text());
+    const content = await response.text();
+    verifyChecksum(name, content);
+    fs.writeFileSync(target, content);
   }));
   const license = path.join(include, 'LICENSE.node');
   if (!fs.existsSync(license)) {
     const response = await fetch('https://raw.githubusercontent.com/nodejs/node/v22.19.0/LICENSE');
     if (!response.ok) throw new Error('Could not fetch the Node.js header license.');
-    fs.writeFileSync(license, await response.text());
+    const content = await response.text();
+    verifyChecksum('LICENSE.node', content);
+    fs.writeFileSync(license, content);
   }
   const run = (command, args) => {
     const result = spawnSync(command, args, { stdio: 'inherit', shell: false });
